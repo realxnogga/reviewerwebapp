@@ -1,34 +1,39 @@
-
+import { Login } from "./pages/login";
+import { Register } from "./pages/register";
 import Home from "./pages/home";
-import About from "./pages/about";
-import Contact from "./pages/contact";
+import { Provider } from "react-redux";
+import { Store } from "./store"; // Assuming you've exported your Redux store as 'store'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { fakeCookie } from "./feature/authenticationSlice";
+import { useSelector } from "react-redux";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+function WrapperApp() {
+  const bool = useSelector(fakeCookie);
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home></Home>,
-  },
-  {
-    path: "/about",
-    element: <About></About>,
-  },
-  {
-    path: "/contact",
-    element: <Contact></Contact>,
-  }
-]);
-
-function App() {
   return (
-   <>
-    <RouterProvider router={router} />
-   </>
+    <Router>
+      <Routes>
+        {bool ? (
+          <>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/home" element={<Home />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </>
+        )}
+      </Routes>
+    </Router>
   );
 }
+
+const App = () => (
+  <Provider store={Store}>
+    <WrapperApp />
+  </Provider>
+);
 
 export default App;

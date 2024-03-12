@@ -18,10 +18,6 @@ const Joker = () => {
 
                         <div style={{ backgroundImage: `url(${require('../assets/images/joker4.jpg')})` }}
                             className="bg-cover bg-center bg-no-repeat h-full w-full"></div>
-
-                        <div style={{ backgroundImage: `url(${require('../assets/images/joker5.jpg')})` }}
-                            className="bg-cover bg-center bg-no-repeat h-full w-full"></div>
-
                     </Carousel>
                 </div>
 

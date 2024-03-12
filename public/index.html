@@ -10,6 +10,7 @@
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" />
   <title>React App</title>
 
   <script>
@@ -18,7 +19,10 @@
         extend: {
           colors: {
             clifford: '#da373d',
-          }
+          },
+          animation: {
+          'spin': 'spin 10s linear infinite',
+        }
         },
         screens: {
           'desktop': { 'max': '1366px' },
@@ -26,6 +30,7 @@
           'mobile': { 'max': '450px' },
           'breakPoint': { 'max': '68rem' },
         }
+
       }
     }
   </script>
@@ -54,6 +59,7 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
 
 </html>
