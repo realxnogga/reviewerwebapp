@@ -13,7 +13,6 @@ import { NavLink } from 'react-router-dom';
 import { ListGroup } from 'flowbite-react';
 import { HiCloudDownload, HiInbox, HiOutlineAdjustments, HiUserCircle } from 'react-icons/hi';
 
-
 export const Nav1 = () => {
 
     const dispatch = useDispatch();
@@ -62,6 +61,20 @@ export const Nav1 = () => {
         setMenuHover(false);
     }
 
+    const [avatarImage, setAvatarImage] = useState(null);
+    useEffect(() => {
+        const fetchImage = async () => {
+          try {
+            const imageModule = await import(`../assets/userProfile/${userImgUrl}`);
+            setAvatarImage(imageModule.default);
+          } catch (error) {
+            console.error('Error loading image:', error);
+          }
+        };
+    
+        fetchImage();
+      }, [userImgUrl]);
+
     return (
         <Navbar fluid rounded className={`${temp} absolute text-gray-400 bg-gray-700 px-12 h-fit w-screen backdrop-blur backdrop-brightness-75 transition-[1s]`}>
 
@@ -75,15 +88,10 @@ export const Nav1 = () => {
                     arrowIcon={false}
                     inline
                     label={
-                        loginCookie === true ? (
-                         
-                                 <Avatar img={require(`../assets/userProfile/${userImgUrl}`)} rounded bordered color="gray" />
-                                
-                
-
-                ) : (
-                null
-                )
+                        avatarImage ? (
+                            <Avatar img={avatarImage} rounded bordered color="gray" />
+                          ) : (null)
+                          
                     }>
                 <Dropdown.Header>
                     <span className="block text-gray-400 text-sm">{name}</span>
