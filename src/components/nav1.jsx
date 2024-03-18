@@ -9,7 +9,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { ListGroup } from 'flowbite-react';
 import { HiCloudDownload, HiInbox, HiOutlineAdjustments } from 'react-icons/hi';
 
-import { logout } from '../feature/loginRegistration/loginSlice';
+import { clearState } from '../feature/loginRegistration/loginSlice';
 import { userdataTemp } from '../feature/data/userdataSlice';
 
 export const Nav1 = () => {
@@ -25,7 +25,7 @@ export const Nav1 = () => {
     }
 
     const handleLogout = () => {
-        dispatch(logout());
+        dispatch(clearState());
         navigate('/');
     }
 

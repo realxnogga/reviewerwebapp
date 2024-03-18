@@ -3,11 +3,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const LoginSlice = createSlice({
     name: 'LoginSliceName',
     initialState: {
-        isLogged: false,
+        isLogged: null,
       },
       reducers: {
-        logout: (state) => {
-          state.isLogged = false;
+        clearState: (state) => {
+          state.isLogged = null;
         },
     
       },
@@ -19,7 +19,7 @@ export const LoginSlice = createSlice({
       }
 })
 
-export const { logout } = LoginSlice.actions;
+export const { clearState } = LoginSlice.actions;
 export const loginReducer = LoginSlice.reducer;
 export const loginCookieTemp = state => state.LoginSliceName.isLogged;
 

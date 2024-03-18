@@ -7,11 +7,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { loginCookieTemp } from "./feature/loginRegistration/loginSlice";
+import { CustomToastContainer } from "./components/toaster";
 
 function WrapperApp() {
   const loginCookie = useSelector(loginCookieTemp);
 
   return (
+
     <Router>
       <Routes>
         {loginCookie ? (
@@ -28,13 +30,18 @@ function WrapperApp() {
         )}
       </Routes>
     </Router>
+
   );
 }
 
 const App = () => (
-  <Provider store={Store}>
-    <WrapperApp />
-  </Provider>
+  <>
+    <Provider store={Store}>
+      <WrapperApp />
+      <CustomToastContainer />
+    </Provider>
+  </>
+
 );
 
 export default App;
