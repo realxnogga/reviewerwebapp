@@ -2,25 +2,22 @@
 
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { userdata } from '../feature/authenticationSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../feature/authenticationSlice';
 import { useNavigate } from 'react-router-dom';
-import { Tooltip, Button, Avatar, Dropdown, Navbar, NavbarCollapse } from 'flowbite-react';
-import { fakeCookie } from '../feature/authenticationSlice';
+import { Tooltip, Avatar, Dropdown, Navbar } from 'flowbite-react';
 import { GiHamburgerMenu } from "react-icons/gi";
-import { NavLink } from 'react-router-dom';
 import { ListGroup } from 'flowbite-react';
-import { HiCloudDownload, HiInbox, HiOutlineAdjustments, HiUserCircle } from 'react-icons/hi';
+import { HiCloudDownload, HiInbox, HiOutlineAdjustments } from 'react-icons/hi';
+
+import { logout } from '../feature/loginRegistration/loginSlice';
+import { userdataTemp } from '../feature/data/userdataSlice';
 
 export const Nav1 = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const loginCookie = useSelector(fakeCookie);
-
-    const udata = useSelector(userdata);
+    const udata = useSelector(userdataTemp);
     if (Object.entries(udata).length != 0) {
         var name = udata[0].username;
         var email = udata[0].email;

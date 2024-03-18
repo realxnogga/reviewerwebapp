@@ -4,16 +4,17 @@ import Home from "./pages/home";
 import { Provider } from "react-redux";
 import { Store } from "./store"; // Assuming you've exported your Redux store as 'store'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { fakeCookie } from "./feature/authenticationSlice";
 import { useSelector } from "react-redux";
 
+import { loginCookieTemp } from "./feature/loginRegistration/loginSlice";
+
 function WrapperApp() {
-  const bool = useSelector(fakeCookie);
+  const loginCookie = useSelector(loginCookieTemp);
 
   return (
     <Router>
       <Routes>
-        {bool ? (
+        {loginCookie ? (
           <>
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />

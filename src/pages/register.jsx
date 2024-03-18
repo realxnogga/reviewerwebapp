@@ -5,19 +5,18 @@ import { Button } from 'flowbite-react';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FileInput } from 'flowbite-react';
-import { fakeCookie } from '../feature/authenticationSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { registration } from '../feature/authenticationSlice';
+
+import { registration } from '../feature/loginRegistration/registrationSlice';
+import { loginCookieTemp } from '../feature/loginRegistration/loginSlice';
 
 export const Register = () => {
 
-    
-  
 
     const dispatch = useDispatch();
-    const fakeCookieTemp = useSelector(fakeCookie);
+    const loginCookie = useSelector(loginCookieTemp);
 
-    console.log(fakeCookieTemp);
+    console.log(loginCookie);
 
     const [registerInput, setRegisterInput] = useState({
         username: '',
