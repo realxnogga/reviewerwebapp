@@ -5,6 +5,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 
 import { loginReducer } from './feature/loginRegistration/loginSlice';
 import { getdataReducer } from './feature/data/userdataSlice';
+import { registrationReducer } from './feature/loginRegistration/registrationSlice';
 
 const persistConfig = {
   key: 'root',
@@ -12,8 +13,9 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-  LoginSliceName: loginReducer,
   GetUserDataName: getdataReducer,
+  LoginSliceName: loginReducer,
+  RegisterSliceName: registrationReducer,
 });
 
 

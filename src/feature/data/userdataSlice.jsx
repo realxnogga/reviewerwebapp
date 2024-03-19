@@ -5,16 +5,21 @@ export const GetUserData = createSlice({
     initialState: {
       userdata: [],
     },
-    reducers: {},
+    reducers: {
+      clearRegisterState: (state) => {
+        state.userdata = [];
+      },
+    },
 
     extraReducers: builder => {
       builder
         .addCase(getUserData.fulfilled, (state, action) => {
-          state.userdata = action.payload;
+          state.userdata = action.payload[0];
         })
     }
   });
 
+export const { clearRegisterState } = GetUserData.actions;
 export const userdataTemp = state => state.GetUserDataName.userdata;
 export const getdataReducer = GetUserData.reducer;
 

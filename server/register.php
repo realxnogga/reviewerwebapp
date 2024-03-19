@@ -26,18 +26,29 @@ if (isset($_GET['action'])) {
             $username = $registerData['username'];
             $password = $registerData['password'];
             $email = $registerData['email'];
-
             $file = $_FILES['file'];
-            $userImageName = $file['name'];
-            $userImageTMP = $file['tmp_name'];
-            $userImageDestination = '../src/assets/userProfile/'. $userImageName;
 
-            move_uploaded_file($userImageTMP, $userImageDestination);
 
-            $sql = "INSERT INTO user (username, password, email, userimage) VALUES ('$username', '$password', '$email', '$userImageName')";
-            $conn->query($sql);
+            $sql = "select*from user where username = '$username' and email = '$email'";
+            $result = $conn->query($sql);
 
+            if ($result->num_rows > 0) {
+                echo json_encode(['success' => true, 'message' => 'Item already Exist']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Item does not exist']);
+
+                $userImageName = $file['name'];
+                $userImageTMP = $file['tmp_name'];
+                $userImageDestination = '../src/assets/userProfile/' . $userImageName;
+    
+                move_uploaded_file($userImageTMP, $userImageDestination);
+    
+                $sql = "INSERT INTO user (username, password, email, userimage) VALUES ('$username', '$password', '$email', '$userImageName')";
+                $conn->query($sql);
+            }        
+            $conn->close();
             break;
+
         case 'checkExist':
 
             $data = json_decode(file_get_contents("php://input"), true);

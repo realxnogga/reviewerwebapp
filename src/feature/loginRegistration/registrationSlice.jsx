@@ -1,25 +1,32 @@
 
-
-
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// export const registerSlice = createSlice({
-//     name: 'registerSliceName',
-//     initialState: {
-//         isLogged: false,
-//       },
-//       reducers: {},
-// })
+export const RegisterSlice = createSlice({
+    name: 'RegisterSliceName',
+    initialState: {
+        isUserAlreadyExist: null,
+      },
+      reducers: {
+        clearRegistrationState: (state) => {
+          state.isUserAlreadyExist = null;
+        },
+      },
+      extraReducers: builder => {
+        builder
+          .addCase(RegistrationThunk.fulfilled, (state, action) => {
+            state.isUserAlreadyExist = action.payload;
+          })
+      }
+})
 
-// export const { logout } = registerSlice.actions;
-// export const loginReducer = registerSlice.reducer;
-// export const loginCookieTemp = state => state.registerSliceName.isLogged;
+export const { clearRegistrationState } = RegisterSlice.actions;
+export const registrationReducer = RegisterSlice.reducer;
+export const isUserAlreadyExistTemp = state => state.RegisterSliceName.isUserAlreadyExist;
 
 
 
-export const registration = createAsyncThunk(
-    'authentication/registration',
+export const RegistrationThunk = createAsyncThunk(
+    'useralreadyexist/RegistrationThunk',
     async ({udata, file}) => {
       try {
         const formData = new FormData();
@@ -30,9 +37,8 @@ export const registration = createAsyncThunk(
           method: 'POST',
           body: formData,
         });
-  
        const data = await res.json();
-       return data;
+       return data.success;
       } catch (error) {
         console.log('Error', error);
       }

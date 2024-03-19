@@ -1,5 +1,5 @@
 import Foot from "../components/footer";
-import { Nav1 } from "../components/nav1";
+import { Nav1 } from "../components/navbar";
 
 const Home = () => {
 

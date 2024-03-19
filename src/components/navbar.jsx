@@ -9,8 +9,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { ListGroup } from 'flowbite-react';
 import { HiCloudDownload, HiInbox, HiOutlineAdjustments } from 'react-icons/hi';
 
-import { clearState } from '../feature/loginRegistration/loginSlice';
+import { clearLoginState } from '../feature/loginRegistration/loginSlice';
 import { userdataTemp } from '../feature/data/userdataSlice';
+import { clearRegisterState } from '../feature/data/userdataSlice';
 
 export const Nav1 = () => {
 
@@ -18,14 +19,17 @@ export const Nav1 = () => {
     const navigate = useNavigate();
 
     const udata = useSelector(userdataTemp);
-  
-        var name = udata[0].username;
-        var email = udata[0].email;
-        var userImgUrl = udata[0].userimage;
+    console.log(udata)
+    
+        var name = udata.username;
+        var email = udata.email;
+        var userImgUrl = udata.userimage;
     
 
     const handleLogout = () => {
-        dispatch(clearState());
+        dispatch(clearLoginState());
+        dispatch(clearRegisterState());
+
         navigate('/');
     }
 
@@ -58,20 +62,6 @@ export const Nav1 = () => {
         setMenuHover(false);
     }
 
-    // const [avatarImage, setAvatarImage] = useState(null);
-    // useEffect(() => {
-    //     const fetchImage = async () => {
-    //       try {
-    //         const imageModule = await import(`../assets/userProfile/${userImgUrl}`);
-    //         setAvatarImage(imageModule.default);
-    //       } catch (error) {
-    //         console.error('Error loading image:', error);
-    //       }
-    //     };
-
-    //     fetchImage();
-    //   }, [userImgUrl]);
-
     return (
         <Navbar fluid rounded className={`${temp} absolute text-gray-400 bg-gray-700 px-12 h-fit w-screen backdrop-blur backdrop-brightness-75 transition-[1s]`}>
 
@@ -85,7 +75,10 @@ export const Nav1 = () => {
                     arrowIcon={false}
                     inline
                     label={
-                        <img className="animate-spin spin h-[3rem] w-[3rem]" src={`${require(`../assets/userProfile/${userImgUrl}`)}`} />
+                        <img className="h-[2.5rem] w-[2.5rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`${require(`../assets/userProfile/${userImgUrl}`)}`} />   
+                      
+                    
+                             
                     }>
                     <Dropdown.Header>
                         <span className="block text-gray-400 text-sm">{name}</span>

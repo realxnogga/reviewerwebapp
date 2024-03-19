@@ -2,21 +2,19 @@
 import { Card } from 'flowbite-react';
 import { FloatingLabel } from 'flowbite-react';
 import { Button } from 'flowbite-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FileInput } from 'flowbite-react';
 import { useSelector, useDispatch } from 'react-redux';
+import { ShowToast } from '../components/toaster';
 
-import { registration } from '../feature/loginRegistration/registrationSlice';
-import { loginCookieTemp } from '../feature/loginRegistration/loginSlice';
+import { RegistrationThunk } from '../feature/loginRegistration/registrationSlice';
+import { isUserAlreadyExistTemp } from '../feature/loginRegistration/registrationSlice';
+import { clearRegistrationState } from '../feature/loginRegistration/registrationSlice';
 
 export const Register = () => {
 
-
     const dispatch = useDispatch();
-    const loginCookie = useSelector(loginCookieTemp);
-
-    console.log(loginCookie);
 
     const [registerInput, setRegisterInput] = useState({
         username: '',
@@ -35,31 +33,71 @@ export const Register = () => {
         setFile(e.target.files[0]);
     }
 
-
-    console.log(file);
-
     const handleSubmit = (e) => {
         e.preventDefault();     
 
-        const udata = {
-            username: registerInput.username,
-            password: registerInput.password,
-            email: registerInput.email,
+        if (registerInput.username == '' && registerInput.password == '' && registerInput.email == '') {
+            ShowToast('fields must not be empty', 'warning');
+        }
+        else if (registerInput.username == '' && registerInput.password == '') {
+            ShowToast('username and password must not be empty', 'warning');
+        }
+        else if (registerInput.password == '' && registerInput.email == '') {
+            ShowToast('password and email must not be empty', 'warning');
+        }
+        else if (registerInput.username == '') {
+            ShowToast('username must not be empty', 'warning');
+        }
+        else if (registerInput.password == '') {
+            ShowToast('password must not be empty', 'warning');
+        }
+        else if (registerInput.email == '') {
+            ShowToast('email must not be empty', 'warning');
+        }
+        else if (registerInput.username != '' && registerInput.password != '' && registerInput.email != '') {
+
+            const udata = {
+                username: registerInput.username,
+                password: registerInput.password,
+                email: registerInput.email,
+            }
+    
+            dispatch(RegistrationThunk(
+               {udata, file}
+            ));
+
+            
         }
 
-        dispatch(registration(
-           {udata, file}
-        ));
-
-        // dispatch(getUserPhoto(userPhotoFile));
-
-        setRegisterInput({
-            username: '',
-            password: '',
-            email: '',
-        })
-
     };
+
+    const alreadyExist = useSelector(isUserAlreadyExistTemp);
+    console.log(alreadyExist);
+
+    useEffect(() => {
+        if (alreadyExist === true) {
+            ShowToast('user already exist', 'error');  
+            
+            setRegisterInput({
+                username: '',
+                password: '',
+                email: '',
+            })
+            dispatch(clearRegistrationState());
+        }
+    
+        if (alreadyExist === false){
+            ShowToast('account is created', 'success'); 
+            
+            setRegisterInput({
+                username: '',
+                password: '',
+                email: '',
+            })  
+            
+            dispatch(clearRegistrationState());
+        }
+      }, [alreadyExist]);
 
     return (
         <div className="h-screen w-screen bg-gray-700 flex items-center justify-center">

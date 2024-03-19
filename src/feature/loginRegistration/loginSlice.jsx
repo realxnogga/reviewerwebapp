@@ -6,7 +6,7 @@ export const LoginSlice = createSlice({
         isLogged: null,
       },
       reducers: {
-        clearState: (state) => {
+        clearLoginState: (state) => {
           state.isLogged = null;
         },
     
@@ -15,14 +15,14 @@ export const LoginSlice = createSlice({
         builder
           .addCase(LoginThunk.fulfilled, (state, action) => {
             state.isLogged = action.payload;
+           
           })
       }
 })
 
-export const { clearState } = LoginSlice.actions;
+export const { clearLoginState } = LoginSlice.actions;
 export const loginReducer = LoginSlice.reducer;
 export const loginCookieTemp = state => state.LoginSliceName.isLogged;
-
 
 export const LoginThunk = createAsyncThunk(
     'login/isLogged',

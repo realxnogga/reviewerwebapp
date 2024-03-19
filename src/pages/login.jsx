@@ -7,9 +7,16 @@ import { ShowToast } from '../components/toaster';
 import { loginCookieTemp } from '../feature/loginRegistration/loginSlice';
 import { getUserData } from '../feature/data/userdataSlice';
 import { LoginThunk } from '../feature/loginRegistration/loginSlice';
-import { clearState } from '../feature/loginRegistration/loginSlice';
+import { clearLoginState } from '../feature/loginRegistration/loginSlice';
+
+import { userdataTemp } from '../feature/data/userdataSlice';
 
 export const Login = () => {
+
+    const dat = useSelector(userdataTemp);
+        console.log(dat);
+
+ 
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -28,11 +35,23 @@ export const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        dispatch(LoginThunk({
-            username: inputValue.username,
-            password: inputValue.password,
-        }));    
+        
+        if (inputValue.username == '' && inputValue.password == '') {
+            ShowToast('username and password must not be empty', 'warning');
+        }
+        else if (inputValue.username == '') {
+            ShowToast('username must not be empty', 'warning');
+        }
+        else if (inputValue.password == '') {
+            ShowToast('password must not be empty', 'warning');
+        }
+        else if (inputValue.username != '' && inputValue.password != '') {
+            dispatch(LoginThunk({
+                username: inputValue.username,
+                password: inputValue.password,
+            })); 
+        }       
+        
     };
 
 
@@ -42,10 +61,16 @@ export const Login = () => {
 
             navigate("/home");
 
+            setInputValue({
+                username: '',
+                password: '',
+            }) 
+
             dispatch(getUserData({
                 username: inputValue.username,
                 password: inputValue.password,
-            }));      
+            }));  
+
         }
     
         if (loginCookie === false){
@@ -56,7 +81,7 @@ export const Login = () => {
                 password: '',
             })   
 
-            dispatch(clearState());
+            dispatch(clearLoginState());
             
         }
       }, [loginCookie]);
