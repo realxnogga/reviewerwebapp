@@ -8,9 +8,9 @@ import { FileInput } from 'flowbite-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ShowToast } from '../components/toaster';
 
-import { RegistrationThunk } from '../feature/loginRegistration/registrationSlice';
-import { isUserAlreadyExistTemp } from '../feature/loginRegistration/registrationSlice';
-import { clearRegistrationState } from '../feature/loginRegistration/registrationSlice';
+import { RegistrationThunk } from '../feature/accountslice/registrationSlice';
+import { isUserAlreadyExistTemp } from '../feature/accountslice/registrationSlice';
+import { clearRegistrationState } from '../feature/accountslice/registrationSlice';
 
 export const Register = () => {
 

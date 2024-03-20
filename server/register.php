@@ -40,12 +40,12 @@ if (isset($_GET['action'])) {
                 $userImageName = $file['name'];
                 $userImageTMP = $file['tmp_name'];
                 $userImageDestination = '../src/assets/userProfile/' . $userImageName;
-    
+
                 move_uploaded_file($userImageTMP, $userImageDestination);
-    
+
                 $sql = "INSERT INTO user (username, password, email, userimage) VALUES ('$username', '$password', '$email', '$userImageName')";
                 $conn->query($sql);
-            }        
+            }
             $conn->close();
             break;
 
@@ -84,6 +84,21 @@ if (isset($_GET['action'])) {
             $conn->close();
             break;
 
+        case 'deleteAccout':
+            $data = json_decode(file_get_contents("php://input"), true);
+            $username = $data['username'];
+            $email = $data['email'];
+
+            $sql = "delete from user where username = '$username' and email = '$email'";
+            $result = $conn->query($sql);
+        
+            if ($conn->affected_rows > 0) {
+                echo json_encode(['success' => true, 'message' => 'Account deleted successfully']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Failed to delete account']);
+            }
+                $conn->close();
+            break;
 
         default:
             # code...

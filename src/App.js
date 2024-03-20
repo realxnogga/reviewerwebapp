@@ -6,7 +6,7 @@ import { Store } from "./store"; // Assuming you've exported your Redux store as
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { loginCookieTemp } from "./feature/loginRegistration/loginSlice";
+import { loginCookieTemp } from "./feature/accountslice/loginSlice";
 import { CustomToastContainer } from "./components/toaster";
 
 function WrapperApp() {

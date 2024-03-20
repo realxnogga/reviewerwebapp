@@ -3,9 +3,11 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { loginReducer } from './feature/loginRegistration/loginSlice';
+import { loginReducer } from './feature/accountslice/loginSlice';
 import { getdataReducer } from './feature/data/userdataSlice';
-import { registrationReducer } from './feature/loginRegistration/registrationSlice';
+import { registrationReducer } from './feature/accountslice/registrationSlice';
+import { deleteaccountReducer } from './feature/accountslice/deleteaccountSlice';
+
 
 const persistConfig = {
   key: 'root',
@@ -13,9 +15,10 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-  GetUserDataName: getdataReducer,
   LoginSliceName: loginReducer,
+  GetUserDataName: getdataReducer,
   RegisterSliceName: registrationReducer,
+  DeleteAccountSliceName: deleteaccountReducer,
 });
 
 
