@@ -25,7 +25,7 @@ export const loginReducer = LoginSlice.reducer;
 export const loginCookieTemp = state => state.LoginSliceName.isLogged;
 
 export const LoginThunk = createAsyncThunk(
-    'login/isLogged',
+    'LoginSliceName/LoginThunk',
     async (passedLoginCredentials) => {
       try {
         const res = await fetch('http://localhost/simple_web_in_react/server/register.php?action=checkExist', {

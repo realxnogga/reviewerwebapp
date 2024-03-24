@@ -33,7 +33,7 @@ export const Register = () => {
         setFile(e.target.files[0]);
     }
 
-    const handleSubmit = (e) => {
+    const handleRegisterSubmit = (e) => {
         e.preventDefault();     
 
         if (registerInput.username == '' && registerInput.password == '' && registerInput.email == '') {
@@ -56,14 +56,14 @@ export const Register = () => {
         }
         else if (registerInput.username != '' && registerInput.password != '' && registerInput.email != '') {
 
-            const udata = {
+            const userdata = {
                 username: registerInput.username,
                 password: registerInput.password,
                 email: registerInput.email,
             }
     
             dispatch(RegistrationThunk(
-               {udata, file}
+               {userdata, file}
             ));
 
             
@@ -102,7 +102,7 @@ export const Register = () => {
     return (
         <div className="h-screen w-screen bg-gray-700 flex items-center justify-center">
             <Card className="h-fit w-fit max-w-[90%]">
-                <form onSubmit={handleSubmit} action="" className='flex flex-col justify-start gap-y-5'>
+                <form onSubmit={handleRegisterSubmit} action="" className='flex flex-col justify-start gap-y-5'>
                     <FloatingLabel name="username" onChange={handleChange} value={registerInput.username} variant="standard" label="Enter your Username" />
                     <FloatingLabel name="password" onChange={handleChange} value={registerInput.password} variant="standard" label="Enter your password" />
                     <FloatingLabel name="email" onChange={handleChange} value={registerInput.email} variant="standard" label="Enter your Email" />

@@ -7,6 +7,7 @@ import { loginReducer } from './feature/accountslice/loginSlice';
 import { getdataReducer } from './feature/data/userdataSlice';
 import { registrationReducer } from './feature/accountslice/registrationSlice';
 import { deleteaccountReducer } from './feature/accountslice/deleteaccountSlice';
+import { editUserReducer } from './feature/accountslice/editaccountSlice';
 
 
 const persistConfig = {
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   GetUserDataName: getdataReducer,
   RegisterSliceName: registrationReducer,
   DeleteAccountSliceName: deleteaccountReducer,
+  EditUserSliceName: editUserReducer,
 });
 
 

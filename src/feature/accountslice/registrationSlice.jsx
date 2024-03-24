@@ -26,11 +26,11 @@ export const isUserAlreadyExistTemp = state => state.RegisterSliceName.isUserAlr
 
 
 export const RegistrationThunk = createAsyncThunk(
-    'useralreadyexist/RegistrationThunk',
-    async ({udata, file}) => {
+    'RegisterSliceName/RegistrationThunk',
+    async ({userdata, file}) => {
       try {
         const formData = new FormData();
-        formData.append('registerData', JSON.stringify(udata));
+        formData.append('registerData', JSON.stringify(userdata));
         formData.append('file', file);
   
         const res = await fetch("http://localhost/simple_web_in_react/server/register.php?action=putData", {
@@ -38,6 +38,7 @@ export const RegistrationThunk = createAsyncThunk(
           body: formData,
         });
        const data = await res.json();
+       console.log(data.success)
        return data.success;
       } catch (error) {
         console.log('Error', error);
