@@ -25,12 +25,12 @@ export const getdataReducer = GetUserData.reducer;
 
 export const getUserData = createAsyncThunk(
     'GetUserDataName/getUserData',
-    async (getUserCredentials) => {
+    async (userid) => {
       try {
         const res = await fetch("http://localhost/simple_web_in_react/server/register.php?action=getData", {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(getUserCredentials),
+          body: JSON.stringify(userid),
         });
         const data = await res.json();
         return data;

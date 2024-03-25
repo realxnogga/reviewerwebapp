@@ -4,6 +4,7 @@ export const LoginSlice = createSlice({
     name: 'LoginSliceName',
     initialState: {
         isLogged: null,
+        userid: null,
       },
       reducers: {
         clearLoginState: (state) => {
@@ -14,7 +15,9 @@ export const LoginSlice = createSlice({
       extraReducers: builder => {
         builder
           .addCase(LoginThunk.fulfilled, (state, action) => {
-            state.isLogged = action.payload;
+            state.isLogged = action.payload.success;
+
+            state.userid = action.payload.userid;
            
           })
       }
@@ -23,6 +26,7 @@ export const LoginSlice = createSlice({
 export const { clearLoginState } = LoginSlice.actions;
 export const loginReducer = LoginSlice.reducer;
 export const loginCookieTemp = state => state.LoginSliceName.isLogged;
+export const useridTemp = state => state.LoginSliceName.userid;
 
 export const LoginThunk = createAsyncThunk(
     'LoginSliceName/LoginThunk',
@@ -34,7 +38,7 @@ export const LoginThunk = createAsyncThunk(
           body: JSON.stringify(passedLoginCredentials),
         });
         const data = await res.json();
-        return data.success; // equals true
+        return { success: data.success, userid: data.userid };
       } catch (error) {
         console.log('Error', error);
       }

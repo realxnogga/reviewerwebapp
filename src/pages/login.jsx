@@ -8,20 +8,18 @@ import { loginCookieTemp } from '../feature/accountslice/loginSlice';
 import { getUserData } from '../feature/data/userdataSlice';
 import { LoginThunk } from '../feature/accountslice/loginSlice';
 import { clearLoginState } from '../feature/accountslice/loginSlice';
+import { useridTemp } from '../feature/accountslice/loginSlice';
 
 import { userdataTemp } from '../feature/data/userdataSlice';
 
 export const Login = () => {
-
-    const dat = useSelector(userdataTemp);
-    console.log(dat);
-
 
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const loginCookie = useSelector(loginCookieTemp);
+    const userid = useSelector(useridTemp);
 
     const [inputValue, setInputValue] = useState({
         username: '',
@@ -66,10 +64,9 @@ export const Login = () => {
                 password: '',
             })
 
-            dispatch(getUserData({
-                username: inputValue.username,
-                password: inputValue.password,
-            }));
+            dispatch(getUserData(
+                { userid: userid, }         
+            ));
 
         }
 

@@ -118,8 +118,6 @@ export const Nav1 = () => {
         });
 
         console.log(editInput.username);
-    
-    console.log(name)
 
     const handleEditChange = (e) => {
         const { name, value } = e.target;
@@ -159,8 +157,7 @@ export const Nav1 = () => {
             })
 
             dispatch(getUserData({
-                username: editInput.username,
-                password: editInput.password,
+               userid: id,
             }));
 
             dispatch(clearEditDataState());
@@ -175,6 +172,7 @@ export const Nav1 = () => {
 
     console.log(isUserEdited);
 
+    
     return (
         Object.keys(userdata).length != 0 ?
             (
@@ -209,7 +207,7 @@ export const Nav1 = () => {
                     <Navbar fluid rounded className={`${temp} absolute text-gray-400 bg-gray-700 px-12 h-fit w-screen backdrop-blur backdrop-brightness-75 transition-[1s]`}>
 
                         <Navbar.Brand>
-                            <img className="animate-spin spin h-[3rem] w-[3rem]" src={`${require('../assets/icon/logo192.png')}`} alt="" />
+                            <img className="animate-spin spin h-[3rem] w-[3rem]" src="../../asset/icon/logo192.png" alt="" />
                         </Navbar.Brand>
 
                         <section className='flex gap-x-5'>
@@ -218,7 +216,7 @@ export const Nav1 = () => {
                                 arrowIcon={false}
                                 inline
                                 label={
-                                    <img className="h-[2.5rem] w-[2.5rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`${require(`../assets/userProfile/${userImgUrl}`)}`} />
+                                    <img className="h-[2.5rem] w-[2.5rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />                          
                                                                  
                                 }>
                                 <Dropdown.Header>
@@ -259,7 +257,9 @@ export const Nav1 = () => {
                         <Modal.Body>
                             <div className="space-y-6">
                                 <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                    <img className="h-[4rem] w-[4rem] mobile:h-[2.2rem] mobile:w-[2.2rem] rounded-[50%]" src={`${require(`../assets/userProfile/${userImgUrl}`)}`} />
+
+                                    <img className="h-[4rem] w-[4rem] mobile:h-[2.2rem] mobile:w-[2.2rem] rounded-[50%]" src={`../../asset/userprofile/${userImgUrl}`} alt="" /> 
+
                                 </p>
 
                                 <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
