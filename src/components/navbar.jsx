@@ -117,8 +117,16 @@ export const Nav1 = () => {
             email: '',
         });
 
-        console.log(editInput.username);
-
+        useEffect(() => {
+            if (Object.keys(userdata).length !== 0) {
+                setEditInput({
+                    username: userdata.username,
+                    password: userdata.password,
+                    email: userdata.email,
+                });
+            }
+        }, [userdata]);
+        
     const handleEditChange = (e) => {
         const { name, value } = e.target;
         setEditInput({ ...editInput, [name]: value });
@@ -149,7 +157,7 @@ export const Nav1 = () => {
     useEffect(() => {
         if (isUserEdited == true) {
             ShowToast('updated successfully', 'success')
-
+            setOpenEditUserModal(false);
             setEditInput({
                 username: '',
                 password: '',
@@ -159,8 +167,7 @@ export const Nav1 = () => {
             dispatch(getUserData({
                userid: id,
             }));
-
-            dispatch(clearEditDataState());
+            dispatch(clearEditDataState());      
         }
 
         if (isUserEdited == false) {
@@ -224,7 +231,7 @@ export const Nav1 = () => {
                                     <span className="block text-gray-400 truncate text-sm font-medium">{email}</span>
                                 </Dropdown.Header>
                                 <Dropdown.Item onClick={() => setOpenUserData(true)} className='text-gray-400'>View Profile</Dropdown.Item>
-                                <Dropdown.Item onClick={() => setOpenEditUserModal(true)} className='text-gray-400'>Edit Profile</Dropdown.Item>
+                                <Dropdown.Item onClick={() =>{ setOpenEditUserModal(true);}} className='text-gray-400'>Edit Profile</Dropdown.Item>
                                 <Dropdown.Divider />
                                 <Dropdown.Item className='text-gray-400' onClick={handleLogout} >Sign out</Dropdown.Item>
                             </Dropdown>
@@ -238,9 +245,11 @@ export const Nav1 = () => {
                             menuhover ?
                                 (
                                     <section onMouseLeave={menuMouseLeave} className='w-full list-none rounded-none'>
-                                        <ListGroup.Item icon={HiOutlineAdjustments}>Practice Tests and Quizzes</ListGroup.Item>
-                                        <ListGroup.Item icon={HiInbox}>Progress</ListGroup.Item>
-                                        <ListGroup.Item icon={HiCloudDownload}>Exam Simulation</ListGroup.Item>
+                                         <ListGroup.Item icon={HiOutlineAdjustments}>Dashboard (progress tracking)</ListGroup.Item>
+                                        <ListGroup.Item icon={HiOutlineAdjustments}>Review Modules</ListGroup.Item>
+                                        <ListGroup.Item icon={HiInbox}>Practice Test and Quizzes</ListGroup.Item>
+                                        <ListGroup.Item icon={HiInbox}>Exam Simulation</ListGroup.Item>
+                                        <ListGroup.Item icon={HiCloudDownload}>Learning Resources</ListGroup.Item>
                                     </section>
                                 ) :
                                 (
