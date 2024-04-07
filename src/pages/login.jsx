@@ -57,7 +57,7 @@ export const Login = () => {
         if (loginCookie === true) {
             ShowToast('login successfully', 'success');
 
-            navigate("/home");
+            navigate("/mainpage");
 
             setInputValue({
                 username: '',

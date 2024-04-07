@@ -1,13 +1,10 @@
 
 
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { Tooltip, Avatar, Dropdown, Navbar } from 'flowbite-react';
-import { GiHamburgerMenu } from "react-icons/gi";
-import { ListGroup } from 'flowbite-react';
-import { HiCloudDownload, HiInbox, HiOutlineAdjustments } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
+import { Dropdown, Navbar } from 'flowbite-react';
+
 import { ShowToast } from './toaster';
 import { clearLoginState } from '../feature/account/loginSlice';
 import { userdataTemp } from '../feature/data/userdataSlice';
@@ -15,7 +12,6 @@ import { clearRegisterState } from '../feature/data/userdataSlice';
 import { FloatingLabel } from 'flowbite-react';
 import { FileInput, } from 'flowbite-react';
 
-import { Checkbox, Label, TextInput } from 'flowbite-react';
 import { getUserData } from '../feature/data/userdataSlice';
 import { DeleteAccountThunk } from '../feature/account/deleteaccountSlice';
 import { isAccountDeletedTemp } from '../feature/account/deleteaccountSlice';

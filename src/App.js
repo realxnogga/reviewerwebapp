@@ -1,7 +1,7 @@
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
-import { Home }from "./pages/home";
-import { LearningResource } from "./pages/learningresource";
+import { MainPage } from "./pages/mainpage";
+import { LearningResources } from "./pages/learningresources";
 import { PracticeTestAndQuiz } from "./pages/practicetestandquiz";
 import { ReviewModule } from "./pages/reviewmodule";
 import { DashBoard } from "./pages/dashboard";
@@ -25,8 +25,8 @@ function WrapperApp() {
           <>
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/learningresource" element={<LearningResource />} />
+            <Route path="/mainpage" element={<MainPage />} />
+            <Route path="/learningresources" element={<LearningResources />} />
             <Route path="/practicetestandquiz" element={<PracticeTestAndQuiz />} />
             <Route path="/reviewmodule" element={<ReviewModule />} />
             <Route path="/dashboard" element={<DashBoard />} />
