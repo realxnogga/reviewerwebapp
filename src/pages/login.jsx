@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ShowToast } from '../components/toaster';
 
-import { loginCookieTemp } from '../feature/accountslice/loginSlice';
+import { loginCookieTemp } from '../feature/account/loginSlice';
 import { getUserData } from '../feature/data/userdataSlice';
-import { LoginThunk } from '../feature/accountslice/loginSlice';
-import { clearLoginState } from '../feature/accountslice/loginSlice';
-import { useridTemp } from '../feature/accountslice/loginSlice';
+import { LoginThunk } from '../feature/account/loginSlice';
+import { clearLoginState } from '../feature/account/loginSlice';
+import { useridTemp } from '../feature/account/loginSlice';
 
 import { userdataTemp } from '../feature/data/userdataSlice';
 

@@ -9,7 +9,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { ListGroup } from 'flowbite-react';
 import { HiCloudDownload, HiInbox, HiOutlineAdjustments } from 'react-icons/hi';
 import { ShowToast } from './toaster';
-import { clearLoginState } from '../feature/accountslice/loginSlice';
+import { clearLoginState } from '../feature/account/loginSlice';
 import { userdataTemp } from '../feature/data/userdataSlice';
 import { clearRegisterState } from '../feature/data/userdataSlice';
 import { FloatingLabel } from 'flowbite-react';
@@ -17,13 +17,13 @@ import { FileInput, } from 'flowbite-react';
 
 import { Checkbox, Label, TextInput } from 'flowbite-react';
 import { getUserData } from '../feature/data/userdataSlice';
-import { DeleteAccountThunk } from '../feature/accountslice/deleteaccountSlice';
-import { isAccountDeletedTemp } from '../feature/accountslice/deleteaccountSlice';
-import { clearDeleteAccountState } from '../feature/accountslice/deleteaccountSlice';
+import { DeleteAccountThunk } from '../feature/account/deleteaccountSlice';
+import { isAccountDeletedTemp } from '../feature/account/deleteaccountSlice';
+import { clearDeleteAccountState } from '../feature/account/deleteaccountSlice';
 
-import { EditUserThunk } from '../feature/accountslice/editaccountSlice';
-import { isUserEditedTemp } from '../feature/accountslice/editaccountSlice';
-import { clearEditDataState } from '../feature/accountslice/editaccountSlice';
+import { EditUserThunk } from '../feature/account/editaccountSlice';
+import { isUserEditedTemp } from '../feature/account/editaccountSlice';
+import { clearEditDataState } from '../feature/account/editaccountSlice';
 
 import { Button, Modal } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
@@ -61,7 +61,7 @@ export const Nav1 = () => {
         const handleScroll = () => {
             const currentScrollPos = window.scrollY;
 
-            prevScrollPos > currentScrollPos ? setTemp('top-0') : setTemp('top-[-5rem]');
+            prevScrollPos > currentScrollPos ? setTemp('top-0') : setTemp('top-[-4rem]');
 
             setPrevScrollPos(currentScrollPos);
         };
@@ -184,34 +184,8 @@ export const Nav1 = () => {
         Object.keys(userdata).length != 0 ?
             (
                 <>
-
-                    {/* edit profile modal */}
-
-                    <Modal show={openEditUserModal} size="md" onClose={() => setOpenEditUserModal(false)} popup>
-                        <Modal.Header />
-                        <Modal.Body>
-                            <div className="space-y-6">
-                                <h3 className="text-xl font-medium text-gray-900 dark:text-white">Edit Account</h3>
-                                <form onSubmit={handleEditSubmit} action="" className='flex flex-col justify-start gap-y-5'>
-                                    <FloatingLabel onChange={handleEditChange} value={editInput.username} name="username" variant="standard" label="Enter new Username" />
-                                    <FloatingLabel onChange={handleEditChange} value={editInput.password} name="password" variant="standard" label="Enter new Password" />
-                                    <FloatingLabel onChange={handleEditChange} value={editInput.email} name="email" variant="standard" label="Enter new Email" />
-
-                                    <div>
-                                        <FileInput onChange={handleEditImageUploadChange} id="large-file-upload" sizing="lg" />
-                                    </div>
-
-                                    <Button className='w-fit' type='submit'>submit</Button>
-
-                                </form>
-                            </div>
-                        </Modal.Body>
-                    </Modal>
-
-                    {/* ------------------------- */}
-
-
-                    <Navbar fluid rounded className={`${temp} absolute text-gray-400 bg-gray-700 px-12 h-fit w-screen backdrop-blur backdrop-brightness-75 transition-[1s]`}>
+                   
+                    <Navbar fluid className={`${temp} h-[4rem] bg-gray-900 text-gray-400 px-12 w-screen backdrop-blur absolute top-0  z-10 backdrop-brightness-75`}>
 
                         <Navbar.Brand>
                             <img className="animate-spin spin h-[3rem] w-[3rem]" src="../../asset/icon/logo192.png" alt="" />
@@ -219,7 +193,7 @@ export const Nav1 = () => {
 
                         <section className='flex gap-x-5'>
                             <Dropdown
-                                className='bg-gray-700'
+                                className='bg-gray-800 border-none'
                                 arrowIcon={false}
                                 inline
                                 label={
@@ -235,27 +209,8 @@ export const Nav1 = () => {
                                 <Dropdown.Divider />
                                 <Dropdown.Item className='text-gray-400' onClick={handleLogout} >Sign out</Dropdown.Item>
                             </Dropdown>
-                            <Tooltip content={'Menu'}>
-                                <GiHamburgerMenu
-                                    onMouseOver={menuMouseOver}
-                                    className='h-full w-full' />
-                            </Tooltip>
+                           
                         </section>
-                        {
-                            menuhover ?
-                                (
-                                    <section onMouseLeave={menuMouseLeave} className='w-full list-none rounded-none'>
-                                         <ListGroup.Item icon={HiOutlineAdjustments}>Dashboard (progress tracking)</ListGroup.Item>
-                                        <ListGroup.Item icon={HiOutlineAdjustments}>Review Modules</ListGroup.Item>
-                                        <ListGroup.Item icon={HiInbox}>Practice Test and Quizzes</ListGroup.Item>
-                                        <ListGroup.Item icon={HiInbox}>Exam Simulation</ListGroup.Item>
-                                        <ListGroup.Item icon={HiCloudDownload}>Learning Resources</ListGroup.Item>
-                                    </section>
-                                ) :
-                                (
-                                    null
-                                )
-                        }
 
                     </Navbar >
 
@@ -267,7 +222,7 @@ export const Nav1 = () => {
                             <div className="space-y-6">
                                 <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 
-                                    <img className="h-[4rem] w-[4rem] mobile:h-[2.2rem] mobile:w-[2.2rem] rounded-[50%]" src={`../../asset/userprofile/${userImgUrl}`} alt="" /> 
+                                    <img className="h-[4rem] w-[4rem] mobile:h-[2.2rem] mobile:w-[2.2rem]" src={`../../asset/userprofile/${userImgUrl}`} alt="" /> 
 
                                 </p>
 
@@ -303,6 +258,29 @@ export const Nav1 = () => {
                                         No, cancel
                                     </Button>
                                 </div>
+                            </div>
+                        </Modal.Body>
+                    </Modal>
+
+                      {/* edit profile modal */}
+
+                      <Modal show={openEditUserModal} size="md" onClose={() => setOpenEditUserModal(false)} popup>
+                        <Modal.Header />
+                        <Modal.Body>
+                            <div className="space-y-6">
+                                <h3 className="text-xl font-medium text-gray-900 dark:text-white">Edit Account</h3>
+                                <form onSubmit={handleEditSubmit} action="" className='flex flex-col justify-start gap-y-5'>
+                                    <FloatingLabel onChange={handleEditChange} value={editInput.username} name="username" variant="standard" label="Enter new Username" />
+                                    <FloatingLabel onChange={handleEditChange} value={editInput.password} name="password" variant="standard" label="Enter new Password" />
+                                    <FloatingLabel onChange={handleEditChange} value={editInput.email} name="email" variant="standard" label="Enter new Email" />
+
+                                    <div>
+                                        <FileInput onChange={handleEditImageUploadChange} id="large-file-upload" sizing="lg" />
+                                    </div>
+
+                                    <Button className='w-fit' type='submit'>submit</Button>
+
+                                </form>
                             </div>
                         </Modal.Body>
                     </Modal>
