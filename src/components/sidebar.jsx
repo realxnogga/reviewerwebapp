@@ -60,33 +60,30 @@ export const Sidebar = () => {
                 <hr />
 
                 <li onClick={() => { dispatch(whatIsClickedState('dashboard')) }} className='flex flex-row items-center gap-x-3 cursor-pointer'>
-                    <span className='text-[1.6rem] '><MdOutlineSpaceDashboard className="text-blue-500" /></span>
+                    <span><MdOutlineSpaceDashboard className="text-blue-500 text-[1.6rem] " /></span>
                     <span className={`${hideTextLinkString} ${whatIsClicked === 'dashboard' ? 'text-blue-500' : ''}`}>Dashboard (progress tracking)</span>
                 </li>
 
                 <hr />
 
                 <li onClick={() => { dispatch(whatIsClickedState('reviewmodule')) }} className='flex flex-row items-center gap-x-3 cursor-pointer' >
-                    <span className='text-[1.6rem] '><MdOutlineRateReview className="text-blue-500" /></span>
+                    <span><MdOutlineRateReview className="text-blue-500 text-[1.6rem]" /></span>
                     <span className={`${hideTextLinkString} ${whatIsClicked === 'reviewmodule' ? 'text-blue-500' : ''}`}>Review Modules</span>
                 </li>
 
                 <hr />
 
                 <li onClick={() => { dispatch(whatIsClickedState('practicetestandquiz')) }} className='flex flex-row items-center gap-x-3 cursor-pointer' >
-                    <span className='text-[1.6rem] '><MdOutlineQuiz className="text-blue-500" /></span>
+                    <span><MdOutlineQuiz className="text-blue-500 text-[1.6rem]" /></span>
                     <span className={`${hideTextLinkString} ${whatIsClicked === 'practicetestandquiz' ? 'text-blue-500' : ''} `}>Practice Test and Quizzes</span>
                 </li>
 
                 <hr />
 
                 <li onClick={() => { dispatch(whatIsClickedState('learningresources')) }} className='flex flex-row items-center gap-x-3 cursor-pointer' >
-                    <span className='text-[1.6rem] '><GrResources className="text-blue-500" /></span>
+                    <span><GrResources className="text-blue-500 text-[1.6rem]" /></span>
                     <span className={`${hideTextLinkString} ${whatIsClicked === 'learningresources' ? 'text-blue-500' : ''}`}>Learning Resources</span>
                 </li>
-
-
-
 
 
             </ul>

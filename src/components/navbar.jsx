@@ -3,27 +3,13 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Dropdown, Navbar } from 'flowbite-react';
-
+import { Dropdown, Navbar, FloatingLabel, FileInput, Button, Modal } from 'flowbite-react';
 import { ShowToast } from './toaster';
 import { clearLoginState } from '../feature/account/loginSlice';
-import { userdataTemp } from '../feature/data/userdataSlice';
-import { clearRegisterState } from '../feature/data/userdataSlice';
-import { FloatingLabel } from 'flowbite-react';
-import { FileInput, } from 'flowbite-react';
-
-import { getUserData } from '../feature/data/userdataSlice';
-import { DeleteAccountThunk } from '../feature/account/deleteaccountSlice';
-import { isAccountDeletedTemp } from '../feature/account/deleteaccountSlice';
-import { clearDeleteAccountState } from '../feature/account/deleteaccountSlice';
-
-import { EditUserThunk } from '../feature/account/editaccountSlice';
-import { isUserEditedTemp } from '../feature/account/editaccountSlice';
-import { clearEditDataState } from '../feature/account/editaccountSlice';
-
+import { userdataTemp, clearRegisterState, getUserData } from '../feature/data/userdataSlice';
+import { DeleteAccountThunk, isAccountDeletedTemp, clearDeleteAccountState } from '../feature/account/deleteaccountSlice';
+import { EditUserThunk, isUserEditedTemp, clearEditDataState } from '../feature/account/editaccountSlice';
 import { clearIsSidebarOpenState, clearWhatIsClickedState } from '../feature/opensidebar/opensidebarSlice';
-
-import { Button, Modal } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
 export const Nav1 = () => {
@@ -73,15 +59,6 @@ export const Nav1 = () => {
         };
     }, [prevScrollPos]);
 
-    const [menuhover, setMenuHover] = useState(false);
-
-    const menuMouseOver = () => {
-        setMenuHover(true);
-    }
-
-    const menuMouseLeave = () => {
-        setMenuHover(false);
-    }
 
     const handleDeleteAccount = () => {
         dispatch(DeleteAccountThunk({
@@ -101,6 +78,8 @@ export const Nav1 = () => {
             dispatch(clearLoginState());
             dispatch(clearRegisterState());
             dispatch(clearDeleteAccountState());
+            dispatch(clearIsSidebarOpenState());
+            dispatch(clearWhatIsClickedState());
             navigate('/');
         }
         if (isAccountDeleted == false) {
@@ -111,22 +90,22 @@ export const Nav1 = () => {
 
     // ----------------------------------------
     const [editfile, setEditFile] = useState(null)
-        const [editInput, setEditInput] = useState({
-            username: '',
-            password: '',
-            email: '',
-        });
+    const [editInput, setEditInput] = useState({
+        username: '',
+        password: '',
+        email: '',
+    });
 
-        useEffect(() => {
-            if (Object.keys(userdata).length !== 0) {
-                setEditInput({
-                    username: userdata.username,
-                    password: userdata.password,
-                    email: userdata.email,
-                });
-            }
-        }, [userdata]);
-        
+    useEffect(() => {
+        if (Object.keys(userdata).length !== 0) {
+            setEditInput({
+                username: userdata.username,
+                password: userdata.password,
+                email: userdata.email,
+            });
+        }
+    }, [userdata]);
+
     const handleEditChange = (e) => {
         const { name, value } = e.target;
         setEditInput({ ...editInput, [name]: value });
@@ -137,18 +116,18 @@ export const Nav1 = () => {
     }
 
     const handleEditSubmit = (e) => {
-        e.preventDefault();  
-        
+        e.preventDefault();
+
         const editdata = {
             id: id,
-            username : editInput.username,
-            password : editInput.password,
-            email : editInput.email,
-            userimage : userImgUrl,
+            username: editInput.username,
+            password: editInput.password,
+            email: editInput.email,
+            userimage: userImgUrl,
         }
 
         dispatch(EditUserThunk(
-            {editdata, editfile}     
+            { editdata, editfile }
         ))
     }
 
@@ -165,9 +144,9 @@ export const Nav1 = () => {
             })
 
             dispatch(getUserData({
-               userid: id,
+                userid: id,
             }));
-            dispatch(clearEditDataState());      
+            dispatch(clearEditDataState());
         }
 
         if (isUserEdited == false) {
@@ -179,12 +158,12 @@ export const Nav1 = () => {
 
     console.log(isUserEdited);
 
-    
+
     return (
         Object.keys(userdata).length != 0 ?
             (
                 <>
-                   
+
                     <Navbar fluid className={`${temp} h-[4rem] bg-gray-900 text-gray-400 px-12 w-screen backdrop-blur absolute top-0  z-10 backdrop-brightness-75`}>
 
                         <Navbar.Brand>
@@ -197,19 +176,19 @@ export const Nav1 = () => {
                                 arrowIcon={false}
                                 inline
                                 label={
-                                    <img className="h-[2.5rem] w-[2.5rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />                          
-                                                                 
+                                    <img className="h-[2.5rem] w-[2.5rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />
+
                                 }>
                                 <Dropdown.Header>
                                     <span className="block text-gray-400 text-sm">{name}</span>
                                     <span className="block text-gray-400 truncate text-sm font-medium">{email}</span>
                                 </Dropdown.Header>
                                 <Dropdown.Item onClick={() => setOpenUserData(true)} className='text-gray-400'>View Profile</Dropdown.Item>
-                                <Dropdown.Item onClick={() =>{ setOpenEditUserModal(true);}} className='text-gray-400'>Edit Profile</Dropdown.Item>
+                                <Dropdown.Item onClick={() => { setOpenEditUserModal(true); }} className='text-gray-400'>Edit Profile</Dropdown.Item>
                                 <Dropdown.Divider />
                                 <Dropdown.Item className='text-gray-400' onClick={handleLogout} >Sign out</Dropdown.Item>
                             </Dropdown>
-                           
+
                         </section>
 
                     </Navbar >
@@ -217,72 +196,81 @@ export const Nav1 = () => {
                     {/* view profile modal */}
 
                     <Modal dismissible show={openUserData} onClose={() => setOpenUserData(false)}>
-                        <Modal.Header>User Profile</Modal.Header>
-                        <Modal.Body>
-                            <div className="space-y-6">
+                        <div className='space-y-8 bg-gray-700 rounded-lg p-5 '>
+                            <h3 className="text-xl font-medium text-gray-300 dark:text-white">Your Profile</h3>
+
+                            <div className="flex flex-col items-start gap-y-2">
                                 <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 
-                                    <img className="h-[4rem] w-[4rem] mobile:h-[2.2rem] mobile:w-[2.2rem]" src={`../../asset/userprofile/${userImgUrl}`} alt="" /> 
+                                    <img className="h-[4rem] w-[4rem] mobile:h-[2.2rem] mobile:w-[2.2rem]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />
 
                                 </p>
 
-                                <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                <p className="text-xl text-gray-300">
                                     Name : {name}
                                 </p>
-                                <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                <p className="text-xl text-gray-300">
                                     Email : {email}
                                 </p>
+
                             </div>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button onClick={() => setOpenUserData(false)}>ok</Button>
-                            <Button onClick={() => { setOpenDeleteUserModal(true); setOpenUserData(false) }} color='failure'>delete account</Button>
-                        </Modal.Footer>
+                            <div className='flex flex-row gap-x-3'>
+                                <Button className='w-fit rounded-md' onClick={() => { setOpenDeleteUserModal(true); setOpenUserData(false) }} gradientMonochrome="failure">delete account</Button>
+                                <Button className='w-fit rounded-md' onClick={() => setOpenUserData(false)} gradientMonochrome="success">close</Button>
+                            </div>
+                        </div>
                     </Modal>
 
                     {/* confirm delete account modal */}
 
                     <Modal show={openDeleteUserModal} size="md" onClose={() => setOpenDeleteUserModal(false)} popup>
-                        <Modal.Header />
-                        <Modal.Body>
-                            <div className="text-center">
-                                <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
-                                <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                    Are you sure you want to delete this account?
-                                </h3>
-                                <div className="flex justify-center gap-4">
-                                    <Button color="failure" onClick={() => { setOpenDeleteUserModal(false); handleDeleteAccount(); }}>
-                                        {"Yes, I'm sure"}
-                                    </Button>
-                                    <Button color="gray" onClick={() => setOpenDeleteUserModal(false)}>
-                                        No, cancel
-                                    </Button>
-                                </div>
+                        {/* <Modal.Header />
+                        <Modal.Body> */}
+
+                        <div className="bg-gray-700 rounded-lg flex flex-col items-center gap-y-7 p-5">
+                            <HiOutlineExclamationCircle className='text-[6rem] text-gray-300 ' />
+                            <h3 className='text-gray-300 font-semibold text-md'>
+                                Are you sure you want to delete this account?
+                            </h3>
+                            <div className=" flex flex-row items-center justify-center gap-x-4">
+
+                                <Button className='w-fit rounded-md' onClick={() => { setOpenDeleteUserModal(false); handleDeleteAccount(); }} gradientMonochrome="failure">Yes, I'm sure</Button>
+
+                                <Button className='w-fit rounded-md' onClick={() => setOpenDeleteUserModal(false)} gradientMonochrome="success">close</Button>
                             </div>
-                        </Modal.Body>
+                        </div>
+                        {/* </Modal.Body> */}
                     </Modal>
 
-                      {/* edit profile modal */}
+                    {/* edit profile modal */}
 
-                      <Modal show={openEditUserModal} size="md" onClose={() => setOpenEditUserModal(false)} popup>
-                        <Modal.Header />
-                        <Modal.Body>
-                            <div className="space-y-6">
-                                <h3 className="text-xl font-medium text-gray-900 dark:text-white">Edit Account</h3>
+                    <Modal show={openEditUserModal} size="md" onClose={() => setOpenEditUserModal(false)} popup>
+                        {/* <Modal.Header className='bg-gray-700'/> */}
+                        {/* <Modal.Body> */}
+                        <div className='bg-gray-700 p-5 rounded-lg'>
+                            <div className="space-y-8">
+                                <h3 className="text-xl font-medium text-gray-300 dark:text-white">Edit Account</h3>
                                 <form onSubmit={handleEditSubmit} action="" className='flex flex-col justify-start gap-y-5'>
-                                    <FloatingLabel onChange={handleEditChange} value={editInput.username} name="username" variant="standard" label="Enter new Username" />
-                                    <FloatingLabel onChange={handleEditChange} value={editInput.password} name="password" variant="standard" label="Enter new Password" />
-                                    <FloatingLabel onChange={handleEditChange} value={editInput.email} name="email" variant="standard" label="Enter new Email" />
+                                    <FloatingLabel className='text-gray-300' onChange={handleEditChange} value={editInput.username} name="username" variant="standard" label="Enter new Username" />
+                                    <FloatingLabel className='text-gray-300' onChange={handleEditChange} value={editInput.password} name="password" variant="standard" label="Enter new Password" />
+                                    <FloatingLabel className='text-gray-300' onChange={handleEditChange} value={editInput.email} name="email" variant="standard" label="Enter new Email" />
 
                                     <div>
-                                        <FileInput onChange={handleEditImageUploadChange} id="large-file-upload" sizing="lg" />
+                                        <FileInput className='text-gray-300' onChange={handleEditImageUploadChange} id="large-file-upload" sizing="lg" />
                                     </div>
 
-                                    <Button className='w-fit' type='submit'>submit</Button>
+                                    <div className='flex flex-row gap-x-3'>
+
+                                        <Button className='w-fit rounded-md' type='submit' gradientMonochrome="cyan">submit</Button>
+                                        <Button className='w-fit rounded-md' onClick={() => setOpenEditUserModal(false)} gradientMonochrome="success">close</Button>
+
+                                    </div>
+
 
                                 </form>
                             </div>
-                        </Modal.Body>
+                        </div>
+                        {/* </Modal.Body> */}
                     </Modal>
 
                 </>
