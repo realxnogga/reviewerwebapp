@@ -1,10 +1,6 @@
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import { MainPage } from "./pages/mainpage";
-import { LearningResources } from "./pages/learningresources";
-import { PracticeTestAndQuiz } from "./pages/practicetestandquiz";
-import { ReviewModule } from "./pages/reviewmodule";
-import { DashBoard } from "./pages/dashboard";
 
 import { Provider } from "react-redux";
 import { Store } from "./store"; // Assuming you've exported your Redux store as 'store'
@@ -26,10 +22,6 @@ function WrapperApp() {
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/mainpage" element={<MainPage />} />
-            <Route path="/learningresources" element={<LearningResources />} />
-            <Route path="/practicetestandquiz" element={<PracticeTestAndQuiz />} />
-            <Route path="/reviewmodule" element={<ReviewModule />} />
-            <Route path="/dashboard" element={<DashBoard />} />
           </>
         ) : (
           <>

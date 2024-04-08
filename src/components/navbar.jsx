@@ -21,6 +21,8 @@ import { EditUserThunk } from '../feature/account/editaccountSlice';
 import { isUserEditedTemp } from '../feature/account/editaccountSlice';
 import { clearEditDataState } from '../feature/account/editaccountSlice';
 
+import { clearIsSidebarOpenState, clearWhatIsClickedState } from '../feature/opensidebar/opensidebarSlice';
+
 import { Button, Modal } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
@@ -47,6 +49,8 @@ export const Nav1 = () => {
     const handleLogout = () => {
         dispatch(clearLoginState());
         dispatch(clearRegisterState());
+        dispatch(clearIsSidebarOpenState());
+        dispatch(clearWhatIsClickedState());
         navigate('/');
     }
 
