@@ -181,7 +181,7 @@ export const LearningResources = () => {
                             onChange={(e) => setSearchQuery(e.target.value)} placeholder="search resources here..." className="bg-white h-full w-full text-black border-none outline-none p-0 focus:border-transparent focus:outline-none focus:ring-0" />
                     </div>
 
-                    <Button onClick={() => { setOpenContributeModal(true) }}  gradientDuoTone="purpleToBlue">contribute</Button>
+                    <Button onClick={() => { setOpenContributeModal(true) }} gradientDuoTone="purpleToBlue">contribute</Button>
                 </section>
 
 
@@ -199,7 +199,17 @@ export const LearningResources = () => {
                                     <p><span>Title : </span>{item.filetitle}</p>
                                     <p><span>Type : </span>{item.filetype}</p>
                                     <p><span>Subject : </span>{item.filesubject}</p>
-                                    <p onClick={() => { WhatResourceDataClicked(item.actualfile, item.filetitle); setOpenViewResourceDataModal(true); }} className="text-blue-500 italic underline cursor-pointer">view fullscreen</p>
+
+
+                                    {item.filetype === 'video' && (
+                                        <p onClick={() => { WhatResourceDataClicked(item.actualfile, item.filetitle); setOpenViewResourceDataModal(true); }} className="text-blue-500 italic underline cursor-pointer">Watch Video</p>
+                                    )}
+                                    {item.filetype === 'pdf' && (
+                                        <p onClick={() => { WhatResourceDataClicked(item.actualfile, item.filetitle); setOpenViewResourceDataModal(true); }} className="text-blue-500 italic underline cursor-pointer">Read PDF</p>
+                                    )}
+                                    {item.filetype === 'image' && (
+                                        <p onClick={() => { WhatResourceDataClicked(item.actualfile, item.filetitle); setOpenViewResourceDataModal(true); }} className="text-blue-500 italic underline cursor-pointer">See Photo</p>
+                                    )}
                                 </div>
 
                             </div>
