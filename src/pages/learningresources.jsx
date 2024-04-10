@@ -105,7 +105,6 @@ export const LearningResources = () => {
 
     const [openFilterModal, setOpenFilterModal] = useState(false);
 
-
     return (
         <>
             <div className="relative bg-gray-700 mt-[4rem] h-screen w-screen flex flex-col items-center justify-center gap-y-5 p-4">
@@ -185,38 +184,51 @@ export const LearningResources = () => {
                 </section>
 
 
-                <section className="h-[90%] w-[75rem] max-w-[98%] flex flex-row flex-wrap content-start mobile:justify-center gap-4 overflow-scroll noScrollbar">
-
-                    {
-                        filteredData.map((item) => (
-                            <div key={item.fileID} className=" h-fit w-fit overflow-hidden">
-
-                                <iframe
-                                    className="h-[10rem] w-[14rem]"
-                                    src={`../../asset/learningresources/${item.actualfile}`}
-                                ></iframe>
-                                <div className="text-gray-100 text-sm pt-2">
-                                    <p><span>Title : </span>{item.filetitle}</p>
-                                    <p><span>Type : </span>{item.filetype}</p>
-                                    <p><span>Subject : </span>{item.filesubject}</p>
-
-
-                                    {item.filetype === 'video' && (
-                                        <p onClick={() => { WhatResourceDataClicked(item.actualfile, item.filetitle); setOpenViewResourceDataModal(true); }} className="text-blue-500 italic underline cursor-pointer">Watch Video</p>
-                                    )}
-                                    {item.filetype === 'pdf' && (
-                                        <p onClick={() => { WhatResourceDataClicked(item.actualfile, item.filetitle); setOpenViewResourceDataModal(true); }} className="text-blue-500 italic underline cursor-pointer">Read PDF</p>
-                                    )}
-                                    {item.filetype === 'image' && (
-                                        <p onClick={() => { WhatResourceDataClicked(item.actualfile, item.filetitle); setOpenViewResourceDataModal(true); }} className="text-blue-500 italic underline cursor-pointer">See Photo</p>
-                                    )}
+                {
+                    filteredData.length === 0 ?
+                        (
+                            <div className="h-[90%] w-[75rem] max-w-[98%] flex items-center justify-center">
+                                <div className="h-[70%] w-[45rem] max-w-[95%] border rounded-xl flex items-center justify-center">
+                                    <p className="text-[3.5rem] font-semibold text-gray-300 mobile:text-[2rem] ">No Resources!</p>
                                 </div>
-
                             </div>
-                        ))
-                    }
+                        )
+                        :
+                        (
+                            <section className="h-[90%] w-[75rem] max-w-[98%] flex flex-row flex-wrap content-start mobile:justify-center gap-4 overflow-scroll noScrollbar">
+                                {
+                                    filteredData.map((item) => (
+                                        <div key={item.fileID} className=" h-fit w-fit overflow-hidden">
 
-                </section>
+                                            <iframe
+                                                className="h-[10rem] w-[14rem]"
+                                                src={`../../asset/learningresources/${item.actualfile}`}
+                                            ></iframe>
+                                            <div className="text-gray-100 text-sm pt-2">
+                                                <p><span>Title : </span>{item.filetitle}</p>
+                                                <p><span>Type : </span>{item.filetype}</p>
+                                                <p><span>Subject : </span>{item.filesubject}</p>
+
+
+                                                {item.filetype === 'video' && (
+                                                    <p onClick={() => { WhatResourceDataClicked(item.actualfile, item.filetitle); setOpenViewResourceDataModal(true); }} className="text-blue-500 italic underline cursor-pointer">Watch Video</p>
+                                                )}
+                                                {item.filetype === 'pdf' && (
+                                                    <p onClick={() => { WhatResourceDataClicked(item.actualfile, item.filetitle); setOpenViewResourceDataModal(true); }} className="text-blue-500 italic underline cursor-pointer">Read PDF</p>
+                                                )}
+                                                {item.filetype === 'image' && (
+                                                    <p onClick={() => { WhatResourceDataClicked(item.actualfile, item.filetitle); setOpenViewResourceDataModal(true); }} className="text-blue-500 italic underline cursor-pointer">See Photo</p>
+                                                )}
+                                            </div>
+
+                                        </div>
+                                    ))
+                                }
+
+                            </section>
+                        )
+                }
+
                 {/* modal to view resource data in full screen */}
                 <Modal size='null' show={openViewResourceDataModal} onClose={() => setOpenViewResourceDataModal(false)}>
                     <div className="bg-white h-screen w-full overflow-scroll noScrollbar">
