@@ -12,28 +12,18 @@ import { useSelector } from 'react-redux';
 export const MainPage = () => {
 
     const whatIsClicked = useSelector(whatIsClickedTemp);
-    
-    var container = '';
-    if (whatIsClicked == 'dashboard') {
-       container = <DashBoard />
-    }
-    if (whatIsClicked == 'reviewmodule') {
-        container = <ReviewModule />
-     }
-     if (whatIsClicked == 'practicetestandquiz') {
-        container = <PracticeTestAndQuiz />
-     }
-     if (whatIsClicked == 'learningresources') {
-        container = <LearningResources />
-     }
 
-    console.log(container)
+    var container = '';
+    if (whatIsClicked == 'dashboard') container = <DashBoard />;
+    if (whatIsClicked == 'reviewmodule') container = <ReviewModule />;
+    if (whatIsClicked == 'practicetestandquiz') container = <PracticeTestAndQuiz />;
+    if (whatIsClicked == 'learningresources') container = <LearningResources />;
 
     return (
         <>
             <Nav1 />
             <Sidebar />
-            {container}   
+            {container}
         </>
 
     );

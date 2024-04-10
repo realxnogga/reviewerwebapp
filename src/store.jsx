@@ -9,7 +9,7 @@ import { registrationReducer } from './feature/account/registrationSlice';
 import { deleteaccountReducer } from './feature/account/deleteaccountSlice';
 import { editUserReducer } from './feature/account/editaccountSlice';
 import { isSidebarOpenReducer } from './feature/opensidebar/opensidebarSlice';
-
+import { insertResourceDataSliceReducer } from './feature/learningresource/insertresourcedataSlice';
 
 const persistConfig = {
   key: 'root',
@@ -23,6 +23,7 @@ const rootReducer = combineReducers({
   DeleteAccountSliceName: deleteaccountReducer,
   EditUserSliceName: editUserReducer,
   OpenSidebarSliceName: isSidebarOpenReducer,
+  InsertResourceDataSliceName: insertResourceDataSliceReducer,
 });
 
 

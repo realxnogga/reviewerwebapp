@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Dropdown, Navbar, FloatingLabel, FileInput, Button, Modal } from 'flowbite-react';
+import { Dropdown, Navbar, FileInput, Button, Modal } from 'flowbite-react';
 import { ShowToast } from './toaster';
 import { clearLoginState } from '../feature/account/loginSlice';
 import { userdataTemp, clearRegisterState, getUserData } from '../feature/data/userdataSlice';
@@ -28,7 +28,7 @@ export const Nav1 = () => {
         var userImgUrl = userdata.userimage;
     }
 
-    const [openUserData, setOpenUserData] = useState(false);
+    const [openUserDataModal, setOpenUserDataModal] = useState(false);
     const [openDeleteUserModal, setOpenDeleteUserModal] = useState(false);
     const [openEditUserModal, setOpenEditUserModal] = useState(false);
 
@@ -183,7 +183,7 @@ export const Nav1 = () => {
                                     <span className="block text-gray-400 text-sm">{name}</span>
                                     <span className="block text-gray-400 truncate text-sm font-medium">{email}</span>
                                 </Dropdown.Header>
-                                <Dropdown.Item onClick={() => setOpenUserData(true)} className='text-gray-400'>View Profile</Dropdown.Item>
+                                <Dropdown.Item onClick={() => setOpenUserDataModal(true)} className='text-gray-400'>View Profile</Dropdown.Item>
                                 <Dropdown.Item onClick={() => { setOpenEditUserModal(true); }} className='text-gray-400'>Edit Profile</Dropdown.Item>
                                 <Dropdown.Divider />
                                 <Dropdown.Item className='text-gray-400' onClick={handleLogout} >Sign out</Dropdown.Item>
@@ -195,7 +195,7 @@ export const Nav1 = () => {
 
                     {/* view profile modal */}
 
-                    <Modal dismissible show={openUserData} onClose={() => setOpenUserData(false)}>
+                    <Modal dismissible show={openUserDataModal} onClose={() => setOpenUserDataModal(false)}>
                         <div className='space-y-8 bg-gray-700 rounded-lg p-5 '>
                             <h3 className="text-xl font-medium text-gray-300 dark:text-white">Your Profile</h3>
 
@@ -215,8 +215,8 @@ export const Nav1 = () => {
 
                             </div>
                             <div className='flex flex-row gap-x-3'>
-                                <Button className='w-fit rounded-md' onClick={() => { setOpenDeleteUserModal(true); setOpenUserData(false) }} gradientMonochrome="failure">delete account</Button>
-                                <Button className='w-fit rounded-md' onClick={() => setOpenUserData(false)} gradientMonochrome="success">close</Button>
+                                <Button className='w-fit rounded-md' onClick={() => { setOpenDeleteUserModal(true); setOpenUserDataModal(false) }} gradientMonochrome="failure">delete account</Button>
+                                <Button className='w-fit rounded-md' onClick={() => setOpenUserDataModal(false)} gradientMonochrome="success">close</Button>
                             </div>
                         </div>
                     </Modal>
@@ -247,13 +247,25 @@ export const Nav1 = () => {
                     <Modal show={openEditUserModal} size="md" onClose={() => setOpenEditUserModal(false)} popup>
                         {/* <Modal.Header className='bg-gray-700'/> */}
                         {/* <Modal.Body> */}
-                        <div className='bg-gray-700 p-5 rounded-lg'>
+                        <div className='bg-gray-700 p-4 rounded-lg'>
                             <div className="space-y-8">
                                 <h3 className="text-xl font-medium text-gray-300 dark:text-white">Edit Account</h3>
                                 <form onSubmit={handleEditSubmit} action="" className='flex flex-col justify-start gap-y-5'>
-                                    <FloatingLabel className='text-gray-300' onChange={handleEditChange} value={editInput.username} name="username" variant="standard" label="Enter new Username" />
-                                    <FloatingLabel className='text-gray-300' onChange={handleEditChange} value={editInput.password} name="password" variant="standard" label="Enter new Password" />
-                                    <FloatingLabel className='text-gray-300' onChange={handleEditChange} value={editInput.email} name="email" variant="standard" label="Enter new Email" />
+
+                                    <div>
+                                        <label htmlFor="username" className="text-lg text-gray-300">enter a new username:</label>
+                                        <input type="text" name="username" id="username" onChange={handleEditChange} value={editInput.username} className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md " />
+                                    </div>
+
+                                    <div>
+                                        <label htmlFor="password" className="text-lg text-gray-300">enter a new password:</label>
+                                        <input type="text" name="password" id="password" onChange={handleEditChange} value={editInput.password} className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md " />
+                                    </div>
+
+                                    <div>
+                                        <label htmlFor="email" className="text-lg text-gray-300">enter a new email:</label>
+                                        <input type="email" name="email" id="email" onChange={handleEditChange} value={editInput.email} className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md " />
+                                    </div>
 
                                     <div>
                                         <FileInput className='text-gray-300' onChange={handleEditImageUploadChange} id="large-file-upload" sizing="lg" />
