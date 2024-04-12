@@ -6,7 +6,7 @@ import { ReviewModule } from "./reviewmodule";
 import { PracticeTestAndQuiz } from "./practicetestandquiz";
 import { LearningResources } from "./learningresources";
 
-import { whatIsClickedTemp } from "../feature/opensidebar/opensidebarSlice";
+import { whatIsClickedTemp } from "../feature/opensidebarSlice";
 import { useSelector } from 'react-redux';
 
 export const MainPage = () => {

@@ -1,8 +1,8 @@
 
 import { Hamburger } from "../components/hamburger";
 import { Dropdown, Navbar, FloatingLabel, FileInput, Button, Modal } from 'flowbite-react';
-import { InsertResourceDataThunk } from "../feature/learningresource/insertresourcedataSlice";
-import { GetResourceDataThunk } from "../feature/learningresource/insertresourcedataSlice";
+import { InsertResourceDataThunk } from "../feature/insertresourcedataSlice";
+import { GetResourceDataThunk } from "../feature/insertresourcedataSlice";
 import { ShowToast } from "../components/toaster";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
@@ -10,13 +10,15 @@ import { IoMdClose } from "react-icons/io";
 import { IoFilter } from "react-icons/io5";
 import { Tooltip } from "flowbite-react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { ClearIsResourceDataInsertedState } from "../feature/learningresource/insertresourcedataSlice";
-import { isResourceDataInsertedTemp } from "../feature/learningresource/insertresourcedataSlice";
-import { resourceDataTemp } from "../feature/learningresource/insertresourcedataSlice";
-
+import { ClearIsResourceDataInsertedState } from "../feature/insertresourcedataSlice";
+import { isResourceDataInsertedTemp } from "../feature/insertresourcedataSlice";
+import { resourceDataTemp } from "../feature/insertresourcedataSlice";
+import { themeHolderTemp } from "../feature/themeSlice";
 export const LearningResources = () => {
 
     const dispatch = useDispatch();
+
+    const themeHolder = useSelector(themeHolderTemp);
 
     const [openContributeModal, setOpenContributeModal] = useState(false);
     const [openViewResourceDataModal, setOpenViewResourceDataModal] = useState(false);
@@ -107,24 +109,24 @@ export const LearningResources = () => {
 
     return (
         <>
-            <div className="relative bg-gray-700 mt-[4rem] h-screen w-screen flex flex-col items-center justify-center gap-y-5 p-4">
+            <div className={`${themeHolder.colorbg3} relative bg-gray-700 mt-[4rem] h-screen w-screen flex flex-col items-center justify-center gap-y-5 p-4`}>
                 <Hamburger />
 
                 <section className="h-fit w-full flex items-center justify-end gap-x-5 mobile:gap-x-2 mobile:justify-between mobile:pt-10">
-                    <Tooltip placement="left" content={'Filter'}>
-                        <IoFilter onClick={() => { setOpenFilterModal(true); }} className="text-gray-300 text-2xl " />
+                    <Tooltip placement="left" className="bg-yellow-500" arrow={false} content={'Filter'}>
+                        <IoFilter onClick={() => { setOpenFilterModal(true); }} className={`${themeHolder.colortxt1} text-gray-300 text-2xl `} />
                     </Tooltip>
 
-
+                    {/* for filter */}
                     <Modal size="md" dismissible show={openFilterModal} onClose={() => setOpenFilterModal(false)}>
 
                         <div className='space-y-8 bg-gray-700 rounded-lg p-5'>
-                            <h3 className="text-xl font-medium text-gray-300 dark:text-white">Make a contribution</h3>
+                            <h3 className="text-xl font-medium text-gray-300 dark:text-white">Filter Resources</h3>
 
                             <div className="flex flex-col items-start gap-y-2">
 
                                 <div className="w-full">
-                                    <label htmlFor="subject" className="text-lg text-gray-300">choose a subject:</label>
+                                    <label htmlFor="subject" className="text-lg text-gray-300">filter by subject:</label>
 
                                     <select
                                         onChange={(e) => setSubjectFilter(e.target.value)}
@@ -144,14 +146,14 @@ export const LearningResources = () => {
                                 </div>
 
                                 <div className="w-full">
-                                    <label htmlFor="type" className="text-lg text-gray-300">choose a type:</label>
+                                    <label htmlFor="type" className="text-lg text-gray-300">filter by type:</label>
 
                                     <select
                                         onChange={(e) => setTypeFilter(e.target.value)}
                                         value={typeFilter}
                                         name="type"
                                         id="type"
-                                        className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md ">
+                                        className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md">
                                         <option value="all">All</option>
                                         <option value="pdf">PDF</option>
                                         <option value="video">Video</option>
@@ -165,8 +167,6 @@ export const LearningResources = () => {
                                 <Button className='w-fit rounded-md' onClick={() => setOpenFilterModal(false)} gradientMonochrome="success">close</Button>
                             </div>
                         </div>
-
-
 
                     </Modal>
 
@@ -188,8 +188,8 @@ export const LearningResources = () => {
                     filteredData.length === 0 ?
                         (
                             <div className="h-[90%] w-[75rem] max-w-[98%] flex items-center justify-center">
-                                <div className="h-[70%] w-[45rem] max-w-[95%] border rounded-xl flex items-center justify-center">
-                                    <p className="text-[3.5rem] font-semibold text-gray-300 mobile:text-[2rem] ">No Resources!</p>
+                                <div className={`h-[70%] w-[45rem] max-w-[95%] border rounded-xl flex items-center justify-center`}>
+                                    <p className={`${themeHolder.colortxt1} text-[3.5rem] font-semibold text-gray-200 mobile:text-[2rem] `}>No Resources!</p>
                                 </div>
                             </div>
                         )
@@ -201,10 +201,11 @@ export const LearningResources = () => {
                                         <div key={item.fileID} className=" h-fit w-fit overflow-hidden">
 
                                             <iframe
+                                                scrolling="no" // to hide scrollbar
                                                 className="h-[10rem] w-[14rem]"
                                                 src={`../../asset/learningresources/${item.actualfile}`}
                                             ></iframe>
-                                            <div className="text-gray-100 text-sm pt-2">
+                                            <div className={`${themeHolder.colortxt1} text-gray-100 text-sm pt-2`}>
                                                 <p><span>Title : </span>{item.filetitle}</p>
                                                 <p><span>Type : </span>{item.filetype}</p>
                                                 <p><span>Subject : </span>{item.filesubject}</p>

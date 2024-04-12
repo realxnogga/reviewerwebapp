@@ -9,13 +9,17 @@ import { clearLoginState } from '../feature/account/loginSlice';
 import { userdataTemp, clearRegisterState, getUserData } from '../feature/data/userdataSlice';
 import { DeleteAccountThunk, isAccountDeletedTemp, clearDeleteAccountState } from '../feature/account/deleteaccountSlice';
 import { EditUserThunk, isUserEditedTemp, clearEditDataState } from '../feature/account/editaccountSlice';
-import { clearIsSidebarOpenState, clearWhatIsClickedState } from '../feature/opensidebar/opensidebarSlice';
+import { clearIsSidebarOpenState, clearWhatIsClickedState } from '../feature/opensidebarSlice';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { Theme } from './theme';
+import { themeHolderTemp } from '../feature/themeSlice'; 
 
 export const Nav1 = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const themeHolder = useSelector(themeHolderTemp);
 
     const userdata = useSelector(userdataTemp);
     console.log(userdata)
@@ -164,12 +168,16 @@ export const Nav1 = () => {
             (
                 <>
 
-                    <Navbar fluid className={`${temp} h-[4rem] bg-gray-900 text-gray-400 px-12 w-screen backdrop-blur absolute top-0  z-10 backdrop-brightness-75`}>
+                    <Navbar fluid className={`${temp} ${themeHolder.colorbg1} h-[4rem] bg-gray-900 text-gray-400 px-12 w-screen backdrop-blur absolute top-0  z-10 backdrop-brightness-75`}>
 
-                        <Navbar.Brand>
-                            <img className="animate-spin spin h-[3rem] w-[3rem]" src="../../asset/icon/logo192.png" alt="" />
+                        <Navbar.Brand>         
+                            <img className="animate-spin spin h-[2rem] w-[2rem]" src="../../asset/icon/logo192.png" alt="" />
                         </Navbar.Brand>
 
+                        <div className='gap-x-5 flex items-center '>
+                        <section>
+                          <Theme />
+                        </section>
                         <section className='flex gap-x-5'>
                             <Dropdown
                                 className='bg-gray-800 border-none'
@@ -186,11 +194,11 @@ export const Nav1 = () => {
                                 <Dropdown.Item onClick={() => setOpenUserDataModal(true)} className='text-gray-400'>View Profile</Dropdown.Item>
                                 <Dropdown.Item onClick={() => { setOpenEditUserModal(true); }} className='text-gray-400'>Edit Profile</Dropdown.Item>
                                 <Dropdown.Divider />
-                                <Dropdown.Item className='text-gray-400' onClick={handleLogout} >Sign out</Dropdown.Item>
+                                <Dropdown.Item className='text-gray-400' onClick={handleLogout} >Log out</Dropdown.Item>
                             </Dropdown>
 
                         </section>
-
+                        </div>
                     </Navbar >
 
                     {/* view profile modal */}

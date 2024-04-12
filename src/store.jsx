@@ -8,8 +8,9 @@ import { getdataReducer } from './feature/data/userdataSlice';
 import { registrationReducer } from './feature/account/registrationSlice';
 import { deleteaccountReducer } from './feature/account/deleteaccountSlice';
 import { editUserReducer } from './feature/account/editaccountSlice';
-import { isSidebarOpenReducer } from './feature/opensidebar/opensidebarSlice';
-import { insertResourceDataSliceReducer } from './feature/learningresource/insertresourcedataSlice';
+import { isSidebarOpenReducer } from './feature/opensidebarSlice';
+import { insertResourceDataSliceReducer } from './feature/insertresourcedataSlice';
+import { themeSliceReducer } from './feature/themeSlice';
 
 const persistConfig = {
   key: 'root',
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   EditUserSliceName: editUserReducer,
   OpenSidebarSliceName: isSidebarOpenReducer,
   InsertResourceDataSliceName: insertResourceDataSliceReducer,
+  ThemeSliceName: themeSliceReducer,
 });
 
 
