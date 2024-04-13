@@ -18,19 +18,19 @@ export const ThemeSlice = createSlice({
             const whatThemeIsClicked = action.payload;
 
             if (whatThemeIsClicked === 'firstColor') {
-                state.themeHolder.colorbg1 = '!bg-gray-900';
-                state.themeHolder.colorbg2 = '!bg-gray-800';
-                state.themeHolder.colorbg3 = '!bg-gray-700';
-                state.themeHolder.colortxt1 = 'text-gray-300';
-                state.themeHolder.colortxt2 = 'text-gray-800';
+                state.themeHolder.colorbg1 = '!bg-gray-900 duration-200';
+                state.themeHolder.colorbg2 = '!bg-gray-800 duration-200';
+                state.themeHolder.colorbg3 = '!bg-gray-700 duration-200';
+                state.themeHolder.colortxt1 = '!text-gray-300 duration-200';
+                state.themeHolder.colortxt2 = '!text-gray-800 duration-200';
             }
 
             if (whatThemeIsClicked === 'secondColor') {               
-                state.themeHolder.colorbg1 = '!bg-[#256D85]';
-                state.themeHolder.colorbg2 = '!bg-[#2DA4CC]';
-                state.themeHolder.colorbg3 = '!bg-gray-100';
-                state.themeHolder.colortxt1 = 'text-gray-800';
-                state.themeHolder.colortxt2 = 'text-gray-300';
+                state.themeHolder.colorbg1 = '!bg-[#256D85] duration-200';   
+                state.themeHolder.colorbg2 = '!bg-[#2DA4CC] duration-200';
+                state.themeHolder.colorbg3 = '!bg-gray-100 duration-200';
+                state.themeHolder.colortxt1 = '!text-gray-800 duration-200';
+                state.themeHolder.colortxt2 = '!text-gray-300 duration-200';
             }
         }
 

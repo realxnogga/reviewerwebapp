@@ -2,7 +2,7 @@ import Foot from "../components/footer";
 import { Nav1 } from "../components/navbar";
 import { Sidebar } from "../components/sidebar";
 import { DashBoard } from "./dashboard";
-import { ReviewModule } from "./reviewmodule";
+import { LearningMaterial } from "./learingmaterial";
 import { PracticeTestAndQuiz } from "./practicetestandquiz";
 import { LearningResources } from "./learningresources";
 
@@ -15,10 +15,10 @@ export const MainPage = () => {
 
     var container = '';
     if (whatIsClicked == 'dashboard') container = <DashBoard />;
-    if (whatIsClicked == 'reviewmodule') container = <ReviewModule />;
     if (whatIsClicked == 'practicetestandquiz') container = <PracticeTestAndQuiz />;
     if (whatIsClicked == 'learningresources') container = <LearningResources />;
-
+    if (whatIsClicked == 'learningmaterial') container = <LearningMaterial />;
+    
     return (
         <>
             <Nav1 />

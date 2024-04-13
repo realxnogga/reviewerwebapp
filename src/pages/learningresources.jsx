@@ -1,6 +1,6 @@
 
 import { Hamburger } from "../components/hamburger";
-import { Dropdown, Navbar, FloatingLabel, FileInput, Button, Modal } from 'flowbite-react';
+import { FileInput, Button, Modal } from 'flowbite-react';
 import { InsertResourceDataThunk } from "../feature/insertresourcedataSlice";
 import { GetResourceDataThunk } from "../feature/insertresourcedataSlice";
 import { ShowToast } from "../components/toaster";
@@ -188,7 +188,7 @@ export const LearningResources = () => {
                     filteredData.length === 0 ?
                         (
                             <div className="h-[90%] w-[75rem] max-w-[98%] flex items-center justify-center">
-                                <div className={`h-[70%] w-[45rem] max-w-[95%] border rounded-xl flex items-center justify-center`}>
+                                <div className={`border-gray-500 h-[70%] w-[45rem] max-w-[95%] border rounded-xl flex items-center justify-center`}>
                                     <p className={`${themeHolder.colortxt1} text-[3.5rem] font-semibold text-gray-200 mobile:text-[2rem] `}>No Resources!</p>
                                 </div>
                             </div>

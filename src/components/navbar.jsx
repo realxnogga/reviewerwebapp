@@ -13,6 +13,8 @@ import { clearIsSidebarOpenState, clearWhatIsClickedState } from '../feature/ope
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { Theme } from './theme';
 import { themeHolderTemp } from '../feature/themeSlice'; 
+import { clearIsToggleNoteFlashCardOpenState } from '../feature/opentogglenoteflashcardSlice';
+import { clearWhatIsClickToggleNoteflashCardState } from '../feature/opentogglenoteflashcardSlice';
 
 export const Nav1 = () => {
 
@@ -41,6 +43,8 @@ export const Nav1 = () => {
         dispatch(clearRegisterState());
         dispatch(clearIsSidebarOpenState());
         dispatch(clearWhatIsClickedState());
+        dispatch(clearIsToggleNoteFlashCardOpenState());
+        dispatch(clearWhatIsClickToggleNoteflashCardState());
         navigate('/');
     }
 
