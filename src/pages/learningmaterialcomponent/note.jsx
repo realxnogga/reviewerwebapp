@@ -2,7 +2,7 @@
 
 import { themeHolderTemp } from "../../feature/themeSlice";
 import { useEffect, useState } from "react";
-import { FileInput, Button, Modal } from 'flowbite-react';
+import { Button, Modal } from 'flowbite-react';
 import { userdataTemp } from "../../feature/data/userdataSlice";
 import { InsertNoteThunk } from "../../feature/noteSlice";
 import { useSelector, useDispatch } from 'react-redux';
@@ -129,9 +129,19 @@ export const Note = () => {
     });
 
     const WhatIsClickInNoteTabFunc = (notesubject) => {
-       dispatch(whatIsClickedInNoteTabState(notesubject));
+        dispatch(whatIsClickedInNoteTabState(notesubject));
     }
-    
+    // get the count of each note base on subject
+    const allSubjectNoteCount = Object.keys(gotNoteData).length;
+    const englishNoteCount = gotNoteData.filter(item => item.notesubject === 'english').length;
+    const filipinoNoteCount = gotNoteData.filter(item => item.notesubject === 'filipino').length;
+    const mathematicsNoteCount = gotNoteData.filter(item => item.notesubject === 'mathematics').length;
+    const scienceNoteCount = gotNoteData.filter(item => item.notesubject === 'science').length;
+    const socialscienceNoteCount = gotNoteData.filter(item => item.notesubject === 'social science').length;
+    const humanitiesNoteCount = gotNoteData.filter(item => item.notesubject === 'humanities').length;
+    const communicationskillsNoteCount = gotNoteData.filter(item => item.notesubject === 'communication skills').length;
+    const ictNoteCount = gotNoteData.filter(item => item.notesubject === 'ict').length;
+
     return (
         <div className="relative h-[90%] w-[69rem] max-w-[95%]">
             <section className="h-[8%] w-full flex items-center justify-between">
@@ -139,94 +149,209 @@ export const Note = () => {
                     <ul className="flex h-full text-sm text-gray-300 ">
 
                         <li onClick={() => { setSubjectFilter('all'); WhatIsClickInNoteTabFunc('all') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'all' ? 'border-b-4 border-yellow-500' : ''} h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>All
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'all' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>All
+                        
+                            {
+                                allSubjectNoteCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{allSubjectNoteCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
+
                         </li>
 
                         <li onClick={() => { setSubjectFilter('english'); WhatIsClickInNoteTabFunc('english') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'english' ? 'border-b-4 border-yellow-500' : ''} h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>English
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'english' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>English
+
+                            {
+                                englishNoteCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{englishNoteCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
                         </li>
 
                         <li onClick={() => { setSubjectFilter('filipino'); WhatIsClickInNoteTabFunc('filipino') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'filipino' ? 'border-b-4 border-yellow-500' : ''} h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Filipino
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'filipino' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Filipino
+
+                            {
+                                filipinoNoteCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{filipinoNoteCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
                         </li>
 
                         <li onClick={() => { setSubjectFilter('mathematics'); WhatIsClickInNoteTabFunc('mathematics') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'mathematics' ? 'border-b-4 border-yellow-500' : ''} h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Mathematics
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'mathematics' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Mathematics
+
+                            {
+                                mathematicsNoteCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{mathematicsNoteCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
                         </li>
 
                         <li onClick={() => { setSubjectFilter('science'); WhatIsClickInNoteTabFunc('science') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'science' ? 'border-b-4 border-yellow-500' : ''} h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Science
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'science' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Science
+
+                            {
+                                scienceNoteCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{scienceNoteCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
                         </li>
 
                         <li onClick={() => { setSubjectFilter('social science'); WhatIsClickInNoteTabFunc('social science') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'social science' ? 'border-b-4 border-yellow-500' : ''} h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Social Science
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'social science' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Social Science
+
+                            {
+                                socialscienceNoteCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{socialscienceNoteCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
                         </li>
 
                         <li onClick={() => { setSubjectFilter('humanities'); WhatIsClickInNoteTabFunc('humanities') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'humanities' ? 'border-b-4 border-yellow-500' : ''} h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Humanities
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'humanities' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Humanities
+
+                            {
+                                humanitiesNoteCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{humanitiesNoteCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
                         </li>
 
                         <li onClick={() => { setSubjectFilter('communication skills'); WhatIsClickInNoteTabFunc('communication skills') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'communication skills' ? 'border-b-4 border-yellow-500' : ''} h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Communication Skills
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'communication skills' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Communication Skills
+
+                            {
+                                communicationskillsNoteCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{communicationskillsNoteCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
                         </li>
 
                         <li onClick={() => { setSubjectFilter('ict'); WhatIsClickInNoteTabFunc('ict') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'ict' ? 'border-b-4 border-yellow-500' : ''} h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>ICT
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'ict' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>ICT
+
+                            {
+                                ictNoteCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{ictNoteCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
                         </li>
 
                     </ul>
                 </div>
 
-                
-                  <RiAddCircleFill onClick={() => { setOpenInsertNoteModal(true) }} className=" text-[3.5rem] mobile:text-[3rem] text-yellow-500 hover:text-yellow-300 "/>   
+
+                <RiAddCircleFill onClick={() => { setOpenInsertNoteModal(true) }} className=" text-[3.5rem] mobile:text-[3rem] text-yellow-500 hover:text-yellow-300 " />
             </section>
 
-          
 
-                {
-                    filteredNoteData.length === 0 ?
+
+            {
+                filteredNoteData.length === 0 ?
                     (
                         <section className="h-[92%] w-full flex items-center justify-center  ">
-                           <div className={`border-gray-500 h-[70%] w-[45rem] max-w-[95%] border rounded-xl flex items-center justify-center`}>
-                                    <p className={`${themeHolder.colortxt1} text-[3.5rem] font-semibold text-gray-200 mobile:text-[2rem] `}>No Notes Yet!</p>
-                                </div>                       
+                            <div className={`border-gray-500 h-[70%] w-[45rem] max-w-[95%] border rounded-xl flex items-center justify-center`}>
+                                <p className={`${themeHolder.colortxt1} text-[3.5rem] font-semibold text-gray-200 mobile:text-[2rem] `}>No Notes Yet!</p>
+                            </div>
                         </section>
                     )
                     :
                     (
                         <section className="h-[92%] w-full pt-3 overflow-scroll noScrollbar flex flex-wrap content-start gap-4 ">
 
-                        {
+                            {
 
-                            filteredNoteData.map((item) => (
-        
-                                <div key={item.noteID} className={`${NoteColorFunc(item.notesubject)} relative h-[13rem] w-[13rem] overflow-scroll noScrollbar  rounded-lg p-2`}>
-                                    <div >
-                                        <p className="text-gray-600 text-sm">{item.notedate}</p>
+                                filteredNoteData.map((item) => (
+
+                                    <div key={item.noteID} className={`${NoteColorFunc(item.notesubject)} relative h-[13rem] w-[13rem] overflow-scroll noScrollbar  rounded-lg p-2`}>
+                                        <div >
+                                            <p className="text-gray-600 text-sm">{item.notedate}</p>
+                                        </div>
+
+
+                                        <FaRegTrashAlt onClick={() => DeleteNoteFunc(item.noteID)} className="absolute top-2 right-2 flex flex-col text-md gap-y-2 text-red-500 hover:bg-white cursor-pointer" />
+
+
+                                        <div>
+                                            <p className="text-gray-800 text-2xl font-semibold ">{item.notetitle}</p>
+
+                                            <p className="text-gray-800 text-md">{item.actualnote}</p>
+                                        </div>
+
                                     </div>
-        
-        
-                                    <FaRegTrashAlt onClick={() => DeleteNoteFunc(item.noteID)} className="absolute top-2 right-2 flex flex-col text-md gap-y-2 text-red-500 hover:bg-white cursor-pointer" />
-        
-        
-                                    <div>
-                                        <p className="text-gray-800 text-2xl font-semibold ">{item.notetitle}</p>
-        
-                                        <p className="text-gray-800 text-md">{item.actualnote}</p>
-                                    </div>
-        
-                                </div>
-        
-                            ))
-        
-        
-                        }
+
+                                ))
+
+
+                            }
                         </section>
                     )
-                }
-                
-       
-
+            }
 
             {/* modal section */}
             <Modal size="md" dismissible show={openInsertNoteModal} onClose={() => setOpenInsertNoteModal(false)}>
