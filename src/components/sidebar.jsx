@@ -40,7 +40,7 @@ export const Sidebar = () => {
    
 
     return (
-        <aside className={`${hideSidebarString} ${themeHolder.colorbg2} bg-gray-700 h-screen w-fit top-[4rem] absolute left-0 z-10 overflow-hidden`}>
+        <aside className={`${hideSidebarString} ${themeHolder.colorbg2} bg-gray-800 h-screen w-fit top-[4rem] absolute left-0 z-10 overflow-hidden border-r border-r-yellow-500`}>
 
             <ul className='flex flex-col text-md '>
 
@@ -68,28 +68,28 @@ export const Sidebar = () => {
 
                 <li onClick={() => { dispatch(whatIsClickedState('dashboard')) }} className={`${whatIsClicked === 'dashboard' ? themeHolder.colorbg1 : ''} p-4 flex flex-row items-center gap-x-3 cursor-pointer`}>
                     <span><MdOutlineSpaceDashboard className="text-yellow-500 text-[1.6rem] " /></span>
-                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} `}>Dashboard (progress tracking)</span>
+                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Dashboard (progress tracking)</span>
                 </li>
 
                      
 
                 <li onClick={() => { dispatch(whatIsClickedState('practicetestandquiz')) }} className={`${whatIsClicked === 'practicetestandquiz' ? themeHolder.colorbg1 : ''} p-4 flex flex-row items-center gap-x-3 cursor-pointer`} >
                     <span><MdOutlineQuiz className="text-yellow-500 text-[1.6rem]" /></span>
-                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} `}>Practice Test and Quizzes</span>
+                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Practice Test and Quizzes</span>
                 </li>
 
     
 
                 <li onClick={() => { dispatch(whatIsClickedState('learningresources')) }} className={`${whatIsClicked === 'learningresources' ? themeHolder.colorbg1 : ''} p-4 flex flex-row items-center gap-x-3 cursor-pointer`} >
                     <span><GrResources className="text-yellow-500 text-[1.6rem]" /></span>
-                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1}`}>Learning Resources</span>
+                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Learning Resources</span>
                 </li>
 
           
 
                 <li onClick={() => { dispatch(whatIsClickedState('learningmaterial')) }} className={`${whatIsClicked === 'learningmaterial' ? themeHolder.colorbg1 : ''} p-4 flex flex-row items-center gap-x-3 cursor-pointer`} >
                     <span><BsBookshelf className="text-yellow-500 text-[1.6rem]" /></span>
-                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1}`}>Learning Matherial</span>
+                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Learning Matherial</span>
                 </li>
 
 

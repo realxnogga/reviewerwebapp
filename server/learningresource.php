@@ -29,7 +29,6 @@ if (isset($_GET['action'])) {
             $file = $_FILES['resourceDataActualFile'];
 
             $resourceDataActualFileName = $file['name'];
-
             $sql = "insert into learningresources (filesubject, filetype, filetitle, actualfile) VALUES ('$subject', '$type', '$title', '$resourceDataActualFileName')";
 
             $conn->query($sql);

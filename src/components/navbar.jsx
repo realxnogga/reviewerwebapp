@@ -24,8 +24,6 @@ export const Nav1 = () => {
     const themeHolder = useSelector(themeHolderTemp);
 
     const userdata = useSelector(userdataTemp);
-    console.log(userdata)
-
     if (Object.keys(userdata).length != 0) {
         var id = userdata.ID;
         var name = userdata.username;
@@ -214,7 +212,7 @@ export const Nav1 = () => {
                             <div className="flex flex-col items-start gap-y-2">
                                 <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 
-                                    <img className="h-[4rem] w-[4rem] mobile:h-[2.2rem] mobile:w-[2.2rem]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />
+                                    <img className="h-[6rem] w-[6rem] mobile:h-[2.2rem] mobile:w-[2.2rem]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />
 
                                 </p>
 

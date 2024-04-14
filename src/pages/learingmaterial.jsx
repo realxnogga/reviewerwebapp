@@ -14,12 +14,8 @@ export const LearningMaterial = () => {
     const whatIsClickToggleNoteflashCard = useSelector(whatIsClickToggleNoteflashCardTemp);
 
     var container = '';
-    if (whatIsClickToggleNoteflashCard === 'note') {
-        container = <Note />;
-    }
-    if (whatIsClickToggleNoteflashCard === 'flashcard') {
-        container = <FlashCard />;
-    }
+    if (whatIsClickToggleNoteflashCard === 'note') container = <Note />;
+    if (whatIsClickToggleNoteflashCard === 'flashcard') container = <FlashCard />;
     
     return (
         <>
@@ -28,11 +24,9 @@ export const LearningMaterial = () => {
                 <ToggleNoteFlashcardIcon />
                 <ToggleNoteFlashcard />
 
-                <div className="h-[90%] w-[69rem]  max-w-[95%]">
-      
-                    {container}           
-
-                </div>
+           
+                    {container}        
+             
             </div>
         </>
 

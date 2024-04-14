@@ -11,9 +11,14 @@ import { clearLoginState } from '../feature/account/loginSlice';
 import { useridTemp } from '../feature/account/loginSlice';
 
 import { userdataTemp } from '../feature/data/userdataSlice';
+import { changeThemeState } from '../feature/themeSlice';
+import { GetResourceDataThunk } from '../feature/insertresourcedataSlice';
+import { GetNoteThunk } from '../feature/noteSlice';
 
 export const Login = () => {
-
+    
+    // imoport username to determine which note to fetch
+  
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -31,7 +36,7 @@ export const Login = () => {
         setInputValue({ ...inputValue, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleLoginSubmit = (e) => {
         e.preventDefault();
 
         if (inputValue.username == '' && inputValue.password == '') {
@@ -65,8 +70,13 @@ export const Login = () => {
             })
 
             dispatch(getUserData(
-                { userid: userid, }         
+                { userid: userid, }
             ));
+
+            dispatch(changeThemeState('firstColor')); // if login is successfull, themestate will dispatch
+            dispatch(GetResourceDataThunk()) // if login is successfull, resourcedata will dispatch
+            dispatch(GetNoteThunk(inputValue.username)) // if login is successfull, note will dispatch
+
 
         }
 
@@ -105,11 +115,11 @@ export const Login = () => {
 
         <div className="h-screen w-screen bg-gray-700 flex items-center justify-center">
             <Card className="h-fit w-fit max-w-[90%]">
-                <form onSubmit={handleSubmit} action="" className='flex flex-col justify-start gap-y-7'>
+                <form onSubmit={handleLoginSubmit} action="" className='flex flex-col justify-start gap-y-7'>
                     <FloatingLabel value={inputValue.username} onChange={handleChange} name="username" variant="standard" label="Enter Username" />
                     <div>
                         <FloatingLabel type={showPasswordString} value={inputValue.password} onChange={handleChange} name="password" variant="standard" label="Enter password" />
-                        <input onClick={showpassword} type="checkbox" />                
+                        <input onClick={showpassword} type="checkbox" />
                     </div>
 
                     <Button type='submit' gradientDuoTone="purpleToBlue" className='rounded-[50px]'>Login</Button>

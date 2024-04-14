@@ -27,12 +27,12 @@ export const ToggleNoteFlashcard = () => {
 
 
     return (
-        <aside className={`${themeHolder.colorbg2} ${isToggleNoteFlashCardOpen ? 'w-[8rem]' : ''} absolute  top-0 right-0 bg-gray-700 h-full w-0 overflow-hidden`}>
+        <aside className={`${themeHolder.colorbg2} ${isToggleNoteFlashCardOpen ? 'w-[8rem]  ' : ''} absolute  top-0 right-0 bg-gray-800 h-full w-0 overflow-hidden`}>
 
 
             <ul className="flex flex-col">
                 <li className="py-3 px-4">
-                    <IoMdClose onClick={CloseToggleNoteFlashcardFunc} className={`${themeHolder.colortxt1} gray-500 text-2xl hover:bg-red-500`} />
+                    <IoMdClose onClick={CloseToggleNoteFlashcardFunc} className={`${themeHolder.colortxt1} text-gray-300 text-2xl hover:bg-red-500`} />
                 </li>
 
                 <li 
@@ -40,7 +40,7 @@ export const ToggleNoteFlashcard = () => {
                 className={`hover:${themeHolder.colorbg1} 
                 ${whatIsClickToggleNoteflashCard == 'note' ? themeHolder.colorbg1 : ''} flex items-center justify-start gap-x-3 py-3 px-4 cursor-pointer`}>
                     <MdOutlineNoteAlt className="text-[2rem] text-yellow-500" />
-                    <span className={`${themeHolder.colortxt1} text-xl`}>Note</span>
+                    <span className={`${themeHolder.colortxt1} text-gray-300 text-xl`}>Note</span>
                 </li>
 
                 <li 
@@ -48,7 +48,7 @@ export const ToggleNoteFlashcard = () => {
                 className={`hover:${themeHolder.colorbg1} 
                 ${whatIsClickToggleNoteflashCard == 'flashcard' ? themeHolder.colorbg1 : ''} flex items-center justify-start gap-x-3 py-3 px-4 cursor-pointer`}>
                     <IoFlashOutline className="text-[2rem] text-yellow-500 " />
-                    <span className={`${themeHolder.colortxt1} text-xl`}>Flash</span>
+                    <span className={`${themeHolder.colortxt1} text-gray-300 text-xl`}>Flash</span>
                 </li>
 
             </ul>

@@ -16,6 +16,6 @@ export const ToggleNoteFlashcardIcon = () => {
 
     return (
         <IoMdSwitch onClick={OpenToggleNoteFlashcardFunc} className={`${themeHolder.colortxt1} 
-        absolute top-4 right-4 text-[2rem] hover:bg-yellow-500 rounded-sm`}/>
+        absolute top-4 right-4 text-gray-300 text-[2rem] hover:bg-yellow-500 rounded-sm`}/>
     )
 }

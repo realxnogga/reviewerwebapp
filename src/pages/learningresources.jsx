@@ -141,7 +141,6 @@ export const LearningResources = () => {
                                         <option value="humanities">Humanities</option>
                                         <option value="communication skills">Communication Skills</option>
                                         <option value="ict">ICT</option>
-                                        <option value="english">English</option>
                                     </select>
                                 </div>
 

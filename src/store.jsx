@@ -11,7 +11,7 @@ import { isSidebarOpenReducer } from './feature/opensidebarSlice';
 import { insertResourceDataSliceReducer } from './feature/insertresourcedataSlice';
 import { themeSliceReducer } from './feature/themeSlice';
 import { isToggleNoteFlashCardOpenReducer } from './feature/opentogglenoteflashcardSlice';
-
+import { noteSliceReducer } from './feature/noteSlice';
 const persistConfig = {
   key: 'root',
   storage,
@@ -27,6 +27,7 @@ const rootReducer = combineReducers({
   InsertResourceDataSliceName: insertResourceDataSliceReducer,
   ThemeSliceName: themeSliceReducer,
   OpenToggleNoteFlashcardSliceName: isToggleNoteFlashCardOpenReducer,
+  NoteSliceName: noteSliceReducer,
 });
 
 
