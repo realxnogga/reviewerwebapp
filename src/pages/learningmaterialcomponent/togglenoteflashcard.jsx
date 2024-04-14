@@ -25,9 +25,8 @@ export const ToggleNoteFlashcard = () => {
 
     const whatIsClickToggleNoteflashCard = useSelector(whatIsClickToggleNoteflashCardTemp);
 
-
     return (
-        <aside className={`${themeHolder.colorbg2} ${isToggleNoteFlashCardOpen ? 'w-[8rem]  ' : ''} absolute  top-0 right-0 bg-gray-800 h-full w-0 overflow-hidden`}>
+        <aside className={`${themeHolder.colorbg2} ${isToggleNoteFlashCardOpen ? 'w-[8rem]  ' : ''} absolute  top-0 right-0 bg-gray-800 h-full w-0 overflow-hidden z-10`}>
 
 
             <ul className="flex flex-col">

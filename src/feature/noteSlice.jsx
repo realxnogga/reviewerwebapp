@@ -9,14 +9,23 @@ export const NoteSlice = createSlice({
         isNoteDataInserted: null,
         isNoteDataDeleted: null,
         noteData: [],
+        whatIsClickedInNoteTab: 'all',
     },
-    reducers: {
+    reducers: { 
         ClearIsNoteDataInsertedState: (state) => {
             state.isNoteDataInserted = null;
         },
         ClearIsNoteDataDeletedState: (state) => {
             state.isNoteDataDeleted = null;
-        }
+        },
+        whatIsClickedInNoteTabState: (state, action) => {
+            state.whatIsClickedInNoteTab = action.payload;
+        },
+        ClearWhatIsClickedInNoteTabState: (state, action) => {
+            state.whatIsClickedInNoteTab = 'all';
+        },
+
+
     },
     extraReducers: builder => {
         builder
@@ -34,7 +43,8 @@ export const NoteSlice = createSlice({
 })
 
 
-export const { ClearIsNoteDataInsertedState, ClearIsNoteDataDeletedState } = NoteSlice.actions;
+export const { ClearIsNoteDataInsertedState, ClearIsNoteDataDeletedState, whatIsClickedInNoteTabState, ClearWhatIsClickedInNoteTabState } = NoteSlice.actions;
+export const whatIsClickedInNoteTabTemp = state => state.NoteSliceName.whatIsClickedInNoteTab;
 export const noteDataTemp = state => state.NoteSliceName.noteData;
 export const isNoteDataInsertedTemp = state => state.NoteSliceName.isNoteDataInserted;
 export const isNoteDataDeletedTemp = state => state.NoteSliceName.isNoteDataDeleted;
