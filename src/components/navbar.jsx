@@ -12,10 +12,11 @@ import { EditUserThunk, isUserEditedTemp, clearEditDataState } from '../feature/
 import { clearIsSidebarOpenState, clearWhatIsClickedState } from '../feature/opensidebarSlice';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { Theme } from './theme';
-import { themeHolderTemp } from '../feature/themeSlice'; 
+import { themeHolderTemp } from '../feature/themeSlice';
 import { clearIsToggleNoteFlashCardOpenState } from '../feature/opentogglenoteflashcardSlice';
 import { clearWhatIsClickToggleNoteflashCardState } from '../feature/opentogglenoteflashcardSlice';
 import { ClearWhatIsClickedInNoteTabState } from '../feature/noteSlice';
+import { DeleteAllNoteThunk } from '../feature/noteSlice';
 
 export const Nav1 = () => {
 
@@ -48,25 +49,8 @@ export const Nav1 = () => {
         navigate('/');
     }
 
-    const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
-    const [temp, setTemp] = useState('');
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollPos = window.scrollY;
-
-            prevScrollPos > currentScrollPos ? setTemp('top-0') : setTemp('top-[-4rem]');
-
-            setPrevScrollPos(currentScrollPos);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [prevScrollPos]);
-
+    const ShowProfileDropdownFunc = () => setShowUserProfileDropdown(!showUserProfileDropdown);   
+    const ShowProfileDropdownMouseLeaveFunc = () => setShowUserProfileDropdown(!showUserProfileDropdown);
 
     const handleDeleteAccount = () => {
         dispatch(DeleteAccountThunk({
@@ -89,6 +73,7 @@ export const Nav1 = () => {
             dispatch(clearIsSidebarOpenState());
             dispatch(clearWhatIsClickedState());
             dispatch(ClearWhatIsClickedInNoteTabState());
+            dispatch(DeleteAllNoteThunk(name));
             navigate('/');
         }
         if (isAccountDeleted == false) {
@@ -165,46 +150,33 @@ export const Nav1 = () => {
         }
     }, [isUserEdited])
 
-    console.log(isUserEdited);
 
+    const [showUserProfileDropdown, setShowUserProfileDropdown] = useState(false);
 
     return (
         Object.keys(userdata).length != 0 ?
             (
                 <>
+                   <nav className={`${themeHolder.colorbg1} h-[4rem] text-gray-400 px-12 mobile:px-4 w-screen backdrop-blur absolute top-0  z-10 backdrop-brightness-75 flex items-center justify-between  `}>
 
-                    <Navbar fluid className={`${temp} ${themeHolder.colorbg1} h-[4rem] bg-gray-900 text-gray-400 px-12 w-screen backdrop-blur absolute top-0  z-10 backdrop-brightness-75`}>
+                        <img className="animate-spin spin h-[2rem] w-[2rem]" src="../../asset/icon/logo192.png" alt="" />
+                        <div className='gap-x-5 flex items-center'>
+                            <Theme />
+                            <div className={`relative`}>
+                                <img onClick={ShowProfileDropdownFunc} className="h-[2.5rem] w-[2.5rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />
 
-                        <Navbar.Brand>         
-                            <img className="animate-spin spin h-[2rem] w-[2rem]" src="../../asset/icon/logo192.png" alt="" />
-                        </Navbar.Brand>
-
-                        <div className='gap-x-5 flex items-center '>
-                        <section>
-                          <Theme />
-                        </section>
-                        <section className='flex gap-x-5'>
-                            <Dropdown
-                                className='bg-gray-800 border-none'
-                                arrowIcon={false}
-                                inline
-                                label={
-                                    <img className="h-[2.5rem] w-[2.5rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />
-
-                                }>
-                                <Dropdown.Header>
-                                    <span className="block text-gray-400 text-sm">{name}</span>
-                                    <span className="block text-gray-400 truncate text-sm font-medium">{email}</span>
-                                </Dropdown.Header>
-                                <Dropdown.Item onClick={() => setOpenUserDataModal(true)} className='text-gray-400'>View Profile</Dropdown.Item>
-                                <Dropdown.Item onClick={() => { setOpenEditUserModal(true); }} className='text-gray-400'>Edit Profile</Dropdown.Item>
-                                <Dropdown.Divider />
-                                <Dropdown.Item className='text-gray-400' onClick={handleLogout} >Log out</Dropdown.Item>
-                            </Dropdown>
-
-                        </section>
+                                <div onMouseLeave={ShowProfileDropdownMouseLeaveFunc} className={`${showUserProfileDropdown ? 'h-[12.8rem] p-3' : ''} ${themeHolder.colorbg2} ${themeHolder.colortxt1} h-0 w-fit absolute right-0 mt-3 flex flex-col items-start gap-y-1 overflow-hidden`}>
+                                    <strong>{name}</strong>
+                                    <strong>{email}</strong>
+                                    <hr className='w-full my-2' />
+                                    <p className='hover:text-yellow-500 cursor-pointer' onClick={() => setOpenUserDataModal(true)}>View Profile</p>
+                                    <p className='hover:text-yellow-500 cursor-pointer' onClick={() => { setOpenEditUserModal(true); }}>Edit Profile</p>
+                                    <hr className='w-full my-2' />
+                                    <p className='hover:text-yellow-500 cursor-pointer' onClick={handleLogout}>Log Out</p>
+                                </div>
+                            </div>
                         </div>
-                    </Navbar >
+                    </nav>
 
                     {/* view profile modal */}
 

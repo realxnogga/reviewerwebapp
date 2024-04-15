@@ -108,3 +108,20 @@ export const DeleteNoteThunk = createAsyncThunk(
         }
      }
 )
+
+export const DeleteAllNoteThunk = createAsyncThunk(
+    "NoteSliceName/DeleteAllNoteThunk",
+    async (noteUser) => {
+        try {
+            const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=deleteAllNoteData", {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(noteUser)
+
+            })
+            
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    }
+)

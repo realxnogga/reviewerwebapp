@@ -6,7 +6,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "registration";
+$dbname = "reviewerwebapp";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

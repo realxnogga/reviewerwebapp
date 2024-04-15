@@ -7,7 +7,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "registration";
+$dbname = "reviewerwebapp";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -45,7 +45,7 @@ if (isset($_GET['action'])) {
             $conn->close();
             break;
 
-         case 'getNoteData':
+        case 'getNoteData':
 
             $username = json_decode(file_get_contents("php://input"), true);
 
@@ -64,19 +64,34 @@ if (isset($_GET['action'])) {
             break;
 
         case 'deleteNoteData':
-                $noteID = json_decode(file_get_contents("php://input"), true);
+            $noteID = json_decode(file_get_contents("php://input"), true);
 
-                $sql = "delete from note where noteID = '$noteID'";
-                $conn->query($sql);
-    
-                if ($conn->affected_rows > 0) {
-                    echo json_encode(['success' => true, 'message' => 'Note successfully deleted']);
-                } else {
-                    echo json_encode(['success' => false, 'message' => 'Note failed to delete']);
-                }
-    
-                $conn->close();
-                break;
+            $sql = "delete from note where noteID = '$noteID'";
+            $conn->query($sql);
+
+            if ($conn->affected_rows > 0) {
+                echo json_encode(['success' => true, 'message' => 'Note successfully deleted']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Note failed to delete']);
+            }
+
+            $conn->close();
+            break;
+
+        case 'deleteAllNoteData':
+            $noteUser = json_decode(file_get_contents("php://input"), true);
+
+            $sql = "delete from note where usernote = '$noteUser'";
+            $conn->query($sql);
+
+            if ($conn->affected_rows > 0) {
+                echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
+            }
+
+            $conn->close();
+            break;
     }
 }
 

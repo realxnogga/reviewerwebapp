@@ -3,11 +3,10 @@ import { Card } from 'flowbite-react';
 import { FloatingLabel } from 'flowbite-react';
 import { Button } from 'flowbite-react';
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { FileInput } from 'flowbite-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ShowToast } from '../components/toaster';
-
+import { NavLink, useNavigate } from 'react-router-dom';
 import { RegistrationThunk } from '../feature/account/registrationSlice';
 import { isUserAlreadyExistTemp } from '../feature/account/registrationSlice';
 import { clearRegistrationState } from '../feature/account/registrationSlice';
@@ -15,6 +14,7 @@ import { clearRegistrationState } from '../feature/account/registrationSlice';
 export const Register = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [registerInput, setRegisterInput] = useState({
         username: '',
@@ -96,6 +96,8 @@ export const Register = () => {
             })  
             
             dispatch(clearRegistrationState());
+
+            navigate('/');
         }
       }, [alreadyExist]);
 
