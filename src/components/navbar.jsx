@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Dropdown, Navbar, FileInput, Button, Modal } from 'flowbite-react';
+import { FileInput, Button, Modal } from 'flowbite-react';
 import { ShowToast } from './toaster';
 import { clearLoginState } from '../feature/account/loginSlice';
 import { userdataTemp, clearRegisterState, getUserData } from '../feature/data/userdataSlice';
@@ -15,7 +15,6 @@ import { Theme } from './theme';
 import { themeHolderTemp } from '../feature/themeSlice';
 import { clearIsToggleNoteFlashCardOpenState } from '../feature/opentogglenoteflashcardSlice';
 import { clearWhatIsClickToggleNoteflashCardState } from '../feature/opentogglenoteflashcardSlice';
-import { ClearWhatIsClickedInNoteTabState } from '../feature/noteSlice';
 import { DeleteAllNoteThunk } from '../feature/noteSlice';
 
 export const Nav1 = () => {
@@ -45,7 +44,6 @@ export const Nav1 = () => {
         dispatch(clearWhatIsClickedState());
         dispatch(clearIsToggleNoteFlashCardOpenState());
         dispatch(clearWhatIsClickToggleNoteflashCardState());
-        dispatch(ClearWhatIsClickedInNoteTabState());
         navigate('/');
     }
 
@@ -72,7 +70,6 @@ export const Nav1 = () => {
             dispatch(clearDeleteAccountState());
             dispatch(clearIsSidebarOpenState());
             dispatch(clearWhatIsClickedState());
-            dispatch(ClearWhatIsClickedInNoteTabState());
             dispatch(DeleteAllNoteThunk(name));
             navigate('/');
         }

@@ -3,13 +3,11 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ShowToast } from '../components/toaster';
-
 import { loginCookieTemp } from '../feature/account/loginSlice';
 import { getUserData } from '../feature/data/userdataSlice';
 import { LoginThunk } from '../feature/account/loginSlice';
 import { clearLoginState } from '../feature/account/loginSlice';
 import { useridTemp } from '../feature/account/loginSlice';
-
 import { userdataTemp } from '../feature/data/userdataSlice';
 import { changeThemeState } from '../feature/themeSlice';
 import { GetResourceDataThunk } from '../feature/insertresourcedataSlice';
@@ -113,19 +111,19 @@ export const Login = () => {
 
     return (
 
-        <div className="h-screen w-screen bg-gray-700 flex items-center justify-center">
-            <Card className="h-fit w-fit max-w-[90%]">
+        <div class="h-screen w-screen flex items-center justify-center bg-no-repeat bg-cover bg-center bg-[url('../../asset/loginregisterbg/bg.jpg')]">
+            <Card  className="h-fit w-fit max-w-[90%] bg-black bg-opacity-20 backdrop-blur-md border border-yellow-500 text-white">
                 <form onSubmit={handleLoginSubmit} action="" className='flex flex-col justify-start gap-y-7'>
-                    <FloatingLabel value={inputValue.username} onChange={handleChange} name="username" variant="standard" label="Enter Username" />
+                    <FloatingLabel className='text-white' value={inputValue.username} onChange={handleChange} name="username" variant="standard" label="Enter Username" />
                     <div>
-                        <FloatingLabel type={showPasswordString} value={inputValue.password} onChange={handleChange} name="password" variant="standard" label="Enter password" />
+                        <FloatingLabel className='text-white' type={showPasswordString} value={inputValue.password} onChange={handleChange} name="password" variant="standard" label="Enter password" />
                         <input onClick={showpassword} type="checkbox" />
                     </div>
 
                     <Button type='submit' gradientDuoTone="purpleToBlue" className='rounded-[50px]'>Login</Button>
-                    <p className='text-gray-400'>Don't have an account yet? <span className='underline hover:text-blue-600'><NavLink to={'/register'}>Register</NavLink></span></p>
+                    <p className='text-white'>Don't have an account yet? <span className='underline hover:text-blue-600'><NavLink to={'/register'}>Register</NavLink></span></p>
                 </form>
-            </Card>
+            </Card>     
         </div>
 
     );

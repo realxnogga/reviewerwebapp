@@ -68,14 +68,14 @@ export const Sidebar = () => {
 
                 <li onClick={() => { dispatch(whatIsClickedState('dashboard')) }} className={`${whatIsClicked === 'dashboard' ? themeHolder.colorbg1 : ''} p-4 flex flex-row items-center gap-x-3 cursor-pointer`}>
                     <span><MdOutlineSpaceDashboard className="text-yellow-500 text-[1.6rem] " /></span>
-                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Dashboard (progress tracking)</span>
+                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Dashboard</span>
                 </li>
 
                      
 
                 <li onClick={() => { dispatch(whatIsClickedState('practicetestandquiz')) }} className={`${whatIsClicked === 'practicetestandquiz' ? themeHolder.colorbg1 : ''} p-4 flex flex-row items-center gap-x-3 cursor-pointer`} >
                     <span><MdOutlineQuiz className="text-yellow-500 text-[1.6rem]" /></span>
-                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Practice Test and Quizzes</span>
+                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Practice Test & Quizzes</span>
                 </li>
 
     
@@ -89,7 +89,7 @@ export const Sidebar = () => {
 
                 <li onClick={() => { dispatch(whatIsClickedState('learningmaterial')) }} className={`${whatIsClicked === 'learningmaterial' ? themeHolder.colorbg1 : ''} p-4 flex flex-row items-center gap-x-3 cursor-pointer`} >
                     <span><BsBookshelf className="text-yellow-500 text-[1.6rem]" /></span>
-                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Learning Matherial</span>
+                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Learning Material</span>
                 </li>
 
 

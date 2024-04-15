@@ -13,15 +13,12 @@ import { noteDataTemp } from "../../feature/noteSlice";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { DeleteNoteThunk } from "../../feature/noteSlice";
 import { RiAddCircleFill } from "react-icons/ri";
-import { whatIsClickedInNoteTabState } from "../../feature/noteSlice";
-import { whatIsClickedInNoteTabTemp } from "../../feature/noteSlice";
 
 export const Note = () => {
 
     const dispatch = useDispatch();
     const themeHolder = useSelector(themeHolderTemp);
-    const whatIsClickedInNoteTab = useSelector(whatIsClickedInNoteTabTemp);
-
+    const [whatIsClickedInNoteTab, setWhatIsClickedInNoteTab] = useState('all');
     const [openInsertNoteModal, setOpenInsertNoteModal] = useState(false);
 
     const userdata = useSelector(userdataTemp);
@@ -127,9 +124,7 @@ export const Note = () => {
         return allSubjectFilter;
     });
 
-    const WhatIsClickInNoteTabFunc = (notesubject) => {
-        dispatch(whatIsClickedInNoteTabState(notesubject));
-    }
+
     // get the count of each note base on subject
     const allSubjectNoteCount = Object.keys(gotNoteData).length;
     const englishNoteCount = gotNoteData.filter(item => item.notesubject === 'english').length;
@@ -147,7 +142,7 @@ export const Note = () => {
                 <div className="h-full w-full overflow-scroll noScrollbar">
                     <ul className="flex h-full text-sm text-gray-300 ">
 
-                        <li onClick={() => { setSubjectFilter('all'); WhatIsClickInNoteTabFunc('all') }}
+                        <li onClick={() => { setSubjectFilter('all'); setWhatIsClickedInNoteTab('all') }}
                             className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'all' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>All
                         
                             {
@@ -165,7 +160,7 @@ export const Note = () => {
 
                         </li>
 
-                        <li onClick={() => { setSubjectFilter('english'); WhatIsClickInNoteTabFunc('english') }}
+                        <li onClick={() => { setSubjectFilter('english'); setWhatIsClickedInNoteTab('english') }}
                             className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'english' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>English
 
                             {
@@ -182,7 +177,7 @@ export const Note = () => {
                             }
                         </li>
 
-                        <li onClick={() => { setSubjectFilter('filipino'); WhatIsClickInNoteTabFunc('filipino') }}
+                        <li onClick={() => { setSubjectFilter('filipino'); setWhatIsClickedInNoteTab('filipino') }}
                             className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'filipino' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Filipino
 
                             {
@@ -199,7 +194,7 @@ export const Note = () => {
                             }
                         </li>
 
-                        <li onClick={() => { setSubjectFilter('mathematics'); WhatIsClickInNoteTabFunc('mathematics') }}
+                        <li onClick={() => { setSubjectFilter('mathematics'); setWhatIsClickedInNoteTab('mathematics') }}
                             className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'mathematics' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Mathematics
 
                             {
@@ -216,7 +211,7 @@ export const Note = () => {
                             }
                         </li>
 
-                        <li onClick={() => { setSubjectFilter('science'); WhatIsClickInNoteTabFunc('science') }}
+                        <li onClick={() => { setSubjectFilter('science'); setWhatIsClickedInNoteTab('science') }}
                             className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'science' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Science
 
                             {
@@ -233,7 +228,7 @@ export const Note = () => {
                             }
                         </li>
 
-                        <li onClick={() => { setSubjectFilter('social science'); WhatIsClickInNoteTabFunc('social science') }}
+                        <li onClick={() => { setSubjectFilter('social science'); setWhatIsClickedInNoteTab('social science') }}
                             className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'social science' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Social Science
 
                             {
@@ -250,7 +245,7 @@ export const Note = () => {
                             }
                         </li>
 
-                        <li onClick={() => { setSubjectFilter('humanities'); WhatIsClickInNoteTabFunc('humanities') }}
+                        <li onClick={() => { setSubjectFilter('humanities'); setWhatIsClickedInNoteTab('humanities') }}
                             className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'humanities' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Humanities
 
                             {
@@ -267,7 +262,7 @@ export const Note = () => {
                             }
                         </li>
 
-                        <li onClick={() => { setSubjectFilter('communication skills'); WhatIsClickInNoteTabFunc('communication skills') }}
+                        <li onClick={() => { setSubjectFilter('communication skills'); setWhatIsClickedInNoteTab('communication skills') }}
                             className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'communication skills' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Communication Skills
 
                             {
@@ -284,7 +279,7 @@ export const Note = () => {
                             }
                         </li>
 
-                        <li onClick={() => { setSubjectFilter('ict'); WhatIsClickInNoteTabFunc('ict') }}
+                        <li onClick={() => { setSubjectFilter('ict'); setWhatIsClickedInNoteTab('ict') }}
                             className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'ict' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>ICT
 
                             {
