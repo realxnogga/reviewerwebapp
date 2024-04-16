@@ -30,7 +30,8 @@ export const Theme = () => {
         <section className="flex flex-row-reverse items-center gap-x-4">
 
 
-            <IoMdColorFill onClick={ShowThemeFunc} className="text-gray-300 text-[1.8rem] cursor-pointer" />
+            {/* <img onClick={ShowThemeFunc} src="../asset/icon/themeIcon.svg" alt="theme icon" className="h-[2rem] w-[2rem]"/> */}
+            <IoMdColorFill onClick={ShowThemeFunc} className="text-yellow-500 text-[1.8rem] cursor-pointer" />
 
 
             <div className={`${closeThemeString} h-fit w-0 duration-200 ease-in-out flex items-center justify-between overflow-hidden`}>

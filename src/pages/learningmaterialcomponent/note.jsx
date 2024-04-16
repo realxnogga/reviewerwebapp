@@ -138,9 +138,9 @@ export const Note = () => {
 
     return (
         <div className="relative h-[90%] w-[69rem] max-w-[95%]">
-            <section className="h-[8%] w-full flex items-center justify-between">
-                <div className="h-full w-full overflow-scroll noScrollbar">
-                    <ul className="flex h-full text-sm text-gray-300 ">
+            <section className={`${themeHolder.colorbg2} overflow-hidden rounded-md h-[9%] w-full flex items-center justify-between`}>
+                <div className={` h-full w-full overflow-scroll noScrollbar`}>
+                    <ul className={`flex h-full text-sm text-gray-300`}>
 
                         <li onClick={() => { setSubjectFilter('all'); setWhatIsClickedInNoteTab('all') }}
                             className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'all' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>All
@@ -300,7 +300,9 @@ export const Note = () => {
                 </div>
 
 
-                <RiAddCircleFill onClick={() => { setOpenInsertNoteModal(true) }} className=" text-[3.5rem] mobile:text-[3rem] text-yellow-500 hover:text-yellow-300 " />
+                {/* <RiAddCircleFill onClick={() => { setOpenInsertNoteModal(true) }} className=" text-[3.5rem] mobile:text-[3rem] text-yellow-500 hover:text-yellow-300 " /> */}
+               
+                <Button onClick={() => { setOpenInsertNoteModal(true) }} gradientDuoTone="purpleToBlue" className=" m-1 rounded-md ">add</Button>
             </section>
 
 
@@ -308,7 +310,7 @@ export const Note = () => {
             {
                 filteredNoteData.length === 0 ?
                     (
-                        <section className="h-[92%] w-full flex items-center justify-center  ">
+                        <section className="h-[91%] w-full flex items-center justify-center  ">
                             <div className={`border-gray-500 h-[70%] w-[45rem] max-w-[95%] border rounded-xl flex items-center justify-center`}>
                                 <p className={`${themeHolder.colortxt1} text-[3.5rem] font-semibold text-gray-200 mobile:text-[2rem] `}>No Notes Yet!</p>
                             </div>
@@ -316,7 +318,7 @@ export const Note = () => {
                     )
                     :
                     (
-                        <section className="h-[92%] w-full pt-3 overflow-scroll noScrollbar flex flex-wrap content-start gap-4 ">
+                        <section className="h-[91%] w-full pt-3 overflow-scroll noScrollbar flex flex-wrap content-start gap-4 ">
 
                             {
 

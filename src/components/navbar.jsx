@@ -16,6 +16,11 @@ import { themeHolderTemp } from '../feature/themeSlice';
 import { clearIsToggleNoteFlashCardOpenState } from '../feature/opentogglenoteflashcardSlice';
 import { clearWhatIsClickToggleNoteflashCardState } from '../feature/opentogglenoteflashcardSlice';
 import { DeleteAllNoteThunk } from '../feature/noteSlice';
+import { FaRegEdit } from "react-icons/fa";
+import { RiLogoutBoxLine } from "react-icons/ri";
+import { MdOutlineWindow } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
+import { RiEditBoxLine } from "react-icons/ri";
 
 export const Nav1 = () => {
 
@@ -47,7 +52,7 @@ export const Nav1 = () => {
         navigate('/');
     }
 
-    const ShowProfileDropdownFunc = () => setShowUserProfileDropdown(!showUserProfileDropdown);   
+    const ShowProfileDropdownFunc = () => setShowUserProfileDropdown(!showUserProfileDropdown);
     const ShowProfileDropdownMouseLeaveFunc = () => setShowUserProfileDropdown(!showUserProfileDropdown);
 
     const handleDeleteAccount = () => {
@@ -154,22 +159,36 @@ export const Nav1 = () => {
         Object.keys(userdata).length != 0 ?
             (
                 <>
-                   <nav className={`${themeHolder.colorbg1} h-[4rem] text-gray-400 px-12 mobile:px-4 w-screen backdrop-blur absolute top-0  z-10 backdrop-brightness-75 flex items-center justify-between  `}>
+                    <nav className={`${themeHolder.colorbg1} h-[4rem] px-12 mobile:px-4 w-screen backdrop-blur absolute top-0  z-10 backdrop-brightness-75 flex items-center justify-between  `}>
+                        <div className='flex items-center gap-x-6'>
+                            <img className="animate-spin spin h-[2rem] w-[2rem]" src="../../asset/icon/logo192.png" alt="" />
 
-                        <img className="animate-spin spin h-[2rem] w-[2rem]" src="../../asset/icon/logo192.png" alt="" />
+                            <p className={`${themeHolder.colortxt1} text-xl`}>Welcome, <span>{name}</span></p>
+                        </div>
+
+
                         <div className='gap-x-5 flex items-center'>
                             <Theme />
                             <div className={`relative`}>
                                 <img onClick={ShowProfileDropdownFunc} className="h-[2.5rem] w-[2.5rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />
 
-                                <div onMouseLeave={ShowProfileDropdownMouseLeaveFunc} className={`${showUserProfileDropdown ? 'h-[12.8rem] p-3' : ''} ${themeHolder.colorbg2} ${themeHolder.colortxt1} h-0 w-fit absolute right-0 mt-3 flex flex-col items-start gap-y-1 overflow-hidden`}>
+                                <div onMouseLeave={ShowProfileDropdownMouseLeaveFunc} className={`${showUserProfileDropdown ? 'h-[12.8rem] p-3' : ''} ${themeHolder.colorbg2} ${themeHolder.colortxt1} h-0 w-fit text-nowrap absolute right-0 mt-3 flex flex-col items-start gap-y-1 overflow-hidden`}>
                                     <strong>{name}</strong>
                                     <strong>{email}</strong>
                                     <hr className='w-full my-2' />
-                                    <p className='hover:text-yellow-500 cursor-pointer' onClick={() => setOpenUserDataModal(true)}>View Profile</p>
-                                    <p className='hover:text-yellow-500 cursor-pointer' onClick={() => { setOpenEditUserModal(true); }}>Edit Profile</p>
+                                    <p className='hover:text-yellow-500 cursor-pointer flex items-center gap-x-2' onClick={() => setOpenUserDataModal(true)}>
+                                    <CgProfile className='text-xl'/>
+                                        View Profile
+                                        </p>
+                                    <p className='hover:text-yellow-500 cursor-pointer flex items-center gap-x-2' onClick={() => { setOpenEditUserModal(true); }}>
+                                    <RiEditBoxLine className='text-xl'/>
+                                        Edit Profile
+                                        </p>
                                     <hr className='w-full my-2' />
-                                    <p className='hover:text-yellow-500 cursor-pointer' onClick={handleLogout}>Log Out</p>
+                                    <p className='hover:text-yellow-500 cursor-pointer flex items-center gap-x-2' onClick={handleLogout}>
+                                        <RiLogoutBoxLine className='text-xl'/>    
+                                        Log Out
+                                        </p>
                                 </div>
                             </div>
                         </div>
