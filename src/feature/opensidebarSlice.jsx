@@ -27,4 +27,4 @@ export const OpenSidebarSlice = createSlice({
 export const { isSidebarOpenState, whatIsClickedState, clearIsSidebarOpenState, clearWhatIsClickedState } = OpenSidebarSlice.actions;
 export const isSideBarOpenTemp = state => state.OpenSidebarSliceName.isSideBarOpen;
 export const whatIsClickedTemp = state => state.OpenSidebarSliceName.whatIsClicked;
-export const isSidebarOpenReducer = OpenSidebarSlice.reducer;
+export const openSidebarSliceReducer = OpenSidebarSlice.reducer;

@@ -33,4 +33,4 @@ export const isToggleNoteFlashcardOpenTemp = state => state.OpenToggleNoteFlashc
 
 export const whatIsClickToggleNoteflashCardTemp = state => state.OpenToggleNoteFlashcardSliceName.whatIsClickToggleNoteflashCard;
 
-export const isToggleNoteFlashCardOpenReducer = OpenToggleNoteFlashcardSlice.reducer;
+export const OpenToggleNoteFlashcardReducer = OpenToggleNoteFlashcardSlice.reducer;

@@ -21,7 +21,7 @@ export const EditUserSlice = createSlice({
 })
 
 export const { clearEditDataState } = EditUserSlice.actions;
-export const editUserReducer = EditUserSlice.reducer;
+export const editUserSliceReducer = EditUserSlice.reducer;
 export const isUserEditedTemp = state => state.EditUserSliceName.isUserEdited;
 
 

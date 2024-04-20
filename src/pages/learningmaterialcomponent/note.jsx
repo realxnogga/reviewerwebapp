@@ -124,7 +124,6 @@ export const Note = () => {
         return allSubjectFilter;
     });
 
-
     // get the count of each note base on subject
     const allSubjectNoteCount = Object.keys(gotNoteData).length;
     const englishNoteCount = gotNoteData.filter(item => item.notesubject === 'english').length;

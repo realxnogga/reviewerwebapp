@@ -10,6 +10,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { RegistrationThunk } from '../feature/account/registrationSlice';
 import { isUserAlreadyExistTemp } from '../feature/account/registrationSlice';
 import { clearRegistrationState } from '../feature/account/registrationSlice';
+import { InsertSettingDataThunk } from '../feature/systemsettingSlice';
 
 export const Register = () => {
 
@@ -96,6 +97,8 @@ export const Register = () => {
             })
 
             dispatch(clearRegistrationState());
+
+            dispatch(InsertSettingDataThunk(registerInput.username));
 
             navigate('/');
         }

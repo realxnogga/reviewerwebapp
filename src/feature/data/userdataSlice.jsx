@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const GetUserData = createSlice({
-    name: 'GetUserDataName',
+export const GetUserDataSlice = createSlice({
+    name: 'GetUserDataSliceName',
     initialState: {
       userdata: [],
     },
@@ -13,18 +13,18 @@ export const GetUserData = createSlice({
 
     extraReducers: builder => {
       builder
-        .addCase(getUserData.fulfilled, (state, action) => {
+        .addCase(getUserDataThunk.fulfilled, (state, action) => {
           state.userdata = action.payload[0];
         })
     }
   });
 
-export const { clearRegisterState } = GetUserData.actions;
-export const userdataTemp = state => state.GetUserDataName.userdata;
-export const getdataReducer = GetUserData.reducer;
+export const { clearRegisterState } = GetUserDataSlice.actions;
+export const userdataTemp = state => state.GetUserDataSliceName.userdata;
+export const getUserDataSliceReducer = GetUserDataSlice.reducer;
 
-export const getUserData = createAsyncThunk(
-    'GetUserDataName/getUserData',
+export const getUserDataThunk = createAsyncThunk(
+    'GetUserDataSliceName/getUserDataThunk',
     async (userid) => {
       try {
         const res = await fetch("http://localhost/simple_web_in_react/server/register.php?action=getData", {

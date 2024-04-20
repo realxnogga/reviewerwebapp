@@ -1,14 +1,10 @@
 
-import { NavLink } from "react-router-dom";
+
 import { MdOutlineSpaceDashboard } from "react-icons/md";
-import { MdOutlineRateReview } from "react-icons/md";
 import { MdOutlineQuiz } from "react-icons/md";
 import { GrResources } from "react-icons/gr";
 import { IoCloseSharp } from "react-icons/io5";
-import { PiBooksLight } from "react-icons/pi";
 import { BsBookshelf } from "react-icons/bs";
-import { LiaSwatchbookSolid } from "react-icons/lia";
-import { PiBooksBold } from "react-icons/pi";
 import { LiaEyeSlash } from "react-icons/lia";
 import { LiaEyeSolid } from "react-icons/lia";
 import { isSidebarOpenState, whatIsClickedState, isSideBarOpenTemp, whatIsClickedTemp } from "../feature/opensidebarSlice";
@@ -45,7 +41,7 @@ export const Sidebar = () => {
             <ul className='flex flex-col text-md '>
 
                 {
-
+                    
                     (
                         hideTextLink === true ?
                             (

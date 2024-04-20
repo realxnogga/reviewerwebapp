@@ -20,7 +20,7 @@ export const RegisterSlice = createSlice({
 })
 
 export const { clearRegistrationState } = RegisterSlice.actions;
-export const registrationReducer = RegisterSlice.reducer;
+export const registerSliceReducer = RegisterSlice.reducer;
 export const isUserAlreadyExistTemp = state => state.RegisterSliceName.isUserAlreadyExist;
 
 

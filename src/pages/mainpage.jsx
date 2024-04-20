@@ -1,5 +1,5 @@
 import Foot from "../components/footer";
-import { Nav1 } from "../components/navbar";
+import { Navbar } from "../components/navbar";
 import { Sidebar } from "../components/sidebar";
 import { DashBoard } from "./dashboard";
 import { LearningMaterial } from "./learingmaterial";
@@ -21,7 +21,7 @@ export const MainPage = () => {
     
     return (
         <>
-            <Nav1 />
+            <Navbar />
             <Sidebar />
             {container}
         </>

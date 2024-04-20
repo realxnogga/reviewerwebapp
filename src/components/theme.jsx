@@ -4,6 +4,8 @@ import { changeThemeState } from "../feature/themeSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import { Tooltip } from "flowbite-react";
 import { themeHolderTemp } from "../feature/themeSlice";
+import { IoSunnySharp } from "react-icons/io5";
+import { IoMdMoon } from "react-icons/io";
 
 export const Theme = () => {
 
@@ -23,30 +25,29 @@ export const Theme = () => {
     var closeThemeString = '';
 
     if (showTheme === true) {
-        closeThemeString = 'w-[4rem]';
+        closeThemeString = 'w-[8rem]';
     }
 
     return (
-        <section className="flex flex-row-reverse items-center gap-x-4">
 
 
-            {/* <img onClick={ShowThemeFunc} src="../asset/icon/themeIcon.svg" alt="theme icon" className="h-[2rem] w-[2rem]"/> */}
-            <IoMdColorFill onClick={ShowThemeFunc} className="text-yellow-500 text-[1.8rem] cursor-pointer" />
 
+
+
+        <section className="flex items-center gap-x-4">
+
+            
+                <p onClick={ShowThemeFunc} className="text-gray-300 cursor-pointer">Theme:</p>
 
             <div className={`${closeThemeString} h-fit w-0 duration-200 ease-in-out flex items-center justify-between overflow-hidden`}>
 
-                <div onClick={() => { dispatch(changeThemeState('firstColor')); HideThemeFunc() }} className="h-[1.5rem] w-[1.5rem] flex rounded-[50%] overflow-hidden hover:border-double hover:border-4 hover:border-yellow-500 cursor-pointer">
-                    <div className="bg-gray-800 h-full w-full"></div>
-                    <div className="bg-gray-700 h-full w-full"></div>
-                    <div className="bg-gray-300 h-full w-full"></div>
-                </div>
+             
+                  <img  onClick={() => { dispatch(changeThemeState('firstColor')); HideThemeFunc() }} className="h-[2.5rem] w-[3.5rem] border cursor-pointer" src="../asset/theme/darkTheme.png" alt="" />
+             
 
-                <div onClick={() => { dispatch(changeThemeState('secondColor')); HideThemeFunc() }} className="h-[1.5rem] w-[1.5rem] flex rounded-[50%] overflow-hidden hover:border-double hover:border-4 hover:border-yellow-500 cursor-pointer">
-                    <div className="bg-[#236277] h-full w-full"></div>
-                    <div className="bg-[#47b5FF] h-full w-full"></div>
-                    <div className="bg-white h-full w-full"></div>
-                </div>
+           
+                 <img onClick={() => { dispatch(changeThemeState('secondColor')); HideThemeFunc() }} className="h-[2.5rem] w-[3.5rem] border cursor-pointer" src="../asset/theme/lightTheme.png" alt="" />
+                
 
             </div>
         </section>

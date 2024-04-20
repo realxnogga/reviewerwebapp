@@ -24,7 +24,7 @@ export const LoginSlice = createSlice({
 })
 
 export const { clearLoginState } = LoginSlice.actions;
-export const loginReducer = LoginSlice.reducer;
+export const loginSliceReducer = LoginSlice.reducer;
 export const loginCookieTemp = state => state.LoginSliceName.isLogged;
 export const useridTemp = state => state.LoginSliceName.userid;
 

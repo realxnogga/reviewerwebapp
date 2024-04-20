@@ -38,12 +38,16 @@ if (isset($_GET['action'])) {
                 echo json_encode(['success' => false, 'message' => 'Item does not exist']);
 
                 $userImageName = $file['name'];
+                // concatinate time to image name to grnerate unique image name
+                $uniqueImageName =  $userImageName."_".$timestamp = date("YmdHis");
+
+
                 $userImageTMP = $file['tmp_name'];
-                $userImageDestination = '../public/asset/userprofile/' . $userImageName;
+                $userImageDestination = '../public/asset/userprofile/' . $uniqueImageName;
 
                 move_uploaded_file($userImageTMP, $userImageDestination);
 
-                $sql = "INSERT INTO user (username, password, email, userimage) VALUES ('$username', '$password', '$email', '$userImageName')";
+                $sql = "INSERT INTO user (username, password, email, userimage) VALUES ('$username', '$password', '$email', '$uniqueImageName')";
                 $conn->query($sql);
             }
             $conn->close();
@@ -122,11 +126,14 @@ if (isset($_GET['action'])) {
             $userimagetobereplace = $conn->real_escape_string($editUserData['userimage']);
             $file = $_FILES['editUserfile'];
 
-            $userImageName = $conn->real_escape_string($file['name']);
-            $userImageTMP = $file['tmp_name'];
-            $userImageDestination = '../public/asset/userprofile/' . $userImageName;
+            $userImageName = $file['name'];
+            // concatinate time to image name to grnerate unique image name
+            $uniqueImageName =  $userImageName."_".$timestamp = date("YmdHis");
 
-            $sql = "UPDATE `user` SET `username` = '$username', `password` = '$password', `email` = '$email', `userimage` = '$userImageName' WHERE `ID` = '$id'";
+            $userImageTMP = $file['tmp_name'];
+            $userImageDestination = '../public/asset/userprofile/' . $uniqueImageName;
+
+            $sql = "UPDATE `user` SET `username` = '$username', `password` = '$password', `email` = '$email', `userimage` = '$uniqueImageName' WHERE `ID` = '$id'";
             $result = $conn->query($sql);
 
             if ($result === TRUE) {

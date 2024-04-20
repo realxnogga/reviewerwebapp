@@ -9,7 +9,6 @@ export const FlashCard = () => {
         { id: 3, front: 'warren', back: 'warrenback', },
         { id: 4, front: 'eat', back: 'eatback', },
         { id: 5, front: 'sleep', back: 'sleepback', },
-        // Add more objects as needed
     ]);
 
     // Function to shuffle objects
@@ -79,7 +78,7 @@ export const FlashCard = () => {
                     </button>
                     <button onClick={() => {setIndex(index + 1); setShowAnswer(false)}} className="bg-blue-500">
                         next
-                    </button>s
+                    </button>
                     <button onClick={() => setShowFlashCard(false)} className="bg-red-500">
                         close
                     </button>

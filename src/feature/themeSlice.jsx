@@ -11,6 +11,7 @@ export const ThemeSlice = createSlice({
            colortxt1: '',
            colortxt2: '',
         },
+      
     },
     reducers: {
         changeThemeState: (state, action) => {
@@ -32,7 +33,7 @@ export const ThemeSlice = createSlice({
                 state.themeHolder.colortxt1 = '!text-gray-800 duration-200';
                 state.themeHolder.colortxt2 = '!text-gray-300 duration-200';
             }
-        }
+        },
 
     }
 })

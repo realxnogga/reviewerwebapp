@@ -22,7 +22,7 @@ export const DeleteAccountSlice = createSlice({
 })
 
 export const {clearDeleteAccountState} = DeleteAccountSlice.actions;
-export const deleteaccountReducer = DeleteAccountSlice.reducer;
+export const deleteAccountSliceReducer = DeleteAccountSlice.reducer;
 export const isAccountDeletedTemp = state => state.DeleteAccountSliceName.isAccountDeleted;
 
 export const DeleteAccountThunk = createAsyncThunk(

@@ -1,17 +1,17 @@
-import { Card, FloatingLabel, Button, Checkbox } from 'flowbite-react';
+import { Card, FloatingLabel, Button } from 'flowbite-react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ShowToast } from '../components/toaster';
 import { loginCookieTemp } from '../feature/account/loginSlice';
-import { getUserData } from '../feature/data/userdataSlice';
+import { getUserDataThunk } from '../feature/data/userdataSlice';
 import { LoginThunk } from '../feature/account/loginSlice';
 import { clearLoginState } from '../feature/account/loginSlice';
 import { useridTemp } from '../feature/account/loginSlice';
-import { userdataTemp } from '../feature/data/userdataSlice';
 import { changeThemeState } from '../feature/themeSlice';
 import { GetResourceDataThunk } from '../feature/insertresourcedataSlice';
 import { GetNoteThunk } from '../feature/noteSlice';
+import { GetSettingDataThunk } from '../feature/systemsettingSlice';
 
 export const Login = () => {
     
@@ -67,14 +67,15 @@ export const Login = () => {
                 password: '',
             })
 
-            dispatch(getUserData(
+            dispatch(getUserDataThunk(
                 { userid: userid, }
             ));
 
             dispatch(changeThemeState('firstColor')); // if login is successfull, themestate will dispatch
             dispatch(GetResourceDataThunk()) // if login is successfull, resourcedata will dispatch
             dispatch(GetNoteThunk(inputValue.username)) // if login is successfull, note will dispatch
-
+            
+            dispatch(GetSettingDataThunk(inputValue.username)); // if login is successfull, system name will be displayed
 
         }
 

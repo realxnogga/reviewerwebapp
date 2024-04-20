@@ -2,32 +2,34 @@ import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 import { combineReducers } from '@reduxjs/toolkit';
-import { loginReducer } from './feature/account/loginSlice';
-import { getdataReducer } from './feature/data/userdataSlice';
-import { registrationReducer } from './feature/account/registrationSlice';
-import { deleteaccountReducer } from './feature/account/deleteaccountSlice';
-import { editUserReducer } from './feature/account/editaccountSlice';
-import { isSidebarOpenReducer } from './feature/opensidebarSlice';
+import { loginSliceReducer } from './feature/account/loginSlice';
+import { getUserDataSliceReducer } from './feature/data/userdataSlice';
+import { registerSliceReducer } from './feature/account/registrationSlice';
+import { deleteAccountSliceReducer } from './feature/account/deleteaccountSlice';
+import { editUserSliceReducer } from './feature/account/editaccountSlice';
+import { openSidebarSliceReducer } from './feature/opensidebarSlice';
 import { insertResourceDataSliceReducer } from './feature/insertresourcedataSlice';
 import { themeSliceReducer } from './feature/themeSlice';
-import { isToggleNoteFlashCardOpenReducer } from './feature/opentogglenoteflashcardSlice';
+import { OpenToggleNoteFlashcardReducer } from './feature/opentogglenoteflashcardSlice';
 import { noteSliceReducer } from './feature/noteSlice';
+import { systemSettingSliceReducer } from './feature/systemsettingSlice';
 const persistConfig = {
   key: 'root',
   storage,
 }
 
 const rootReducer = combineReducers({
-  LoginSliceName: loginReducer,
-  GetUserDataName: getdataReducer,
-  RegisterSliceName: registrationReducer,
-  DeleteAccountSliceName: deleteaccountReducer,
-  EditUserSliceName: editUserReducer,
-  OpenSidebarSliceName: isSidebarOpenReducer,
+  LoginSliceName: loginSliceReducer,
+  GetUserDataSliceName: getUserDataSliceReducer,
+  RegisterSliceName: registerSliceReducer,
+  DeleteAccountSliceName: deleteAccountSliceReducer,
+  EditUserSliceName: editUserSliceReducer,
+  OpenSidebarSliceName: openSidebarSliceReducer,
   InsertResourceDataSliceName: insertResourceDataSliceReducer,
   ThemeSliceName: themeSliceReducer,
-  OpenToggleNoteFlashcardSliceName: isToggleNoteFlashCardOpenReducer,
+  OpenToggleNoteFlashcardSliceName: OpenToggleNoteFlashcardReducer,
   NoteSliceName: noteSliceReducer,
+  SystemSettingSliceName: systemSettingSliceReducer,
 });
 
 
