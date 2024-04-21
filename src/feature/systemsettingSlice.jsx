@@ -29,6 +29,25 @@ export const isSystemNameUpdatedTemp = state => state.SystemSettingSliceName.isS
 export const systemSettingSliceReducer = SystemSettingSlice.reducer;
 
 
+
+export const DeleteSettingDataThunk = createAsyncThunk(
+    "SystemSettingSliceName/DeleteSettingDataThunk",
+    async (systemsettinguser) => {
+        try {
+        const res = await fetch("http://localhost/simple_web_in_react/server/systemsetting.php?action=deleteSystemSetting", {
+            method: 'POST',
+            header: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(systemsettinguser)
+        })
+            
+        } catch (error) {
+          console.log('Error:', error);
+        }
+    }
+)
+
+
+
 export const EditSettingDataThunk = createAsyncThunk(
     "SystemSettingSliceName/EditSettingDataThunk",
     async ({systemSettingTemp}) => {

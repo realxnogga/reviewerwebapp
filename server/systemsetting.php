@@ -68,6 +68,21 @@ if (isset($_GET['action'])) {
                 }
                 $conn->close();
                 break;
+            
+            case 'deleteSystemSetting':
+                    $systemsettinguser = json_decode(file_get_contents("php://input"), true);
+    
+                    $sql = "delete from systemsetting where systemsettinguser = '$systemsettinguser'";
+                    $conn->query($sql);
+        
+                    if ($conn->affected_rows > 0) {
+                        echo json_encode(['success' => true, 'message' => 'system name updated successfully']);
+                    }
+                    else{
+                        echo json_encode(['success' => false, 'message' => 'system name failed to update']);
+                    }
+                    $conn->close();
+                    break;
 
     }
 }

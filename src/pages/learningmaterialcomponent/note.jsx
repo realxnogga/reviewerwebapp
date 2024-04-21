@@ -351,19 +351,19 @@ export const Note = () => {
             {/* modal section */}
             <Modal size="md" dismissible show={openInsertNoteModal} onClose={() => setOpenInsertNoteModal(false)}>
                 <form onSubmit={handleNoteSubmit} action="">
-                    <div className='space-y-8 bg-gray-700 rounded-lg p-5'>
-                        <h3 className="text-xl font-medium text-gray-300 dark:text-white">Create Note</h3>
+                    <div className={`${themeHolder.colorbg3} space-y-8 bg-gray-700 rounded-lg p-5`}>
+                        <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Create Note</h3>
 
                         <div className="flex flex-col items-start gap-y-2">
 
                             <div className="w-full">
-                                <label htmlFor="subject" className="text-lg text-gray-300">Choose a subject:</label>
+                                <label htmlFor="subject" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Choose a subject:</label>
                                 <select
                                     onChange={handleNoteDataChangeFunc}
                                     value={noteData.noteSubject}
                                     id="noteSubject"
                                     name="noteSubject"
-                                    className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md ">
+                                    className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `}>
                                     <option value="english">English</option>
                                     <option value="filipino">Filipino</option>
                                     <option value="mathematics">Mathematics</option>
@@ -375,13 +375,13 @@ export const Note = () => {
                             </div>
 
                             <div className="w-full">
-                                <label htmlFor="title" className="text-lg text-gray-300">Enter note title:</label>
-                                <input onChange={handleNoteDataChangeFunc} value={noteData.noteTitle} type="text" name="noteTitle" id="noteTitle" className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md " placeholder="Note Title:" />
+                                <label htmlFor="title" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Enter note title:</label>
+                                <input onChange={handleNoteDataChangeFunc} value={noteData.noteTitle} type="text" name="noteTitle" id="noteTitle" className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md`} placeholder="Note Title:" />
                             </div>
 
                             <div className="w-full flex flex-col">
                                 <textarea onChange={handleNoteDataChangeFunc} value={noteData.note}
-                                    name="note" id="note" className="h-[8rem] w-full bg-gray-600 rounded-sm outline-none border-none p-2 text-gray-300 text-md " placeholder="Enter your thought..."></textarea>
+                                    name="note" id="note" className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} h-[8rem] w-full bg-gray-600 rounded-sm outline-none p-2 text-gray-300 text-md`} placeholder="Enter your thought..."></textarea>
                             </div>
 
                         </div>

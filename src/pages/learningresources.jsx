@@ -120,19 +120,19 @@ export const LearningResources = () => {
                     {/* for filter */}
                     <Modal size="md" dismissible show={openFilterModal} onClose={() => setOpenFilterModal(false)}>
 
-                        <div className='space-y-8 bg-gray-700 rounded-lg p-5'>
-                            <h3 className="text-xl font-medium text-gray-300 dark:text-white">Filter Resources</h3>
+                        <div className={`${themeHolder.colorbg3} space-y-8 bg-gray-700 rounded-lg p-5`}>
+                            <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Filter Resources</h3>
 
                             <div className="flex flex-col items-start gap-y-2">
 
                                 <div className="w-full">
-                                    <label htmlFor="subject" className="text-lg text-gray-300">filter by subject:</label>
+                                    <label htmlFor="subject" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>filter by subject:</label>
 
                                     <select
                                         onChange={(e) => setSubjectFilter(e.target.value)}
                                         value={subjectFilter}
                                         id="subject"
-                                        className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md ">
+                                        className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `}>
                                         <option value="all">All</option>
                                         <option value="english">English</option>
                                         <option value="filipino">Filipino</option>
@@ -145,14 +145,14 @@ export const LearningResources = () => {
                                 </div>
 
                                 <div className="w-full">
-                                    <label htmlFor="type" className="text-lg text-gray-300">filter by type:</label>
+                                    <label htmlFor="type" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>filter by type:</label>
 
                                     <select
                                         onChange={(e) => setTypeFilter(e.target.value)}
                                         value={typeFilter}
                                         name="type"
                                         id="type"
-                                        className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md">
+                                        className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md`}>
                                         <option value="all">All</option>
                                         <option value="pdf">PDF</option>
                                         <option value="video">Video</option>
@@ -244,19 +244,19 @@ export const LearningResources = () => {
                 </Modal>
 
 
-                {/* section for modal */}
+                {/* contribution modal */}
                 <Modal size="md" dismissible show={openContributeModal} onClose={() => setOpenContributeModal(false)}>
 
                     <form onSubmit={handleResourceDataSubmitFunc} action="">
-                        <div className='space-y-8 bg-gray-700 rounded-lg p-5'>
-                            <h3 className="text-xl font-medium text-gray-300 dark:text-white">Make a contribution</h3>
+                        <div className={`${themeHolder.colorbg3} space-y-8 bg-gray-700 rounded-lg p-5`}>
+                            <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Make a contribution</h3>
 
                             <div className="flex flex-col items-start gap-y-2">
 
                                 <div className="w-full">
-                                    <label htmlFor="subject" className="text-lg text-gray-300">choose a subject:</label>
+                                    <label htmlFor="subject" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>choose a subject:</label>
 
-                                    <select onChange={handleResourceDataChangeFunc} value={resourceData.subject} name="subject" id="subject" className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md ">
+                                    <select onChange={handleResourceDataChangeFunc} value={resourceData.subject} name="subject" id="subject" className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `}>
                                         <option value="english">English</option>
                                         <option value="filipino">Filipino</option>
                                         <option value="mathematics">Mathematics</option>
@@ -269,9 +269,9 @@ export const LearningResources = () => {
                                 </div>
 
                                 <div className="w-full">
-                                    <label htmlFor="type" className="text-lg text-gray-300">choose a type:</label>
+                                    <label htmlFor="type" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>choose a type:</label>
 
-                                    <select onChange={handleResourceDataChangeFunc} value={resourceData.type} name="type" id="type" className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md ">
+                                    <select onChange={handleResourceDataChangeFunc} value={resourceData.type} name="type" id="type" className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `}>
                                         <option value="pdf">PDF</option>
                                         <option value="video">Video</option>
                                         <option value="image">Image</option>
@@ -279,12 +279,12 @@ export const LearningResources = () => {
                                 </div>
 
                                 <div className="w-full">
-                                    <label htmlFor="title" className="text-lg text-gray-300">enter title:</label>
-                                    <input onChange={handleResourceDataChangeFunc} value={resourceData.title} type="text" name="title" id="title" className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md " placeholder="Title:" />
+                                    <label htmlFor="title" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>enter title:</label>
+                                    <input onChange={handleResourceDataChangeFunc} value={resourceData.title} type="text" name="title" id="title" className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md`} placeholder="Title:" />
                                 </div>
 
                                 <div className="w-full">
-                                    <label htmlFor="actualfile" className="text-lg text-gray-300">choose a file:</label>
+                                    <label htmlFor="actualfile" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>choose a file:</label>
                                     <FileInput onChange={handleResourceDataActualFileChangeFunc} id="actualfile" className='text-gray-300' />
                                 </div>
 

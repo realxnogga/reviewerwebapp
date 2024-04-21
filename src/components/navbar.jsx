@@ -21,10 +21,11 @@ import { CgProfile } from "react-icons/cg";
 import { RiEditBoxLine } from "react-icons/ri";
 import { IoSettingsOutline } from "react-icons/io5";
 import { RxDividerVertical } from "react-icons/rx";
-import { InsertSettingDataThunk, isSystemNameUpdatedTemp } from '../feature/systemsettingSlice';
+import { isSystemNameUpdatedTemp } from '../feature/systemsettingSlice';
 import { GetSettingDataThunk } from '../feature/systemsettingSlice';
 import { clearIsSystemNameUpdatedState } from '../feature/systemsettingSlice';
 import { EditSettingDataThunk } from '../feature/systemsettingSlice';
+import { DeleteSettingDataThunk } from '../feature/systemsettingSlice';
 
 import { systemDataTemp } from '../feature/systemsettingSlice';
 
@@ -83,6 +84,7 @@ export const Navbar = () => {
             dispatch(clearIsSidebarOpenState());
             dispatch(clearWhatIsClickedState());
             dispatch(DeleteAllNoteThunk(name));
+            dispatch(DeleteSettingDataThunk(name));
             navigate('/');
         }
         if (isAccountDeleted == false) {
@@ -174,9 +176,9 @@ export const Navbar = () => {
     }
 
     const handleChangeSystemSetting = () => {
-
         dispatch(EditSettingDataThunk({ systemSettingTemp }));
     }
+
     const isSystemNameUpdated = useSelector(isSystemNameUpdatedTemp);
 
     useEffect(() => {
@@ -205,7 +207,7 @@ export const Navbar = () => {
             <nav className={`${themeHolder.colorbg1} h-[4rem] px-12 mobile:px-4 w-screen backdrop-blur absolute top-0  z-10 backdrop-brightness-75 flex items-center justify-between  `}>
 
                 {/* <img className="animate-spin spin h-[2rem] w-[2rem]" src="../../asset/icon/logo192.png" alt="" /> */}
-                <div className={`${themeHolder.colortxt1} text-xl flex items-center gap-x-1 mobile:text-sm`}>
+                <div className={`text-gray-300 text-xl flex items-center gap-x-1 mobile:text-sm`}>
 
                     <p>{systemName}</p>
                     <RxDividerVertical className='text-[2rem] text-yellow-500' />
@@ -244,15 +246,14 @@ export const Navbar = () => {
             </nav>
 
             {/* edit system setting */}
-
             <Modal size="md" dismissible show={openEditSystemSettingModal} onClose={() => setOpenEditSystemSettingModal(false)}>
-                <div className='space-y-8 bg-gray-700 rounded-lg p-5 '>
-                    <h3 className="text-xl font-medium text-gray-300 dark:text-white">Edit System Setting</h3>
+                <div className={`${themeHolder.colorbg3} space-y-8 bg-gray-700 rounded-lg p-5 `}>
+                    <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Edit System Setting</h3>
 
                     <div className="flex flex-col items-start gap-y-2">
                         <div>
-                            <label htmlFor="systemname" className="text-lg text-gray-300">enter a new system name:</label>
-                            <input type="text" name="systemname" id="systemname" onChange={handleEditSystemChange} value={editSystem.systemname} className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md " />
+                            <label htmlFor="systemname" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>enter a new system name:</label>
+                            <input type="text" name="systemname" id="systemname" onChange={handleEditSystemChange} value={editSystem.systemname} className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `}/>
                         </div>
                         <div>
                             <Theme />
@@ -269,20 +270,20 @@ export const Navbar = () => {
             {/* view profile modal */}
 
             <Modal dismissible show={openUserDataModal} onClose={() => setOpenUserDataModal(false)}>
-                <div className='space-y-8 bg-gray-700 rounded-lg p-5 '>
-                    <h3 className="text-xl font-medium text-gray-300 dark:text-white">Your Profile</h3>
+                <div className={`${themeHolder.colorbg3} space-y-8 bg-gray-700 rounded-lg p-5 `}>
+                    <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Your Profile</h3>
 
-                    <div className="flex flex-col items-start gap-y-2">
+                    <div className={`flex flex-col items-start gap-y-2`}>
                         <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 
                             <img className="h-[6rem] w-[6rem] mobile:h-[2.2rem] mobile:w-[2.2rem]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />
 
                         </p>
 
-                        <p className="text-xl text-gray-300">
+                        <p className={`${themeHolder.colortxt1} text-xl text-gray-300`}>
                             Name : {name}
                         </p>
-                        <p className="text-xl text-gray-300">
+                        <p className={`${themeHolder.colortxt1} text-xl text-gray-300`}>
                             Email : {email}
                         </p>
 
@@ -295,14 +296,10 @@ export const Navbar = () => {
             </Modal>
 
             {/* confirm delete account modal */}
-
             <Modal show={openDeleteUserModal} size="md" onClose={() => setOpenDeleteUserModal(false)} popup>
-                {/* <Modal.Header />
-                        <Modal.Body> */}
-
-                <div className="bg-gray-700 rounded-lg flex flex-col items-center gap-y-7 p-5">
-                    <HiOutlineExclamationCircle className='text-[6rem] text-gray-300 ' />
-                    <h3 className='text-gray-300 font-semibold text-md'>
+                <div className={`${themeHolder.colorbg3} bg-gray-700 rounded-lg flex flex-col items-center gap-y-7 p-5`}>
+                    <HiOutlineExclamationCircle className={`${themeHolder.colortxt1} text-[6rem] text-gray-300 `}/>
+                    <h3 className={`${themeHolder.colortxt1} text-gray-300 font-semibold text-md`}>
                         Are you sure you want to delete this account?
                     </h3>
                     <div className=" flex flex-row items-center justify-center gap-x-4">
@@ -311,32 +308,29 @@ export const Navbar = () => {
 
                         <Button className='w-fit rounded-md' onClick={() => setOpenDeleteUserModal(false)} gradientMonochrome="success">close</Button>
                     </div>
-                </div>
-                {/* </Modal.Body> */}
+                </div>  
             </Modal>
 
             {/* edit profile modal */}
-
             <Modal show={openEditUserModal} size="md" onClose={() => setOpenEditUserModal(false)} popup>
-
-                <div className='bg-gray-700 p-4 rounded-lg'>
+                <div className={`${themeHolder.colorbg3}  bg-gray-700 p-4 rounded-lg`}>
                     <div className="space-y-8">
-                        <h3 className="text-xl font-medium text-gray-300 dark:text-white">Edit Account</h3>
+                        <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Edit Account</h3>
                         <div className='flex flex-col justify-start gap-y-5'>
 
                             <div>
-                                <label htmlFor="username" className="text-lg text-gray-300">enter a new username:</label>
-                                <input type="text" name="username" id="username" onChange={handleEditChange} value={editInput.username} className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md " />
+                                <label htmlFor="username" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>enter a new username:</label>
+                                <input type="text" name="username" id="username" onChange={handleEditChange} value={editInput.username} className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `} />
                             </div>
 
                             <div>
-                                <label htmlFor="password" className="text-lg text-gray-300">enter a new password:</label>
-                                <input type="text" name="password" id="password" onChange={handleEditChange} value={editInput.password} className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md " />
+                                <label htmlFor="password" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>enter a new password:</label>
+                                <input type="text" name="password" id="password" onChange={handleEditChange} value={editInput.password} className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `} />
                             </div>
 
                             <div>
-                                <label htmlFor="email" className="text-lg text-gray-300">enter a new email:</label>
-                                <input type="email" name="email" id="email" onChange={handleEditChange} value={editInput.email} className="bg-gray-600 rounded-sm w-full outline-none border-none p-2 text-gray-300 text-md " />
+                                <label htmlFor="email" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>enter a new email:</label>
+                                <input type="email" name="email" id="email" onChange={handleEditChange} value={editInput.email} className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `} />
                             </div>
 
                             <div>
@@ -344,11 +338,10 @@ export const Navbar = () => {
                             </div>
 
                             <div className='flex flex-row gap-x-3'>
-
                                 <Button onClick={handleEditSubmit} className='w-fit rounded-md' gradientMonochrome="cyan">submit</Button>
                                 <Button className='w-fit rounded-md' onClick={() => setOpenEditUserModal(false)} gradientMonochrome="success">close</Button>
-
                             </div>
+
                         </div>
                     </div>
                 </div>

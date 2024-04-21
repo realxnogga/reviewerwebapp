@@ -37,7 +37,7 @@ export const Theme = () => {
         <section className="flex items-center gap-x-4">
 
             
-                <p onClick={ShowThemeFunc} className="text-gray-300 cursor-pointer">Theme:</p>
+                <p onClick={ShowThemeFunc} className={`${themeHolder.colortxt1}text-gray-300 cursor-pointer`}>Theme:</p>
 
             <div className={`${closeThemeString} h-fit w-0 duration-200 ease-in-out flex items-center justify-between overflow-hidden`}>
 

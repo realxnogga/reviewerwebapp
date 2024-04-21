@@ -11,6 +11,10 @@ export const FlashCard = () => {
         { id: 5, front: 'sleep', back: 'sleepback', },
     ]);
 
+
+    const copiedArray = [...objects];
+    
+
     // Function to shuffle objects
     const shuffleObjects = () => {
         const shuffled = [...objects];
@@ -33,6 +37,11 @@ export const FlashCard = () => {
     }
 
 
+    const HideCardFunc = () => {
+        objects.splice(index, 1);
+    }
+
+
     console.log(index)
 
     const [showFlashCard, setShowFlashCard] = useState(false);
@@ -50,6 +59,8 @@ export const FlashCard = () => {
             setBackAnswer(''); 
         }
     }, [showAnswer])
+
+    
        
     
 
@@ -70,6 +81,10 @@ export const FlashCard = () => {
                
 
                 <div className="w-full flex items-center justify-between">
+                    <button onClick={HideCardFunc} className="bg-red-500">
+                        remove
+                    </button>
+
                     <button onClick={() => {setShowAnswer(true)}} className="bg-green-500">
                         show answer
                     </button>

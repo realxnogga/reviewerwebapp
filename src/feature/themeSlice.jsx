@@ -10,6 +10,7 @@ export const ThemeSlice = createSlice({
            colorbg3: '',
            colortxt1: '',
            colortxt2: '',
+           border: 'border duration-200',
         },
       
     },
@@ -23,7 +24,7 @@ export const ThemeSlice = createSlice({
                 state.themeHolder.colorbg2 = '!bg-gray-800 duration-200';
                 state.themeHolder.colorbg3 = '!bg-gray-700 duration-200';
                 state.themeHolder.colortxt1 = '!text-gray-300 duration-200';
-                state.themeHolder.colortxt2 = '!text-gray-800 duration-200';
+                state.themeHolder.colortxt2 = '!text-gray-800 duration-200';        
             }
 
             if (whatThemeIsClicked === 'secondColor') {               
