@@ -13,6 +13,8 @@ import { themeSliceReducer } from './feature/themeSlice';
 import { OpenToggleNoteFlashcardReducer } from './feature/opentogglenoteflashcardSlice';
 import { noteSliceReducer } from './feature/noteSlice';
 import { systemSettingSliceReducer } from './feature/systemsettingSlice';
+import { flashcardSliceReducer } from './feature/flashcardSlice';
+
 const persistConfig = {
   key: 'root',
   storage,
@@ -30,6 +32,7 @@ const rootReducer = combineReducers({
   OpenToggleNoteFlashcardSliceName: OpenToggleNoteFlashcardReducer,
   NoteSliceName: noteSliceReducer,
   SystemSettingSliceName: systemSettingSliceReducer,
+  FlashcardSliceName: flashcardSliceReducer,
 });
 
 
