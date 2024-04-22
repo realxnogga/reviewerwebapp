@@ -8,6 +8,8 @@ export const FlashcardSlice = createSlice({
       flashcardData: [],
       isFlashcardItemInserted: null,
       flashcardItem: [],
+      isFlashcardDataDeleted: null,
+
     },
     reducers: {
         clearIsFlashcardDataInserted: (state) => {
@@ -15,7 +17,10 @@ export const FlashcardSlice = createSlice({
         },
         clearIsFlashcardItemInserted: (state) => {
             state.isFlashcardItemInserted = null;
-        }
+        },
+        clearIsFlashcardDataDeleted: (state) => {
+            state.isFlashcardDataDeleted = null;
+        },
     },
     extraReducers: builder => {
         builder
@@ -31,17 +36,100 @@ export const FlashcardSlice = createSlice({
             .addCase(GetFlashcardItemThunk.fulfilled, (state, action) => {
                 state.flashcardItem = action.payload;
             })  
+            .addCase(DeleteFlashCardDataThunk.fulfilled, (state, action) => {
+                state.isFlashcardDataDeleted = action.payload;
+            }) 
+   
     }
 
 })
 
-export const { clearIsFlashcardDataInserted, clearIsFlashcardItemInserted } = FlashcardSlice.actions;
+export const { clearIsFlashcardDataInserted, clearIsFlashcardItemInserted, clearIsFlashcardDataDeleted } = FlashcardSlice.actions;
 export const flashcardDataTemp = state => state.FlashcardSliceName.flashcardData; 
 export const isFlashcardDataInsertedTemp = state => state.FlashcardSliceName.isFlashcardDataInserted;
 export const isFlashcardItemInsertedTemp = state => state.FlashcardSliceName.isFlashcardItemInserted;
+export const isFlashcardDataDeletedTemp = state => state.FlashcardSliceName.isFlashcardDataDeleted;
+
 export const flashcardItemTemp = state => state.FlashcardSliceName.flashcardItem; 
 export const flashcardSliceReducer = FlashcardSlice.reducer;
 
+
+// to delete all flashcard item  based on username
+export const DeleteAllFlashCardDataThunk = createAsyncThunk(
+    "FlashcardSliceName/DeleteAllFlashCardDataThunk",
+    async (flashcarduser) => {
+        try {
+
+        const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=deleteAllFlashcardData", {
+            method: 'POST',  
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(flashcarduser),
+        })
+         const data = await res.json();
+         return data.success;
+        } catch (error) {
+        console.log('Error:', error);
+        }
+    }
+)
+
+// to delete all flashcard item  based on username
+export const DeleteAllFlashCardItemThunk = createAsyncThunk(
+    "FlashcardSliceName/DeleteAllFlashCardItemThunk",
+    async (flashcarduser) => {
+        try {
+
+        const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=deleteAllFlashcardItem", {
+            method: 'POST',  
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(flashcarduser),
+        })
+         const data = await res.json();
+         return data.success;
+        } catch (error) {
+        console.log('Error:', error);
+        }
+    }
+)
+
+
+// to delete flashcard based on ID
+export const DeleteFlashCardDataThunk = createAsyncThunk(
+    "FlashcardSliceName/DeleteFlashCardItemThunk",
+    async (flashcardID) => {
+        try {
+
+        const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=deleteFlashcardItemData", {
+            method: 'POST',  
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(flashcardID),
+        })
+         const data = await res.json();
+         return data.success;
+        } catch (error) {
+        console.log('Error:', error);
+        }
+    }
+)
+
+// to delete flashcard item based on ID
+export const DeleteFlashCardItemByIDThunk = createAsyncThunk(
+    "FlashcardSliceName/DeleteFlashCardItemByIDThunk",
+    async (flashcarditemID) => {
+        try {
+
+        const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=deleteFlashcardItemById", {
+            method: 'POST',  
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(flashcarditemID),
+        })
+         const data = await res.json();
+         return data.success;
+        } catch (error) {
+        console.log('Error:', error);
+        }
+    }
+)
 
 export const GetFlashcardItemThunk = createAsyncThunk(
     "FlashcardSliceName/GetFlashcardItemThunk",

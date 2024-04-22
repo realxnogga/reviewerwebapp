@@ -26,8 +26,11 @@ import { GetSettingDataThunk } from '../feature/systemsettingSlice';
 import { clearIsSystemNameUpdatedState } from '../feature/systemsettingSlice';
 import { EditSettingDataThunk } from '../feature/systemsettingSlice';
 import { DeleteSettingDataThunk } from '../feature/systemsettingSlice';
-
 import { systemDataTemp } from '../feature/systemsettingSlice';
+import { DeleteAllFlashCardDataThunk } from '../feature/flashcardSlice';
+import { DeleteAllFlashCardItemThunk } from '../feature/flashcardSlice';
+
+
 
 export const Navbar = () => {
 
@@ -85,7 +88,10 @@ export const Navbar = () => {
             dispatch(clearWhatIsClickedState());
             dispatch(DeleteAllNoteThunk(name));
             dispatch(DeleteSettingDataThunk(name));
-            navigate('/');
+            dispatch(DeleteAllFlashCardDataThunk(name));
+            dispatch(DeleteAllFlashCardItemThunk(name));
+            navigate('/');         
+
         }
         if (isAccountDeleted == false) {
             ShowToast('deletion failed', 'error');
@@ -214,35 +220,35 @@ export const Navbar = () => {
                     <p>Welcome, <span>{name}</span></p>
 
                 </div>
-         
-                    <div className={`relative`}>
-                        <img onClick={ShowProfileDropdownFunc} className="h-[2.5rem] w-[2.5rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />
 
-                        <div onMouseLeave={ShowProfileDropdownMouseLeaveFunc} className={`${showUserProfileDropdown ? 'h-[16rem] p-3' : ''} ${themeHolder.colorbg2} ${themeHolder.colortxt1} h-0 w-fit text-nowrap absolute right-0 mt-3 flex flex-col items-start gap-y-1 overflow-hidden`}>
-                            <strong>{name}</strong>
-                            <strong>{email}</strong>
-                            <hr className='w-full my-2' />
-                            <p className='hover:text-yellow-500 cursor-pointer flex items-center gap-x-2' onClick={() => setOpenUserDataModal(true)}>
-                                <CgProfile className='text-xl' />
-                                View Profile
-                            </p>
-                            <p className='hover:text-yellow-500 cursor-pointer flex items-center gap-x-2' onClick={() => { setOpenEditUserModal(true); }}>
-                                <RiEditBoxLine className='text-xl' />
-                                Edit Profile
-                            </p>
-                            <hr className='w-full my-2' />
-                            <p className='hover:text-yellow-500 cursor-pointer flex items-center gap-x-2' onClick={() => { setOpenEditSystemSettingModal(true); }}>
-                                <IoSettingsOutline className='text-xl' />
-                                System Setting
-                            </p>
-                            <hr className='w-full my-2' />
-                            <p className='hover:text-yellow-500 cursor-pointer flex items-center gap-x-2' onClick={handleLogout}>
-                                <RiLogoutBoxLine className='text-xl' />
-                                Log Out
-                            </p>
-                        </div>
+                <div className={`relative`}>
+                    <img onClick={ShowProfileDropdownFunc} className="h-[2.5rem] w-[2.5rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />
+
+                    <div onMouseLeave={ShowProfileDropdownMouseLeaveFunc} className={`${showUserProfileDropdown ? 'h-[16rem] p-3' : ''} ${themeHolder.colorbg2} ${themeHolder.colortxt1} h-0 w-fit text-nowrap absolute right-0 mt-3 flex flex-col items-start gap-y-1 overflow-hidden`}>
+                        <strong>{name}</strong>
+                        <strong>{email}</strong>
+                        <hr className='w-full my-2' />
+                        <p className='hover:text-yellow-500 cursor-pointer flex items-center gap-x-2' onClick={() => setOpenUserDataModal(true)}>
+                            <CgProfile className='text-xl' />
+                            View Profile
+                        </p>
+                        <p className='hover:text-yellow-500 cursor-pointer flex items-center gap-x-2' onClick={() => { setOpenEditUserModal(true); }}>
+                            <RiEditBoxLine className='text-xl' />
+                            Edit Profile
+                        </p>
+                        <hr className='w-full my-2' />
+                        <p className='hover:text-yellow-500 cursor-pointer flex items-center gap-x-2' onClick={() => { setOpenEditSystemSettingModal(true); }}>
+                            <IoSettingsOutline className='text-xl' />
+                            System Setting
+                        </p>
+                        <hr className='w-full my-2' />
+                        <p className='hover:text-yellow-500 cursor-pointer flex items-center gap-x-2' onClick={handleLogout}>
+                            <RiLogoutBoxLine className='text-xl' />
+                            Log Out
+                        </p>
                     </div>
-                
+                </div>
+
             </nav>
 
             {/* edit system setting */}
@@ -253,7 +259,7 @@ export const Navbar = () => {
                     <div className="flex flex-col items-start gap-y-2">
                         <div>
                             <label htmlFor="systemname" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>enter a new system name:</label>
-                            <input type="text" name="systemname" id="systemname" onChange={handleEditSystemChange} value={editSystem.systemname} className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `}/>
+                            <input type="text" name="systemname" id="systemname" onChange={handleEditSystemChange} value={editSystem.systemname} className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `} />
                         </div>
                         <div>
                             <Theme />
@@ -298,7 +304,7 @@ export const Navbar = () => {
             {/* confirm delete account modal */}
             <Modal show={openDeleteUserModal} size="md" onClose={() => setOpenDeleteUserModal(false)} popup>
                 <div className={`${themeHolder.colorbg3} bg-gray-700 rounded-lg flex flex-col items-center gap-y-7 p-5`}>
-                    <HiOutlineExclamationCircle className={`${themeHolder.colortxt1} text-[6rem] text-gray-300 `}/>
+                    <HiOutlineExclamationCircle className={`${themeHolder.colortxt1} text-[6rem] text-gray-300 `} />
                     <h3 className={`${themeHolder.colortxt1} text-gray-300 font-semibold text-md`}>
                         Are you sure you want to delete this account?
                     </h3>
@@ -308,7 +314,7 @@ export const Navbar = () => {
 
                         <Button className='w-fit rounded-md' onClick={() => setOpenDeleteUserModal(false)} gradientMonochrome="success">close</Button>
                     </div>
-                </div>  
+                </div>
             </Modal>
 
             {/* edit profile modal */}

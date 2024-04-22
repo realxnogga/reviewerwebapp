@@ -135,11 +135,12 @@ if (isset($_GET['action'])) {
             $data = json_decode($_POST['flashcardItemTemp'], true);
 
             $flashcardItemID = $data['flashcardItemID'];
+            $flashcardItemUser = $data['flashcardItemUser'];
             $flashcardItemFront = $data['flashcardItemFront'];
             $flashcardItemBack = $data['flashcardItemBack'];
 
 
-            $sql = "insert into flashcarditem  (flashcarditemID, flashcarditemfront, flashcarditemback) VALUES ('$flashcardItemID', '$flashcardItemFront', '$flashcardItemBack')";
+            $sql = "insert into flashcarditem  (flashcarditemID, flashcarditemuser, flashcarditemfront, flashcarditemback) VALUES ('$flashcardItemID', '$flashcardItemUser', '$flashcardItemFront', '$flashcardItemBack')";
 
             $conn->query($sql);
 
@@ -169,6 +170,77 @@ if (isset($_GET['action'])) {
 
             $conn->close();
             break;
+
+        case 'deleteFlashcardItemData':
+
+            $flashcardID = json_decode(file_get_contents("php://input"), true);
+
+            $sql = "delete from flashcard where flashcardID = '$flashcardID'";
+
+            $conn->query($sql);
+
+            if ($conn->affected_rows > 0) {
+                echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
+            }
+
+            $conn->close();
+            break;
+
+
+            case 'deleteFlashcardItemById':
+
+                $flashcarditemID = json_decode(file_get_contents("php://input"), true);
+    
+                $sql = "delete from flashcarditem where flashcarditemID = '$flashcarditemID'";
+    
+                $conn->query($sql);
+    
+                if ($conn->affected_rows > 0) {
+                    echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
+                }
+    
+                $conn->close();
+                break;
+            
+
+        case 'deleteAllFlashcardItem':
+
+            $flashcarditemuser = json_decode(file_get_contents("php://input"), true);
+
+            $sql = "delete from flashcarditem where flashcarditemuser = '$flashcarditemuser'";
+
+            $conn->query($sql);
+
+            if ($conn->affected_rows > 0) {
+                echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
+            }
+
+            $conn->close();
+            break;
+
+            case 'deleteAllFlashcardData':
+
+                $flashcarduser = json_decode(file_get_contents("php://input"), true);
+    
+                $sql = "delete from flashcard where flashcarduser = '$flashcarduser'";
+    
+                $conn->query($sql);
+    
+                if ($conn->affected_rows > 0) {
+                    echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
+                }
+    
+                $conn->close();
+                break;
+            
     }
 }
 

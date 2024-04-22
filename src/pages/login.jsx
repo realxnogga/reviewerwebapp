@@ -12,6 +12,7 @@ import { changeThemeState } from '../feature/themeSlice';
 import { GetResourceDataThunk } from '../feature/insertresourcedataSlice';
 import { GetNoteThunk } from '../feature/noteSlice';
 import { GetSettingDataThunk } from '../feature/systemsettingSlice';
+import { GetFlashcardThunk } from '../feature/flashcardSlice';
 
 export const Login = () => {
     
@@ -74,9 +75,8 @@ export const Login = () => {
             dispatch(changeThemeState('firstColor')); // if login is successfull, themestate will dispatch
             dispatch(GetResourceDataThunk()) // if login is successfull, resourcedata will dispatch
             dispatch(GetNoteThunk(inputValue.username)) // if login is successfull, note will dispatch
-            
             dispatch(GetSettingDataThunk(inputValue.username)); // if login is successfull, system name will be displayed
-
+            dispatch(GetFlashcardThunk(inputValue.username));
         }
 
         if (loginCookie === false) {
