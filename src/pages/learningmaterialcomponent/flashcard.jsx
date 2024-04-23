@@ -161,10 +161,15 @@ export const FlashCard = () => {
     }
 
     const RemoveFlashcardFunc = () => {
-        copiedFlashcard.splice(flashcardIndex, 1);
-         setFlashcardIndex(flashcardIndex = 0);
+        const copiedFlashcardTemp = [...copiedFlashcard];
+        // Remove the flashcard at the specified index and get the removed item
+        copiedFlashcardTemp.splice(flashcardIndex, 1);
+        // Update the state with the updated array
+        setCopiedFlashcard(copiedFlashcardTemp);
+
+        setFlashcardIndex(flashcardIndex = 0);
     }
-     console.log(copiedFlashcard)
+    console.log(copiedFlashcard)
     console.log(flashcardIndex);
 
 
