@@ -81,18 +81,6 @@ export const Note = () => {
 
     }, [isNoteDataInserted]);
 
-    const gotNoteData = useSelector(noteDataTemp);
-
-    const NoteColorFunc = (usernote) => {
-        if (usernote === 'english') return 'bg-blue-300';
-        if (usernote === 'filipino') return 'bg-violet-300';
-        if (usernote === 'mathematics') return 'bg-green-300';
-        if (usernote === 'social science') return 'bg-pink-300';
-        if (usernote === 'humanities') return 'bg-yellow-300';
-        if (usernote === 'communication skills') return 'bg-orange-300';
-        if (usernote === 'ict') return 'bg-red-300';
-    }
-
     const DeleteNoteFunc = (noteID) => {
         dispatch(DeleteNoteThunk(noteID)); //passed id to determine which note to delete
     }
@@ -114,9 +102,23 @@ export const Note = () => {
 
     }, [isNoteDataDeleted])
 
+     //---------------------------------------------------------------------------
+    
+
+    const NoteColorFunc = (usernote) => {
+        if (usernote === 'english') return 'bg-blue-300';
+        if (usernote === 'filipino') return 'bg-violet-300';
+        if (usernote === 'mathematics') return 'bg-green-300';
+        if (usernote === 'social science') return 'bg-pink-300';
+        if (usernote === 'humanities') return 'bg-yellow-300';
+        if (usernote === 'communication skills') return 'bg-orange-300';
+        if (usernote === 'ict') return 'bg-red-300';
+    }
+
 
     const [subjectFilter, setSubjectFilter] = useState('all');
-
+    const gotNoteData = useSelector(noteDataTemp);
+    
     const filteredNoteData = gotNoteData.filter(item => {
 
         const allSubjectFilter = subjectFilter === 'all' || item.notesubject.toLowerCase() === subjectFilter.toLowerCase();

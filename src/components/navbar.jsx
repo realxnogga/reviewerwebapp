@@ -256,7 +256,7 @@ export const Navbar = () => {
                 <div className={`${themeHolder.colorbg3} space-y-8 bg-gray-700 rounded-lg p-5 `}>
                     <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Edit System Setting</h3>
 
-                    <div className="flex flex-col items-start gap-y-2">
+                    <div className="flex flex-col items-start gap-y-8">
                         <div>
                             <label htmlFor="systemname" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>enter a new system name:</label>
                             <input type="text" name="systemname" id="systemname" onChange={handleEditSystemChange} value={editSystem.systemname} className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `} />

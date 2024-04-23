@@ -27,6 +27,7 @@ import { isFlashcardDataDeletedTemp } from "../../feature/flashcardSlice";
 import { DeleteFlashCardItemByIDThunk } from "../../feature/flashcardSlice";
 import { GrCaretPrevious } from "react-icons/gr";
 import { GrCaretNext } from "react-icons/gr";
+
 export const FlashCard = () => {
 
     const dispatch = useDispatch();
@@ -111,6 +112,7 @@ export const FlashCard = () => {
                 flashcardItemFront: '',
                 flashcardItemBack: '',
             })
+            // dispatch(GetFlashcardItemThunk(flashcardItemID));
             dispatch(clearIsFlashcardItemInserted());
         }
         if (isFlashcardItemInserted === false) {
@@ -130,10 +132,6 @@ export const FlashCard = () => {
         dispatch(GetFlashcardItemThunk(flashcardID));
         setShowContainer(true);
         setFlashcardIndex(flashcardIndex = 0);
-
-        if (copiedFlashcard.length == 0) {
-
-        }
     }
 
     useEffect(() => {
@@ -194,15 +192,7 @@ export const FlashCard = () => {
     }, [copiedFlashcard.length])
 
 
-    const FlashcardColorFunc = (FlashcardColorFunc) => {
-        if (FlashcardColorFunc === 'english') return 'bg-blue-300';
-        if (FlashcardColorFunc === 'filipino') return 'bg-violet-300';
-        if (FlashcardColorFunc === 'mathematics') return 'bg-green-300';
-        if (FlashcardColorFunc === 'social science') return 'bg-pink-300';
-        if (FlashcardColorFunc === 'humanities') return 'bg-yellow-300';
-        if (FlashcardColorFunc === 'communication skills') return 'bg-orange-300';
-        if (FlashcardColorFunc === 'ict') return 'bg-red-300';
-    }
+
 
     // ---------------------------------------------------------------------
 
@@ -226,14 +216,205 @@ export const FlashCard = () => {
 
     }, [isFlashcardDataDeleted]);
 
+    //---------------------------------------------------------
 
+
+    const FlashcardColorFunc = (FlashcardColorFunc) => {
+        if (FlashcardColorFunc === 'english') return 'bg-blue-300';
+        if (FlashcardColorFunc === 'filipino') return 'bg-violet-300';
+        if (FlashcardColorFunc === 'mathematics') return 'bg-green-300';
+        if (FlashcardColorFunc === 'social science') return 'bg-pink-300';
+        if (FlashcardColorFunc === 'humanities') return 'bg-yellow-300';
+        if (FlashcardColorFunc === 'communication skills') return 'bg-orange-300';
+        if (FlashcardColorFunc === 'ict') return 'bg-red-300';
+    }
+
+    const [whatIsClickedInFlashcardTab, setWhatIsClickedInFlashcardTab] = useState('all');
+
+    const [subjectFilter, setSubjectFilter] = useState('all');
+
+    const filteredNoteData = actualFlashcard.filter(item => {
+
+        const allSubjectFilter = subjectFilter === 'all' || item.flashcardsubject.toLowerCase() === subjectFilter.toLowerCase();
+
+        return allSubjectFilter;
+    });
+
+    // get the count of each note base on subject
+    const allSubjectFlashcardCount = Object.keys(actualFlashcard).length;
+    const englishFlashcardCount = actualFlashcard.filter(item => item.flashcardsubject === 'english').length;
+    const filipinoFlashcardCount = actualFlashcard.filter(item => item.flashcardsubject === 'filipino').length;
+    const mathematicsFlashcardCount = actualFlashcard.filter(item => item.flashcardsubject === 'mathematics').length;
+    const scienceFlashcardCount = actualFlashcard.filter(item => item.flashcardsubject === 'science').length;
+    const socialscienceFlashcardCount = actualFlashcard.filter(item => item.flashcardsubject === 'social science').length;
+    const humanitiesFlashcardCount = actualFlashcard.filter(item => item.flashcardsubject === 'humanities').length;
+    const communicationskillsFlashcardCount = actualFlashcard.filter(item => item.flashcardsubject === 'communication skills').length;
+    const ictFlashcardCount = actualFlashcard.filter(item => item.flashcardsubject === 'ict').length;
 
 
     return (
         <div className="relative h-[90%] w-[69rem] max-w-[95%]">
+            <section className={`${themeHolder.colorbg2} overflow-hidden rounded-md h-[9%] w-full justify-end flex items-center`}>
 
+                <div className={`h-full w-full overflow-scroll noScrollbar`}>
+                    <ul className={`flex h-full text-sm text-gray-300`}>
 
-            <section className={`overflow-hidden rounded-md h-[9%] w-full justify-end flex items-center`}>
+                        <li onClick={() => { setSubjectFilter('all'); setWhatIsClickedInFlashcardTab('all') }}
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInFlashcardTab === 'all' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>All
+
+                            {
+                                allSubjectFlashcardCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{allSubjectFlashcardCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
+
+                        </li>
+
+                        <li onClick={() => { setSubjectFilter('english'); setWhatIsClickedInFlashcardTab('english') }}
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInFlashcardTab === 'english' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>English
+
+                            {
+                                englishFlashcardCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{englishFlashcardCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
+                        </li>
+
+                        <li onClick={() => { setSubjectFilter('filipino'); setWhatIsClickedInFlashcardTab('filipino') }}
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInFlashcardTab === 'filipino' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Filipino
+
+                            {
+                                filipinoFlashcardCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{filipinoFlashcardCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
+                        </li>
+
+                        <li onClick={() => { setSubjectFilter('mathematics'); setWhatIsClickedInFlashcardTab('mathematics') }}
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInFlashcardTab === 'mathematics' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Mathematics
+
+                            {
+                                mathematicsFlashcardCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{mathematicsFlashcardCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
+                        </li>
+
+                        <li onClick={() => { setSubjectFilter('science'); setWhatIsClickedInFlashcardTab('science') }}
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInFlashcardTab === 'science' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Science
+
+                            {
+                                scienceFlashcardCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{scienceFlashcardCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
+                        </li>
+
+                        <li onClick={() => { setSubjectFilter('social science'); setWhatIsClickedInFlashcardTab('social science') }}
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInFlashcardTab === 'social science' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Social Science
+
+                            {
+                                socialscienceFlashcardCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{socialscienceFlashcardCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
+                        </li>
+
+                        <li onClick={() => { setSubjectFilter('humanities'); setWhatIsClickedInFlashcardTab('humanities') }}
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInFlashcardTab === 'humanities' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Humanities
+
+                            {
+                                humanitiesFlashcardCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{humanitiesFlashcardCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
+                        </li>
+
+                        <li onClick={() => { setSubjectFilter('communication skills'); setWhatIsClickedInFlashcardTab('communication skills') }}
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInFlashcardTab === 'communication skills' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Communication Skills
+
+                            {
+                                communicationskillsFlashcardCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{communicationskillsFlashcardCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
+                        </li>
+
+                        <li onClick={() => { setSubjectFilter('ict'); setWhatIsClickedInFlashcardTab('ict') }}
+                            className={`${themeHolder.colortxt1} ${whatIsClickedInFlashcardTab === 'ict' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>ICT
+
+                            {
+                                ictFlashcardCount > 0 ?
+                                    (
+                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
+                                            <p className="text-white">{ictFlashcardCount}</p>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+                            }
+                        </li>
+
+                    </ul>
+                </div>
 
                 <Button onClick={() => { setOpenAddFlashcardModal(true) }} gradientDuoTone="purpleToBlue" className=" m-1 rounded-md ">
                     add
@@ -244,11 +425,9 @@ export const FlashCard = () => {
             <section className="h-[91%] w-full mt-3 overflow-scroll noScrollbar flex flex-wrap content-start gap-4">
                 {
 
-                    actualFlashcard.map((item) => (
+                    filteredNoteData.map((item) => (
                         <div key={item.flashcardID} className={`${themeHolder.border} ${FlashcardColorFunc(item.flashcardsubject)} relative h-[12rem] w-[16rem] rounded-lg flex flex-col justify-between border-none overflow-hidden`}>
                             <p className="text-[2rem] absolute top-0 left-3">{item.flashcardtitle}</p>
-
-
                             <div className="absolute top-0 right-0 bg-black bg-opacity-40 backdrop-blur-sm h-full w-[4rem] pt-4 flex flex-col items-center justify-start gap-y-6 text-2xl text-yellow-500">
                                 <Tooltip style="light" placement="left" content={'add'}>
                                     <IoMdAddCircleOutline onClick={() => { setOpenAddFlashcardItemModal(true); setFlashcardItemID(item.flashcardID); }} className="cursor-pointer" />
@@ -273,89 +452,74 @@ export const FlashCard = () => {
 
             {/* add flashcard item modal */}
 
-            {
-                actualFlashcardItem.length === 0 ?
-                    (
-                        <section className={`${themeHolder.colorbg2} ${showContainerString} ${themeHolder.colortxt1} absolute rounded-lg top-0 h-full w-full
-                    flex flex-col items-center justify-center gap-y-10 font-semibold`}>
-                            <p className="text-[3rem]">No Flashcard Available!</p>
-
-                            <button onClick={() => { setShowContainer(false) }} className={`${themeHolder.colorbg1} text-gray-300 flex hover:border hover:border-yellow-500 items-center gap-x-10 justify-center h-[6rem] w-[20rem] rounded-[10rem]  `}>
-                                <MdOutlineArrowBack className="text-[4rem]" />
-                                <span className="text-[3rem] ">Back</span>
-                            </button>
-                        </section>
-                    )
-                    :
-                    (
-                        <section className={`${themeHolder.colorbg2} ${showContainerString} ${themeHolder.colortxt1} absolute rounded-lg top-0 h-full w-full
+            <section className={`${themeHolder.colorbg2} ${showContainerString} ${themeHolder.colortxt1} absolute rounded-lg top-0 h-full w-full
                     flex flex-col items-center justify-center gap-y-20 text-[2rem] font-semibold`}>
 
-                            {copiedFlashcard.length > 1 ?
-                                <p className="absolute top-3 left-3 font-thin text-lg">{copiedFlashcard.length} <span>cards</span></p>
-                                :
-                                <p className="absolute top-3 left-3 font-thin text-lg">{copiedFlashcard.length} <span>card</span></p>
-                            }
+                {copiedFlashcard.length > 1 ?
+                    <p className="absolute top-3 left-3 font-thin text-lg">{copiedFlashcard.length} <span>cards</span></p>
+                    :
+                    <p className="absolute top-3 left-3 font-thin text-lg">{copiedFlashcard.length} <span>card</span></p>
+                }
 
 
-                            {/* this check if copied array is empty or not */}
-                            <section className="h-[12rem] w-[90%] flex flex-col items-center justify-between">
+                {/* this check if copied array is empty or not */}
+                <section className="h-[12rem] w-[95%] flex flex-col items-center justify-between">
 
-                                {copiedFlashcard.length > 0 ?
-                                    (
-                                        <>
-                                            <p>{copiedFlashcard[flashcardIndex].flashcarditemfront}</p>
-                                            <p>{backanswer}</p>
-                                        </>
-                                    )
-                                    :
-                                    (
-                                        ''
-                                    )
-                                }
-                            </section>
-                            <section className="w-[95%] flex flex-col items-center gap-y-6"> 
+                    {copiedFlashcard.length > 0 ?
+                        (
+                            <>
+                                <p>{copiedFlashcard[flashcardIndex].flashcarditemfront}</p>
+                                <p>{backanswer}</p>
+                            </>
+                        )
+                        :
+                        (
+                            ''
+                        )
+                    }
+                </section>
+                <section className="w-[95%] flex flex-col items-center gap-y-6">
 
-                                <div className="flex items-center justify-center gap-x-20">
+                    <div className="flex items-center justify-center gap-x-20">
 
-                                <GrCaretPrevious  onClick={() => {
-                                        setFlashcardIndex(flashcardIndex - 1);
-                                        setShowAnswer(false)
-                                    }}/>
-                                <GrCaretNext onClick={() => {
-                                        setFlashcardIndex(flashcardIndex + 1);
-                                        setShowAnswer(false);
-                                    }}/>
-                                </div>
+                        <GrCaretPrevious onClick={() => {
+                            setFlashcardIndex(flashcardIndex - 1);
+                            setShowAnswer(false)
+                        }} />
+                        <GrCaretNext onClick={() => {
+                            setFlashcardIndex(flashcardIndex + 1);
+                            setShowAnswer(false);
+                        }} />
+                    </div>
 
-                                <div className={`${themeHolder.colortxt1} h-[4rem] w-[30rem] max-w-full flex gap-x-5 text-lg mobile:h-[3rem] mobile:text-sm `}>
+                    <div className={`${themeHolder.colortxt1} h-[4rem] w-[30rem] max-w-full flex gap-x-5 text-lg mobile:h-[3rem] mobile:text-sm `}>
 
-                                    <button  onClick={() => {
-                                        RemoveFlashcardFunc();
-                                        setShowAnswer(false)
-                                    }} className={`rounded-lg bg-green-600 w-full hover:bg-green-700 `}>
-                                        remove
-                                    </button>
+                        <button onClick={() => {
+                            RemoveFlashcardFunc();
+                            setShowAnswer(false)
+                        }} className={`rounded-lg bg-green-600 w-full hover:bg-green-700 `}>
+                            remove
+                        </button>
 
-                                    <button onClick={() => {
-                                        setShowAnswer(true)
-                                    }} className={`rounded-lg bg-blue-600 w-full hover:bg-blue-700`}>
-                                        show answer
-                                    </button>
+                        <button onClick={() => {
+                            setShowAnswer(true)
+                        }} className={`rounded-lg bg-blue-600 w-full hover:bg-blue-700`}>
+                            show answer
+                        </button>
 
-                                    <button onClick={() => {
-                                        setShowContainer(false);
-                                        setCopiedFlashcard([]);
-                                        setFlashcardIndex(flashcardIndex = 0);
-                                    }} className={`rounded-lg bg-orange-600 w-full hover:bg-orange-700`}>
-                                        close
-                                    </button>
+                        <button onClick={() => {
+                            setShowContainer(false);
+                            setCopiedFlashcard([]);
+                            setFlashcardIndex(flashcardIndex = 0);
+                        }} className={`rounded-lg bg-orange-600 w-full hover:bg-orange-700`}>
+                            close
+                        </button>
 
-                                </div>
-                            </section>
-                        </section>
-                    )
-            }
+                    </div>
+                </section>
+            </section>
+
+
 
 
             {/* add flashcard item modal */}
@@ -367,7 +531,7 @@ export const FlashCard = () => {
                         <div className="flex flex-col items-start gap-y-2">
 
                             <div className="w-full">
-                                <label htmlFor="flashcardItemFront" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Enter Front:</label>
+                                <label htmlFor="flashcardItemFront" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Question:</label>
 
                                 <textarea
                                     onChange={handleFlashcardItemChangeFunc}
@@ -376,7 +540,7 @@ export const FlashCard = () => {
                             </div>
 
                             <div className="w-full">
-                                <label htmlFor="flashcardItemBack" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Enter Back:</label>
+                                <label htmlFor="flashcardItemBack" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Answer:</label>
 
                                 <textarea
                                     onChange={handleFlashcardItemChangeFunc}
