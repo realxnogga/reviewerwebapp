@@ -162,9 +162,9 @@ export const FlashCard = () => {
 
     const RemoveFlashcardFunc = () => {
         copiedFlashcard.splice(flashcardIndex, 1);
-        setFlashcardIndex(flashcardIndex = 0);
+         setFlashcardIndex(flashcardIndex = 0);
     }
-
+     console.log(copiedFlashcard)
     console.log(flashcardIndex);
 
 
@@ -416,9 +416,9 @@ export const FlashCard = () => {
                     </ul>
                 </div>
 
-                <Button onClick={() => { setOpenAddFlashcardModal(true) }} gradientDuoTone="purpleToBlue" className=" m-1 rounded-md ">
+                <button onClick={() => { setOpenAddFlashcardModal(true) }} className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-[85%] w-[5rem] m-1 rounded-md text-white">
                     add
-                </Button>
+                </button>
 
             </section>
 
@@ -511,6 +511,7 @@ export const FlashCard = () => {
                             setShowContainer(false);
                             setCopiedFlashcard([]);
                             setFlashcardIndex(flashcardIndex = 0);
+                            setShowAnswer(false);
                         }} className={`rounded-lg bg-orange-600 w-full hover:bg-orange-700`}>
                             close
                         </button>

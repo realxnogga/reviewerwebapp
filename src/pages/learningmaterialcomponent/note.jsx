@@ -300,10 +300,10 @@ export const Note = () => {
                     </ul>
                 </div>
 
-
-                {/* <RiAddCircleFill onClick={() => { setOpenInsertNoteModal(true) }} className=" text-[3.5rem] mobile:text-[3rem] text-yellow-500 hover:text-yellow-300 " /> */}
-               
-                <Button onClick={() => { setOpenInsertNoteModal(true) }} gradientDuoTone="purpleToBlue" className=" m-1 rounded-md ">add</Button>
+                <button onClick={() => { setOpenInsertNoteModal(true) }} className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-[85%] w-[5rem] m-1 rounded-md text-white">
+                    add
+                </button>
+                
             </section>
 
 
