@@ -59,6 +59,57 @@ export const isGetFlashcardItemPendingTemp = state => state.FlashcardSliceName.i
 export const flashcardSliceReducer = FlashcardSlice.reducer;
 
 
+
+
+export const UpdateFlashcardItemUserThunk = createAsyncThunk(
+    "NoteSliceName/UpdateFlashcardItemUserThunk",
+    async ({ datatobeupdated }) => {
+        try {
+            const formData = new FormData();
+            formData.append('datatobeupdated', JSON.stringify(datatobeupdated));
+
+            const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=updateFlashcardItemUser", {
+                method: 'POST',
+                body: formData,
+            })
+            const data = await res.json();
+            return data.success;
+
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    }
+)
+
+
+
+
+
+export const UpdateFlashcardUserThunk = createAsyncThunk(
+    "NoteSliceName/UpdateFlashcardUserThunk",
+    async ({ datatobeupdated }) => {
+        try {
+            const formData = new FormData();
+            formData.append('datatobeupdated', JSON.stringify(datatobeupdated));
+
+            const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=updateFlashcardUser", {
+                method: 'POST',
+                body: formData,
+            })
+            const data = await res.json();
+            return data.success;
+
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    }
+)
+
+
+
+
+
+
 // to delete all flashcard item  based on username
 export const DeleteAllFlashCardDataThunk = createAsyncThunk(
     "FlashcardSliceName/DeleteAllFlashCardDataThunk",

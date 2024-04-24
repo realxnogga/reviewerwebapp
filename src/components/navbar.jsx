@@ -29,7 +29,9 @@ import { DeleteSettingDataThunk } from '../feature/systemsettingSlice';
 import { systemDataTemp } from '../feature/systemsettingSlice';
 import { DeleteAllFlashCardDataThunk } from '../feature/flashcardSlice';
 import { DeleteAllFlashCardItemThunk } from '../feature/flashcardSlice';
-
+import { UpdateNoteUserThunk } from '../feature/noteSlice';
+import { UpdateFlashcardUserThunk } from '../feature/flashcardSlice';
+import { UpdateFlashcardItemUserThunk } from '../feature/flashcardSlice';
 
 
 export const Navbar = () => {
@@ -41,7 +43,7 @@ export const Navbar = () => {
 
     const userdata = useSelector(userdataTemp);
     if (Object.keys(userdata).length != 0) {
-        var id = userdata.ID;
+        var userID = userdata.ID;
         var name = userdata.username;
         var password = userdata.password;
         var email = userdata.email;
@@ -130,7 +132,7 @@ export const Navbar = () => {
         e.preventDefault();
 
         const editdata = {
-            id: id,
+            id: userID,
             username: editInput.username,
             password: editInput.password,
             email: editInput.email,
@@ -145,9 +147,10 @@ export const Navbar = () => {
     const isUserEdited = useSelector(isUserEditedTemp);
 
     useEffect(() => {
-        if (isUserEdited == true) {
+        if (isUserEdited === true) {
             ShowToast('updated successfully', 'success')
             setOpenEditUserModal(false);
+            
             setEditInput({
                 username: '',
                 password: '',
@@ -155,18 +158,32 @@ export const Navbar = () => {
             })
 
             dispatch(getUserDataThunk({
-                userid: id,
+                userid: userID,
             }));
+
+
             dispatch(clearEditDataState());
         }
 
-        if (isUserEdited == false) {
+        if (isUserEdited === false) {
             ShowToast('failed to update', 'error')
 
             dispatch(clearEditDataState());
         }
     }, [isUserEdited])
-    // -----------------------------------
+
+
+    // ----------------------------------------------------
+
+     const datatobeupdated = {
+        userID: userID,
+        user: name,
+     }
+     dispatch(UpdateNoteUserThunk({datatobeupdated}));
+     dispatch(UpdateFlashcardUserThunk({datatobeupdated}));
+     dispatch(UpdateFlashcardItemUserThunk({datatobeupdated}));
+        
+    // -----------------------------------------------------
     const [editSystem, setEditSystem] = useState({
         systemname: '',
     })
@@ -203,10 +220,10 @@ export const Navbar = () => {
 
 
     // ------------------------------------------------
-    const systemData = useSelector(systemDataTemp);
-    if (Object.keys(systemData).length != 0) {
-        var systemName = systemData.systemsettingname;
-    }
+    // const systemData = useSelector(systemDataTemp);
+    // if (Object.keys(systemData).length != 0) {
+    //     var systemName = systemData.systemsettingname;
+    // }
 
     return (
         <>
@@ -215,7 +232,7 @@ export const Navbar = () => {
                 {/* <img className="animate-spin spin h-[2rem] w-[2rem]" src="../../asset/icon/logo192.png" alt="" /> */}
                 <div className={`text-gray-300 text-xl flex items-center gap-x-1 mobile:text-sm`}>
 
-                    <p>{systemName}</p>
+                    {/* <p>{systemName}</p> */}
                     <RxDividerVertical className='text-[2rem] text-yellow-500' />
                     <p>Welcome, <span>{name}</span></p>
 

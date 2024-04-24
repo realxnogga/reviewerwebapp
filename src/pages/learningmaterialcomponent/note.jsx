@@ -23,6 +23,7 @@ export const Note = () => {
 
     const userdata = useSelector(userdataTemp);
     if (Object.keys(userdata).length != 0) {
+        var userID = userdata.ID;
         var username = userdata.username;
     }
 
@@ -45,6 +46,7 @@ export const Note = () => {
         e.preventDefault();
 
         const noteDataTemp = {
+            userID: userID,
             noteuser: username,
             noteSubject: noteData.noteSubject,
             noteTitle: noteData.noteTitle,

@@ -29,7 +29,7 @@ import { GrCaretPrevious } from "react-icons/gr";
 import { GrCaretNext } from "react-icons/gr";
 import { isGetFlashcardItemPendingTemp } from "../../feature/flashcardSlice";
 import { LoadingComponent } from "../../components/loading";
-
+import { AiOutlineRollback } from "react-icons/ai";
 
 export const FlashCard = () => {
 
@@ -40,6 +40,7 @@ export const FlashCard = () => {
 
     const userdata = useSelector(userdataTemp);
     if (Object.keys(userdata).length != 0) {
+        var userID = userdata.ID;
         var username = userdata.username;
     }
 
@@ -61,6 +62,7 @@ export const FlashCard = () => {
         }
         else if (flashcardData.flashcardTitle != '') {
             const flashcardDataTemp = {
+                userID: userID,
                 flashcardUser: username,
                 flashcardSubject: flashcardData.flashcardSubject,
                 flashcardTitle: flashcardData.flashcardTitle,
@@ -113,6 +115,7 @@ export const FlashCard = () => {
         }
         else if (flashcardItem.flashcardItemFront != '' || flashcardItem.flashcardItemBack != '') {
             const flashcardItemTemp = {
+                userID: userID,
                 flashcardItemID: flashcardItemID,
                 flashcardItemUser: username,
                 flashcardItemFront: flashcardItem.flashcardItemFront,
@@ -494,9 +497,14 @@ export const FlashCard = () => {
 
                         copiedFlashcard.length === 0 ?
                                 (
-                                    <section className={`${themeHolder.colorbg2} ${showContainerString} ${themeHolder.colortxt1} absolute rounded-lg top-0 h-full w-full flex flex-col items-center justify-center gap-y-20 text-[2rem] font-semibold`}>
+                                    <section className={`${themeHolder.colorbg2} ${showContainerString} ${themeHolder.colortxt1} absolute rounded-lg top-0 h-full w-full flex flex-col items-center justify-center gap-y-10`}>
 
-                                        <p>No Flashcard</p>
+                                        <p className="text-[4rem] font-semibold mobile:text-[2.5rem] ">No Flashcard</p>
+                                        <button onClick={() =>  setShowContainer(false)} className="h-[5rem] w-[10rem] mobile:h-[4rem] mobile:w-[8rem] mobile:gap-x-2 flex items-center justify-center gap-x-6 border hover:border-yellow-500 ">
+                                       
+                                        <AiOutlineRollback className="text-[2rem]"/>
+                                        <span className="text-[2rem]">Back</span>
+                                        </button>
 
                                 </section>
                                 )

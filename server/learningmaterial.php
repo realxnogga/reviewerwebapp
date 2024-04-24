@@ -24,6 +24,8 @@ if (isset($_GET['action'])) {
         case 'putNoteData':
 
             $data = json_decode($_POST['noteDataTemp'], true);
+
+            $userID = $data['userID'];
             $noteUser = $data['noteuser'];
             $noteSubject = $data['noteSubject'];
             $noteTitle = $data['noteTitle'];
@@ -31,7 +33,7 @@ if (isset($_GET['action'])) {
             $noteDate = $data['notedate'];
 
 
-            $sql = "insert into note (usernote, notesubject, notetitle, actualnote, notedate) VALUES ('$noteUser', '$noteSubject', '$noteTitle', '$actualnote', '$noteDate')";
+            $sql = "insert into note (userID, usernote, notesubject, notetitle, actualnote, notedate) VALUES ('$userID','$noteUser', '$noteSubject', '$noteTitle', '$actualnote', '$noteDate')";
 
             $conn->query($sql);
 
@@ -62,6 +64,22 @@ if (isset($_GET['action'])) {
 
             $conn->close();
             break;
+
+
+        case 'updateNoteUser':
+
+            $data = json_decode($_POST['datatobeupdated'], true);
+            $userID = $data['userID'];
+            $user = $data['user'];
+
+            $sql = "UPDATE `note` SET `usernote` = '$user' WHERE `userID` = '$userID'";
+            $conn->query($sql);
+
+
+            $conn->close();
+            break;
+
+
 
         case 'deleteNoteData':
             $noteID = json_decode(file_get_contents("php://input"), true);
@@ -95,12 +113,13 @@ if (isset($_GET['action'])) {
 
         case 'insertFlashcardData':
             $data = json_decode($_POST['flashcardDataTemp'], true);
+            $userID = $data['userID'];
             $flashcardUser = $data['flashcardUser'];
             $flashcardSubject = $data['flashcardSubject'];
             $flashcardTitle = $data['flashcardTitle'];
 
 
-            $sql = "insert into flashcard (flashcarduser, flashcardsubject, flashcardtitle) VALUES ('$flashcardUser', '$flashcardSubject', '$flashcardTitle')";
+            $sql = "insert into flashcard (userID, flashcarduser, flashcardsubject, flashcardtitle) VALUES ('$userID', '$flashcardUser', '$flashcardSubject', '$flashcardTitle')";
 
             $conn->query($sql);
 
@@ -134,13 +153,14 @@ if (isset($_GET['action'])) {
 
             $data = json_decode($_POST['flashcardItemTemp'], true);
 
+            $userID = $data['userID'];
             $flashcardItemID = $data['flashcardItemID'];
             $flashcardItemUser = $data['flashcardItemUser'];
             $flashcardItemFront = $data['flashcardItemFront'];
             $flashcardItemBack = $data['flashcardItemBack'];
 
 
-            $sql = "insert into flashcarditem  (flashcarditemID, flashcarditemuser, flashcarditemfront, flashcarditemback) VALUES ('$flashcardItemID', '$flashcardItemUser', '$flashcardItemFront', '$flashcardItemBack')";
+            $sql = "insert into flashcarditem  (flashcarditemID, userID, flashcarditemuser, flashcarditemfront, flashcarditemback) VALUES ('$flashcardItemID', '$userID', '$flashcardItemUser', '$flashcardItemFront', '$flashcardItemBack')";
 
             $conn->query($sql);
 
@@ -171,6 +191,35 @@ if (isset($_GET['action'])) {
             $conn->close();
             break;
 
+
+
+
+        case 'updateFlashcardUser':
+            $data = json_decode($_POST['datatobeupdated'], true);
+            $userID = $data['userID'];
+            $user = $data['user'];
+
+            $sql = "UPDATE `flashcard` SET `flashcarduser` = '$user' WHERE `userID` = '$userID'";
+
+            $conn->query($sql);
+
+            $conn->close();
+            break;
+
+
+        case 'updateFlashcardItemUser':
+            $data = json_decode($_POST['datatobeupdated'], true);
+            $userID = $data['userID'];
+            $user = $data['user'];
+
+
+            $sql = "UPDATE `flashcarditem` SET `flashcarditemuser` = '$user' WHERE `userID` = '$userID'";
+            $conn->query($sql);
+
+            $conn->close();
+            break;
+
+
         case 'deleteFlashcardItemData':
 
             $flashcardID = json_decode(file_get_contents("php://input"), true);
@@ -189,23 +238,23 @@ if (isset($_GET['action'])) {
             break;
 
 
-            case 'deleteFlashcardItemById':
+        case 'deleteFlashcardItemById':
 
-                $flashcarditemID = json_decode(file_get_contents("php://input"), true);
-    
-                $sql = "delete from flashcarditem where flashcarditemID = '$flashcarditemID'";
-    
-                $conn->query($sql);
-    
-                if ($conn->affected_rows > 0) {
-                    echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
-                } else {
-                    echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
-                }
-    
-                $conn->close();
-                break;
-            
+            $flashcarditemID = json_decode(file_get_contents("php://input"), true);
+
+            $sql = "delete from flashcarditem where flashcarditemID = '$flashcarditemID'";
+
+            $conn->query($sql);
+
+            if ($conn->affected_rows > 0) {
+                echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
+            }
+
+            $conn->close();
+            break;
+
 
         case 'deleteAllFlashcardItem':
 
@@ -224,23 +273,22 @@ if (isset($_GET['action'])) {
             $conn->close();
             break;
 
-            case 'deleteAllFlashcardData':
+        case 'deleteAllFlashcardData':
 
-                $flashcarduser = json_decode(file_get_contents("php://input"), true);
-    
-                $sql = "delete from flashcard where flashcarduser = '$flashcarduser'";
-    
-                $conn->query($sql);
-    
-                if ($conn->affected_rows > 0) {
-                    echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
-                } else {
-                    echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
-                }
-    
-                $conn->close();
-                break;
-            
+            $flashcarduser = json_decode(file_get_contents("php://input"), true);
+
+            $sql = "delete from flashcard where flashcarduser = '$flashcarduser'";
+
+            $conn->query($sql);
+
+            if ($conn->affected_rows > 0) {
+                echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
+            }
+
+            $conn->close();
+            break;
     }
 }
 
