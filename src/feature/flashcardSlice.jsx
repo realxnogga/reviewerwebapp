@@ -9,6 +9,7 @@ export const FlashcardSlice = createSlice({
       isFlashcardItemInserted: null,
       flashcardItem: [],
       isFlashcardDataDeleted: null,
+      isGetFlashcardItemPending: false,
 
     },
     reducers: {
@@ -35,7 +36,11 @@ export const FlashcardSlice = createSlice({
             })  
             .addCase(GetFlashcardItemThunk.fulfilled, (state, action) => {
                 state.flashcardItem = action.payload;
+                state.isGetFlashcardItemPending = false;
             })  
+            .addCase(GetFlashcardItemThunk.pending, (state) => {
+                state.isGetFlashcardItemPending = true;
+            }) 
             .addCase(DeleteFlashCardDataThunk.fulfilled, (state, action) => {
                 state.isFlashcardDataDeleted = action.payload;
             }) 
@@ -49,8 +54,8 @@ export const flashcardDataTemp = state => state.FlashcardSliceName.flashcardData
 export const isFlashcardDataInsertedTemp = state => state.FlashcardSliceName.isFlashcardDataInserted;
 export const isFlashcardItemInsertedTemp = state => state.FlashcardSliceName.isFlashcardItemInserted;
 export const isFlashcardDataDeletedTemp = state => state.FlashcardSliceName.isFlashcardDataDeleted;
-
 export const flashcardItemTemp = state => state.FlashcardSliceName.flashcardItem; 
+export const isGetFlashcardItemPendingTemp = state => state.FlashcardSliceName.isGetFlashcardItemPending;
 export const flashcardSliceReducer = FlashcardSlice.reducer;
 
 
