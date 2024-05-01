@@ -161,7 +161,6 @@ export const Navbar = () => {
                 userid: userID,
             }));
 
-
             dispatch(clearEditDataState());
         }
 
@@ -174,15 +173,18 @@ export const Navbar = () => {
 
 
     // ----------------------------------------------------
-
-     const datatobeupdated = {
-        userID: userID,
-        user: name,
-     }
-     dispatch(UpdateNoteUserThunk({datatobeupdated}));
-     dispatch(UpdateFlashcardUserThunk({datatobeupdated}));
-     dispatch(UpdateFlashcardItemUserThunk({datatobeupdated}));
-        
+    // this useEffect will run once the username change after am edit
+    // it also changes the foraeign key of the other tables
+    useEffect(() => {
+        const datatobeupdated = {
+            userID: userID,
+            user: name,
+         }
+         dispatch(UpdateNoteUserThunk({datatobeupdated}));
+         dispatch(UpdateFlashcardUserThunk({datatobeupdated}));
+         dispatch(UpdateFlashcardItemUserThunk({datatobeupdated}));
+    }, [name])
+         
     // -----------------------------------------------------
     const [editSystem, setEditSystem] = useState({
         systemname: '',
@@ -219,7 +221,7 @@ export const Navbar = () => {
 
 
 
-    // ------------------------------------------------
+    //------------------------------------------------
     // const systemData = useSelector(systemDataTemp);
     // if (Object.keys(systemData).length != 0) {
     //     var systemName = systemData.systemsettingname;
@@ -232,7 +234,7 @@ export const Navbar = () => {
                 {/* <img className="animate-spin spin h-[2rem] w-[2rem]" src="../../asset/icon/logo192.png" alt="" /> */}
                 <div className={`text-gray-300 text-xl flex items-center gap-x-1 mobile:text-sm`}>
 
-                    {/* <p>{systemName}</p> */}
+                     {/* <p>{systemName}</p> */}
                     <RxDividerVertical className='text-[2rem] text-yellow-500' />
                     <p>Welcome, <span>{name}</span></p>
 

@@ -60,28 +60,28 @@ export const Sidebar = () => {
                     )
                 }
 
-                <li onClick={() => { dispatch(whatIsClickedState('dashboard')) }} className={`${whatIsClicked === 'dashboard' ? themeHolder.colorbg1 : ''} p-4 flex flex-row items-center gap-x-3 cursor-pointer`}>
+                <li onClick={() => { dispatch(whatIsClickedState('dashboard')) }} className={`${whatIsClicked === 'dashboard' ? themeHolder.colorbg1 : ''} hover:${themeHolder.colorbg1} p-4 flex flex-row items-center gap-x-3 cursor-pointer`}>
                     <span><MdOutlineSpaceDashboard className="text-yellow-500 text-[1.6rem] " /></span>
                     <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Dashboard</span>
                 </li>
 
                      
 
-                <li onClick={() => { dispatch(whatIsClickedState('practicetestandquiz')) }} className={`${whatIsClicked === 'practicetestandquiz' ? themeHolder.colorbg1 : ''} p-4 flex flex-row items-center gap-x-3 cursor-pointer`} >
+                <li onClick={() => { dispatch(whatIsClickedState('practicetestandquiz')) }} className={`${whatIsClicked === 'practicetestandquiz' ? themeHolder.colorbg1 : ''} hover:${themeHolder.colorbg1} p-4 flex flex-row items-center gap-x-3 cursor-pointer`} >
                     <span><MdOutlineQuiz className={`text-yellow-500 text-[1.6rem]`}/></span>
-                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Practice Test & Quizzes</span>
+                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300`}>Practice Test & Quizzes</span>
                 </li>
 
     
 
-                <li onClick={() => { dispatch(whatIsClickedState('learningresources')) }} className={`${whatIsClicked === 'learningresources' ? themeHolder.colorbg1 : ''} p-4 flex flex-row items-center gap-x-3 cursor-pointer`} >
+                <li onClick={() => { dispatch(whatIsClickedState('learningresources')) }} className={`${whatIsClicked === 'learningresources' ? themeHolder.colorbg1 : ''} hover:${themeHolder.colorbg1} p-4 flex flex-row items-center gap-x-3 cursor-pointer`} >
                     <span><GrResources className="text-yellow-500 text-[1.6rem]" /></span>
                     <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Learning Resources</span>
                 </li>
 
           
 
-                <li onClick={() => { dispatch(whatIsClickedState('learningmaterial')) }} className={`${whatIsClicked === 'learningmaterial' ? themeHolder.colorbg1 : ''} p-4 flex flex-row items-center gap-x-3 cursor-pointer`} >
+                <li onClick={() => { dispatch(whatIsClickedState('learningmaterial')) }} className={`${whatIsClicked === 'learningmaterial' ? themeHolder.colorbg1 : ''} hover:${themeHolder.colorbg1} p-4 flex flex-row items-center gap-x-3 cursor-pointer`} >
                     <span><BsBookshelf className="text-yellow-500 text-[1.6rem]" /></span>
                     <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Learning Material</span>
                 </li>

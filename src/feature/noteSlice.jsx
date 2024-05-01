@@ -65,12 +65,10 @@ export const UpdateNoteUserThunk = createAsyncThunk(
             const formData = new FormData();
             formData.append('datatobeupdated', JSON.stringify(datatobeupdated));
 
-            const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=updateNoteUser", {
+            await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=updateNoteUser", {
                 method: 'POST',
                 body: formData,
-            })
-            const data = await res.json();
-            return data.success;
+            })   
 
         } catch (error) {
             console.log('Error:', error);

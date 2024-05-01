@@ -1,15 +1,15 @@
 
 
-import { themeHolderTemp } from "../../feature/themeSlice";
+import { themeHolderTemp } from "../feature/themeSlice";
 import { useSelector, useDispatch } from 'react-redux';
 import { MdOutlineNoteAlt } from "react-icons/md";
 import { IoFlashOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import { useState } from "react";
-import { isToggleNoteFlashcardOpenTemp } from "../../feature/opentogglenoteflashcardSlice";
-import { clearIsToggleNoteFlashCardOpenState } from "../../feature/opentogglenoteflashcardSlice";
-import { whatIsClickToggleNoteflashCardState } from "../../feature/opentogglenoteflashcardSlice";
-import { whatIsClickToggleNoteflashCardTemp } from "../../feature/opentogglenoteflashcardSlice";
+import { isToggleNoteFlashcardOpenTemp } from "../feature/opentogglenoteflashcardSlice";
+import { clearIsToggleNoteFlashCardOpenState } from "../feature/opentogglenoteflashcardSlice";
+import { whatIsClickToggleNoteflashCardState } from "../feature/opentogglenoteflashcardSlice";
+import { whatIsClickToggleNoteflashCardTemp } from "../feature/opentogglenoteflashcardSlice";
 
 
 export const ToggleNoteFlashcard = () => {

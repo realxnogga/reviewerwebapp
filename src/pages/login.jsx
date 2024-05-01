@@ -111,9 +111,10 @@ export const Login = () => {
 
 
     return (
-
+       
         <div class="h-screen w-screen flex items-center justify-center bg-no-repeat bg-cover bg-center bg-[url('../../asset/loginregisterbg/bg.jpg')]">
-            <Card  className="h-fit w-fit max-w-[90%] bg-black bg-opacity-20 backdrop-blur-md border border-yellow-500 text-white">
+             
+            <Card  className="hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:border-none h-fit w-fit max-w-[90%] bg-black bg-opacity-20 backdrop-blur-md border border-yellow-500 text-white">
                 <form onSubmit={handleLoginSubmit} action="" className='flex flex-col justify-start gap-y-7'>
                     <FloatingLabel className='text-white' value={inputValue.username} onChange={handleChange} name="username" variant="standard" label="Enter Username" />
                     <div>
@@ -124,8 +125,9 @@ export const Login = () => {
                     <Button type='submit' gradientDuoTone="purpleToBlue" className='rounded-[50px]'>Login</Button>
                     <p className='text-white'>Don't have an account yet? <span className='underline hover:text-blue-600'><NavLink to={'/register'}>Register</NavLink></span></p>
                 </form>
-            </Card>     
+            </Card>  
         </div>
+      
 
     );
 }

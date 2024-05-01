@@ -1,34 +1,34 @@
 
 import { Button, Modal } from "flowbite-react";
 
-import { ShowToast } from "../../components/toaster";
+import { ShowToast } from "./toaster";
 import React, { useEffect, useState } from "react";
-import { themeHolderTemp } from "../../feature/themeSlice";
+import { themeHolderTemp } from "../feature/themeSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { userdataTemp } from "../../feature/data/userdataSlice";
-import { InsertFlashcardThunk } from "../../feature/flashcardSlice";
-import { clearIsFlashcardDataInserted } from "../../feature/flashcardSlice";
-import { isFlashcardDataInsertedTemp } from "../../feature/flashcardSlice";
-import { GetFlashcardThunk } from "../../feature/flashcardSlice";
-import { flashcardDataTemp } from "../../feature/flashcardSlice";
-import { InsertFlashCardItemThunk } from "../../feature/flashcardSlice";
-import { isFlashcardItemInsertedTemp } from "../../feature/flashcardSlice";
-import { clearIsFlashcardItemInserted } from "../../feature/flashcardSlice";
-import { GetFlashcardItemThunk } from "../../feature/flashcardSlice";
-import { flashcardItemTemp } from "../../feature/flashcardSlice";
+import { userdataTemp } from "../feature/data/userdataSlice";
+import { InsertFlashcardThunk } from "../feature/flashcardSlice";
+import { clearIsFlashcardDataInserted } from "../feature/flashcardSlice";
+import { isFlashcardDataInsertedTemp } from "../feature/flashcardSlice";
+import { GetFlashcardThunk } from "../feature/flashcardSlice";
+import { flashcardDataTemp } from "../feature/flashcardSlice";
+import { InsertFlashCardItemThunk } from "../feature/flashcardSlice";
+import { isFlashcardItemInsertedTemp } from "../feature/flashcardSlice";
+import { clearIsFlashcardItemInserted } from "../feature/flashcardSlice";
+import { GetFlashcardItemThunk } from "../feature/flashcardSlice";
+import { flashcardItemTemp } from "../feature/flashcardSlice";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { LuBookOpen } from "react-icons/lu";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Tooltip } from "flowbite-react";
 import { MdOutlineArrowBack } from "react-icons/md";
-import { DeleteFlashCardDataThunk } from "../../feature/flashcardSlice";
-import { clearIsFlashcardDataDeleted } from "../../feature/flashcardSlice";
-import { isFlashcardDataDeletedTemp } from "../../feature/flashcardSlice";
-import { DeleteFlashCardItemByIDThunk } from "../../feature/flashcardSlice";
+import { DeleteFlashCardDataThunk } from "../feature/flashcardSlice";
+import { clearIsFlashcardDataDeleted } from "../feature/flashcardSlice";
+import { isFlashcardDataDeletedTemp } from "../feature/flashcardSlice";
+import { DeleteFlashCardItemByIDThunk } from "../feature/flashcardSlice";
 import { GrCaretPrevious } from "react-icons/gr";
 import { GrCaretNext } from "react-icons/gr";
-import { isGetFlashcardItemPendingTemp } from "../../feature/flashcardSlice";
-import { LoadingComponent } from "../../components/loading";
+import { isGetFlashcardItemPendingTemp } from "../feature/flashcardSlice";
+import { LoadingComponent } from "./loading";
 import { AiOutlineRollback } from "react-icons/ai";
 
 export const FlashCard = () => {

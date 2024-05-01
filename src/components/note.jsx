@@ -1,17 +1,17 @@
 
-import { themeHolderTemp } from "../../feature/themeSlice";
+import { themeHolderTemp } from "../feature/themeSlice";
 import { useEffect, useState } from "react";
 import { Button, Modal } from 'flowbite-react';
-import { userdataTemp } from "../../feature/data/userdataSlice";
-import { InsertNoteThunk } from "../../feature/noteSlice";
+import { userdataTemp } from "../feature/data/userdataSlice";
+import { InsertNoteThunk } from "../feature/noteSlice";
 import { useSelector, useDispatch } from 'react-redux';
-import { isNoteDataInsertedTemp, isNoteDataDeletedTemp } from "../../feature/noteSlice";
-import { ShowToast } from "../../components/toaster";
-import { ClearIsNoteDataInsertedState, ClearIsNoteDataDeletedState } from "../../feature/noteSlice";
-import { GetNoteThunk } from "../../feature/noteSlice";
-import { noteDataTemp } from "../../feature/noteSlice";
+import { isNoteDataInsertedTemp, isNoteDataDeletedTemp } from "../feature/noteSlice";
+import { ShowToast } from "./toaster";
+import { ClearIsNoteDataInsertedState, ClearIsNoteDataDeletedState } from "../feature/noteSlice";
+import { GetNoteThunk } from "../feature/noteSlice";
+import { noteDataTemp } from "../feature/noteSlice";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { DeleteNoteThunk } from "../../feature/noteSlice";
+import { DeleteNoteThunk } from "../feature/noteSlice";
 import { RiAddCircleFill } from "react-icons/ri";
 
 export const Note = () => {

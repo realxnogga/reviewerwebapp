@@ -2,10 +2,10 @@
 import { Hamburger } from "../components/hamburger";
 import { themeHolderTemp } from "../feature/themeSlice";
 import { useSelector } from 'react-redux';
-import { ToggleNoteFlashcard } from "./learningmaterialcomponent/togglenoteflashcard";
-import { ToggleNoteFlashcardIcon } from "./learningmaterialcomponent/togglenoteflashcardicon";
-import { Note } from "./learningmaterialcomponent/note";
-import { FlashCard } from "./learningmaterialcomponent/flashcard";
+import { Note } from "../components/note";
+import { ToggleNoteFlashcard } from "../components/togglenoteflashcard";
+import { ToggleNoteFlashcardIcon } from "../components/togglenoteflashcardicon";
+import { FlashCard } from "../components/flashcard";
 import { whatIsClickToggleNoteflashCardTemp } from "../feature/opentogglenoteflashcardSlice";
 
 export const LearningMaterial = () => {
@@ -23,8 +23,7 @@ export const LearningMaterial = () => {
                 <Hamburger />
                 <ToggleNoteFlashcardIcon />
                 <ToggleNoteFlashcard />
-
-           
+      
                     {container}        
              
             </div>
