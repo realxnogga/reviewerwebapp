@@ -108,8 +108,6 @@ export const Register = () => {
         <div 
         class="h-screen w-screen flex items-center justify-center bg-no-repeat bg-cover bg-center bg-[url('../../asset/loginregisterbg/bg.jpg')]">
 
-          
-
             <Card className="hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:border-none h-fit w-fit max-w-[90%] bg-black bg-opacity-20 backdrop-blur-md border border-yellow-500 text-white">
                 <form onSubmit={handleRegisterSubmit} action="" className='flex flex-col justify-start gap-y-5'>
                     <FloatingLabel className='text-white' name="username" onChange={handleChange} value={registerInput.username} variant="standard" label="Enter your Username" />

@@ -143,7 +143,7 @@ export const Note = () => {
         <div className="relative h-[90%] w-[69rem] max-w-[95%]">
             <section className={`${themeHolder.colorbg2} overflow-hidden rounded-md h-[9%] w-full flex items-center justify-between`}>
                 <div className={` h-full w-full overflow-scroll noScrollbar`}>
-                    <ul className={`flex h-full text-sm text-gray-300`}>
+                    <ul className={`flex h-full text-sm text-gray-300 text-nowrap`}>
 
                         <li onClick={() => { setSubjectFilter('all'); setWhatIsClickedInNoteTab('all') }}
                             className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'all' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>All
@@ -313,10 +313,10 @@ export const Note = () => {
             {
                 filteredNoteData.length === 0 ?
                     (
-                        <section className="h-[91%] w-full flex items-center justify-center  ">
-                            <div className={`border-gray-500 h-[70%] w-[45rem] max-w-[95%] border rounded-xl flex items-center justify-center`}>
-                                <p className={`${themeHolder.colortxt1} text-[3.5rem] font-semibold text-gray-200 mobile:text-[2rem] `}>No Notes Yet!</p>
-                            </div>
+                        <section className="h-[91%] w-full flex items-center justify-center flex-col gap-y-3">
+                           <img className="h-[17rem] mobile:h-[13rem]" 
+                           src="../../asset/emptyIcon/trashImg.png" alt="" />
+                           <h3 className={`${themeHolder.colortxt1} text-[4rem] font-bold mobile:text-[3rem] `}>No Notes Yet</h3>
                         </section>
                     )
                     :

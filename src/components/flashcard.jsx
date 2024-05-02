@@ -286,7 +286,7 @@ export const FlashCard = () => {
             <section className={`${themeHolder.colorbg2} overflow-hidden rounded-md h-[9%] w-full justify-end flex items-center`}>
 
                 <div className={`h-full w-full overflow-scroll noScrollbar`}>
-                    <ul className={`flex h-full text-sm text-gray-300`}>
+                    <ul className={`flex h-full text-sm text-gray-300 text-nowrap`}>
 
                         <li onClick={() => { setSubjectFilter('all'); setWhatIsClickedInFlashcardTab('all') }}
                             className={`${themeHolder.colortxt1} ${whatIsClickedInFlashcardTab === 'all' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>All
@@ -451,32 +451,48 @@ export const FlashCard = () => {
 
             </section>
 
-            <section className="h-[91%] w-full mt-3 overflow-scroll noScrollbar flex flex-wrap content-start gap-4">
-                {
+            {
+                filteredNoteData.length === 0 ?
+                    (
+                        <section className="h-[91%] w-full flex items-center justify-center flex-col gap-y-3">
+                            <img className="h-[17rem] mobile:h-[13rem]"
+                                src="../../asset/emptyIcon/trashImg.png" alt="" />
+                            <h3 className={`${themeHolder.colortxt1} text-[4rem] font-bold mobile:text-[2rem] `}>No Flashcard Yet</h3>
+                        </section>
+                    )
+                    :
+                    (
+                        <section className="h-[91%] w-full mt-3 overflow-scroll noScrollbar flex flex-wrap content-start gap-4">
+                        {
+        
+                            filteredNoteData.map((item) => (
+                                <div key={item.flashcardID} className={`${themeHolder.border} ${FlashcardColorFunc(item.flashcardsubject)} relative h-[12rem] w-[16rem] rounded-lg flex flex-col justify-between border-none overflow-hidden`}>
+                                    <p className="text-[2rem] absolute top-0 left-3">{item.flashcardtitle}</p>
+                                    <div className="absolute top-0 right-0 bg-black bg-opacity-40 backdrop-blur-sm h-full w-[4rem] pt-4 flex flex-col items-center justify-start gap-y-6 text-2xl text-yellow-500">
+                                        <Tooltip style="light" placement="left" content={'add'}>
+                                            <IoMdAddCircleOutline onClick={() => { setOpenAddFlashcardItemModal(true); setFlashcardItemID(item.flashcardID); }} className="cursor-pointer" />
+                                        </Tooltip>
+        
+                                        <Tooltip style="light" placement="left" content={'study'}>
+                                            <LuBookOpen onClick={() => { handleStudyBtnFunc(item.flashcardID) }} className="cursor-pointer" />
+                                        </Tooltip>
+        
+                                        <Tooltip style="light" placement="left" content={'delete'}>
+                                            <RiDeleteBin6Line onClick={() => { DeleteFlashCardDataFunc(item.flashcardID); setGetflashcardID(item.flashcardID) }} className="cursor-pointer" />
+                                        </Tooltip>
+                                    </div>
+        
+                                </div>
+                            ))
+        
+        
+                        }
+                    </section>
 
-                    filteredNoteData.map((item) => (
-                        <div key={item.flashcardID} className={`${themeHolder.border} ${FlashcardColorFunc(item.flashcardsubject)} relative h-[12rem] w-[16rem] rounded-lg flex flex-col justify-between border-none overflow-hidden`}>
-                            <p className="text-[2rem] absolute top-0 left-3">{item.flashcardtitle}</p>
-                            <div className="absolute top-0 right-0 bg-black bg-opacity-40 backdrop-blur-sm h-full w-[4rem] pt-4 flex flex-col items-center justify-start gap-y-6 text-2xl text-yellow-500">
-                                <Tooltip style="light" placement="left" content={'add'}>
-                                    <IoMdAddCircleOutline onClick={() => { setOpenAddFlashcardItemModal(true); setFlashcardItemID(item.flashcardID); }} className="cursor-pointer" />
-                                </Tooltip>
+                    )
+            }
 
-                                <Tooltip style="light" placement="left" content={'study'}>
-                                    <LuBookOpen onClick={() => { handleStudyBtnFunc(item.flashcardID) }} className="cursor-pointer" />
-                                </Tooltip>
-
-                                <Tooltip style="light" placement="left" content={'delete'}>
-                                    <RiDeleteBin6Line onClick={() => { DeleteFlashCardDataFunc(item.flashcardID); setGetflashcardID(item.flashcardID) }} className="cursor-pointer" />
-                                </Tooltip>
-                            </div>
-
-                        </div>
-                    ))
-
-
-                }
-            </section>
+          
 
 
             {/* add flashcard item modal */}
@@ -493,184 +509,184 @@ export const FlashCard = () => {
                     :
                     (
                         <>
-                        {
+                            {
 
-                        copiedFlashcard.length === 0 ?
-                                (
-                                    <section className={`${themeHolder.colorbg2} ${showContainerString} ${themeHolder.colortxt1} absolute rounded-lg top-0 h-full w-full flex flex-col items-center justify-center gap-y-10`}>
+                                copiedFlashcard.length === 0 ?
+                                    (
+                                        <section className={`${themeHolder.colorbg2} ${showContainerString} ${themeHolder.colortxt1} absolute rounded-lg top-0 h-full w-full flex flex-col items-center justify-center gap-y-10`}>
 
-                                        <p className="text-[4rem] font-semibold mobile:text-[2.5rem] ">No Flashcard</p>
-                                        <button onClick={() =>  setShowContainer(false)} className="h-[5rem] w-[10rem] mobile:h-[4rem] mobile:w-[8rem] mobile:gap-x-2 flex items-center justify-center gap-x-6 border hover:border-yellow-500 ">
-                                       
-                                        <AiOutlineRollback className="text-[2rem]"/>
-                                        <span className="text-[2rem]">Back</span>
-                                        </button>
+                                            <p className="text-[4rem] font-semibold mobile:text-[2.5rem] ">No Flashcard</p>
+                                            <button onClick={() => setShowContainer(false)} className="h-[5rem] w-[10rem] mobile:h-[4rem] mobile:w-[8rem] mobile:gap-x-2 flex items-center justify-center gap-x-6 border hover:border-yellow-500 ">
 
-                                </section>
-                                )
-                                :
-                                (
-                                    <>
-                                    <section className={`${themeHolder.colorbg2} ${showContainerString} ${themeHolder.colortxt1} absolute rounded-lg top-0 h-full w-full
+                                                <AiOutlineRollback className="text-[2rem]" />
+                                                <span className="text-[2rem]">Back</span>
+                                            </button>
+
+                                        </section>
+                                    )
+                                    :
+                                    (
+                                        <>
+                                            <section className={`${themeHolder.colorbg2} ${showContainerString} ${themeHolder.colortxt1} absolute rounded-lg top-0 h-full w-full
                                             flex flex-col items-center justify-center gap-y-20 text-[2rem] font-semibold`}>
-            
-                                        {copiedFlashcard.length > 1 ?
-                                            <p className="absolute top-3 left-3 font-thin text-lg">{copiedFlashcard.length} <span>cards</span></p>
-                                            :
-                                            <p className="absolute top-3 left-3 font-thin text-lg">{copiedFlashcard.length} <span>card</span></p>
-                                        }
-            
-            
-                                        {/* this check if copied array is empty or not */}
-                                        <section className="h-[12rem] w-[95%] flex flex-col items-center justify-between">
-            
-                                            {copiedFlashcard.length > 0 ?
-                                                (
-                                                    <>
-                                                        <p>{copiedFlashcard[flashcardIndex].flashcarditemfront}</p>
-                                                        <p>{backanswer}</p>
-                                                    </>
-                                                )
-                                                :
-                                                (
-                                                    ''
-                                                )
-                                            }
-                                        </section>
-                                        <section className="w-[95%] flex flex-col items-center gap-y-6">
-            
-                                            <div className="flex items-center justify-center gap-x-20">
-            
-                                                <GrCaretPrevious onClick={() => {
-                                                    setFlashcardIndex(flashcardIndex - 1);
-                                                    setShowAnswer(false)
-                                                }} />
-                                                <GrCaretNext onClick={() => {
-                                                    setFlashcardIndex(flashcardIndex + 1);
-                                                    setShowAnswer(false);
-                                                }} />
-                                            </div>
-            
-                                            <div className={`${themeHolder.colortxt1} h-[4rem] w-[30rem] max-w-full flex gap-x-5 text-lg mobile:h-[3rem] mobile:text-sm `}>
-            
-                                                <button onClick={() => {
-                                                    RemoveFlashcardFunc();
-                                                    setShowAnswer(false)
-                                                }} className={`rounded-lg bg-green-600 w-full hover:bg-green-700 `}>
-                                                    remove
-                                                </button>
-            
-                                                <button onClick={() => {
-                                                    setShowAnswer(true)
-                                                }} className={`rounded-lg bg-blue-600 w-full hover:bg-blue-700`}>
-                                                    show answer
-                                                </button>
-            
-                                                <button onClick={() => {
-                                                    setShowContainer(false);
-                                                    setCopiedFlashcard([]);
-                                                    setFlashcardIndex(flashcardIndex = 0);
-                                                    setShowAnswer(false);
-                                                }} className={`rounded-lg bg-orange-600 w-full hover:bg-orange-700`}>
-                                                    close
-                                                </button>
-            
-                                            </div>
-                                        </section>
-                                    </section>
-                                    </>
 
-                                )
-                        }
+                                                {copiedFlashcard.length > 1 ?
+                                                    <p className="absolute top-3 left-3 font-thin text-lg">{copiedFlashcard.length} <span>cards</span></p>
+                                                    :
+                                                    <p className="absolute top-3 left-3 font-thin text-lg">{copiedFlashcard.length} <span>card</span></p>
+                                                }
+
+
+                                                {/* this check if copied array is empty or not */}
+                                                <section className="h-[12rem] w-[95%] flex flex-col items-center justify-between">
+
+                                                    {copiedFlashcard.length > 0 ?
+                                                        (
+                                                            <>
+                                                                <p>{copiedFlashcard[flashcardIndex].flashcarditemfront}</p>
+                                                                <p>{backanswer}</p>
+                                                            </>
+                                                        )
+                                                        :
+                                                        (
+                                                            ''
+                                                        )
+                                                    }
+                                                </section>
+                                                <section className="w-[95%] flex flex-col items-center gap-y-6">
+
+                                                    <div className="flex items-center justify-center gap-x-20">
+
+                                                        <GrCaretPrevious onClick={() => {
+                                                            setFlashcardIndex(flashcardIndex - 1);
+                                                            setShowAnswer(false)
+                                                        }} />
+                                                        <GrCaretNext onClick={() => {
+                                                            setFlashcardIndex(flashcardIndex + 1);
+                                                            setShowAnswer(false);
+                                                        }} />
+                                                    </div>
+
+                                                    <div className={`${themeHolder.colortxt1} h-[4rem] w-[30rem] max-w-full flex gap-x-5 text-lg mobile:h-[3rem] mobile:text-sm `}>
+
+                                                        <button onClick={() => {
+                                                            RemoveFlashcardFunc();
+                                                            setShowAnswer(false)
+                                                        }} className={`rounded-lg bg-green-600 w-full hover:bg-green-700 `}>
+                                                            remove
+                                                        </button>
+
+                                                        <button onClick={() => {
+                                                            setShowAnswer(true)
+                                                        }} className={`rounded-lg bg-blue-600 w-full hover:bg-blue-700`}>
+                                                            show answer
+                                                        </button>
+
+                                                        <button onClick={() => {
+                                                            setShowContainer(false);
+                                                            setCopiedFlashcard([]);
+                                                            setFlashcardIndex(flashcardIndex = 0);
+                                                            setShowAnswer(false);
+                                                        }} className={`rounded-lg bg-orange-600 w-full hover:bg-orange-700`}>
+                                                            close
+                                                        </button>
+
+                                                    </div>
+                                                </section>
+                                            </section>
+                                        </>
+
+                                    )
+                            }
                         </>
-                       
-    )
-}
+
+                    )
+            }
 
 
 
 
 
-{/* add flashcard item modal */ }
-<Modal size="md" dismissible show={openAddFlashcardItemModal} onClose={() => setOpenAddFlashcardItemModal(false)}>
-    <form onSubmit={handleFlashcardItemSubmit} action="">
-        <div className={`${themeHolder.colorbg3} space-y-8 bg-gray-700 rounded-lg p-5`}>
-            <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Add Item</h3>
+            {/* add flashcard item modal */}
+            <Modal size="md" dismissible show={openAddFlashcardItemModal} onClose={() => setOpenAddFlashcardItemModal(false)}>
+                <form onSubmit={handleFlashcardItemSubmit} action="">
+                    <div className={`${themeHolder.colorbg3} space-y-8 bg-gray-700 rounded-lg p-5`}>
+                        <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Add Item</h3>
 
-            <div className="flex flex-col items-start gap-y-2">
+                        <div className="flex flex-col items-start gap-y-2">
 
-                <div className="w-full">
-                    <label htmlFor="flashcardItemFront" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Question:</label>
+                            <div className="w-full">
+                                <label htmlFor="flashcardItemFront" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Question:</label>
 
-                    <textarea
-                        onChange={handleFlashcardItemChangeFunc}
-                        value={flashcardItem.flashcardItemFront}
-                        name="flashcardItemFront" id="flashcardItemFront" className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} h-[6rem] w-full bg-gray-600 rounded-sm outline-none p-2 text-gray-300 text-md`} placeholder="Enter a question..."></textarea>
-                </div>
+                                <textarea
+                                    onChange={handleFlashcardItemChangeFunc}
+                                    value={flashcardItem.flashcardItemFront}
+                                    name="flashcardItemFront" id="flashcardItemFront" className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} h-[6rem] w-full bg-gray-600 rounded-sm outline-none p-2 text-gray-300 text-md`} placeholder="Enter a question..."></textarea>
+                            </div>
 
-                <div className="w-full">
-                    <label htmlFor="flashcardItemBack" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Answer:</label>
+                            <div className="w-full">
+                                <label htmlFor="flashcardItemBack" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Answer:</label>
 
-                    <textarea
-                        onChange={handleFlashcardItemChangeFunc}
-                        value={flashcardItem.flashcardItemBack}
-                        name="flashcardItemBack" id="flashcardItemBack" className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} h-[6rem] w-full bg-gray-600 rounded-sm outline-none p-2 text-gray-300 text-md`} placeholder="Enter a answer..."></textarea>
-                </div>
+                                <textarea
+                                    onChange={handleFlashcardItemChangeFunc}
+                                    value={flashcardItem.flashcardItemBack}
+                                    name="flashcardItemBack" id="flashcardItemBack" className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} h-[6rem] w-full bg-gray-600 rounded-sm outline-none p-2 text-gray-300 text-md`} placeholder="Enter a answer..."></textarea>
+                            </div>
 
 
 
-            </div>
+                        </div>
 
-            <div className='flex flex-row gap-x-3'>
-                <Button className='w-fit rounded-md' type='submit' gradientMonochrome="cyan">add</Button>
+                        <div className='flex flex-row gap-x-3'>
+                            <Button className='w-fit rounded-md' type='submit' gradientMonochrome="cyan">add</Button>
 
-                <Button className='w-fit rounded-md' onClick={() => setOpenAddFlashcardItemModal(false)} gradientMonochrome="success">close</Button>
-            </div>
-        </div>
-    </form>
-</Modal>
+                            <Button className='w-fit rounded-md' onClick={() => setOpenAddFlashcardItemModal(false)} gradientMonochrome="success">close</Button>
+                        </div>
+                    </div>
+                </form>
+            </Modal>
 
-{/* add flashcard modal */ }
-<Modal size="md" dismissible show={openAddFlashcardModal} onClose={() => setOpenAddFlashcardModal(false)}>
-    <form onSubmit={handleFlashcardSubmit} action="">
-        <div className={`${themeHolder.colorbg3} space-y-8 bg-gray-700 rounded-lg p-5`}>
-            <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Create Flashcard</h3>
+            {/* add flashcard modal */}
+            <Modal size="md" dismissible show={openAddFlashcardModal} onClose={() => setOpenAddFlashcardModal(false)}>
+                <form onSubmit={handleFlashcardSubmit} action="">
+                    <div className={`${themeHolder.colorbg3} space-y-8 bg-gray-700 rounded-lg p-5`}>
+                        <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Create Flashcard</h3>
 
-            <div className="flex flex-col items-start gap-y-2">
+                        <div className="flex flex-col items-start gap-y-2">
 
-                <div className="w-full">
-                    <label htmlFor="flashcardSubject" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Choose a subject:</label>
-                    <select
-                        onChange={handleFlashcardDataChangeFunc}
-                        value={flashcardData.flashcardSubject}
-                        id="flashcardSubject"
-                        name="flashcardSubject"
-                        className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `}>
-                        <option value="english">English</option>
-                        <option value="filipino">Filipino</option>
-                        <option value="mathematics">Mathematics</option>
-                        <option value="social science">Social Science</option>
-                        <option value="humanities">Humanities</option>
-                        <option value="communication skills">Communication Skills</option>
-                        <option value="ict">ICT</option>
-                    </select>
-                </div>
+                            <div className="w-full">
+                                <label htmlFor="flashcardSubject" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Choose a subject:</label>
+                                <select
+                                    onChange={handleFlashcardDataChangeFunc}
+                                    value={flashcardData.flashcardSubject}
+                                    id="flashcardSubject"
+                                    name="flashcardSubject"
+                                    className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `}>
+                                    <option value="english">English</option>
+                                    <option value="filipino">Filipino</option>
+                                    <option value="mathematics">Mathematics</option>
+                                    <option value="social science">Social Science</option>
+                                    <option value="humanities">Humanities</option>
+                                    <option value="communication skills">Communication Skills</option>
+                                    <option value="ict">ICT</option>
+                                </select>
+                            </div>
 
-                <div className="w-full">
-                    <label htmlFor="flashcardTitle" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Enter flashcard title:</label>
-                    <input onChange={handleFlashcardDataChangeFunc} value={flashcardData.flashcardTitle} type="text" name="flashcardTitle" id="flashcardTitle" className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md`} placeholder="flashcard Title:" />
-                </div>
+                            <div className="w-full">
+                                <label htmlFor="flashcardTitle" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Enter flashcard title:</label>
+                                <input onChange={handleFlashcardDataChangeFunc} value={flashcardData.flashcardTitle} type="text" name="flashcardTitle" id="flashcardTitle" className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md`} placeholder="flashcard Title:" />
+                            </div>
 
-            </div>
+                        </div>
 
-            <div className='flex flex-row gap-x-3'>
-                <Button className='w-fit rounded-md' type='submit' gradientMonochrome="cyan">submit</Button>
+                        <div className='flex flex-row gap-x-3'>
+                            <Button className='w-fit rounded-md' type='submit' gradientMonochrome="cyan">submit</Button>
 
-                <Button className='w-fit rounded-md' onClick={() => setOpenAddFlashcardModal(false)} gradientMonochrome="success">close</Button>
-            </div>
-        </div>
-    </form>
-</Modal>
+                            <Button className='w-fit rounded-md' onClick={() => setOpenAddFlashcardModal(false)} gradientMonochrome="success">close</Button>
+                        </div>
+                    </div>
+                </form>
+            </Modal>
 
 
         </div >
