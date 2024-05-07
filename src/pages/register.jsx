@@ -97,8 +97,12 @@ export const Register = () => {
             })
 
             dispatch(clearRegistrationState());
-
-            dispatch(InsertSettingDataThunk(registerInput.username));
+             
+            const systemsettingdatatemp = {
+                username: registerInput.username,
+                userpassword: registerInput.password,
+             }
+            dispatch(InsertSettingDataThunk({systemsettingdatatemp}));
 
             navigate('/');
         }

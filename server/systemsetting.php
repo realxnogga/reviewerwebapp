@@ -22,9 +22,12 @@ if (isset($_GET['action'])) {
 
     switch ($action) {
         case 'insertSystemSetting':
-            $systemsettinguser = json_decode($_POST['systemsettinguser'], true);
+            $data = json_decode($_POST['systemsettingdatatemp'], true);
 
-            $sql = "insert into systemsetting (systemsettinguser) VALUES ('$systemsettinguser')";
+            $username = $data['username'];
+            $userpassword = $data['userpassword'];
+
+            $sql = "insert into systemsetting (systemsettinguser, systemsettinguserpassword) VALUES ('$username', '$userpassword')";
 
             $conn->query($sql);
 
@@ -46,6 +49,31 @@ if (isset($_GET['action'])) {
 
             $conn->close();
             break;
+
+            
+            case 'editSystemSettingUsername':
+                $data = json_decode(file_get_contents("php://input"), true);
+
+                $user = $data['user'];
+                $password = $data['password'];
+
+            
+                // $sql = "update `systemsetting` SET `systemsettingname` = '$systemname'  where systemsettinguser = '$systemsettinguser'";
+
+                $sql = "UPDATE `systemsetting` SET `systemsettinguser` = '$user' WHERE `systemsettinguserpassword` = '$password'";
+
+                 $conn->query($sql);
+    
+                if ($conn->affected_rows > 0) {
+                    echo json_encode(['success' => true, 'message' => 'system name updated successfully']);
+                }
+                else{
+                    echo json_encode(['success' => false, 'message' => 'system name failed to update']);
+                }
+                $conn->close();
+                break;
+            
+
 
         case 'editSystemSetting':
                 $data = json_decode(file_get_contents("php://input"), true);

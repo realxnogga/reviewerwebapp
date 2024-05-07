@@ -75,8 +75,10 @@ export const Login = () => {
             dispatch(changeThemeState('firstColor')); // if login is successfull, themestate will dispatch
             dispatch(GetResourceDataThunk()) // if login is successfull, resourcedata will dispatch
             dispatch(GetNoteThunk(inputValue.username)) // if login is successfull, note will dispatch
-            dispatch(GetSettingDataThunk(inputValue.username)); // if login is successfull, system name will be displayed
             dispatch(GetFlashcardThunk(inputValue.username));
+            
+            dispatch(GetSettingDataThunk(inputValue.username));
+
         }
 
         if (loginCookie === false) {
@@ -107,7 +109,6 @@ export const Login = () => {
     if (!showPassword) {
         showPasswordString = 'password';
     }
-
 
 
     return (

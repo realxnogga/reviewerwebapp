@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import storageSession from 'redux-persist/lib/storage/session'; // Use sessionStorage
 import { combineReducers } from '@reduxjs/toolkit';
 import { loginSliceReducer } from './feature/account/loginSlice';
 import { getUserDataSliceReducer } from './feature/data/userdataSlice';
@@ -18,7 +18,7 @@ import { OpenToggleQuizExamReducer } from './feature/opentogglequizexamSlice';
 
 const persistConfig = {
   key: 'root',
-  storage,
+  storage: storageSession, // Use sessionStorage
 }
 
 const rootReducer = combineReducers({
@@ -36,7 +36,6 @@ const rootReducer = combineReducers({
   FlashcardSliceName: flashcardSliceReducer,
   OpenToggleQuizExamSliceName: OpenToggleQuizExamReducer,
 });
-
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

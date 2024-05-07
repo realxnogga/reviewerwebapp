@@ -30,6 +30,44 @@ export const systemSettingSliceReducer = SystemSettingSlice.reducer;
 
 
 
+
+// used for updating the systemsettinguser column in db
+export const UpdateSettingUsernameThunk = createAsyncThunk(
+    "SystemSettingSliceName/EditSettingDataThunk",
+    async ({datatobeupdated}) => {
+        try {
+        
+        const res = await fetch("http://localhost/simple_web_in_react/server/systemsetting.php?action=editSystemSettingUsername", {
+            method: 'POST',
+            header: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(datatobeupdated)
+        })
+        const data = await res.json();
+        return data.success;
+            
+        } catch (error) {
+          console.log('Error', error);  
+        }
+    }
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const DeleteSettingDataThunk = createAsyncThunk(
     "SystemSettingSliceName/DeleteSettingDataThunk",
     async (systemsettinguser) => {
@@ -47,7 +85,7 @@ export const DeleteSettingDataThunk = createAsyncThunk(
 )
 
 
-
+// used for updating the systemsettingname column in db
 export const EditSettingDataThunk = createAsyncThunk(
     "SystemSettingSliceName/EditSettingDataThunk",
     async ({systemSettingTemp}) => {
@@ -90,10 +128,10 @@ export const GetSettingDataThunk = createAsyncThunk(
 
 export const InsertSettingDataThunk = createAsyncThunk(
     "SystemSettingSliceName/SystemSettingThunk",
-    async (systemsettinguser) => {
+    async ({systemsettingdatatemp}) => {
         try {
             const formData = new FormData();
-            formData.append('systemsettinguser', JSON.stringify(systemsettinguser));
+            formData.append('systemsettingdatatemp', JSON.stringify(systemsettingdatatemp));
 
             const res = await fetch("http://localhost/simple_web_in_react/server/systemsetting.php?action=insertSystemSetting", {
                method: "POST",

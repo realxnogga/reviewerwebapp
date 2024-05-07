@@ -32,7 +32,8 @@ import { DeleteAllFlashCardItemThunk } from '../feature/flashcardSlice';
 import { UpdateNoteUserThunk } from '../feature/noteSlice';
 import { UpdateFlashcardUserThunk } from '../feature/flashcardSlice';
 import { UpdateFlashcardItemUserThunk } from '../feature/flashcardSlice';
-
+import { UpdateSettingDataThunk } from '../feature/systemsettingSlice';
+import { UpdateSettingUsernameThunk } from '../feature/systemsettingSlice';
 
 export const Navbar = () => {
 
@@ -179,10 +180,13 @@ export const Navbar = () => {
         const datatobeupdated = {
             userID: userID,
             user: name,
+            password: password,
          }
          dispatch(UpdateNoteUserThunk({datatobeupdated}));
          dispatch(UpdateFlashcardUserThunk({datatobeupdated}));
          dispatch(UpdateFlashcardItemUserThunk({datatobeupdated}));
+         dispatch(UpdateSettingUsernameThunk({datatobeupdated}));
+
     }, [name])
          
     // -----------------------------------------------------
@@ -208,24 +212,24 @@ export const Navbar = () => {
 
     useEffect(() => {
         if (isSystemNameUpdated === true) {
-            ShowToast('system name updated successfully', 'success');
             setOpenEditSystemSettingModal(false);
             dispatch(GetSettingDataThunk(name));
             dispatch(clearIsSystemNameUpdatedState());
         }
         if (isSystemNameUpdated === false) {
-            ShowToast('system name failed to update', 'error');
             dispatch(clearIsSystemNameUpdatedState());
         }
     }, [isSystemNameUpdated]);
 
+    console.log(isSystemNameUpdated)
+
 
 
     //------------------------------------------------
-    // const systemData = useSelector(systemDataTemp);
-    // if (Object.keys(systemData).length != 0) {
-    //     var systemName = systemData.systemsettingname;
-    // }
+    const systemData = useSelector(systemDataTemp);
+    if (Object.keys(systemData).length != 0) {
+        var systemName = systemData.systemsettingname;
+    }
 
     return (
         <>
@@ -234,7 +238,7 @@ export const Navbar = () => {
                 {/* <img className="animate-spin spin h-[2rem] w-[2rem]" src="../../asset/icon/logo192.png" alt="" /> */}
                 <div className={`text-gray-300 text-xl flex items-center gap-x-1 mobile:text-sm`}>
 
-                     {/* <p>{systemName}</p> */}
+                     <p>{systemName}</p>
                     <RxDividerVertical className='text-[2rem] text-yellow-500' />
                     <p>Welcome, <span>{name}</span></p>
 

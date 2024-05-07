@@ -104,10 +104,6 @@ export const UpdateFlashcardUserThunk = createAsyncThunk(
 )
 
 
-
-
-
-
 // to delete all flashcard item  based on username
 export const DeleteAllFlashCardDataThunk = createAsyncThunk(
     "FlashcardSliceName/DeleteAllFlashCardDataThunk",
