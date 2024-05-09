@@ -11,6 +11,8 @@ export const ThemeSlice = createSlice({
            colortxt1: '',
            colortxt2: '',
            border: 'border duration-200',
+           tabidentifier: '',
+           tabidentifierhover: ''
         },
       
     },
@@ -24,7 +26,9 @@ export const ThemeSlice = createSlice({
                 state.themeHolder.colorbg2 = '!bg-gray-800 duration-200';
                 state.themeHolder.colorbg3 = '!bg-gray-700 duration-200';
                 state.themeHolder.colortxt1 = '!text-gray-300 duration-200';
-                state.themeHolder.colortxt2 = '!text-gray-800 duration-200';        
+                state.themeHolder.colortxt2 = '!text-gray-800 duration-200';
+                state.themeHolder.tabidentifier = '!bg-yellow-200 !bg-opacity-15 duration-200';   
+                state.themeHolder.tabidentifierhover = 'bg-gray-700 duration-200';         
             }
 
             if (whatThemeIsClicked === 'secondColor') {               
@@ -33,6 +37,8 @@ export const ThemeSlice = createSlice({
                 state.themeHolder.colorbg3 = '!bg-gray-100 duration-200';
                 state.themeHolder.colortxt1 = '!text-gray-800 duration-200';
                 state.themeHolder.colortxt2 = '!text-gray-300 duration-200';
+                state.themeHolder.tabidentifier = '!bg-[#6FBED8] duration-200';   
+                state.themeHolder.tabidentifierhover = 'bg-[#4AAFD1] duration-200'; 
             }
         },
 

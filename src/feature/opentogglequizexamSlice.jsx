@@ -6,6 +6,7 @@ export const OpenToggleQuizExamSlice = createSlice({
     name: 'OpenToggleQuizExamSliceName',
     initialState: {
         isToggleQuizExamOpen: false,
+        whatIsClickToggleQuizExam: ''
     },
     reducers: {
         isToggleQuizExamOpenState: (state) => {
@@ -16,10 +17,16 @@ export const OpenToggleQuizExamSlice = createSlice({
             state.isToggleQuizExamOpen = false;
         },
 
+        whatIsClickToggleQuizExamState: (state, action) => {
+            state.whatIsClickToggleQuizExam = action.payload;
+        }
+
 
     },
 })
 
-export const {isToggleQuizExamOpenState, clearIsToggleQuizExamOpenState} = OpenToggleQuizExamSlice.actions;
+export const {isToggleQuizExamOpenState, clearIsToggleQuizExamOpenState, whatIsClickToggleQuizExamState} = OpenToggleQuizExamSlice.actions;
+
+export const whatIsClickToggleQuizExamTemp = state => state.OpenToggleQuizExamSliceName.whatIsClickToggleQuizExam;
 export const isToggleQuizExamOpenTemp = state => state.OpenToggleQuizExamSliceName.isToggleQuizExamOpen;
 export const OpenToggleQuizExamReducer = OpenToggleQuizExamSlice.reducer;

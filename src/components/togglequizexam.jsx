@@ -6,6 +6,7 @@ import { IoMdClose } from "react-icons/io";
 import { clearIsToggleQuizExamOpenState } from "../feature/opentogglequizexamSlice";
 import { isToggleQuizExamOpenTemp } from "../feature/opentogglequizexamSlice";
 import { useState } from "react";
+import { whatIsClickToggleQuizExamState } from "../feature/opentogglequizexamSlice";
 
 export const ToggleQuizExam = () => {
     const dispatch = useDispatch();
@@ -34,6 +35,7 @@ export const ToggleQuizExam = () => {
             FoundationofEducationDropdown: !prevState.FoundationofEducationDropdown,
             isArrowRotateFoundationofEducation: !prevState.isArrowRotateFoundationofEducation
         }));
+
     }
     const PrinciplesofTeachingDropdownFunc = () => {
         setIsShowDrop(prevState => ({
@@ -107,8 +109,8 @@ export const ToggleQuizExam = () => {
 
                     </li>
                     <ul className={`${isShowDrop.FoundationofEducationDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in FE</li>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in FE </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FoundationofEducationExam1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in FE</li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FoundationofEducationQuiz1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in FE </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}
                     <li
@@ -120,8 +122,8 @@ export const ToggleQuizExam = () => {
 
                     </li>
                     <ul className={`${isShowDrop.PrinciplesofTeachingDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in PT </li>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in PT </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('PrinciplesofTeachingExam1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in PT </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('PrinciplesofTeachingQuiz1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in PT </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}
                     <li
@@ -133,8 +135,8 @@ export const ToggleQuizExam = () => {
 
                     </li>
                     <ul className={`${isShowDrop.ChildandAdolescentDevelopmentDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in CAD </li>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in CAD </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('ChildandAdolescentDevelopmentExam1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in CAD </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('ChildandAdolescentDevelopmentQuiz1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in CAD </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}
                     <li
@@ -146,8 +148,8 @@ export const ToggleQuizExam = () => {
 
                     </li>
                     <ul className={`${isShowDrop.FacilitatingLearningDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in FL </li>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in FL </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FacilitatingLearningExam1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in FL </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FacilitatingLearningQuiz1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in FL </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}
                     <li
@@ -159,8 +161,8 @@ export const ToggleQuizExam = () => {
 
                     </li>
                     <ul className={`${isShowDrop.AssessmentofStudentLearningDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in ASL </li>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in ASL </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('AssessmentofStudentLearningExam1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in ASL </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('AssessmentofStudentLearningQuiz1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in ASL </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}
                     <li
@@ -172,8 +174,8 @@ export const ToggleQuizExam = () => {
 
                     </li>
                     <ul className={`${isShowDrop.DevelopmentallyAppropriatePracticesinTeachingDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in DAPT </li>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in DAPT </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('DevelopmentallyAppropriatePracticesinTeachingExam1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in DAPT </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('DevelopmentallyAppropriatePracticesinTeachingQuiz1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in DAPT </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}
                     <li
@@ -185,8 +187,8 @@ export const ToggleQuizExam = () => {
 
                     </li>
                     <ul className={`${isShowDrop.CurriculumDevelopmentDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in CD</li>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in CD </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('CurriculumDevelopmentExam1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in CD</li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('CurriculumDevelopmentQuiz1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in CD </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}
                     <li
@@ -198,8 +200,8 @@ export const ToggleQuizExam = () => {
 
                     </li>
                     <ul className={`${isShowDrop.FieldStudyandPracticeDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in FSP</li>
-                        <li className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in FSP </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FieldStudyandPracticeExam1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Exam 1 in FSP</li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FieldStudyandPracticeQuiz1'))} className={`hover:${themeHolder.colorbg1} py-2 px-8`}>Quiz 1 in FSP </li>
                     </ul>
 
 
