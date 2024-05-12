@@ -4,46 +4,38 @@ import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { MdOutlineQuiz } from "react-icons/md";
 import { GrResources } from "react-icons/gr";
 import { IoCloseSharp } from "react-icons/io5";
-import { BsBookshelf } from "react-icons/bs";
 import { LiaEyeSlash } from "react-icons/lia";
 import { LiaEyeSolid } from "react-icons/lia";
 import { isSidebarOpenState, whatIsClickedState, isSideBarOpenTemp, whatIsClickedTemp } from "../feature/opensidebarSlice";
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from "react";
 import { themeHolderTemp } from "../feature/themeSlice";
+import { FiBox } from "react-icons/fi";
+import { minimizeSidebarState } from "../feature/opensidebarSlice";
+import { minimizeSidebarTemp } from "../feature/opensidebarSlice";
+import { LogoutInSidebar } from "./logoutbutton";
+import { ThemeInSidebar } from "./theme";
+
 
 export const Sidebar = () => {
 
-    const themeHolder = useSelector(themeHolderTemp);
-
     const dispatch = useDispatch();
-
+    const themeHolder = useSelector(themeHolderTemp);
     const whatIsClicked = useSelector(whatIsClickedTemp);
+    const minimizeSidebar = useSelector(minimizeSidebarTemp);
 
-    const [hideTextLink, setHideTextLink] = useState(false);
+    const hideTextLinkFunc = () => {dispatch(minimizeSidebarState())}
+    const hideSidebarFunc = () => { dispatch(isSidebarOpenState()); }
 
-    const hideTextLinkFunc = () => {
-        setHideTextLink(!hideTextLink);
-    }
-    var hideTextLinkString = hideTextLink === true ? 'hidden' : '';
-
-
-    const hideSidebarFunc = () => {
-        dispatch(isSidebarOpenState());
-    }
     const isSideBarOpen = useSelector(isSideBarOpenTemp);
-    var hideSidebarString = isSideBarOpen === true ? 'hidden' : '';
 
 
     return (
-        <aside className={`${hideSidebarString} ${themeHolder.colorbg2} bg-gray-800 h-screen w-fit top-[4rem] absolute left-0 px-2 z-10 overflow-hidden border-r border-r-yellow-500`}>
+        <aside className={`${isSideBarOpen ? 'w-[16.7rem] px-2 border-r border-r-yellow-500' : 'w-0 px-0 border-none'} ${minimizeSidebar ? 'w-[4.8rem]' : ''} ${themeHolder.colorbg2} absolute left-0 z-10 bg-gray-800 h-screen top-[4rem] text-nowrap overflow-hidden`}>
 
             <ul className='flex flex-col text-md '>
-
                 {
-
                     (
-                        hideTextLink === true ?
+                        minimizeSidebar === true ?
                             (
                                 <div className="p-4">
                                     <LiaEyeSlash onClick={hideTextLinkFunc} className={`${themeHolder.colortxt1} text-2xl text-gray-400`} />
@@ -61,31 +53,37 @@ export const Sidebar = () => {
                 }
 
                 <li onClick={() => { dispatch(whatIsClickedState('dashboard')) }} className={`${whatIsClicked === 'dashboard' ? themeHolder.tabidentifier : ''} hover:${themeHolder.tabidentifierhover} p-4 rounded-md flex flex-row items-center gap-x-3 cursor-pointer`}>        
-                        <span><MdOutlineSpaceDashboard className="text-yellow-500 text-[1.6rem] " /></span>
-                        <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Dashboard</span>
+                        <span><MdOutlineSpaceDashboard className="text-yellow-500 text-[1.8rem] " /></span>
+                        <span className={`${minimizeSidebar ? 'hidden' : ''} ${themeHolder.colortxt1} text-gray-300 `}>Dashboard</span>
                 </li>
 
 
 
                 <li onClick={() => { dispatch(whatIsClickedState('practicetestandquiz')) }} className={`${whatIsClicked === 'practicetestandquiz' ? themeHolder.tabidentifier : ''} hover:${themeHolder.tabidentifierhover} p-4 rounded-md flex flex-row items-center gap-x-3 cursor-pointer`} >
-                    <span><MdOutlineQuiz className={`text-yellow-500 text-[1.6rem]`} /></span>
-                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300`}>Practice Test & Quizzes</span>
+                    <span><MdOutlineQuiz className={`text-yellow-500 text-[1.8rem]`} /></span>
+                    <span className={`${minimizeSidebar ? 'hidden' : ''} ${themeHolder.colortxt1} text-gray-300`}>
+                   Practice Test and Quizzes </span>
                 </li>
 
 
 
                 <li onClick={() => { dispatch(whatIsClickedState('learningresources')) }} className={`${whatIsClicked === 'learningresources' ? themeHolder.tabidentifier : ''} hover:${themeHolder.tabidentifierhover} p-4 rounded-md flex flex-row items-center gap-x-3 cursor-pointer`} >
-                    <span><GrResources className="text-yellow-500 text-[1.6rem]" /></span>
-                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Learning Resources</span>
+                    <span><GrResources className="text-yellow-500 text-[1.8rem]" /></span>
+                    <span className={`${minimizeSidebar ? 'hidden' : ''} ${themeHolder.colortxt1} text-gray-300 `}>Learning Resources</span>
                 </li>
 
 
 
                 <li onClick={() => { dispatch(whatIsClickedState('learningmaterial')) }} className={`${whatIsClicked === 'learningmaterial' ? themeHolder.tabidentifier : ''} hover:${themeHolder.tabidentifierhover} p-4 rounded-md flex flex-row items-center gap-x-3 cursor-pointer`} >
-                    <span><BsBookshelf className="text-yellow-500 text-[1.6rem]" /></span>
-                    <span className={`${hideTextLinkString} ${themeHolder.colortxt1} text-gray-300 `}>Learning Material</span>
+                    <span><FiBox className="text-yellow-500 text-[1.8rem]" /></span>
+                    <span className={`${minimizeSidebar ? 'hidden' : ''} ${themeHolder.colortxt1} text-gray-300 `}>Learning Material</span>
                 </li>
 
+                <hr className="border border-gray-400 my-4"/>
+
+                <LogoutInSidebar />
+                <ThemeInSidebar />
+    
             </ul>
 
         </aside>

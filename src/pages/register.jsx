@@ -138,9 +138,11 @@ export const Register = () => {
 
     return (
         <div
-            class="h-screen w-screen flex items-center justify-center bg-no-repeat bg-cover bg-center bg-[url('../../asset/loginregisterbg/bg.jpg')]">
+            class="h-screen w-screen flex flex-col gap-y-8 items-center justify-center bg-no-repeat bg-cover bg-center bg-[url('../../asset/loginregisterbg/bg.jpg')]">
 
-            <Card className="hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:border-none h-fit w-fit max-w-[90%] bg-black bg-opacity-20 backdrop-blur-md border border-yellow-500 text-white">
+            <h3 className='text-5xl font-semibold text-gray-300 '>Register</h3>
+
+            <Card className="shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] hover:border-none h-fit w-fit max-w-[90%] bg-black bg-opacity-20 backdrop-blur-md border-none text-white">
 
                 <FloatingLabel className='text-white' name="username" onChange={handleChange} value={registerInput.username} variant="standard" label="Enter your Username" />
 
@@ -152,7 +154,7 @@ export const Register = () => {
                     <div className='relative'>
                         <div className='flex items-center gap-x-2'>
                             <p className='text-[.8rem] text-gray-400'>generate password</p>
-                      
+
                             <IoMdArrowDropup className={`${showgeneratepasswordmadal ? 'rotate-180' : ''} duration-200 text-2xl`} onClick={() => { ShowGeneratePasswordModalfunc(); }} />
                         </div>
                         <div className={`${showgeneratepasswordmadal ? 'h-[9.9rem] p-2 mt-2 border border-yellow-500' : 'h-0'} absolute duration-200 bg-gray-900 w-full flex items-end justify-between overflow-hidden z-10`}>
@@ -171,7 +173,7 @@ export const Register = () => {
 
                                 <div className='flex items-center gap-x-2 text-sm'>
                                     <input type="checkbox" checked={useSymbols} onChange={() => setUseSymbols(!useSymbols)} />
-                                    <p>Use Symbols</p>
+                                    <p>Include Symbols</p>
                                 </div>
 
 
@@ -191,7 +193,7 @@ export const Register = () => {
                                 </div>
                             </div>
 
-                            <button onClick={GeneratePasswordfunc} className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-fit px-3 py-2 rounded-md text-white">
+                            <button onClick={() => { GeneratePasswordfunc(); setshowgeneratepasswordmadal(false) }} className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-fit px-3 py-2 rounded-md text-white text-sm">
                                 Generate
                             </button>
 

@@ -1,50 +1,63 @@
-import { useEffect, useState } from "react";
-import { IoMdColorFill } from "react-icons/io";
+
 import { changeThemeState } from "../feature/themeSlice";
 import { useDispatch, useSelector } from 'react-redux';
-import { Tooltip } from "flowbite-react";
 import { themeHolderTemp } from "../feature/themeSlice";
-import { IoSunnySharp } from "react-icons/io5";
-import { IoMdMoon } from "react-icons/io";
+import { minimizeSidebarTemp } from "../feature/opensidebarSlice";
+import { BsFillMoonStarsFill } from "react-icons/bs";
+import { FaSun } from "react-icons/fa";
+import { toggleThemeState } from "../feature/themeSlice";
+import { toggleThemeTemp } from "../feature/themeSlice";
 
-export const Theme = () => {
-
-    const themeHolder = useSelector(themeHolderTemp);
-
+export const ThemeInSidebar = () => {
     const dispatch = useDispatch();
-
-    const [showTheme, setShowTheme] = useState(false);
-
-    const HideThemeFunc = () => {
-        setShowTheme(false);
-    }
-
-    const ShowThemeFunc = () => {
-        setShowTheme(!showTheme);
-    }
-    var closeThemeString = '';
-
-    if (showTheme === true) {
-        closeThemeString = 'w-[8rem]';
-    }
+    const themeHolder = useSelector(themeHolderTemp);
+    const minimizeSidebar = useSelector(minimizeSidebarTemp);
+    const toggleTheme = useSelector(toggleThemeTemp);
 
     return (
+        <li className={`${themeHolder.colorbg1} p-4 rounded-md flex justify-between items-center gap-x-3`} >
+            {
+                minimizeSidebar ?
+                    (
+                        toggleTheme ?
+                            (
+                                <li className={`h-full w-full flex items-center justify-center`} >
+                                    <FaSun onClick={() => { dispatch(toggleThemeState()); dispatch(changeThemeState('firstColor')); }} className="text-2xl text-yellow-500" />
+                                </li>
+                            )
+                            :
+                            (
+                                <li className={`h-full w-full flex items-center justify-center`} >
+                                    <BsFillMoonStarsFill onClick={() => { dispatch(toggleThemeState()); dispatch(changeThemeState('secondColor')); }} className="text-2xl text-white" />
+                                </li>
+                            )
+                    )
+                    :
+                    (
+                        <>
+                            <p className={`${minimizeSidebar ? 'hidden' : ''} text-gray-300`}>Theme</p>
+                            {
+                                toggleTheme ?
+                                    (
+                                        <div onClick={() => { dispatch(changeThemeState('firstColor')); dispatch(toggleThemeState()); }} className="h-[2rem] w-[4.6rem] pr-1.5 pl-3.5 border border-yellow-500 rounded-[25rem] flex items-center justify-between cursor-pointer">
+                                            <p className="text-gray-200 text-sm">day</p>
+                                            <FaSun className="text-[1.2rem] text-yellow-500" />
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        <div onClick={() => { dispatch(changeThemeState('secondColor')); dispatch(toggleThemeState()); }} className="h-[2rem] w-[4.6rem] pl-1.5 pr-2.5 border border-yellow-500 rounded-[25rem] flex flex-row-reverse items-center justify-between cursor-pointer">
+                                            <p className="text-gray-200 text-sm">night</p>
+                                            <BsFillMoonStarsFill className="text-1xl text-white" />
+                                        </div>
+                                    )
+                            }
+                        </>
 
-        <section className="flex items-center gap-x-4">
+                    )
+            }
 
-            
-            <p onClick={ShowThemeFunc} className={`${themeHolder.colortxt1}text-gray-300 cursor-pointer`}>Theme:</p>
 
-            <div className={`${closeThemeString} h-fit w-0 duration-200 ease-in-out flex items-center justify-between overflow-hidden`}>
-
-             
-                  <img  onClick={() => { dispatch(changeThemeState('firstColor')); HideThemeFunc() }} className="h-[2.5rem] w-[3.5rem] border cursor-pointer" src="../asset/theme/darkTheme.png" alt="" />
-           
-                 <img onClick={() => { dispatch(changeThemeState('secondColor')); HideThemeFunc() }} className="h-[2.5rem] w-[3.5rem] border cursor-pointer" src="../asset/theme/lightTheme.png" alt="" />
-                
-
-            </div>
-        </section>
-
+        </li>
     )
 }

@@ -11,12 +11,8 @@ import { DeleteAccountThunk, isAccountDeletedTemp, clearDeleteAccountState } fro
 import { EditUserThunk, isUserEditedTemp, clearEditDataState } from '../feature/account/editaccountSlice';
 import { clearIsSidebarOpenState, clearWhatIsClickedState } from '../feature/opensidebarSlice';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { Theme } from './theme';
 import { themeHolderTemp } from '../feature/themeSlice';
-import { clearIsToggleNoteFlashCardOpenState } from '../feature/opentogglenoteflashcardSlice';
-import { clearWhatIsClickToggleNoteflashCardState } from '../feature/opentogglenoteflashcardSlice';
 import { DeleteAllNoteThunk } from '../feature/noteSlice';
-import { RiLogoutBoxLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { RiEditBoxLine } from "react-icons/ri";
 import { IoSettingsOutline } from "react-icons/io5";
@@ -32,8 +28,11 @@ import { DeleteAllFlashCardItemThunk } from '../feature/flashcardSlice';
 import { UpdateNoteUserThunk } from '../feature/noteSlice';
 import { UpdateFlashcardUserThunk } from '../feature/flashcardSlice';
 import { UpdateFlashcardItemUserThunk } from '../feature/flashcardSlice';
-import { UpdateSettingDataThunk } from '../feature/systemsettingSlice';
 import { UpdateSettingUsernameThunk } from '../feature/systemsettingSlice';
+import { LogoutInProfileDropdown } from './logoutbutton';
+import { clearMinimizeSidebarState } from '../feature/opensidebarSlice';
+import { clearToggleThemeState } from '../feature/themeSlice';
+
 
 export const Navbar = () => {
 
@@ -55,16 +54,6 @@ export const Navbar = () => {
     const [openDeleteUserModal, setOpenDeleteUserModal] = useState(false);
     const [openEditUserModal, setOpenEditUserModal] = useState(false);
     const [openEditSystemSettingModal, setOpenEditSystemSettingModal] = useState(false);
-
-    const handleLogout = () => {
-        dispatch(clearLoginState());
-        dispatch(clearRegisterState());
-        dispatch(clearIsSidebarOpenState());
-        dispatch(clearWhatIsClickedState());
-        dispatch(clearIsToggleNoteFlashCardOpenState());
-        dispatch(clearWhatIsClickToggleNoteflashCardState());
-        navigate('/');
-    }
 
     const ShowProfileDropdownFunc = () => setShowUserProfileDropdown(!showUserProfileDropdown);
     const ShowProfileDropdownMouseLeaveFunc = () => setShowUserProfileDropdown(!showUserProfileDropdown);
@@ -88,6 +77,8 @@ export const Navbar = () => {
             dispatch(clearRegisterState());
             dispatch(clearDeleteAccountState());
             dispatch(clearIsSidebarOpenState());
+            dispatch(clearMinimizeSidebarState());
+            dispatch(clearToggleThemeState());
             dispatch(clearWhatIsClickedState());
             dispatch(DeleteAllNoteThunk(name));
             dispatch(DeleteSettingDataThunk(name));
@@ -265,10 +256,7 @@ export const Navbar = () => {
                             System Setting
                         </p>
                         <hr className='w-full my-2' />
-                        <p className='hover:text-yellow-500 cursor-pointer flex items-center gap-x-2' onClick={handleLogout}>
-                            <RiLogoutBoxLine className='text-xl' />
-                            Log Out
-                        </p>
+                       <LogoutInProfileDropdown />
                     </div>
                 </div>
 
@@ -283,9 +271,6 @@ export const Navbar = () => {
                         <div>
                             <label htmlFor="systemname" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>enter a new system name:</label>
                             <input type="text" name="systemname" id="systemname" onChange={handleEditSystemChange} value={editSystem.systemname} className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `} />
-                        </div>
-                        <div>
-                            <Theme />
                         </div>
                     </div>
                     <div className='flex flex-row gap-x-3'>

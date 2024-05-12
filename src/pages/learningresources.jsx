@@ -186,11 +186,13 @@ export const LearningResources = () => {
                 {
                     filteredData.length === 0 ?
                         (
-                            <div className="h-[90%] w-[75rem] max-w-[98%] flex items-center justify-center">
-                                <div className={`border-gray-500 h-[70%] w-[45rem] max-w-[95%] border rounded-xl flex items-center justify-center`}>
-                                    <p className={`${themeHolder.colortxt1} text-[3.5rem] font-semibold text-gray-200 mobile:text-[2rem] `}>No Resources!</p>
-                                </div>
-                            </div>
+                            <section className="h-[91%] w-full flex items-center justify-center flex-col gap-y-2.5 text-center">
+                                <img className="h-[17rem] mobile:h-[13rem]"
+                                    src="../../asset/emptyIcon/emptyImg.png" alt="" />
+                                <h3 className={`text-gray-400 text-[3rem] font-bold mobile:text-[2rem] `}>
+                                    No result found </h3>
+                                <span className="text-gray-400">It's empty here, you can search for another resources or adjust the filter.</span>
+                            </section>
                         )
                         :
                         (

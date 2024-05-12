@@ -454,10 +454,12 @@ export const FlashCard = () => {
             {
                 filteredNoteData.length === 0 ?
                     (
-                        <section className="h-[91%] w-full flex items-center justify-center flex-col gap-y-3">
+                        <section className="h-[91%] w-full flex items-center justify-center flex-col gap-y-2.5 text-center">
                             <img className="h-[17rem] mobile:h-[13rem]"
-                                src="../../asset/emptyIcon/trashImg.png" alt="" />
-                            <h3 className={`${themeHolder.colortxt1} text-[4rem] font-bold mobile:text-[2rem] `}>No Flashcard Yet</h3>
+                                src="../../asset/emptyIcon/emptyImg.png" alt="" />
+                           <h3 className={`text-gray-400 text-[3rem] font-bold mobile:text-[2rem] `}>
+                            Nothing to show </h3>
+                            <span className="text-gray-400">It's empty here, you can create a flashcard by clicking the add button.</span>
                         </section>
                     )
                     :
