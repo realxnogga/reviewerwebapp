@@ -39,16 +39,22 @@ export const ThemeInSidebar = () => {
                             {
                                 toggleTheme ?
                                     (
-                                        <div onClick={() => { dispatch(changeThemeState('firstColor')); dispatch(toggleThemeState()); }} className="h-[2rem] w-[4.6rem] pr-1.5 pl-3.5 border border-yellow-500 rounded-[25rem] flex items-center justify-between cursor-pointer">
+                                        <div onClick={() => { dispatch(changeThemeState('firstColor')); dispatch(toggleThemeState()); }} className="h-[2rem] w-[4.6rem] pl-2.5 border border-yellow-500 rounded-[25rem] flex items-center justify-between cursor-pointer">
                                             <p className="text-gray-200 text-sm">day</p>
-                                            <FaSun className="text-[1.2rem] text-yellow-500" />
+                                            <div className="h-[2rem] w-[2rem] border border-yellow-500 rounded-[50%] flex items-center justify-center">
+                                                <FaSun className="text-[1.2rem] text-yellow-500" />
+                                            </div>
+
                                         </div>
                                     )
                                     :
                                     (
-                                        <div onClick={() => { dispatch(changeThemeState('secondColor')); dispatch(toggleThemeState()); }} className="h-[2rem] w-[4.6rem] pl-1.5 pr-2.5 border border-yellow-500 rounded-[25rem] flex flex-row-reverse items-center justify-between cursor-pointer">
+                                        <div onClick={() => { dispatch(changeThemeState('secondColor')); dispatch(toggleThemeState()); }} className="h-[2rem] w-[4.6rem] pr-1.5 border border-yellow-500 rounded-[25rem] flex flex-row-reverse items-center justify-between cursor-pointer">
                                             <p className="text-gray-200 text-sm">night</p>
-                                            <BsFillMoonStarsFill className="text-1xl text-white" />
+                                            <div className="h-[2rem] w-[2rem] border border-yellow-500 rounded-[50%] flex items-center justify-center">
+                                                <BsFillMoonStarsFill className="text-1xl text-white" />
+                                            </div>
+
                                         </div>
                                     )
                             }

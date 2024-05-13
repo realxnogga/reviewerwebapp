@@ -7,11 +7,12 @@ import { clearIsToggleQuizExamOpenState } from "../feature/opentogglequizexamSli
 import { isToggleQuizExamOpenTemp } from "../feature/opentogglequizexamSlice";
 import { useState } from "react";
 import { whatIsClickToggleQuizExamState } from "../feature/opentogglequizexamSlice";
-
+import { whatIsClickToggleQuizExamTemp } from "../feature/opentogglequizexamSlice";
 export const ToggleQuizExam = () => {
     const dispatch = useDispatch();
     const themeHolder = useSelector(themeHolderTemp);
     const isToggleQuizExamOpen = useSelector(isToggleQuizExamOpenTemp);
+    const whatIsClickToggleQuizExam = useSelector(whatIsClickToggleQuizExamTemp);
 
     // const closeToggleQuizExam = () => {
     //     dispatch(clearIsToggleQuizExamOpenState());
@@ -109,7 +110,7 @@ export const ToggleQuizExam = () => {
 
                     </li>
                     <ul className={`${isShowDrop.FoundationofEducationDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FoundationofEducationExam1'))} className={`py-2 px-8`}>Exam 1 in FE</li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FoundationofEducationExam1'))} className={`${whatIsClickToggleQuizExam === ''} py-2 px-8`}>Exam 1 in FE</li>
                         <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FoundationofEducationQuiz1'))} className={`py-2 px-8`}>Quiz 1 in FE </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}

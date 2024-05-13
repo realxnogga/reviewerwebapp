@@ -315,7 +315,7 @@ export const Note = () => {
                     (
                         <section className="h-[91%] w-full flex items-center justify-center flex-col gap-y-2.5 text-center">
                            <img className="h-[17rem] mobile:h-[13rem]" 
-                           src="../../asset/emptyIcon/emptyImg.png" alt="" />
+                           src="../../asset/emptyImg/emptyImg.png" alt="" />
                            <h3 className={`text-gray-400 text-[3rem] font-bold mobile:text-[2rem] `}>
                             Nothing to show </h3>
                             <span className="text-gray-400">It's empty here, you can create a note by clicking the add button.</span>
@@ -323,13 +323,13 @@ export const Note = () => {
                     )
                     :
                     (
-                        <section className="h-[91%] w-full pt-3 overflow-scroll noScrollbar flex flex-wrap content-start gap-4 ">
+                        <section className="h-[91%] w-full pt-3 overflow-scroll noScrollbar flex flex-wrap content-start gap-4 mobile:justify-center">
 
                             {
 
                                 filteredNoteData.map((item) => (
 
-                                    <div key={item.noteID} className={`${NoteColorFunc(item.notesubject)} relative h-[13rem] w-[13rem] overflow-scroll noScrollbar  rounded-lg p-2`}>
+                                    <div key={item.noteID} className={`${NoteColorFunc(item.notesubject)} relative h-[13rem] w-[13rem] overflow-scroll noScrollbar  rounded-lg p-2 mobile:h-[20rem] mobile:w-[20rem]`}>
                                         <div >
                                             <p className="text-gray-600 text-sm">{item.notedate}</p>
                                         </div>

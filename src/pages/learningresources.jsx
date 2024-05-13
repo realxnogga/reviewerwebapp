@@ -188,7 +188,7 @@ export const LearningResources = () => {
                         (
                             <section className="h-[91%] w-full flex items-center justify-center flex-col gap-y-2.5 text-center">
                                 <img className="h-[17rem] mobile:h-[13rem]"
-                                    src="../../asset/emptyIcon/emptyImg.png" alt="" />
+                                    src="../../asset/emptyImg/emptyImg.png" alt="" />
                                 <h3 className={`text-gray-400 text-[3rem] font-bold mobile:text-[2rem] `}>
                                     No result found </h3>
                                 <span className="text-gray-400">It's empty here, you can search for another resources or adjust the filter.</span>
@@ -203,7 +203,7 @@ export const LearningResources = () => {
 
                                             <iframe
                                                 scrolling="no" // to hide scrollbar
-                                                className="h-[10rem] w-[14rem]"
+                                                className="h-[10rem] w-[14rem] mobile:h-[15rem] mobile:w-[25rem] "
                                                 src={`../../asset/learningresources/${item.actualfile}`}
                                             ></iframe>
                                             <div className={`${themeHolder.colortxt1} text-gray-100 text-sm pt-2`}>

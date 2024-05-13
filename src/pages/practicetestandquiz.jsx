@@ -5,12 +5,12 @@ import { useSelector } from 'react-redux';
 import { themeHolderTemp } from "../feature/themeSlice";
 import { ToggleQuizExam } from "../components/togglequizexam";
 import { ToggleQuizExamIcon } from "../components/togglequizexamicon";
-import { Quiz } from "../quizexamresources/sample";
+import { Quiz } from "../quizexamresources/quiz";
 
 export const PracticeTestAndQuiz = () => {
 
     const themeHolder = useSelector(themeHolderTemp);
-   
+
 
     return (
         <>
@@ -19,12 +19,9 @@ export const PracticeTestAndQuiz = () => {
                 <ToggleQuizExam />
                 <ToggleQuizExamIcon />
 
-                <section className="border border-yellow-500 h-[90%] w-[69rem] max-w-[95%] flex items-center justify-center mobile:justify-center gap-4 overflow-scroll noScrollbar">
-                 
-                 <Quiz />
-                  
+                <section className="relative border border-yellow-500 h-[90%] w-[69rem] flex items-center justify-center overflow-scroll noScrollbar">
+                    <Quiz />
                 </section>
-                
 
             </div>
         </>

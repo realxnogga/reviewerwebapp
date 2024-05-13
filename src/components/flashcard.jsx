@@ -456,7 +456,7 @@ export const FlashCard = () => {
                     (
                         <section className="h-[91%] w-full flex items-center justify-center flex-col gap-y-2.5 text-center">
                             <img className="h-[17rem] mobile:h-[13rem]"
-                                src="../../asset/emptyIcon/emptyImg.png" alt="" />
+                                src="../../asset/emptyImg/emptyImg.png" alt="" />
                            <h3 className={`text-gray-400 text-[3rem] font-bold mobile:text-[2rem] `}>
                             Nothing to show </h3>
                             <span className="text-gray-400">It's empty here, you can create a flashcard by clicking the add button.</span>
@@ -464,11 +464,11 @@ export const FlashCard = () => {
                     )
                     :
                     (
-                        <section className="h-[91%] w-full mt-3 overflow-scroll noScrollbar flex flex-wrap content-start gap-4">
+                        <section className="h-[91%] w-full mt-3 overflow-scroll noScrollbar flex flex-wrap content-start gap-4 mobile:justify-center">
                         {
         
                             filteredNoteData.map((item) => (
-                                <div key={item.flashcardID} className={`${themeHolder.border} ${FlashcardColorFunc(item.flashcardsubject)} relative h-[12rem] w-[16rem] rounded-lg flex flex-col justify-between border-none overflow-hidden`}>
+                                <div key={item.flashcardID} className={`${themeHolder.border} ${FlashcardColorFunc(item.flashcardsubject)} relative h-[12rem] w-[16rem] rounded-lg flex flex-col justify-between border-none overflow-hidden mobile:h-[16rem] mobile:w-[22rem]`}>
                                     <p className="text-[2rem] absolute top-0 left-3">{item.flashcardtitle}</p>
                                     <div className="absolute top-0 right-0 bg-black bg-opacity-40 backdrop-blur-sm h-full w-[4rem] pt-4 flex flex-col items-center justify-start gap-y-6 text-2xl text-yellow-500">
                                         <Tooltip style="light" placement="left" content={'add'}>
