@@ -13,7 +13,7 @@ export const Quiz = () => {
     const [answers, setAnswers] = useState([]);
     const [showScore, setShowScore] = useState(false);
     const [indexofQuestion, setIndexofQuestion] = useState(0);
-    
+
 
     const handleAnswerSelection = (questionIndex, selectedAnswer) => {
         setIndexofQuestion(questionIndex); // to access the index of answered question outside of this function
@@ -39,88 +39,103 @@ export const Quiz = () => {
     let questions = '';
     let quizTitle = '';
 
-    if (whatIsClickToggleQuizExam === 'FoundationofEducationQuiz1'){
-        questions = Quiz1; 
-        quizTitle = 'Quiz1 in Foundation of Education';    
-    }    
-    else if (whatIsClickToggleQuizExam === 'PrinciplesofTeachingQuiz1'){
-        questions = Quiz2; 
-        quizTitle = 'Quiz1 in Principle of Teaching';     
-    }  
+    if (whatIsClickToggleQuizExam === 'FoundationofEducationQuiz1') {
+        questions = Quiz1;
+        quizTitle = 'Quiz1 in Foundation of Education';
+    }
+    else if (whatIsClickToggleQuizExam === 'PrinciplesofTeachingQuiz1') {
+        questions = Quiz2;
+        quizTitle = 'Quiz1 in Principle of Teaching';
+    }
 
     // reset if change tab
     useEffect(() => {
         setStartQuiz(false);
-        setShowScore(false); 
-        setIndexofQuestion(0); 
+        setShowScore(false);
+        setIndexofQuestion(0);
         setAnswers([]);
     }, [whatIsClickToggleQuizExam])
 
     return (
         <>
-        {
-           !startQuiz ? 
-           (
-            <>
-             <p>{ quizTitle }</p>
-              <button onClick={() => {setStartQuiz(true)}}>start quiz</button>
-            </>   
-           )
-           :
-           (
-            Array.isArray(questions) && questions.length > 0 ?
-                (
-                    <div>
-                        <div>
-                            {showScore ? (
-                                <div>
-                                    <h2>Quiz Complete!</h2>
-                                    <h3>Your Score: {score}</h3>
-                                    <button onClick={() => {setShowScore(false); setIndexofQuestion(0); setAnswers([])}}>try again</button>
-                                </div>
-                            ) : (
-                                <div>
-                                    {questions.map((question, index) => (
-                                        <div key={index}>
-                                            <h3>{index + 1}. {question.question}</h3>
-        
-                                            {question.type === 'radio' && (
-                                                <ul>             
-                                                    {question.options.map((option, optionIndex) => (
-                                                        <li key={optionIndex}>
-                                                            <input
-                                                                type="radio"
-                                                                name={`question${index}`}
-                                                                value={option}
-                                                                onChange={() =>
-                                                                    handleAnswerSelection(index, option)
-                                                                }
-                                                            />
-                                                            {option}
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            )}
-                                        </div>
-                                    ))}
-        
-                                    {questions.length === (indexofQuestion + 1) && (
-                                        <button onClick={handleFinishQuiz}>Submit</button>
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                )
-                :
-            (
-                ''
-            )     
-            
-           )
-        }
+            {
+                whatIsClickToggleQuizExam === 'none' ?
+                    (
+                        <section className="h-[91%] w-full flex items-center justify-center flex-col gap-y-2.5 text-center">
+                            <img className="h-[17rem] mobile:h-[13rem]"
+                                src="../../asset/emptyIcon/emptyImg.png" alt="" />
+                            <h3 className={`text-gray-400 text-[3rem] font-bold mobile:text-[2rem] `}>
+                               No Selected Reviewer </h3>
+                            <span className="text-gray-400">You can select at the right sidebar.</span>
+                        </section>
+                    )
+                    :
+                    (
+                        !startQuiz ?
+                            (
+                                <>
+                                    <p>{quizTitle}</p>
+                                    <button onClick={() => { setStartQuiz(true) }}>start quiz</button>
+                                </>
+                            )
+                            :
+                            (
+                                Array.isArray(questions) && questions.length > 0 ?
+                                    (
+                                        <div>
+                                            <div>
+                                                {showScore ? (
+                                                    <div>
+                                                        <h2>Quiz Complete!</h2>
+                                                        <h3>Your Score: {score}</h3>
+                                                        <button onClick={() => { setShowScore(false); setIndexofQuestion(0); setAnswers([]) }}>try again</button>
+                                                    </div>
+                                                ) : (
+                                                    <div>
+                                                        {questions.map((question, index) => (
+                                                            <div key={index}>
+                                                                <h3>{index + 1}. {question.question}</h3>
 
-           
+                                                                {question.type === 'radio' && (
+                                                                    <ul>
+                                                                        {question.options.map((option, optionIndex) => (
+                                                                            <li key={optionIndex}>
+                                                                                <input
+                                                                                    type="radio"
+                                                                                    name={`question${index}`}
+                                                                                    value={option}
+                                                                                    onChange={() =>
+                                                                                        handleAnswerSelection(index, option)
+                                                                                    }
+                                                                                />
+                                                                                {option}
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                )}
+                                                            </div>
+                                                        ))}
+
+                                                        {questions.length === (indexofQuestion + 1) && (
+                                                            <button onClick={handleFinishQuiz}>Submit</button>
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        ''
+                                    )
+
+                            )
+
+
+                    )
+            }
+
+
         </>
     );
 }    

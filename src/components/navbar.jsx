@@ -32,7 +32,7 @@ import { UpdateSettingUsernameThunk } from '../feature/systemsettingSlice';
 import { LogoutInProfileDropdown } from './logoutbutton';
 import { clearMinimizeSidebarState } from '../feature/opensidebarSlice';
 import { clearToggleThemeState } from '../feature/themeSlice';
-
+import { clearWhatIsClickToggleQuizExamState } from '../feature/opentogglequizexamSlice';
 
 export const Navbar = () => {
 
@@ -78,6 +78,7 @@ export const Navbar = () => {
             dispatch(clearDeleteAccountState());
             dispatch(clearIsSidebarOpenState());
             dispatch(clearMinimizeSidebarState());
+            dispatch(clearWhatIsClickToggleQuizExamState());
             dispatch(clearToggleThemeState());
             dispatch(clearWhatIsClickedState());
             dispatch(DeleteAllNoteThunk(name));

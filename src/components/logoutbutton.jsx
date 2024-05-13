@@ -12,6 +12,8 @@ import { minimizeSidebarTemp } from "../feature/opensidebarSlice";
 import { themeHolderTemp } from '../feature/themeSlice';
 import { clearMinimizeSidebarState } from '../feature/opensidebarSlice';
 import { clearToggleThemeState } from '../feature/themeSlice';
+import { clearWhatIsClickToggleQuizExamState } from '../feature/opentogglequizexamSlice';
+
 
 export const LogoutInProfileDropdown = () => {
 
@@ -23,6 +25,7 @@ export const LogoutInProfileDropdown = () => {
         dispatch(clearRegisterState());
         dispatch(clearIsSidebarOpenState());
         dispatch(clearMinimizeSidebarState());
+        dispatch(clearWhatIsClickToggleQuizExamState());
         dispatch(clearToggleThemeState());
         dispatch(clearWhatIsClickedState());
         dispatch(clearIsToggleNoteFlashCardOpenState());
@@ -51,6 +54,7 @@ export const LogoutInSidebar = () => {
         dispatch(clearRegisterState());
         dispatch(clearIsSidebarOpenState());
         dispatch(clearMinimizeSidebarState());
+        dispatch(clearWhatIsClickToggleQuizExamState());
         dispatch(clearToggleThemeState());
         dispatch(clearWhatIsClickedState());
         dispatch(clearIsToggleNoteFlashCardOpenState());
