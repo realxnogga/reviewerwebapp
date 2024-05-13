@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { whatIsClickToggleQuizExamTemp } from "../feature/opentogglequizexamSlice";
 import { Quiz1, Quiz2 } from './quiz';
+import { themeHolderTemp } from '../feature/themeSlice';
 
 export const Quiz = () => {
-
+    const themeHolder = useSelector(themeHolderTemp);
     const whatIsClickToggleQuizExam = useSelector(whatIsClickToggleQuizExamTemp);
 
     const [score, setScore] = useState(0);
@@ -65,7 +66,7 @@ export const Quiz = () => {
                             <img className="h-[17rem] mobile:h-[13rem]"
                                 src="../../asset/emptyIcon/emptyImg.png" alt="" />
                             <h3 className={`text-gray-400 text-[3rem] font-bold mobile:text-[2rem] `}>
-                               No Selected Reviewer </h3>
+                                No Selected Reviewer </h3>
                             <span className="text-gray-400">You can select at the right sidebar.</span>
                         </section>
                     )
@@ -73,10 +74,16 @@ export const Quiz = () => {
                     (
                         !startQuiz ?
                             (
-                                <>
-                                    <p>{quizTitle}</p>
-                                    <button onClick={() => { setStartQuiz(true) }}>start quiz</button>
-                                </>
+
+                                <div className='flex flex-col items-center gap-y-8 text-center'>
+                                    <p className={`${themeHolder.colortxt1} text-4xl font-semibold mobile:text-2xl`}>{quizTitle}</p>
+
+                                    <button onClick={() => { setStartQuiz(true) }} className="h-[4rem] w-[8rem] mobile:h-[3rem] mobile:w-[6.5rem] mobile:gap-x-2 mobile:text-lg flex items-center justify-center gap-x-4 bg-yellow-500 border-none rounded-lg text-xl text-white font-semibold">
+                                        Start Quiz
+                                    </button>
+                                </div>
+
+
                             )
                             :
                             (
