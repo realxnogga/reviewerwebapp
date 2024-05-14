@@ -36,7 +36,7 @@ export const LogoutInProfileDropdown = () => {
     return (
         <p className='hover:text-yellow-500 cursor-pointer flex items-center gap-x-2' onClick={handleLogout}>
             <RiLogoutBoxLine className='text-xl' />
-            Log Out
+            Sign out
         </p>
     )
 }
@@ -67,7 +67,7 @@ export const LogoutInSidebar = () => {
         <li onClick={handleLogout} className={`hover:${themeHolder.tabidentifierhover} p-4 rounded-md flex flex-row items-center gap-x-3 cursor-pointer`} >
 
             <span><RiLogoutBoxLine className="text-yellow-500 text-[1.8rem]" /></span>
-            <span className={`${minimizeSidebar ? 'hidden' : ''} ${themeHolder.colortxt1} text-gray-300`}>Logout</span>
+            <span className={`${minimizeSidebar ? 'hidden' : ''} ${themeHolder.colortxt1} text-gray-300`}>Sign out</span>
 
         </li>
 

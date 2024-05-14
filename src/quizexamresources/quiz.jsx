@@ -1,16 +1,30 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { whatIsClickToggleQuizExamTemp } from "../feature/opentogglequizexamSlice";
+import { userdataTemp } from '../feature/data/userdataSlice';
 import { themeHolderTemp } from '../feature/themeSlice';
 import { FoundationOfEducationQuiz1JSON } from './foundationofeducationquiz1JSON';
 import { PrincipleOfTeachingQuiz1JSON } from './principleofteachingquiz1JSON';
 import { ChildAndAdolescentDevelopmentQuiz1JSON } from './child&adolescentdevelopmentquiz1JSON';
+import { InsertQuizThunk } from '../feature/quizSlice';
+import { FacilitatingLearningQuiz1JSON } from './FacilitatingLearningquiz1JSON';
+
 export const Quiz = () => {
+
+    const dispatch = useDispatch();
     const themeHolder = useSelector(themeHolderTemp);
     const whatIsClickToggleQuizExam = useSelector(whatIsClickToggleQuizExamTemp);
 
+    const userdata = useSelector(userdataTemp);
+    if (Object.keys(userdata).length != 0) {
+        var userID = userdata.ID;
+        var name = userdata.username;
+    }
+
+    const [quizSubject, setQuizSubject] = useState('');
+    const [quizQuestion, setQuizQuestion] = useState([]);
     const [score, setScore] = useState(0);
     const [answers, setAnswers] = useState([]);
     const [showScore, setShowScore] = useState(false);
@@ -35,27 +49,59 @@ export const Quiz = () => {
         });
         setScore(totalScore);
         setShowScore(true);
+        
+        // js to generate date and time
+        const date = new Date();
+        const time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        const fullDate = date.toDateString() + ' / ' + time;
+       
+        //dispatch quiz thunk here
+        const quizdatatemp = {
+           quiztaker: name,
+           quiztakerid: userID,
+           quizsubject: quizSubject,
+           quizscore: totalScore,
+           quiztotalitem: quizQuestion.length,
+           quizdatetaken: fullDate,
+        }
+        console.log(quizdatatemp);
+        dispatch(InsertQuizThunk({quizdatatemp}));
+
     };
 
     const [startQuiz, setStartQuiz] = useState(false);
+    let subject = '';
     let questions = '';
     let quizTitle = '';
 
     if (whatIsClickToggleQuizExam === 'FoundationofEducationQuiz1') {
         questions = FoundationOfEducationQuiz1JSON;
         quizTitle = 'Quiz1 in Foundation of Education';
+        subject = 'FoundationofEducationQuiz1';
+       
     }
     else if (whatIsClickToggleQuizExam === 'PrinciplesofTeachingQuiz1') {
         questions = PrincipleOfTeachingQuiz1JSON;
         quizTitle = 'Quiz1 in Principle of Teaching';
+        subject = 'PrinciplesofTeachingQuiz1';
     }
     else if (whatIsClickToggleQuizExam === 'ChildandAdolescentDevelopmentQuiz1') {
         questions = ChildAndAdolescentDevelopmentQuiz1JSON;
         quizTitle = 'Quiz1 in Child and Adolescent Development';
+        subject = 'ChildandAdolescentDevelopmentQuiz1';
+       
     }
+    else if (whatIsClickToggleQuizExam === 'FacilitatingLearningQuiz1') {
+        questions = FacilitatingLearningQuiz1JSON;
+        quizTitle = 'Quiz1 in Facilitating Learning';
+        subject = 'FacilitatingLearningQuiz1';     
+    }
+ 
 
     // reset if change tab
     useEffect(() => {
+        setQuizQuestion(questions);
+        setQuizSubject(subject);
         setStartQuiz(false);
         setShowScore(false);
         setIndexofQuestion(0);
@@ -112,7 +158,7 @@ export const Quiz = () => {
                                                         <div className='absolute w-[40rem] max-w-[95%] translate-x-[-50%] top-0'>
                                                             <p className={`${themeHolder.colortxt1} text-3xl font-semibold pb-5 mobile:text-2xl`}>{quizTitle}</p>
                                                             {questions.map((question, index) => (
-                                                                <div key={index} className='w-full border border-gray-4 00 rounded-lg overflow-hidden mb-5'>
+                                                                <div key={index} className='w-full border border-gray-300 rounded-lg overflow-hidden mb-5'>
                                                                     <p className={`${themeHolder.colorbg2} text-gray-300 font-bold h-[2rem] w-full flex items-center pl-4 `}>Question {index + 1}</p>
                                                                     <div className={`${themeHolder.colortxt1} p-2`}>
                                                                         <h3 className='font-semibold'>{question.question}</h3>

@@ -15,6 +15,7 @@ import { noteSliceReducer } from './feature/noteSlice';
 import { systemSettingSliceReducer } from './feature/systemsettingSlice';
 import { flashcardSliceReducer } from './feature/flashcardSlice';
 import { OpenToggleQuizExamReducer } from './feature/opentogglequizexamSlice';
+import { QuizSliceReducer } from './feature/quizSlice';
 
 const persistConfig = {
   key: 'root',
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   SystemSettingSliceName: systemSettingSliceReducer,
   FlashcardSliceName: flashcardSliceReducer,
   OpenToggleQuizExamSliceName: OpenToggleQuizExamReducer,
+  QuizSliceName: QuizSliceReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

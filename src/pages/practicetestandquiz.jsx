@@ -19,7 +19,7 @@ export const PracticeTestAndQuiz = () => {
                 <ToggleQuizExam />
                 <ToggleQuizExamIcon />
 
-                <section className="relative border border-yellow-500 h-[90%] w-[69rem] flex items-center justify-center overflow-scroll noScrollbar">
+                <section className="relative h-[90%] w-[69rem] flex items-center justify-center overflow-scroll noScrollbar">
                     <Quiz />
                 </section>
 

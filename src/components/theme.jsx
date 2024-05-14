@@ -42,7 +42,7 @@ export const ThemeInSidebar = () => {
                                         <div onClick={() => { dispatch(changeThemeState('firstColor')); dispatch(toggleThemeState()); }} className="h-[2rem] w-[4.6rem] pl-2.5 border border-yellow-500 rounded-[25rem] flex items-center justify-between cursor-pointer">
                                             <p className="text-gray-200 text-sm">day</p>
                                             <div className="h-[2rem] w-[2rem] border border-yellow-500 rounded-[50%] flex items-center justify-center">
-                                                <FaSun className="text-[1.2rem] text-yellow-500" />
+                                                <FaSun className="text-[1.2rem] text-yellow-300" />
                                             </div>
 
                                         </div>

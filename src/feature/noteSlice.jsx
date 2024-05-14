@@ -77,7 +77,7 @@ export const UpdateNoteUserThunk = createAsyncThunk(
 )
 
 export const InsertNoteThunk = createAsyncThunk(
-    "NoteSliceName/NoteThunk",
+    "NoteSliceName/InsertNoteThunk",
     async ({ noteDataTemp }) => {
         try {
             const formData = new FormData();
