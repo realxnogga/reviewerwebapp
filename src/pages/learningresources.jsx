@@ -14,6 +14,8 @@ import { ClearIsResourceDataInsertedState } from "../feature/insertresourcedataS
 import { isResourceDataInsertedTemp } from "../feature/insertresourcedataSlice";
 import { resourceDataTemp } from "../feature/insertresourcedataSlice";
 import { themeHolderTemp } from "../feature/themeSlice";
+import { GetResourceCountThunk } from '../feature/insertresourcedataSlice';
+
 export const LearningResources = () => {
 
     const dispatch = useDispatch();
@@ -68,6 +70,7 @@ export const LearningResources = () => {
             dispatch(GetResourceDataThunk());
             dispatch(ClearIsResourceDataInsertedState());
             setOpenContributeModal(false);
+            dispatch(GetResourceCountThunk());
         }
         if (isResourceDataInserted === false) {
             ShowToast('failed to inserted file', 'error');
@@ -117,57 +120,7 @@ export const LearningResources = () => {
                         <IoFilter onClick={() => { setOpenFilterModal(true); }} className={`${themeHolder.colortxt1} text-gray-300 text-2xl `} />
                     </Tooltip>
 
-                    {/* for filter */}
-                    <Modal size="md" dismissible show={openFilterModal} onClose={() => setOpenFilterModal(false)}>
 
-                        <div className={`${themeHolder.colorbg3} space-y-8 bg-gray-700 rounded-lg p-5`}>
-                            <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Filter Resources</h3>
-
-                            <div className="flex flex-col items-start gap-y-2">
-
-                                <div className="w-full">
-                                    <label htmlFor="subject" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>filter by subject:</label>
-
-                                    <select
-                                        onChange={(e) => setSubjectFilter(e.target.value)}
-                                        value={subjectFilter}
-                                        id="subject"
-                                        className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `}>
-                                        <option value="all">All</option>
-                                        <option value="english">English</option>
-                                        <option value="filipino">Filipino</option>
-                                        <option value="mathematics">Mathematics</option>
-                                        <option value="social science">Social Science</option>
-                                        <option value="humanities">Humanities</option>
-                                        <option value="communication skills">Communication Skills</option>
-                                        <option value="ict">ICT</option>
-                                    </select>
-                                </div>
-
-                                <div className="w-full">
-                                    <label htmlFor="type" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>filter by type:</label>
-
-                                    <select
-                                        onChange={(e) => setTypeFilter(e.target.value)}
-                                        value={typeFilter}
-                                        name="type"
-                                        id="type"
-                                        className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md`}>
-                                        <option value="all">All</option>
-                                        <option value="pdf">PDF</option>
-                                        <option value="video">Video</option>
-                                        <option value="image">Image</option>
-                                    </select>
-                                </div>
-
-                            </div>
-
-                            <div className='flex flex-row gap-x-3'>
-                                <Button className='w-fit rounded-md' onClick={() => setOpenFilterModal(false)} gradientMonochrome="success">close</Button>
-                            </div>
-                        </div>
-
-                    </Modal>
 
 
                     <div className="bg-green-400 flex h-[2.5rem] w-[15rem] ">
@@ -243,6 +196,58 @@ export const LearningResources = () => {
 
                         ></iframe>
                     </div>
+                </Modal>
+
+                {/* for filter */}
+                <Modal size="md" dismissible show={openFilterModal} onClose={() => setOpenFilterModal(false)}>
+
+                    <div className={`${themeHolder.colorbg3} space-y-8 bg-gray-700 rounded-lg p-5`}>
+                        <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Filter Resources</h3>
+
+                        <div className="flex flex-col items-start gap-y-2">
+
+                            <div className="w-full">
+                                <label htmlFor="subject" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>filter by subject:</label>
+
+                                <select
+                                    onChange={(e) => setSubjectFilter(e.target.value)}
+                                    value={subjectFilter}
+                                    id="subject"
+                                    className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `}>
+                                    <option value="all">All</option>
+                                    <option value="english">English</option>
+                                    <option value="filipino">Filipino</option>
+                                    <option value="mathematics">Mathematics</option>
+                                    <option value="social science">Social Science</option>
+                                    <option value="humanities">Humanities</option>
+                                    <option value="communication skills">Communication Skills</option>
+                                    <option value="ict">ICT</option>
+                                </select>
+                            </div>
+
+                            <div className="w-full">
+                                <label htmlFor="type" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>filter by type:</label>
+
+                                <select
+                                    onChange={(e) => setTypeFilter(e.target.value)}
+                                    value={typeFilter}
+                                    name="type"
+                                    id="type"
+                                    className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md`}>
+                                    <option value="all">All</option>
+                                    <option value="pdf">PDF</option>
+                                    <option value="video">Video</option>
+                                    <option value="image">Image</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div className='flex flex-row gap-x-3'>
+                            <Button className='w-fit rounded-md' onClick={() => setOpenFilterModal(false)} gradientMonochrome="success">close</Button>
+                        </div>
+                    </div>
+
                 </Modal>
 
 

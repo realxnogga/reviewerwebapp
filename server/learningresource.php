@@ -61,6 +61,20 @@ if (isset($_GET['action'])) {
 
             $conn->close();
             break;
+        
+            case 'getLearningResourceCount':
+
+                $sql = "SELECT COUNT(*) as total_rows FROM learningresources";
+                $result = $conn->query($sql);
+                
+                if ($result && $result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $data = $row['total_rows'];
+                    echo json_encode($data);
+                }
+                $conn->close();
+                break;
+            
     }
 }
 

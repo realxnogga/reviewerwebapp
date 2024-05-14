@@ -34,8 +34,34 @@ if (isset($_GET['action'])) {
             $sql = "insert into quiz (quiztaker, quiztakerid, quizsubject, quizscore, quiztotalitem, quizdatetaken) VALUES ('$quiztaker','$quiztakerid', '$quizsubject', '$quizscore', '$quiztotalitem', '$quizdatetaken')";
             $conn->query($sql);
 
+            if ($conn->affected_rows > 0) {
+                echo json_encode(['success' => true, 'message' => 'quiz successfully inserted']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'quiz failed to insert']);
+            }
+
             $conn->close();
             break;
+
+            case 'getquizdata':
+                $quiztaker = json_decode($_POST['quiztaker'], true);
+    
+             
+    
+                $sql = "select*from quiz where quiztaker = '$quiztaker'";
+                $result = $conn->query($sql);
+    
+                $data = [];
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+                header('Content-Type: application/json');
+                echo json_encode($data);
+    
+                $conn->close();
+                break;
+
+            
         
         default:
             # code...

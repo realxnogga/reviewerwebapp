@@ -13,6 +13,8 @@ import { GetResourceDataThunk } from '../feature/insertresourcedataSlice';
 import { GetNoteThunk } from '../feature/noteSlice';
 import { GetSettingDataThunk } from '../feature/systemsettingSlice';
 import { GetFlashcardThunk } from '../feature/flashcardSlice';
+import { GetQuizThunk } from '../feature/quizSlice';
+import { GetResourceCountThunk } from '../feature/insertresourcedataSlice';
 
 export const Login = () => {
 
@@ -75,10 +77,11 @@ export const Login = () => {
             dispatch(changeThemeState('firstColor')); // if login is successfull, themestate will dispatch
             dispatch(GetResourceDataThunk()) // if login is successfull, resourcedata will dispatch
             dispatch(GetNoteThunk(inputValue.username)) // if login is successfull, note will dispatch
-            dispatch(GetFlashcardThunk(inputValue.username));
-
+            dispatch(GetFlashcardThunk(inputValue.username));  
             dispatch(GetSettingDataThunk(inputValue.username));
-
+            dispatch(GetQuizThunk(inputValue.username));
+            dispatch(GetResourceCountThunk());
+    
         }
 
         if (loginCookie === false) {

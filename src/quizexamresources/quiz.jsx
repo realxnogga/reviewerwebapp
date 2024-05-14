@@ -10,12 +10,18 @@ import { PrincipleOfTeachingQuiz1JSON } from './principleofteachingquiz1JSON';
 import { ChildAndAdolescentDevelopmentQuiz1JSON } from './child&adolescentdevelopmentquiz1JSON';
 import { InsertQuizThunk } from '../feature/quizSlice';
 import { FacilitatingLearningQuiz1JSON } from './FacilitatingLearningquiz1JSON';
+import { isQuizDataInsertedTemp } from '../feature/quizSlice';
+import { ShowToast } from '../components/toaster';
+import { ClearIsQuizDataInsertedState } from '../feature/quizSlice';
+import { GetQuizThunk } from '../feature/quizSlice';
+
 
 export const Quiz = () => {
 
     const dispatch = useDispatch();
     const themeHolder = useSelector(themeHolderTemp);
     const whatIsClickToggleQuizExam = useSelector(whatIsClickToggleQuizExamTemp);
+    const isQuizDataInserted = useSelector(isQuizDataInsertedTemp);
 
     const userdata = useSelector(userdataTemp);
     if (Object.keys(userdata).length != 0) {
@@ -68,6 +74,17 @@ export const Quiz = () => {
         dispatch(InsertQuizThunk({quizdatatemp}));
 
     };
+     
+    useEffect(() => {
+        if (isQuizDataInserted === true) {
+            dispatch(GetQuizThunk(name));
+            dispatch(ClearIsQuizDataInsertedState());
+        }
+        if (isQuizDataInserted === false) {
+            dispatch(ClearIsQuizDataInsertedState());
+        }
+
+    }, [isQuizDataInserted])
 
     const [startQuiz, setStartQuiz] = useState(false);
     let subject = '';
