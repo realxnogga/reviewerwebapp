@@ -14,7 +14,15 @@ export const DashBoard = () => {
     const resourceCount = useSelector(resourceCountTemp);
     const quizData = useSelector(quizDataTemp);
 
-    const [dateValue, setDateValue] = useState('');
+    const date = new Date();
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); 
+    const day = String(date.getDate()).padStart(2, '0');
+     
+    const dateNow = `${year}-${month}-${day}`;
+
+    const [dateValue, setDateValue] = useState(dateNow);
     const [filteredQuizData, setFilteredQuizData] = useState([]);
     
     const handleDateChangeFunc = (e) => {
@@ -24,12 +32,13 @@ export const DashBoard = () => {
     useEffect(() => {
         setFilteredQuizData(quizData); // display grapt if quizData change  
     }, [quizData])
-    
-    const setUpdatedChart = () => {
-            const filteredData = quizData.filter(item => item.quizdatetaken === dateValue);
-            setFilteredQuizData(filteredData); 
-    };
 
+    useEffect(() => {
+        const filteredData = quizData.filter(item => item.quizdatetaken === dateValue);
+        setFilteredQuizData(filteredData); 
+    }, [dateValue])
+    
+  
    
     const quizScores = filteredQuizData.map(item => item.quizscore);
     const quizLabels = filteredQuizData.map(item => item.quizsubject);
@@ -84,7 +93,7 @@ export const DashBoard = () => {
                 </section>
 
                 <input value={dateValue} onChange={handleDateChangeFunc} type="date" />
-                <button onClick={setUpdatedChart}>get value</button>
+             
 
                 <div className="w-full h-[30rem] flex items-center justify-center">
                     <Bar data={data} options={options} />
