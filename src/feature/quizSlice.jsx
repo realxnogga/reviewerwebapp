@@ -31,6 +31,41 @@ export const quizDataTemp = state => state.QuizSliceName.quizData;
 export const isQuizDataInsertedTemp = state => state.QuizSliceName.isQuizDataInserted;
 export const QuizSliceReducer = QuizSlice.reducer;
 
+
+export const DeleteQuizThunk = createAsyncThunk(
+    "QuizSliceName/DeleteQuizThunk",
+    async (user) => {
+        try {
+            const res = await fetch("http://localhost/simple_web_in_react/server/quizexam.php?action=deleteQuizData", {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(user)
+            })
+            
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    }
+)
+
+export const UpdateQuizUserThunk = createAsyncThunk(
+    "QuizSliceName/UpdateQuizUserThunk",
+    async ({ datatobeupdated }) => {
+        try {
+            const formData = new FormData();
+            formData.append('datatobeupdated', JSON.stringify(datatobeupdated));
+
+            await fetch("http://localhost/simple_web_in_react/server/quizexam.php?action=updateQuizUser", {
+                method: 'POST',
+                body: formData,
+            })   
+
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    }
+)
+
 export const InsertQuizThunk = createAsyncThunk(
     "QuizSliceName/InsertQuizThunk",
     async ({ quizdatatemp }) => {

@@ -5,6 +5,7 @@ import { quizDataTemp } from "../feature/quizSlice";
 import { resourceCountTemp } from "../feature/insertresourcedataSlice";
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { useEffect, useState } from "react";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -13,11 +14,25 @@ export const DashBoard = () => {
     const resourceCount = useSelector(resourceCountTemp);
     const quizData = useSelector(quizDataTemp);
 
+    const [dateValue, setDateValue] = useState('');
+    const [filteredQuizData, setFilteredQuizData] = useState([]);
+    
+    const handleDateChangeFunc = (e) => {
+        setDateValue(e.target.value);
+    };
 
-    const quizScores = quizData.map(item => item.quizscore);
-    const quizLabels = quizData.map(item => item.quizsubject);
+    useEffect(() => {
+        setFilteredQuizData(quizData); // display grapt if quizData change  
+    }, [quizData])
+    
+    const setUpdatedChart = () => {
+            const filteredData = quizData.filter(item => item.quizdatetaken === dateValue);
+            setFilteredQuizData(filteredData); 
+    };
 
-    console.log(quizData)
+   
+    const quizScores = filteredQuizData.map(item => item.quizscore);
+    const quizLabels = filteredQuizData.map(item => item.quizsubject);
 
     const data = {
         labels: quizLabels,
@@ -40,44 +55,41 @@ export const DashBoard = () => {
             },
             title: {
                 display: true,
-                text: 'Quiz Scores Overview',
+                text: `Quiz Scores Overview (${dateValue})`,
             },
         },
     };
 
     return (
-        <>
-            <div className={`${themeHolder.colorbg3} relative mt-[4rem] h-screen w-screen flex items-center justify-center`}>
-                <Hamburger />
+        <div className={`${themeHolder.colorbg3} relative mt-[4rem] h-screen w-screen flex items-center justify-center`}>
+            <Hamburger />
 
-                <section className="relative h-[90%] w-[69rem] mt-5 max-w-[95%] overflow-scroll noScrollbar">
-                    <section className="w-full flex flex-wrap gap-y-5 mobile:justify-center justify-between">
-                        <div className="border-2 border-green-600 h-[14rem] w-[22rem] rounded-2xl p-4">
-                            <p className={`${themeHolder.colortxt1} text-[3rem] font-semibold `}>Over</p>
-                            <span className="text-[5rem] font-extrabold text-yellow-500 leading-10">{resourceCount - 1}+</span>
-                            <p className={`${themeHolder.colortxt1} text-[2rem] `}>Learning resources</p>
-                        </div>
-                        <div className="border-2 border-red-600 h-[14rem] w-[22rem] rounded-2xl p-4">
-                            <p className={`${themeHolder.colortxt1} text-[3rem] font-semibold `}>Over</p>
-                            <span className="text-[5rem] font-extrabold text-yellow-500 leading-10">7+</span>
-                            <p className={`${themeHolder.colortxt1} text-[2rem] `}>Free Quiz Reviewer</p>
-                        </div>
-                        <div className="border-2 border-blue-600 h-[14rem] w-[22rem] rounded-2xl p-4">
-                            <p className={`${themeHolder.colortxt1} text-[3rem] font-semibold `}>Over</p>
-                            <span className="text-[5rem] font-extrabold text-yellow-500 leading-10">7+</span>
-                            <p className={`${themeHolder.colortxt1} text-[2rem] `}>Free Exam Reviewer</p>
-                        </div>
-                    </section>
-
-                    {quizData && quizData.length > 0 && (
-                        <section className="mt-8">
-                            <div className="w-full h-[30rem]">
-                                <Bar data={data} options={options} />
-                            </div>
-                        </section>
-                    )}
+            <section className="relative h-[90%] w-[69rem] mt-5 max-w-[95%] overflow-scroll noScrollbar">
+                <section className="w-full flex flex-wrap gap-y-5 mobile:justify-center justify-between">
+                    <div className="border-2 border-green-600 h-[14rem] w-[22rem] rounded-2xl p-4">
+                        <p className={`${themeHolder.colortxt1} text-[3rem] font-semibold `}>Over</p>
+                        <span className="text-[5rem] font-extrabold text-yellow-500 leading-10">{resourceCount - 1}+</span>
+                        <p className={`${themeHolder.colortxt1} text-[2rem] `}>Learning resources</p>
+                    </div>
+                    <div className="border-2 border-red-600 h-[14rem] w-[22rem] rounded-2xl p-4">
+                        <p className={`${themeHolder.colortxt1} text-[3rem] font-semibold `}>Over</p>
+                        <span className="text-[5rem] font-extrabold text-yellow-500 leading-10">7+</span>
+                        <p className={`${themeHolder.colortxt1} text-[2rem] `}>Free Quiz Reviewer</p>
+                    </div>
+                    <div className="border-2 border-blue-600 h-[14rem] w-[22rem] rounded-2xl p-4">
+                        <p className={`${themeHolder.colortxt1} text-[3rem] font-semibold `}>Over</p>
+                        <span className="text-[5rem] font-extrabold text-yellow-500 leading-10">7+</span>
+                        <p className={`${themeHolder.colortxt1} text-[2rem] `}>Free Exam Reviewer</p>
+                    </div>
                 </section>
-            </div>
-        </>
+
+                <input value={dateValue} onChange={handleDateChangeFunc} type="date" />
+                <button onClick={setUpdatedChart}>get value</button>
+
+                <div className="w-full h-[30rem] flex items-center justify-center">
+                    <Bar data={data} options={options} />
+                </div>
+            </section>
+        </div>
     );
 };

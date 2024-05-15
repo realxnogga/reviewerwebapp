@@ -97,8 +97,6 @@ export const Login = () => {
         }
     }, [loginCookie]);
 
-    console.log(loginCookie);
-
     const [showPassword, setShowPassword] = useState(false)
 
     const showpassword = () => {

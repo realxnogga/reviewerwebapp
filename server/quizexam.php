@@ -43,28 +43,44 @@ if (isset($_GET['action'])) {
             $conn->close();
             break;
 
-            case 'getquizdata':
-                $quiztaker = json_decode($_POST['quiztaker'], true);
-    
-             
-    
-                $sql = "select*from quiz where quiztaker = '$quiztaker'";
-                $result = $conn->query($sql);
-    
-                $data = [];
-                while ($row = $result->fetch_assoc()) {
-                    $data[] = $row;
-                }
-                header('Content-Type: application/json');
-                echo json_encode($data);
-    
-                $conn->close();
-                break;
+        case 'getquizdata':
+            $quiztaker = json_decode($_POST['quiztaker'], true);
 
-            
-        
+            $sql = "select*from quiz where quiztaker = '$quiztaker'";
+            $result = $conn->query($sql);
+
+            $data = [];
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            header('Content-Type: application/json');
+            echo json_encode($data);
+
+            $conn->close();
+            break;
+
+        case 'updateQuizUser':
+            $data = json_decode($_POST['datatobeupdated'], true);
+            $userID = $data['userID'];
+            $user = $data['user'];
+
+            $sql = "UPDATE `quiz` SET `quiztaker` = '$user' WHERE `quiztakerid` = '$userID'";
+            $conn->query($sql);
+
+            $conn->close();
+            break;
+
+        case 'deleteQuizData':
+            $user = json_decode(file_get_contents("php://input"), true);
+
+            $sql = "delete from quiz where quiztaker = '$user'";
+            $conn->query($sql);
+
+            $conn->close();
+            break;
+
         default:
-            # code...
+
             break;
     }
 }

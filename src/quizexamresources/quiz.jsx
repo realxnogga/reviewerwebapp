@@ -56,12 +56,17 @@ export const Quiz = () => {
         setScore(totalScore);
         setShowScore(true);
         
-        // js to generate date and time
-        const date = new Date();
-        const time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-        const fullDate = date.toDateString() + ' / ' + time;
-       
-        //dispatch quiz thunk here
+     
+        const dateNow = new Date();
+
+        const year = dateNow.getFullYear();
+        const month = String(dateNow.getMonth() + 1).padStart(2, '0'); 
+        const day = String(dateNow.getDate()).padStart(2, '0');
+         
+        const fullDate = `${year}-${month}-${day}`;
+
+        console.log(fullDate);
+      
         const quizdatatemp = {
            quiztaker: name,
            quiztakerid: userID,

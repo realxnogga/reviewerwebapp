@@ -33,6 +33,8 @@ import { LogoutInProfileDropdown } from './logoutbutton';
 import { clearMinimizeSidebarState } from '../feature/opensidebarSlice';
 import { clearToggleThemeState } from '../feature/themeSlice';
 import { clearWhatIsClickToggleQuizExamState } from '../feature/opentogglequizexamSlice';
+import { UpdateQuizUserThunk } from '../feature/quizSlice';
+import { DeleteQuizThunk } from '../feature/quizSlice';
 
 export const Navbar = () => {
 
@@ -85,6 +87,7 @@ export const Navbar = () => {
             dispatch(DeleteSettingDataThunk(name));
             dispatch(DeleteAllFlashCardDataThunk(name));
             dispatch(DeleteAllFlashCardItemThunk(name));
+            dispatch(DeleteQuizThunk(name));     
             navigate('/');         
 
         }
@@ -166,7 +169,7 @@ export const Navbar = () => {
 
 
     // ----------------------------------------------------
-    // this useEffect will run once the username change after am edit
+    // this useEffect will run once the username change after an edit
     // it also changes the foraeign key of the other tables
     useEffect(() => {
         const datatobeupdated = {
@@ -178,7 +181,8 @@ export const Navbar = () => {
          dispatch(UpdateFlashcardUserThunk({datatobeupdated}));
          dispatch(UpdateFlashcardItemUserThunk({datatobeupdated}));
          dispatch(UpdateSettingUsernameThunk({datatobeupdated}));
-
+         dispatch(UpdateQuizUserThunk({datatobeupdated}));
+         
     }, [name])
          
     // -----------------------------------------------------
