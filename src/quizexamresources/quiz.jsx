@@ -9,12 +9,13 @@ import { FoundationOfEducationQuiz1JSON } from './foundationofeducationquiz1JSON
 import { PrincipleOfTeachingQuiz1JSON } from './principleofteachingquiz1JSON';
 import { ChildAndAdolescentDevelopmentQuiz1JSON } from './child&adolescentdevelopmentquiz1JSON';
 import { InsertQuizThunk } from '../feature/quizSlice';
-import { FacilitatingLearningQuiz1JSON } from './FacilitatingLearningquiz1JSON';
+import { FacilitatingLearningQuiz1JSON } from './facilitatinglearningquiz1JSON';
 import { isQuizDataInsertedTemp } from '../feature/quizSlice';
 import { ShowToast } from '../components/toaster';
 import { ClearIsQuizDataInsertedState } from '../feature/quizSlice';
 import { GetQuizThunk } from '../feature/quizSlice';
 
+import { FoundationOfEducationExam1JSON } from './foundationofeducationexam1JSON';
 
 export const Quiz = () => {
 
@@ -35,6 +36,7 @@ export const Quiz = () => {
     const [answers, setAnswers] = useState([]);
     const [showScore, setShowScore] = useState(false);
     const [indexofQuestion, setIndexofQuestion] = useState(0);
+    const [type, setType] = useState('');
 
 
     const handleAnswerSelection = (questionIndex, selectedAnswer) => {
@@ -73,6 +75,7 @@ export const Quiz = () => {
            quizsubject: quizSubject,
            quizscore: totalScore,
            quiztotalitem: quizQuestion.length,
+           quiztype: type,
            quizdatetaken: fullDate,
         }
         console.log(quizdatatemp);
@@ -95,30 +98,39 @@ export const Quiz = () => {
     let subject = '';
     let questions = '';
     let quizTitle = '';
+    let reviewerType = '';
 
-    if (whatIsClickToggleQuizExam === 'FoundationofEducationQuiz1') {
+    if (whatIsClickToggleQuizExam === 'FoundationofEducationExam1') {
+        questions = FoundationOfEducationExam1JSON;
+        quizTitle = 'Exam1 in Foundation of Education';
+        subject = 'FE exam1'; 
+        reviewerType = 'exam'    
+    }
+    else if (whatIsClickToggleQuizExam === 'FoundationofEducationQuiz1') {
         questions = FoundationOfEducationQuiz1JSON;
         quizTitle = 'Quiz1 in Foundation of Education';
-        subject = 'FE';
-       
+        subject = 'FE quiz1';
+        reviewerType = 'quiz' 
     }
     else if (whatIsClickToggleQuizExam === 'PrinciplesofTeachingQuiz1') {
         questions = PrincipleOfTeachingQuiz1JSON;
         quizTitle = 'Quiz1 in Principle of Teaching';
         subject = 'PT';
+        reviewerType = 'quiz' 
     }
     else if (whatIsClickToggleQuizExam === 'ChildandAdolescentDevelopmentQuiz1') {
         questions = ChildAndAdolescentDevelopmentQuiz1JSON;
         quizTitle = 'Quiz1 in Child and Adolescent Development';
         subject = 'CAD';
-       
+        reviewerType = 'quiz' 
     }
     else if (whatIsClickToggleQuizExam === 'FacilitatingLearningQuiz1') {
         questions = FacilitatingLearningQuiz1JSON;
         quizTitle = 'Quiz1 in Facilitating Learning';
-        subject = 'FL';     
+        subject = 'FL';
+        reviewerType = 'quiz'      
     }
- 
+
 
     // reset if change tab
     useEffect(() => {
@@ -128,6 +140,7 @@ export const Quiz = () => {
         setShowScore(false);
         setIndexofQuestion(0);
         setAnswers([]);
+        setType(reviewerType);
     }, [whatIsClickToggleQuizExam])
 
     return (

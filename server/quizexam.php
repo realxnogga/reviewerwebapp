@@ -29,9 +29,12 @@ if (isset($_GET['action'])) {
             $quizsubject = $data['quizsubject'];
             $quizscore = $data['quizscore'];
             $quiztotalitem = $data['quiztotalitem'];
+            $quiztype = $data['quiztype'];
             $quizdatetaken = $data['quizdatetaken'];
 
-            $sql = "insert into quiz (quiztaker, quiztakerid, quizsubject, quizscore, quiztotalitem, quizdatetaken) VALUES ('$quiztaker','$quiztakerid', '$quizsubject', '$quizscore', '$quiztotalitem', '$quizdatetaken')";
+            $sql = "insert into quiz (quiztaker, quiztakerid, quizsubject, quizscore, quiztotalitem, quiztype, quizdatetaken) VALUES ('$quiztaker','$quiztakerid', '$quizsubject', '$quizscore', 
+            '$quiztotalitem', '$quiztype', '$quizdatetaken')";
+            
             $conn->query($sql);
 
             if ($conn->affected_rows > 0) {

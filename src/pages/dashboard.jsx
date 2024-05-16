@@ -19,22 +19,26 @@ export const DashBoard = () => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
-
     const dateNow = `${year}-${month}-${day}`;
 
-    console.log(dateNow);   
-
     const [dateValue, setDateValue] = useState(dateNow);
+    const [typeValue, setTypeValue] = useState('all');
     const [filteredQuizData, setFilteredQuizData] = useState([]);
 
     const handleDateChangeFunc = (e) => {
         setDateValue(e.target.value);
     };
 
+    const handleTypeChangeFunc = (e) => {
+        setTypeValue(e.target.value);
+    };
+
     useEffect(() => {
-        const filteredData = quizData.filter(item => item.quizdatetaken === dateValue);
+        const filteredData = quizData.filter(item => 
+            item.quizdatetaken === dateValue && (typeValue === 'all' || item.quiztype === typeValue)
+        );
         setFilteredQuizData(filteredData);
-    }, [dateValue, quizData])
+    }, [dateValue, typeValue, quizData]);
 
 
     const quizScores = filteredQuizData.map(item => item.quizscore);
@@ -44,7 +48,7 @@ export const DashBoard = () => {
         labels: quizLabels,
         datasets: [
             {
-                label: 'Quiz Scores',
+                label: 'Quiz/Exam Scores',
                 data: quizScores,
                 backgroundColor: 'rgba(75, 192, 192, 0.4)',
                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -61,7 +65,7 @@ export const DashBoard = () => {
             },
             title: {
                 display: true,
-                text: `Quiz Scores Overview (${dateValue})`,
+                text: `Quiz/Exam Scores Overview (${dateValue})`,
             },
         },
     };
@@ -73,7 +77,7 @@ export const DashBoard = () => {
             <section className="relative h-[90%] w-[69rem] mt-5 max-w-[95%] overflow-scroll noScrollbar">
                 <section className="w-full flex flex-wrap gap-y-5 mobile:justify-center justify-between">
                     <div className="border-2 border-green-600 h-[14rem] w-[22rem] rounded-2xl p-4">
-                        <p className={`${themeHolder.colortxt1} text-[3rem] font-semibold `}>Over</p>
+                        <p className={`${themeHolder.colortxt1} text-[3rem] font-semibold text-green-800`}>Over</p>
                         <span className="text-[5rem] font-extrabold text-yellow-500 leading-10">{resourceCount - 1}+</span>
                         <p className={`${themeHolder.colortxt1} text-[2rem] `}>Learning resources</p>
                     </div>
@@ -90,8 +94,20 @@ export const DashBoard = () => {
                 </section>
 
                 <section className="mt-20  flex flex-col gap-y-8 items-end">
-                    <input className={`${themeHolder.colortxt1} bg-transparent rounded-md border border-gray-400`} value={dateValue} onChange={handleDateChangeFunc} type="date"/>
+                    <div className="w-full flex items-center justify-end gap-x-5">
 
+                        <select
+                         value={typeValue}
+                         onChange={handleTypeChangeFunc}
+                         className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-400 rounded-md outline-none p-2 text-gray-300 text-md `}>
+                            <option value="all">All</option>
+                            <option value="exam">Exam</option>
+                            <option value="quiz">Quiz</option>
+                        </select>
+
+                        <input className={`${themeHolder.colorbg3} ${themeHolder.colortxt1} ${themeHolder.border} rounded-md outline-none`} value={dateValue} onChange={handleDateChangeFunc} type="date" />
+
+                    </div>
 
                     <div className="w-full h-[30rem] mobile:h-[15rem] flex items-center justify-center">
                         <Bar data={data} options={options} />
