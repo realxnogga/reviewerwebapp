@@ -14,6 +14,7 @@ import { minimizeSidebarState } from "../feature/opensidebarSlice";
 import { minimizeSidebarTemp } from "../feature/opensidebarSlice";
 import { LogoutInSidebar } from "./logoutbutton";
 import { ThemeInSidebar } from "./theme";
+import { useEffect, useState } from "react";
 
 
 export const Sidebar = () => {
@@ -23,14 +24,16 @@ export const Sidebar = () => {
     const whatIsClicked = useSelector(whatIsClickedTemp);
     const minimizeSidebar = useSelector(minimizeSidebarTemp);
 
-    const hideTextLinkFunc = () => {dispatch(minimizeSidebarState())}
+    const hideTextLinkFunc = () => {dispatch(minimizeSidebarState());}
     const hideSidebarFunc = () => { dispatch(isSidebarOpenState()); }
 
     const isSideBarOpen = useSelector(isSideBarOpenTemp);
 
+    
 
     return (
-        <aside className={`${isSideBarOpen ? 'w-[16.7rem] px-2 border-r border-r-yellow-500' : 'w-0 px-0 border-none'} ${minimizeSidebar ? 'w-[4.8rem]' : ''} ${themeHolder.colorbg2} absolute left-0 z-10 bg-gray-800 h-screen top-[4rem] text-nowrap overflow-hidden`}>
+        <aside  className={`${isSideBarOpen ? 'w-[16.7rem] px-2 border-r border-r-yellow-500' : 'w-0 px-0 border-none'} ${minimizeSidebar ? 'w-[4.8rem]' : ''} 
+        ${themeHolder.colorbg2} absolute left-0 z-10 bg-gray-800 h-screen top-[4rem] text-nowrap overflow-hidden`}>
 
             <ul className='flex flex-col text-md '>
                 {

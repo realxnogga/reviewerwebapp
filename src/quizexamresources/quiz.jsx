@@ -99,24 +99,24 @@ export const Quiz = () => {
     if (whatIsClickToggleQuizExam === 'FoundationofEducationQuiz1') {
         questions = FoundationOfEducationQuiz1JSON;
         quizTitle = 'Quiz1 in Foundation of Education';
-        subject = 'FoundationofEducationQuiz1';
+        subject = 'FE';
        
     }
     else if (whatIsClickToggleQuizExam === 'PrinciplesofTeachingQuiz1') {
         questions = PrincipleOfTeachingQuiz1JSON;
         quizTitle = 'Quiz1 in Principle of Teaching';
-        subject = 'PrinciplesofTeachingQuiz1';
+        subject = 'PT';
     }
     else if (whatIsClickToggleQuizExam === 'ChildandAdolescentDevelopmentQuiz1') {
         questions = ChildAndAdolescentDevelopmentQuiz1JSON;
         quizTitle = 'Quiz1 in Child and Adolescent Development';
-        subject = 'ChildandAdolescentDevelopmentQuiz1';
+        subject = 'CAD';
        
     }
     else if (whatIsClickToggleQuizExam === 'FacilitatingLearningQuiz1') {
         questions = FacilitatingLearningQuiz1JSON;
         quizTitle = 'Quiz1 in Facilitating Learning';
-        subject = 'FacilitatingLearningQuiz1';     
+        subject = 'FL';     
     }
  
 

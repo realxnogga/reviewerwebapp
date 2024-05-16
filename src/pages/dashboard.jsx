@@ -17,29 +17,26 @@ export const DashBoard = () => {
     const date = new Date();
 
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); 
+    const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
-     
+
     const dateNow = `${year}-${month}-${day}`;
+
+    console.log(dateNow);   
 
     const [dateValue, setDateValue] = useState(dateNow);
     const [filteredQuizData, setFilteredQuizData] = useState([]);
-    
+
     const handleDateChangeFunc = (e) => {
         setDateValue(e.target.value);
     };
 
     useEffect(() => {
-        setFilteredQuizData(quizData); // display grapt if quizData change  
-    }, [quizData])
-
-    useEffect(() => {
         const filteredData = quizData.filter(item => item.quizdatetaken === dateValue);
-        setFilteredQuizData(filteredData); 
-    }, [dateValue])
-    
-  
-   
+        setFilteredQuizData(filteredData);
+    }, [dateValue, quizData])
+
+
     const quizScores = filteredQuizData.map(item => item.quizscore);
     const quizLabels = filteredQuizData.map(item => item.quizsubject);
 
@@ -49,7 +46,7 @@ export const DashBoard = () => {
             {
                 label: 'Quiz Scores',
                 data: quizScores,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                backgroundColor: 'rgba(75, 192, 192, 0.4)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,
             },
@@ -92,12 +89,15 @@ export const DashBoard = () => {
                     </div>
                 </section>
 
-                <input value={dateValue} onChange={handleDateChangeFunc} type="date" />
-             
+                <section className="mt-20  flex flex-col gap-y-8 items-end">
+                    <input className={`${themeHolder.colortxt1} bg-transparent rounded-md border border-gray-400`} value={dateValue} onChange={handleDateChangeFunc} type="date"/>
 
-                <div className="w-full h-[30rem] flex items-center justify-center">
-                    <Bar data={data} options={options} />
-                </div>
+
+                    <div className="w-full h-[30rem] mobile:h-[15rem] flex items-center justify-center">
+                        <Bar data={data} options={options} />
+                    </div>
+                </section>
+
             </section>
         </div>
     );
