@@ -35,54 +35,69 @@ export const Quiz = () => {
     const [score, setScore] = useState(0);
     const [answers, setAnswers] = useState([]);
     const [showScore, setShowScore] = useState(false);
-    const [indexofQuestion, setIndexofQuestion] = useState(0);
+    let [indexofQuestion, setIndexofQuestion] = useState(0);
     const [type, setType] = useState('');
 
+    const [answerCorrectness, setAnswerCorrectness] = useState([]);
+    const [answeredQuestions, setAnsweredQuestions] = useState([]);
+    const [explanations, setExplanations] = useState([]);
 
     const handleAnswerSelection = (questionIndex, selectedAnswer) => {
-        setIndexofQuestion(questionIndex); // to access the index of answered question outside of this function
+        setIndexofQuestion(indexofQuestion +1 ); // count the number of selected answer then display the submit btn if it equals to questions.length
+
         const updatedAnswers = [...answers];
+        const updatedCorrectness = [...answerCorrectness];
+        const updatedAnsweredQuestions = [...answeredQuestions];
+        const updatedExplanations = [...explanations];
+
         updatedAnswers[questionIndex] = selectedAnswer;
+        const isCorrect = selectedAnswer === quizQuestion[questionIndex].answer;
+        updatedCorrectness[questionIndex] = selectedAnswer === quizQuestion[questionIndex].answer;
+        updatedAnsweredQuestions[questionIndex] = true;
+        updatedExplanations[questionIndex] = isCorrect ? '' : quizQuestion[questionIndex].explanation;
+
         setAnswers(updatedAnswers);
+        setAnswerCorrectness(updatedCorrectness);
+        setAnsweredQuestions(updatedAnsweredQuestions);
+        setExplanations(updatedExplanations);
+
     };
 
     const handleFinishQuiz = () => {
         let totalScore = 0;
         answers.forEach((selectedAnswer, index) => {
-            if (
-                selectedAnswer === questions[index].answer
-            ) {
+            if (selectedAnswer === questions[index].answer) {
                 totalScore++;
             }
         });
         setScore(totalScore);
         setShowScore(true);
-        
-     
+
+
         const dateNow = new Date();
 
         const year = dateNow.getFullYear();
-        const month = String(dateNow.getMonth() + 1).padStart(2, '0'); 
+        const month = String(dateNow.getMonth() + 1).padStart(2, '0');
         const day = String(dateNow.getDate()).padStart(2, '0');
-         
+
         const fullDate = `${year}-${month}-${day}`;
 
         console.log(fullDate);
-      
+
         const quizdatatemp = {
-           quiztaker: name,
-           quiztakerid: userID,
-           quizsubject: quizSubject,
-           quizscore: totalScore,
-           quiztotalitem: quizQuestion.length,
-           quiztype: type,
-           quizdatetaken: fullDate,
+            quiztaker: name,
+            quiztakerid: userID,
+            quizsubject: quizSubject,
+            quizscore: totalScore,
+            quiztotalitem: quizQuestion.length,
+            quiztype: type,
+            quizdatetaken: fullDate,
         }
         console.log(quizdatatemp);
-        dispatch(InsertQuizThunk({quizdatatemp}));
+        dispatch(InsertQuizThunk({ quizdatatemp }));
 
     };
-     
+
     useEffect(() => {
         if (isQuizDataInserted === true) {
             dispatch(GetQuizThunk(name));
@@ -103,32 +118,32 @@ export const Quiz = () => {
     if (whatIsClickToggleQuizExam === 'FoundationofEducationExam1') {
         questions = FoundationOfEducationExam1JSON;
         quizTitle = 'Exam1 in Foundation of Education';
-        subject = 'FE exam1'; 
-        reviewerType = 'exam'    
+        subject = 'FE exam1';
+        reviewerType = 'exam'
     }
     else if (whatIsClickToggleQuizExam === 'FoundationofEducationQuiz1') {
         questions = FoundationOfEducationQuiz1JSON;
         quizTitle = 'Quiz1 in Foundation of Education';
         subject = 'FE quiz1';
-        reviewerType = 'quiz' 
+        reviewerType = 'quiz'
     }
     else if (whatIsClickToggleQuizExam === 'PrinciplesofTeachingQuiz1') {
         questions = PrincipleOfTeachingQuiz1JSON;
         quizTitle = 'Quiz1 in Principle of Teaching';
         subject = 'PT';
-        reviewerType = 'quiz' 
+        reviewerType = 'quiz'
     }
     else if (whatIsClickToggleQuizExam === 'ChildandAdolescentDevelopmentQuiz1') {
         questions = ChildAndAdolescentDevelopmentQuiz1JSON;
         quizTitle = 'Quiz1 in Child and Adolescent Development';
         subject = 'CAD';
-        reviewerType = 'quiz' 
+        reviewerType = 'quiz'
     }
     else if (whatIsClickToggleQuizExam === 'FacilitatingLearningQuiz1') {
         questions = FacilitatingLearningQuiz1JSON;
         quizTitle = 'Quiz1 in Facilitating Learning';
         subject = 'FL';
-        reviewerType = 'quiz'      
+        reviewerType = 'quiz'
     }
 
 
@@ -141,7 +156,23 @@ export const Quiz = () => {
         setIndexofQuestion(0);
         setAnswers([]);
         setType(reviewerType);
+        setAnswerCorrectness([]);
+        setAnsweredQuestions([]);
+        setExplanations([]);
     }, [whatIsClickToggleQuizExam])
+    // reset if the tryagain button is clicked
+    const handleTryAgain = () => {
+        setQuizQuestion(questions);
+        setQuizSubject(subject);
+        setStartQuiz(false);
+        setShowScore(false);
+        setIndexofQuestion(0);
+        setAnswers([]);
+        setType(reviewerType);
+        setAnswerCorrectness([]);
+        setAnsweredQuestions([]);
+        setExplanations([]);
+    }
 
     return (
         <>
@@ -167,26 +198,23 @@ export const Quiz = () => {
                                     (
                                         <div className='flex flex-col items-center gap-y-8 text-center'>
                                             <p className={`${themeHolder.colortxt1} text-4xl font-semibold mobile:text-2xl`}>{quizTitle}</p>
-
                                             <button onClick={() => { setStartQuiz(true) }} className="h-[4rem] w-[8rem] mobile:h-[3rem] mobile:w-[6.5rem] mobile:gap-x-2 mobile:text-lg flex items-center justify-center gap-x-4 bg-yellow-500 border-none rounded-lg text-xl text-white font-semibold">
-                                                Start Quiz
-                                            </button>
-                                        </div>                 
+                                                Start Quiz </button>
+                                        </div>
                                     )
                                     :
                                     (
                                         <div>
                                             <div>
-                                                {showScore ? (
-                                                   <div className={`${themeHolder.colortxt1} flex flex-col items-center justify-center gap-y-5 `}>
-                                                   <h2 className='text-5xl font-semibold mobile:text-4xl'>Quiz Completed!</h2>
-                                                   <h3 className='text-3xl mobile:text-2xl'>Your Score: {score}</h3>
-                                                  
-                                                   <button onClick={() => { setShowScore(false); setIndexofQuestion(0); setAnswers([]) }} className="h-[3rem] w-[6rem] mobile:h-[3rem] mobile:w-[6.5rem] mobile:gap-x-2 mobile:text-lg flex items-center justify-center gap-x-4 border-none bg-yellow-500 rounded-lg text-lg font-semibold">
-                                                       Try again
-                                                    </button>
-                                               </div>
-                                                )
+                                                {showScore ?
+                                                    (
+                                                        <div className={`${themeHolder.colortxt1} flex flex-col items-center justify-center gap-y-5 `}>
+                                                            <h2 className='text-5xl font-semibold mobile:text-4xl'>Quiz Completed!</h2>
+                                                            <h3 className='text-3xl mobile:text-2xl'>Your Score: {score}</h3>
+
+                                                            <button onClick={handleTryAgain} className="h-[3rem] w-[6rem] mobile:h-[3rem] mobile:w-[6.5rem] mobile:gap-x-2 mobile:text-lg flex items-center justify-center gap-x-4 border-none bg-yellow-500 rounded-lg text-lg font-semibold"> Try again </button>
+                                                        </div>
+                                                    )
                                                     :
                                                     (
 
@@ -195,21 +223,45 @@ export const Quiz = () => {
                                                             {questions.map((question, index) => (
                                                                 <div key={index} className='w-full border border-gray-300 rounded-lg overflow-hidden mb-5'>
                                                                     <p className={`${themeHolder.colorbg2} text-gray-300 font-bold h-[2rem] w-full flex items-center pl-4 `}>Question {index + 1}</p>
+                                                                   
+                                                    
+                                                                    <div className="bg-yellow-500 w-full pl-2">{explanations[index]}</div>
+                                                                  
+                                                                  
                                                                     <div className={`${themeHolder.colortxt1} p-2`}>
+
+
                                                                         <h3 className='font-semibold'>{question.question}</h3>
                                                                         {question.type === 'radio' && (
                                                                             <ul>
                                                                                 {question.options.map((option, optionIndex) => (
+
                                                                                     <li key={optionIndex} className='py-0.5'>
                                                                                         <input
                                                                                             type="radio"
                                                                                             name={`question${index}`}
                                                                                             value={option}
-                                                                                            onChange={() =>
-                                                                                                handleAnswerSelection(index, option)
-                                                                                            }
+                                                                                            onChange={() => handleAnswerSelection(index, option)}
+                                                                                            checked={answers[index] === option}
+                                                                                            disabled={answeredQuestions[index]}
                                                                                         />
+
                                                                                         {option}
+
+                                                                                        {answers[index] === option && (
+                                                                                            <span>
+                                                                                                {answerCorrectness[index] ? (
+                                                                                                    <span className="text-green-500"> Correct </span>
+                                                                                                ) : (
+                                                                                                    <>
+                                                                                                        <span className="text-red-500"> Incorrect </span>
+                                                                                                    </>
+
+                                                                                                )}
+
+                                                                                            </span>
+                                                                                        )}
+                                                                                     
                                                                                     </li>
                                                                                 ))}
                                                                             </ul>
@@ -217,16 +269,13 @@ export const Quiz = () => {
                                                                     </div>
                                                                 </div>
                                                             ))}
-                                                            {questions.length === (indexofQuestion + 1) && (
+                                                            {questions.length === (indexofQuestion) && (
                                                                 <button onClick={handleFinishQuiz} className="h-[3rem] w-[6rem] mobile:h-[3rem] mobile:w-[6.5rem] mobile:gap-x-2 mobile:text-lg flex items-center justify-center gap-x-4 bg-yellow-500 border-none rounded-lg text-lg text-white font-semibold">
-                                                                    Submit
-                                                                </button>
-
+                                                                    Submit </button>
                                                             )}
                                                         </div>
-
-
-                                                    )}
+                                                    )
+                                                }
                                             </div>
                                         </div>
                                     )
