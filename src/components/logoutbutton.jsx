@@ -49,7 +49,7 @@ export const LogoutInSidebar = () => {
     const minimizeSidebar = useSelector(minimizeSidebarTemp);
     const themeHolder = useSelector(themeHolderTemp);
 
-    const handleLogout = () => {
+    const handleLogout = () => { 
         dispatch(clearLoginState());
         dispatch(clearRegisterState());
         dispatch(clearIsSidebarOpenState());

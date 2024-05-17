@@ -25,6 +25,16 @@ export const DashBoard = () => {
     const [typeValue, setTypeValue] = useState('all');
     const [filteredQuizData, setFilteredQuizData] = useState([]);
 
+     //for exam
+     const [numberOfTimesExamTaken, setNumberOfTimesExamTaken] = useState(0);
+     const [highestScoreInExam, setHighestScoreInExam] = useState(0);
+     const [LowestScoreInExam, setLowestScoreInExam] = useState(0);
+     //for quiz
+     const [numberOfTimesQuizTaken, setNumberOfTimesQuizTaken] = useState(0);
+     const [highestScoreInQuiz, setHighestScoreInQuiz] = useState(0);
+     const [LowestScoreInQuiz, setLowestScoreInQuiz] = useState(0);
+
+
     const handleDateChangeFunc = (e) => {
         setDateValue(e.target.value);
     };
@@ -34,11 +44,40 @@ export const DashBoard = () => {
     };
 
     useEffect(() => {
-        const filteredData = quizData.filter(item => 
+        const filteredData = quizData.filter(item =>
             item.quizdatetaken === dateValue && (typeValue === 'all' || item.quiztype === typeValue)
         );
         setFilteredQuizData(filteredData);
+
     }, [dateValue, typeValue, quizData]);
+
+    useEffect(() => {
+
+        const examObject = filteredQuizData.filter(item => item.quiztype === 'exam');
+        const quizObject = filteredQuizData.filter(item => item.quiztype === 'quiz');
+
+        if (examObject.length > 0) {
+            setNumberOfTimesExamTaken(examObject.length);
+            setHighestScoreInExam(Math.max(...examObject.map(obj => obj.quizscore)));
+            setLowestScoreInExam(Math.min(...examObject.map(obj => obj.quizscore)));
+        }
+        else {
+            setNumberOfTimesExamTaken(0);
+            setHighestScoreInExam(0);
+            setHighestScoreInExam(0);
+        }
+        if (quizObject.length > 0) {
+            setNumberOfTimesQuizTaken(quizObject.length);
+            setHighestScoreInQuiz(Math.max(...quizObject.map(obj => obj.quizscore)));
+            setLowestScoreInQuiz(Math.min(...quizObject.map(obj => obj.quizscore)));
+        }
+        else {
+            setNumberOfTimesQuizTaken(0);
+            setHighestScoreInQuiz(0);
+            setHighestScoreInQuiz(0);
+        }
+
+    }, [filteredQuizData])
 
 
     const quizScores = filteredQuizData.map(item => item.quizscore);
@@ -93,20 +132,35 @@ export const DashBoard = () => {
                     </div>
                 </section>
 
-                <section className="mt-20  flex flex-col gap-y-8 items-end">
-                    <div className="w-full flex items-center justify-end gap-x-5">
+                <section className="mt-20 flex flex-col gap-y-8 mobile:gap-y-4 items-end">
+                    <div className="w-full flex flex-wrap mobile:gap-y-4 mobile:flex-col-reverse items-start justify-between gap-x-5">
 
-                        <select
-                         value={typeValue}
-                         onChange={handleTypeChangeFunc}
-                         className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-400 rounded-md outline-none p-2 text-gray-300 text-md `}>
-                            <option value="all">All</option>
-                            <option value="exam">Exam</option>
-                            <option value="quiz">Quiz</option>
-                        </select>
+                        <div className={`${themeHolder.colortxt1} flex flex-wrap mobile:gap-y-4 gap-x-5`}>
 
-                        <input className={`${themeHolder.colorbg3} ${themeHolder.colortxt1} ${themeHolder.border} rounded-md outline-none`} value={dateValue} onChange={handleDateChangeFunc} type="date" />
+                            <div className={`mobile:flex-grow border border-gray-500 p-2 rounded-md`}>
+                                <p>Number of times you take an exam : {numberOfTimesExamTaken}</p>
+                                <p>Highest score in Exam : {highestScoreInExam}</p>
+                                <p>Lowest score in Exam : {LowestScoreInExam}</p>
+                            </div>
+                            <div className={`mobile:flex-grow border border-gray-500 p-2 rounded-md`}>
+                                <p>Number of times you take a quiz : {numberOfTimesQuizTaken}</p>
+                                <p>Highest score in quiz : {highestScoreInQuiz}</p>
+                                <p>Lowest score in quiz : {LowestScoreInQuiz}</p>
+                            </div>
+                        </div>
 
+                        <div className="flex items-end gap-x-5">
+                            <select
+                                value={typeValue}
+                                onChange={handleTypeChangeFunc}
+                                className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-400 rounded-md outline-none p-2 text-gray-300 text-md `}>
+                                <option value="all">All</option>
+                                <option value="exam">Exam</option>
+                                <option value="quiz">Quiz</option>
+                            </select>
+
+                            <input className={`${themeHolder.colorbg3} ${themeHolder.colortxt1} ${themeHolder.border} rounded-md outline-none`} value={dateValue} onChange={handleDateChangeFunc} type="date" />
+                        </div>
                     </div>
 
                     <div className="w-full h-[30rem] mobile:h-[15rem] flex items-center justify-center">

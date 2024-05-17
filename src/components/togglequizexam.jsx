@@ -109,9 +109,9 @@ export const ToggleQuizExam = () => {
                         <IoMdArrowDropright className={`${themeHolder.colortxt1} ${isShowDrop.isArrowRotateFoundationofEducation ? 'rotate-90' : ''} text-2xl`} />
 
                     </li>
-                    <ul className={`${isShowDrop.FoundationofEducationDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FoundationofEducationExam1'))} className={`${whatIsClickToggleQuizExam === ''} py-2 px-8`}>Exam 1 in FE</li>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FoundationofEducationQuiz1'))} className={`py-2 px-8`}>Quiz 1 in FE </li>
+                    <ul className={`${isShowDrop.FoundationofEducationDropdown ? `h-[5.5rem] ${themeHolder.colorbg3}` : 'h-0'} duration-200 flex flex-col overflow-hidden cursor-pointer`}>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FoundationofEducationExam1'))} className={`${whatIsClickToggleQuizExam === ''} flex items-center flex-grow pl-8`}>Exam 1 in FE</li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FoundationofEducationQuiz1'))} className={`flex items-center flex-grow pl-8`}>Quiz 1 in FE </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}
                     <li
@@ -122,9 +122,9 @@ export const ToggleQuizExam = () => {
                         <IoMdArrowDropright className={`${themeHolder.colortxt1} ${isShowDrop.isArrowRotatePrinciplesofTeaching ? 'rotate-90' : ''} text-2xl`} />
 
                     </li>
-                    <ul className={`${isShowDrop.PrinciplesofTeachingDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('PrinciplesofTeachingExam1'))} className={` py-2 px-8`}>Exam 1 in PT </li>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('PrinciplesofTeachingQuiz1'))} className={` py-2 px-8`}>Quiz 1 in PT </li>
+                    <ul className={`${isShowDrop.PrinciplesofTeachingDropdown ? `h-[5.5rem] ${themeHolder.colorbg3}` : 'h-0'} duration-200 flex flex-col overflow-hidden cursor-pointer`}>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('PrinciplesofTeachingExam1'))} className={`flex items-center flex-grow pl-8`}>Exam 1 in PT </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('PrinciplesofTeachingQuiz1'))} className={`flex items-center flex-grow pl-8`}>Quiz 1 in PT </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}
                     <li
@@ -135,9 +135,9 @@ export const ToggleQuizExam = () => {
                         <IoMdArrowDropright className={`${themeHolder.colortxt1} ${isShowDrop.isArrowRotateChildandAdolescentDevelopment ? 'rotate-90' : ''} text-2xl`} />
 
                     </li>
-                    <ul className={`${isShowDrop.ChildandAdolescentDevelopmentDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('ChildandAdolescentDevelopmentExam1'))} className={`py-2 px-8`}>Exam 1 in CAD </li>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('ChildandAdolescentDevelopmentQuiz1'))} className={`py-2 px-8`}>Quiz 1 in CAD </li>
+                    <ul className={`${isShowDrop.ChildandAdolescentDevelopmentDropdown ? `h-[5.5rem] ${themeHolder.colorbg3}` : 'h-0'} duration-200 flex flex-col overflow-hidden cursor-pointer`}>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('ChildandAdolescentDevelopmentExam1'))} className={`flex items-center flex-grow pl-8`}>Exam 1 in CAD </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('ChildandAdolescentDevelopmentQuiz1'))} className={`flex items-center flex-grow pl-8`}>Quiz 1 in CAD </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}
                     <li
@@ -148,9 +148,9 @@ export const ToggleQuizExam = () => {
                         <IoMdArrowDropright className={`${themeHolder.colortxt1} ${isShowDrop.isArrowRotateFacilitatingLearning ? 'rotate-90' : ''} text-2xl`} />
 
                     </li>
-                    <ul className={`${isShowDrop.FacilitatingLearningDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FacilitatingLearningExam1'))} className={`py-2 px-8`}>Exam 1 in FL </li>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FacilitatingLearningQuiz1'))} className={`py-2 px-8`}>Quiz 1 in FL </li>
+                    <ul className={`${isShowDrop.FacilitatingLearningDropdown ? `h-[5.5rem] ${themeHolder.colorbg3}` : 'h-0'} duration-200 flex flex-col overflow-hidden cursor-pointer`}>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FacilitatingLearningExam1'))} className={`flex items-center flex-grow pl-8`}>Exam 1 in FL </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FacilitatingLearningQuiz1'))} className={`flex items-center flex-grow pl-8`}>Quiz 1 in FL </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}
                     <li
@@ -161,9 +161,9 @@ export const ToggleQuizExam = () => {
                         <IoMdArrowDropright className={`${themeHolder.colortxt1} ${isShowDrop.isArrowRotateAssessmentofStudentLearning ? 'rotate-90' : ''} text-2xl`} />
 
                     </li>
-                    <ul className={`${isShowDrop.AssessmentofStudentLearningDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('AssessmentofStudentLearningExam1'))} className={`py-2 px-8`}>Exam 1 in ASL </li>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('AssessmentofStudentLearningQuiz1'))} className={`py-2 px-8`}>Quiz 1 in ASL </li>
+                    <ul className={`${isShowDrop.AssessmentofStudentLearningDropdown ? `h-[5.5rem] ${themeHolder.colorbg3}` : 'h-0'} duration-200 flex flex-col overflow-hidden cursor-pointer`}>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('AssessmentofStudentLearningExam1'))} className={`flex items-center flex-grow pl-8`}>Exam 1 in ASL </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('AssessmentofStudentLearningQuiz1'))} className={`flex items-center flex-grow pl-8`}>Quiz 1 in ASL </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}
                     <li
@@ -174,9 +174,9 @@ export const ToggleQuizExam = () => {
                         <IoMdArrowDropright className={`${themeHolder.colortxt1} ${isShowDrop.isArrowRotateDevelopmentallyAppropriatePracticesinTeaching ? 'rotate-90' : ''} text-2xl`} />
 
                     </li>
-                    <ul className={`${isShowDrop.DevelopmentallyAppropriatePracticesinTeachingDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('DevelopmentallyAppropriatePracticesinTeachingExam1'))} className={`py-2 px-8`}>Exam 1 in DAPT </li>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('DevelopmentallyAppropriatePracticesinTeachingQuiz1'))} className={`py-2 px-8`}>Quiz 1 in DAPT </li>
+                    <ul className={`${isShowDrop.DevelopmentallyAppropriatePracticesinTeachingDropdown ? `h-[5.5rem] ${themeHolder.colorbg3}` : 'h-0'} duration-200 flex flex-col overflow-hidden cursor-pointer`}>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('DevelopmentallyAppropriatePracticesinTeachingExam1'))} className={`flex items-center flex-grow pl-8`}>Exam 1 in DAPT </li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('DevelopmentallyAppropriatePracticesinTeachingQuiz1'))} className={`flex items-center flex-grow pl-8`}>Quiz 1 in DAPT </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}
                     <li
@@ -187,9 +187,9 @@ export const ToggleQuizExam = () => {
                         <IoMdArrowDropright className={`${themeHolder.colortxt1} ${isShowDrop.isArrowRotateCurriculumDevelopment ? 'rotate-90' : ''} text-2xl`} />
 
                     </li>
-                    <ul className={`${isShowDrop.CurriculumDevelopmentDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('CurriculumDevelopmentExam1'))} className={`py-2 px-8`}>Exam 1 in CD</li>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('CurriculumDevelopmentQuiz1'))} className={`py-2 px-8`}>Quiz 1 in CD </li>
+                    <ul className={`${isShowDrop.CurriculumDevelopmentDropdown ? `h-[5.5rem] ${themeHolder.colorbg3}` : 'h-0'} duration-200 flex flex-col overflow-hidden cursor-pointer`}>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('CurriculumDevelopmentExam1'))} className={`flex items-center flex-grow pl-8`}>Exam 1 in CD</li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('CurriculumDevelopmentQuiz1'))} className={`flex items-center flex-grow pl-8`}>Quiz 1 in CD </li>
                     </ul>
                     {/* ------------------------------------------------------------------------ */}
                     <li
@@ -200,9 +200,9 @@ export const ToggleQuizExam = () => {
                         <IoMdArrowDropright className={`${themeHolder.colortxt1} ${isShowDrop.isArrowRotateFieldStudyandPractice ? 'rotate-90' : ''} text-2xl`} />
 
                     </li>
-                    <ul className={`${isShowDrop.FieldStudyandPracticeDropdown ? `h-fit ${themeHolder.colorbg3}` : 'h-0'} overflow-hidden cursor-pointer`}>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FieldStudyandPracticeExam1'))} className={`py-2 px-8`}>Exam 1 in FSP</li>
-                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FieldStudyandPracticeQuiz1'))} className={`py-2 px-8`}>Quiz 1 in FSP </li>
+                    <ul className={`${isShowDrop.FieldStudyandPracticeDropdown ? `h-[5.5rem] ${themeHolder.colorbg3}` : 'h-0'} duration-200 flex flex-col overflow-hidden cursor-pointer`}>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FieldStudyandPracticeExam1'))} className={`flex items-center flex-grow pl-8`}>Exam 1 in FSP</li>
+                        <li onClick={() => dispatch(whatIsClickToggleQuizExamState('FieldStudyandPracticeQuiz1'))} className={`flex items-center flex-grow pl-8`}>Quiz 1 in FSP </li>
                     </ul>
 
 

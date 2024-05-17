@@ -43,7 +43,7 @@ export const Quiz = () => {
     const [explanations, setExplanations] = useState([]);
 
     const handleAnswerSelection = (questionIndex, selectedAnswer) => {
-        setIndexofQuestion(indexofQuestion +1 ); // count the number of selected answer then display the submit btn if it equals to questions.length
+        setIndexofQuestion(indexofQuestion + 1); // count the number of selected answer then display the submit btn if it equals to questions.length
 
         const updatedAnswers = [...answers];
         const updatedCorrectness = [...answerCorrectness];
@@ -197,7 +197,8 @@ export const Quiz = () => {
                                 !startQuiz ? // checks if the user clicks on start quiz button
                                     (
                                         <div className='flex flex-col items-center gap-y-8 text-center'>
-                                            <p className={`${themeHolder.colortxt1} text-4xl font-semibold mobile:text-2xl`}>{quizTitle}</p>
+                                            <p className={`${themeHolder.colortxt1} text-4xl font-semibold mobile:text-1xl`}>{quizTitle}</p>
+                                            <p className={`${themeHolder.colortxt1} text-2xl`}>Number of Items : {quizQuestion.length}</p>
                                             <button onClick={() => { setStartQuiz(true) }} className="h-[4rem] w-[8rem] mobile:h-[3rem] mobile:w-[6.5rem] mobile:gap-x-2 mobile:text-lg flex items-center justify-center gap-x-4 bg-yellow-500 border-none rounded-lg text-xl text-white font-semibold">
                                                 Start Quiz </button>
                                         </div>
@@ -217,19 +218,77 @@ export const Quiz = () => {
                                                     )
                                                     :
                                                     (
+                                                        <>
 
-                                                        <div className='absolute w-[40rem] max-w-[95%] translate-x-[-50%] top-0'>
-                                                            <p className={`${themeHolder.colortxt1} text-3xl font-semibold pb-5 mobile:text-2xl`}>{quizTitle}</p>
+                                                        {type === 'exam' &&
+                                                        (
+                                                            <div className='absolute w-[40rem] max-w-[95%] translate-x-[-50%] top-0'>
+                                                                <p className={`${themeHolder.colortxt1} bg-gray-900 sticky top-0 p-2 text-3xl font-semibold mobile:text-2xl`}>{quizTitle}</p>
+                                                                {questions.map((question, index) => (
+                                                                    <div key={index} className='w-full border border-gray-300 rounded-lg overflow-hidden mb-5'>
+                                                                        <p className={`${themeHolder.colorbg2} text-gray-300 font-bold h-[2rem] w-full flex items-center pl-4 `}>Question {index + 1}</p>
+
+
+                                                                        <div className="bg-yellow-500 w-full pl-2">{explanations[index]}</div>
+
+
+                                                                        <div className={`${themeHolder.colortxt1} p-2`}>
+
+
+                                                                            <h3 className='font-semibold'>{question.question}</h3>
+                                                                            {question.type === 'radio' && (
+                                                                                <ul>
+                                                                                    {question.options.map((option, optionIndex) => (
+
+                                                                                        <li key={optionIndex} className='py-0.5'>
+                                                                                            <input
+                                                                                                type="radio"
+                                                                                                name={`question${index}`}
+                                                                                                value={option}
+                                                                                                onChange={() => handleAnswerSelection(index, option)}
+                                                                                                checked={answers[index] === option}
+                                                                                                disabled={answeredQuestions[index]}
+                                                                                            />
+
+                                                                                            {option}
+
+                                                                                            {answers[index] === option && (
+                                                                                                <span>
+                                                                                                    {answerCorrectness[index] ? (
+                                                                                                        <span className="text-green-500"> Correct </span>
+                                                                                                    ) : (
+                                                                                                        <>
+                                                                                                            <span className="text-red-500"> Incorrect </span>
+                                                                                                        </>
+
+                                                                                                    )}
+
+                                                                                                </span>
+                                                                                            )}
+
+                                                                                        </li>
+                                                                                    ))}
+                                                                                </ul>
+                                                                            )}
+                                                                        </div>
+                                                                    </div>
+                                                                ))}
+                                                                {questions.length === (indexofQuestion) && (
+                                                                    <button onClick={handleFinishQuiz} className="h-[3rem] w-[6rem] mobile:h-[3rem] mobile:w-[6.5rem] mobile:gap-x-2 mobile:text-lg flex items-center justify-center gap-x-4 bg-yellow-500 border-none rounded-lg text-lg text-white font-semibold">
+                                                                        Submit </button>
+                                                                )}
+                                                            </div>
+                                                        )}
+
+                                                        {type === 'quiz' &&
+                                                        (
+                                                            <div className='absolute w-[40rem] max-w-[95%] translate-x-[-50%] top-0'>
+                                                            <p className={`${themeHolder.colortxt1} bg-gray-900 sticky top-0 p-2 text-3xl font-semibold mobile:text-2xl`}>{quizTitle}</p>
                                                             {questions.map((question, index) => (
                                                                 <div key={index} className='w-full border border-gray-300 rounded-lg overflow-hidden mb-5'>
                                                                     <p className={`${themeHolder.colorbg2} text-gray-300 font-bold h-[2rem] w-full flex items-center pl-4 `}>Question {index + 1}</p>
-                                                                   
-                                                    
-                                                                    <div className="bg-yellow-500 w-full pl-2">{explanations[index]}</div>
-                                                                  
-                                                                  
-                                                                    <div className={`${themeHolder.colortxt1} p-2`}>
 
+                                                                    <div className={`${themeHolder.colortxt1} p-2`}>
 
                                                                         <h3 className='font-semibold'>{question.question}</h3>
                                                                         {question.type === 'radio' && (
@@ -245,23 +304,7 @@ export const Quiz = () => {
                                                                                             checked={answers[index] === option}
                                                                                             disabled={answeredQuestions[index]}
                                                                                         />
-
                                                                                         {option}
-
-                                                                                        {answers[index] === option && (
-                                                                                            <span>
-                                                                                                {answerCorrectness[index] ? (
-                                                                                                    <span className="text-green-500"> Correct </span>
-                                                                                                ) : (
-                                                                                                    <>
-                                                                                                        <span className="text-red-500"> Incorrect </span>
-                                                                                                    </>
-
-                                                                                                )}
-
-                                                                                            </span>
-                                                                                        )}
-                                                                                     
                                                                                     </li>
                                                                                 ))}
                                                                             </ul>
@@ -274,6 +317,11 @@ export const Quiz = () => {
                                                                     Submit </button>
                                                             )}
                                                         </div>
+                                                        )}
+
+
+                                                        </>
+
                                                     )
                                                 }
                                             </div>
