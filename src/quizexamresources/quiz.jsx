@@ -16,6 +16,7 @@ import { ClearIsQuizDataInsertedState } from '../feature/quizSlice';
 import { GetQuizThunk } from '../feature/quizSlice';
 
 import { FoundationOfEducationExam1JSON } from './foundationofeducationexam1JSON';
+import { PrincipleOfTeachingExam1JSON } from './principleofteachingexam1JSON';
 
 export const Quiz = () => {
 
@@ -130,20 +131,26 @@ export const Quiz = () => {
     else if (whatIsClickToggleQuizExam === 'PrinciplesofTeachingQuiz1') {
         questions = PrincipleOfTeachingQuiz1JSON;
         quizTitle = 'Quiz1 in Principle of Teaching';
-        subject = 'PT';
+        subject = 'PT quiz1';
         reviewerType = 'quiz'
     }
     else if (whatIsClickToggleQuizExam === 'ChildandAdolescentDevelopmentQuiz1') {
         questions = ChildAndAdolescentDevelopmentQuiz1JSON;
         quizTitle = 'Quiz1 in Child and Adolescent Development';
-        subject = 'CAD';
+        subject = 'CAD quiz1';
         reviewerType = 'quiz'
     }
     else if (whatIsClickToggleQuizExam === 'FacilitatingLearningQuiz1') {
         questions = FacilitatingLearningQuiz1JSON;
         quizTitle = 'Quiz1 in Facilitating Learning';
-        subject = 'FL';
+        subject = 'FL quiz1';
         reviewerType = 'quiz'
+    }
+    else if (whatIsClickToggleQuizExam === 'PrinciplesofTeachingExam1') {
+        questions = PrincipleOfTeachingExam1JSON;
+        quizTitle = 'Quiz1 in principle of teaching';
+        subject = 'PL exam1';
+        reviewerType = 'exam';
     }
 
 
@@ -176,7 +183,6 @@ export const Quiz = () => {
 
     return (
         <>
-
             {
                 whatIsClickToggleQuizExam === 'none' ? // checks if the user clicks on any subject tab
                     (

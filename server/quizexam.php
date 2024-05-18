@@ -34,7 +34,7 @@ if (isset($_GET['action'])) {
 
             $sql = "insert into quiz (quiztaker, quiztakerid, quizsubject, quizscore, quiztotalitem, quiztype, quizdatetaken) VALUES ('$quiztaker','$quiztakerid', '$quizsubject', '$quizscore', 
             '$quiztotalitem', '$quiztype', '$quizdatetaken')";
-            
+
             $conn->query($sql);
 
             if ($conn->affected_rows > 0) {
@@ -81,6 +81,55 @@ if (isset($_GET['action'])) {
 
             $conn->close();
             break;
+
+        case 'checkUserPerformanceExist':
+            $user = json_decode(file_get_contents("php://input"), true);
+
+            $sql = "select*from quiz where quiztaker = '$user'";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                echo json_encode(true);
+            } else {
+                echo json_encode(false);
+            }
+
+            $conn->close();
+            break;
+
+            
+            case 'getUserPerformance':
+                $quiztaker = json_decode($_POST['quiztaker'], true);
+
+                $sql = "select*from quiz where quiztaker = '$quiztaker'";
+                $result = $conn->query($sql);
+    
+                $data = [];
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+
+
+                $sql1 = "select*from user where username = '$quiztaker'";
+                $result1 = $conn->query($sql1);
+    
+                $data1 = [];
+                while ($row1 = $result1->fetch_assoc()) {
+                    $data1[] = $row1;
+                }       
+              
+
+                echo json_encode(['userPerformance' => $data, 'userInfo' => $data1]);
+    
+                $conn->close();
+                break;
+          
+
+
+
+
+
+
 
         default:
 

@@ -6,6 +6,7 @@ import { resourceCountTemp } from "../feature/insertresourcedataSlice";
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { useEffect, useState } from "react";
+import { UserPerformance } from "../components/userperformance";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -25,14 +26,14 @@ export const DashBoard = () => {
     const [typeValue, setTypeValue] = useState('all');
     const [filteredQuizData, setFilteredQuizData] = useState([]);
 
-     //for exam
-     const [numberOfTimesExamTaken, setNumberOfTimesExamTaken] = useState(0);
-     const [highestScoreInExam, setHighestScoreInExam] = useState(0);
-     const [LowestScoreInExam, setLowestScoreInExam] = useState(0);
-     //for quiz
-     const [numberOfTimesQuizTaken, setNumberOfTimesQuizTaken] = useState(0);
-     const [highestScoreInQuiz, setHighestScoreInQuiz] = useState(0);
-     const [LowestScoreInQuiz, setLowestScoreInQuiz] = useState(0);
+    //for exam
+    const [numberOfTimesExamTaken, setNumberOfTimesExamTaken] = useState(0);
+    const [highestScoreInExam, setHighestScoreInExam] = useState(0);
+    const [LowestScoreInExam, setLowestScoreInExam] = useState(0);
+    //for quiz
+    const [numberOfTimesQuizTaken, setNumberOfTimesQuizTaken] = useState(0);
+    const [highestScoreInQuiz, setHighestScoreInQuiz] = useState(0);
+    const [LowestScoreInQuiz, setLowestScoreInQuiz] = useState(0);
 
 
     const handleDateChangeFunc = (e) => {
@@ -52,7 +53,6 @@ export const DashBoard = () => {
     }, [dateValue, typeValue, quizData]);
 
     useEffect(() => {
-
         const examObject = filteredQuizData.filter(item => item.quiztype === 'exam');
         const quizObject = filteredQuizData.filter(item => item.quiztype === 'quiz');
 
@@ -64,7 +64,7 @@ export const DashBoard = () => {
         else {
             setNumberOfTimesExamTaken(0);
             setHighestScoreInExam(0);
-            setHighestScoreInExam(0);
+            setLowestScoreInExam(0);
         }
         if (quizObject.length > 0) {
             setNumberOfTimesQuizTaken(quizObject.length);
@@ -74,7 +74,7 @@ export const DashBoard = () => {
         else {
             setNumberOfTimesQuizTaken(0);
             setHighestScoreInQuiz(0);
-            setHighestScoreInQuiz(0);
+            setLowestScoreInQuiz(0);
         }
 
     }, [filteredQuizData])
@@ -133,7 +133,12 @@ export const DashBoard = () => {
                 </section>
 
                 <section className="mt-20 flex flex-col gap-y-8 mobile:gap-y-4 items-end">
-                    <div className="w-full flex flex-wrap mobile:gap-y-4 mobile:flex-col-reverse items-start justify-between gap-x-5">
+
+                    <div className="w-full h-[30rem] mobile:h-[15rem] flex items-center justify-center">
+                        <Bar data={data} options={options} />
+                    </div>
+
+                    <div className={`${themeHolder.colorbg2} flex items-start justify-between gap-y-2 h-fit p-5 rounded-lg w-full`}>
 
                         <div className={`${themeHolder.colortxt1} flex flex-wrap mobile:gap-y-4 gap-x-5`}>
 
@@ -163,9 +168,8 @@ export const DashBoard = () => {
                         </div>
                     </div>
 
-                    <div className="w-full h-[30rem] mobile:h-[15rem] flex items-center justify-center">
-                        <Bar data={data} options={options} />
-                    </div>
+                    <UserPerformance />
+
                 </section>
 
             </section>

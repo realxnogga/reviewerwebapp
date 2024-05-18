@@ -120,9 +120,6 @@ export const LearningResources = () => {
                         <IoFilter onClick={() => { setOpenFilterModal(true); }} className={`${themeHolder.colortxt1} text-gray-300 text-2xl `} />
                     </Tooltip>
 
-
-
-
                     <div className="bg-green-400 flex h-[2.5rem] w-[15rem] ">
                         <div className="bg-white h-[2.5rem] w-[2.5rem] flex items-center justify-center">
                             <FaMagnifyingGlass className="text-black text-xl" />
