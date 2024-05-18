@@ -6,7 +6,7 @@ import { GrResources } from "react-icons/gr";
 import { IoCloseSharp } from "react-icons/io5";
 import { LiaEyeSlash } from "react-icons/lia";
 import { LiaEyeSolid } from "react-icons/lia";
-import { isSidebarOpenState, whatIsClickedState, isSideBarOpenTemp, whatIsClickedTemp } from "../feature/opensidebarSlice";
+import { isSidebarOpenState, whatIsClickedState, isSideBarOpenTemp, whatIsClickedTemp, clearIsSidebarOpenState } from "../feature/opensidebarSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import { themeHolderTemp } from "../feature/themeSlice";
 import { FiBox } from "react-icons/fi";
@@ -29,10 +29,15 @@ export const Sidebar = () => {
 
     const isSideBarOpen = useSelector(isSideBarOpenTemp);
 
-    
+    //onMouseLeave wont work if sidebar is minimize
+    const OnmouseLeaveFunc = () => {
+        if (!minimizeSidebar) {
+            dispatch(clearIsSidebarOpenState());
+        }
+    }
 
     return (
-        <aside  className={`${isSideBarOpen ? 'w-[16.7rem] px-2 border-r border-r-yellow-500' : 'w-0 px-0 border-none'} ${minimizeSidebar ? 'w-[4.8rem]' : ''} 
+        <aside onMouseLeave={OnmouseLeaveFunc} className={`${isSideBarOpen ? 'w-[16.7rem] px-2 border-r border-r-yellow-500' : 'w-0 px-0 border-none'} ${minimizeSidebar ? 'w-[4.8rem]' : ''} 
         ${themeHolder.colorbg2} absolute left-0 z-10 bg-gray-800 h-screen top-[4rem] text-nowrap overflow-hidden`}>
 
             <ul className='flex flex-col text-md '>

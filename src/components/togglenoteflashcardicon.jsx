@@ -7,15 +7,10 @@ import { isToggleNoteFlashCardOpenState } from "../feature/opentogglenoteflashca
 
 export const ToggleNoteFlashcardIcon = () => {
     const themeHolder = useSelector(themeHolderTemp);
-
     const dispatch = useDispatch();
     
-    const OpenToggleNoteFlashcardFunc = () => {
-        dispatch(isToggleNoteFlashCardOpenState());
-    }
-
     return (
-        <IoMdSwitch onClick={OpenToggleNoteFlashcardFunc} className={`${themeHolder.colortxt1} 
-        absolute top-4 right-4 text-gray-300 text-[2rem] hover:bg-yellow-500 rounded-sm`}/>
+        <IoMdSwitch onMouseOver={() => {dispatch(isToggleNoteFlashCardOpenState())}} className={`${themeHolder.colortxt1} 
+        absolute top-4 right-4 text-gray-300 text-[2rem] rounded-sm`}/>
     )
 }

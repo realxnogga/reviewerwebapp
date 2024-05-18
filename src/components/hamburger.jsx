@@ -9,6 +9,6 @@ export const Hamburger = () => {
     const dispatch = useDispatch();
 
     return (      
-            <TfiMenu onClick={() => {dispatch(isSidebarOpenState());}} className={`${themeHolder.colortxt1} absolute top-4 left-4 text-2xl text-gray-300`} />     
+            <TfiMenu onMouseOver={() => {dispatch(isSidebarOpenState());}} className={`${themeHolder.colortxt1} absolute top-4 left-4 text-2xl text-gray-300`} />     
     )
 }

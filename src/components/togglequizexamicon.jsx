@@ -11,12 +11,8 @@ export const ToggleQuizExamIcon = () => {
     const themeHolder = useSelector(themeHolderTemp);
     const dispatch = useDispatch();
     
-    const OpenTogglequizexamFunc = () => {
-        dispatch(isToggleQuizExamOpenState());
-    }
-
     return (
-        <IoMdSwitch onClick={OpenTogglequizexamFunc} className={`${themeHolder.colortxt1} 
-        absolute top-4 right-4 text-gray-300 text-[2rem] hover:bg-yellow-500 rounded-sm`}/>
+        <IoMdSwitch onMouseOver={() => {dispatch(isToggleQuizExamOpenState())}} className={`${themeHolder.colortxt1} 
+        absolute top-4 right-4 text-gray-300 text-[2rem] rounded-sm`}/>
     )
 }

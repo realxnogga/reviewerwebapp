@@ -241,7 +241,7 @@ export const Navbar = () => {
                 </div>
 
                 <div className={`relative`}>
-                    <img onClick={ShowProfileDropdownFunc} className="h-[2.5rem] w-[2.5rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />
+                    <img onMouseOver={ShowProfileDropdownFunc} className="h-[2.5rem] w-[2.5rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />
 
                     <div onMouseLeave={ShowProfileDropdownMouseLeaveFunc} className={`${showUserProfileDropdown ? 'h-[16rem] p-3' : ''} ${themeHolder.colorbg2} ${themeHolder.colortxt1} h-0 w-fit text-nowrap absolute right-0 mt-3 flex flex-col items-start gap-y-1 overflow-hidden`}>
                         <strong>{name}</strong>
