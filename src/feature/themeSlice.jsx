@@ -12,7 +12,8 @@ export const ThemeSlice = createSlice({
             colortxt2: '',
             border: 'border duration-200',
             tabidentifier: '',
-            tabidentifierhover: ''
+            tabidentifierhover: '',
+            quizexamtoggledropdown: ''
         },
         toggleTheme: false,
 
@@ -30,6 +31,7 @@ export const ThemeSlice = createSlice({
                 state.themeHolder.colortxt2 = '!text-gray-800 duration-200';
                 state.themeHolder.tabidentifier = '!bg-yellow-200 !bg-opacity-15 duration-200';
                 state.themeHolder.tabidentifierhover = 'bg-gray-700 duration-200';
+                state.themeHolder.quizexamtoggledropdown = 'bg-[#2C3747] duration-200';
             }
 
             if (whatThemeIsClicked === 'secondColor') {
@@ -40,6 +42,7 @@ export const ThemeSlice = createSlice({
                 state.themeHolder.colortxt2 = '!text-gray-300 duration-200';
                 state.themeHolder.tabidentifier = '!bg-[#6FBED8] duration-200';
                 state.themeHolder.tabidentifierhover = 'bg-[#4AAFD1] duration-200';
+                state.themeHolder.quizexamtoggledropdown = 'bg-[#5CB8D7] duration-200';      
             }
         },
         toggleThemeState: (state) => {

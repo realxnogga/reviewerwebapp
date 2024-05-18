@@ -10,8 +10,9 @@ import { ClearIsUserPerformanceExist } from "../feature/quizSlice";
 import { GetUserPerformanceThunk } from "../feature/quizSlice";
 import { userPerformanceQuizDataTemp } from "../feature/quizSlice";
 import { userPerformanceInfoTemp } from "../feature/quizSlice";
-
-
+import { FiSearch } from "react-icons/fi";
+import { IoMdRemove } from "react-icons/io";
+import { Tooltip } from "flowbite-react";
 
 export const UserPerformance = () => {
 
@@ -127,32 +128,41 @@ export const UserPerformance = () => {
         <section className={`${themeHolder.colorbg2} flex flex-col gap-y-2 h-fit p-5 rounded-lg w-full`}>
 
 
-            <section className="w-full flex justify-between ">
-                <div className="flex gap-x-3 mobile:gap-x-2 mobile:justify-between mobile:pt-10">
-                    <div className="bg-green-400 flex h-[2.5rem] w-[15rem] ">
-                        <div className="bg-white h-[2.5rem] w-[2.5rem] flex items-center justify-center">
-                            <FaMagnifyingGlass className="text-black text-xl" />
+            <section className={`gap-y-3 mobile:justify-end flex items-end flex-wrap-reverse justify-between gap-x-8 h-fit rounded-lg w-full`}>
+                {/* <div className="flex gap-x-3 mobile:gap-x-2 mobile:justify-between mobile:pt-10"> */}
+                <div className={`${themeHolder.colortxt1}bg-red-500 tablet:w-full flex gap-x-2`}>
+                    <div className="flex h-[2.5rem] bg-green-500 w-full ">
+                        <div className={`${themeHolder.colorbg2} ${themeHolder.colortxt1} border border-gray-500 border-r-transparent h-[2.5rem] w-[2.5rem] flex items-center justify-center`}>
+                            <FaMagnifyingGlass className="text-xl" />
                         </div>
-                        <input value={quizTakerSearch}
-                            onChange={handleSearchUserTakerFunc} type="text" placeholder="search users here..." className="bg-white h-full w-full text-black border-none outline-none p-0 focus:border-transparent focus:outline-none focus:ring-0" />
+
+                        <input value={quizTakerSearch}  onChange={handleSearchUserTakerFunc} type="text" name="systemname" id="systemname" placeholder="search users here..." className={`${themeHolder.colorbg2} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none border-l-transparent focus:border-gray-500 focus:border-l-transparent focus:ring-0 p-2 text-gray-300 text-md `} />
                     </div>
-                    <Button onClick={handleSearchSubmitFunc} gradientDuoTone="purpleToBlue">Search</Button>
-                    <Button onClick={handleClearSearchUserFunc} gradientDuoTone="purpleToBlue">Clear</Button>
+
+                    <div className="flex items-center gap-x-2">
+                        <Tooltip style="light" content={'search'}>
+                            <FiSearch onClick={handleSearchSubmitFunc} className="text-3xl p-1 border border-yellow-500 " />
+                        </Tooltip>
+                        <Tooltip style="light" content={'clear'} color="yellow">
+                            <IoMdRemove onClick={handleClearSearchUserFunc} className="text-3xl p-1 border border-yellow-500 " />
+                        </Tooltip>
+                    </div>
+
                 </div>
 
 
                 <div className="flex flex-wrap mobile:gap-y-4 mobile:flex-col-reverse items-start justify-between gap-x-5">
-                    <div className="flex items-end gap-x-5">
+                    <div className="flex items-end gap-x-5 mobile:gap-x-3 ">
                         <select
                             value={typeValue}
                             onChange={handleTypeChangeFunc}
-                            className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-400 rounded-md outline-none p-2 text-gray-300 text-md `}>
+                            className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-400 rounded-md outline-none p-2 text-gray-300 text-md mobile:p-1 mobile:pl-2`}>
                             <option value="all">All</option>
                             <option value="exam">Exam</option>
                             <option value="quiz">Quiz</option>
                         </select>
 
-                        <input className={`${themeHolder.colorbg3} ${themeHolder.colortxt1} ${themeHolder.border} rounded-md outline-none`} value={dateValue} onChange={handleDateChangeFunc} type="date" />
+                        <input className={`${themeHolder.colorbg3} ${themeHolder.colortxt1} ${themeHolder.border} rounded-md outline-none mobile:p-1 mobile:pl-2`} value={dateValue} onChange={handleDateChangeFunc} type="date" />
                     </div>
                 </div>
             </section>
@@ -162,16 +172,18 @@ export const UserPerformance = () => {
                 isUserPerformanceExist === true ?
                     (
                         <>
-                           <img className="h-[3rem] w-[3rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`../../asset/userprofile/${userPerformanceInfoUserImage}`} alt="" />
+                            <img className="h-[3rem] w-[3rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`../../asset/userprofile/${userPerformanceInfoUserImage}`} alt="" />
                             <p className={`${themeHolder.colortxt1} `}>{userPerformanceInfoName}</p>
 
-                            <div className={`${themeHolder.colortxt1} flex flex-wrap mobile:gap-y-4 gap-x-5`}>
+
+                            <div className={`${themeHolder.colortxt1} flex flex-wrap gap-y-4 gap-x-5`}>
 
                                 <div className={`mobile:flex-grow border border-gray-500 p-2 rounded-md`}>
                                     <p>Number of times you take an exam : {numberOfTimesExamTaken}</p>
                                     <p>Highest score in Exam : {highestScoreInExam}</p>
                                     <p>Lowest score in Exam : {LowestScoreInExam}</p>
                                 </div>
+
                                 <div className={`mobile:flex-grow border border-gray-500 p-2 rounded-md`}>
                                     <p>Number of times you take a quiz : {numberOfTimesQuizTaken}</p>
                                     <p>Highest score in quiz : {highestScoreInQuiz}</p>

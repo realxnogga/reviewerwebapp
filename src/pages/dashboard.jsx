@@ -132,39 +132,39 @@ export const DashBoard = () => {
                     </div>
                 </section>
 
-                <section className="mt-20 flex flex-col gap-y-8 mobile:gap-y-4 items-end">
+                <section className="mt-20 mobile:mt-6 flex flex-col gap-y-8 mobile:gap-y-4 items-end">
 
-                    <div className="w-full h-[30rem] mobile:h-[15rem] flex items-center justify-center">
+                    <div className="w-full h-[30rem] mobile:h-[10rem] flex items-center justify-center">
                         <Bar data={data} options={options} />
                     </div>
 
-                    <div className={`${themeHolder.colorbg2} flex items-start justify-between gap-y-2 h-fit p-5 rounded-lg w-full`}>
+                    <div className={`${themeHolder.colorbg2} mobile:justify-end bg-red-500 flex items-end gap-x-8 flex-wrap-reverse justify-between gap-y-3 h-fit p-5 rounded-lg w-full`}>
 
-                        <div className={`${themeHolder.colortxt1} flex flex-wrap mobile:gap-y-4 gap-x-5`}>
+                        <div className={`${themeHolder.colortxt1} flex flex-wrap gap-y-4 gap-x-5`}>
 
-                            <div className={`mobile:flex-grow border border-gray-500 p-2 rounded-md`}>
+                            <div className={`flex-grow mobile:flex-grow border border-gray-500 p-2 rounded-md`}>
                                 <p>Number of times you take an exam : {numberOfTimesExamTaken}</p>
                                 <p>Highest score in Exam : {highestScoreInExam}</p>
                                 <p>Lowest score in Exam : {LowestScoreInExam}</p>
                             </div>
-                            <div className={`mobile:flex-grow border border-gray-500 p-2 rounded-md`}>
+                            <div className={`flex-grow mobile:flex-grow border border-gray-500 p-2 rounded-md`}>
                                 <p>Number of times you take a quiz : {numberOfTimesQuizTaken}</p>
                                 <p>Highest score in quiz : {highestScoreInQuiz}</p>
                                 <p>Lowest score in quiz : {LowestScoreInQuiz}</p>
                             </div>
                         </div>
 
-                        <div className="flex items-end gap-x-5">
+                        <div className="flex items-end gap-x-5 mobile:gap-x-3">
                             <select
                                 value={typeValue}
                                 onChange={handleTypeChangeFunc}
-                                className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-400 rounded-md outline-none p-2 text-gray-300 text-md `}>
+                                className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-400 rounded-md outline-none p-2 text-gray-300 text-md mobile:p-1 mobile:pl-2`}>
                                 <option value="all">All</option>
                                 <option value="exam">Exam</option>
                                 <option value="quiz">Quiz</option>
                             </select>
 
-                            <input className={`${themeHolder.colorbg3} ${themeHolder.colortxt1} ${themeHolder.border} rounded-md outline-none`} value={dateValue} onChange={handleDateChangeFunc} type="date" />
+                            <input className={`${themeHolder.colorbg3} ${themeHolder.colortxt1} ${themeHolder.border} rounded-md outline-none mobile:p-1 mobile:pl-2`} value={dateValue} onChange={handleDateChangeFunc} type="date" />
                         </div>
                     </div>
 

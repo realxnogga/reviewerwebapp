@@ -116,7 +116,7 @@ export const LearningResources = () => {
                 <Hamburger />
 
                 <section className="h-fit w-full flex items-center justify-end gap-x-5 mobile:gap-x-2 mobile:justify-between mobile:pt-10">
-                    <Tooltip placement="left" className="bg-yellow-500" arrow={false} content={'Filter'}>
+                    <Tooltip placement="left" style="light" arrow={false} content={'Filter'}>
                         <IoFilter onClick={() => { setOpenFilterModal(true); }} className={`${themeHolder.colortxt1} text-gray-300 text-2xl `} />
                     </Tooltip>
 
