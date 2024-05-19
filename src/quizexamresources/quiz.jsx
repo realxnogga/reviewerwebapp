@@ -7,7 +7,6 @@ import { userdataTemp } from '../feature/data/userdataSlice';
 import { themeHolderTemp } from '../feature/themeSlice';
 import { FoundationOfEducationQuiz1JSON } from './foundationofeducationquiz1JSON';
 import { PrincipleOfTeachingQuiz1JSON } from './principleofteachingquiz1JSON';
-import { ChildAndAdolescentDevelopmentQuiz1JSON } from './child&adolescentdevelopmentquiz1JSON';
 import { InsertQuizThunk } from '../feature/quizSlice';
 import { FacilitatingLearningQuiz1JSON } from './facilitatinglearningquiz1JSON';
 import { isQuizDataInsertedTemp } from '../feature/quizSlice';
@@ -17,6 +16,17 @@ import { GetQuizThunk } from '../feature/quizSlice';
 
 import { FoundationOfEducationExam1JSON } from './foundationofeducationexam1JSON';
 import { PrincipleOfTeachingExam1JSON } from './principleofteachingexam1JSON';
+import { ChildAndAdolescentDevelopmentExam1JSON } from './childandadolescentdevelopmentexam1JSON';
+import { ChildandAdolescentDevelopmentQuiz1JSON } from './childanddolescentdevelopmentquiz1JSON';
+import { FacilitatingLearningExam1JSON } from './facilitatinglearningexam1JSON';
+import { AssessmentOfStudentLearningExam1JSON } from './assesmentofstudentlearningexam1JSON';
+import { AssessmentOfStudentLearningQuiz1JSON } from './assesmentofstudentlearningquiz1JSON';
+import { DAPTExam1JSON } from './daptexam1JSON';
+import { DAPTQuiz1JSON } from './daptquiz1JSON';
+import { CurriculumDevelopmentExam1JSON } from './curriculumdevelopmentexam1JSON';
+import { CurriculumDevelopmentQuiz1JSON } from './curriculumdevelopmentquiz1JSON';
+import { FieldStudyandPracticeExam1JSON } from './fieldstudyandpracticeexam1JSON';
+import { FieldStudyandPracticeQuiz1JSON } from './fieldstudyandpracticequiz1JSON';
 
 export const Quiz = () => {
 
@@ -128,31 +138,102 @@ export const Quiz = () => {
         subject = 'FE quiz1';
         reviewerType = 'quiz'
     }
+    // ---------------------------------------------------------
     else if (whatIsClickToggleQuizExam === 'PrinciplesofTeachingQuiz1') {
         questions = PrincipleOfTeachingQuiz1JSON;
         quizTitle = 'Quiz1 in Principle of Teaching';
         subject = 'PT quiz1';
         reviewerType = 'quiz'
     }
+    else if (whatIsClickToggleQuizExam === 'PrinciplesofTeachingExam1') {
+        questions = PrincipleOfTeachingExam1JSON;
+        quizTitle = 'Exam1 in Principle of Teaching';
+        subject = 'PT exam1';
+        reviewerType = 'exam'
+    }
+// ---------------------------------------------------------
+    else if (whatIsClickToggleQuizExam === 'ChildandAdolescentDevelopmentExam1') {
+        questions = ChildAndAdolescentDevelopmentExam1JSON;
+        quizTitle = 'Exam1 in Child and Adolescent Development';
+        subject = 'CAD exam1';
+        reviewerType = 'exam';
+    }
+
     else if (whatIsClickToggleQuizExam === 'ChildandAdolescentDevelopmentQuiz1') {
-        questions = ChildAndAdolescentDevelopmentQuiz1JSON;
+        questions = ChildandAdolescentDevelopmentQuiz1JSON;
         quizTitle = 'Quiz1 in Child and Adolescent Development';
         subject = 'CAD quiz1';
-        reviewerType = 'quiz'
+        reviewerType = 'quiz';
     }
+    //------------------------------------------------------------------
+    else if (whatIsClickToggleQuizExam === 'FacilitatingLearningExam1') {
+        questions = FacilitatingLearningExam1JSON;
+        quizTitle = 'Exam1 in Facilitating Learning';
+        subject = 'FL exam1';
+        reviewerType = 'exam';
+    }
+
     else if (whatIsClickToggleQuizExam === 'FacilitatingLearningQuiz1') {
         questions = FacilitatingLearningQuiz1JSON;
         quizTitle = 'Quiz1 in Facilitating Learning';
         subject = 'FL quiz1';
-        reviewerType = 'quiz'
+        reviewerType = 'quiz';
     }
-    else if (whatIsClickToggleQuizExam === 'PrinciplesofTeachingExam1') {
-        questions = PrincipleOfTeachingExam1JSON;
-        quizTitle = 'Quiz1 in principle of teaching';
-        subject = 'PL exam1';
+    //------------------------------------------------------------------
+    else if (whatIsClickToggleQuizExam === 'AssessmentofStudentLearningExam1') {
+        questions = AssessmentOfStudentLearningExam1JSON;
+        quizTitle = 'Exam1 in Assessment of Student Learning';
+        subject = 'ASL exam1';
+        reviewerType = 'exam';
+    }
+    else if (whatIsClickToggleQuizExam === 'AssessmentofStudentLearningQuiz1') {
+        questions = AssessmentOfStudentLearningQuiz1JSON;
+        quizTitle = 'Quiz1 in Assessment of Student Learning';
+        subject = 'ASL quiz1';
+        reviewerType = 'quiz';
+    }
+     //------------------------------------------------------------------
+    else if (whatIsClickToggleQuizExam === 'DevelopmentallyAppropriatePracticesinTeachingExam1') {
+        questions = DAPTExam1JSON;
+        quizTitle = 'Exam1 in Developmentally Appropriate Practices in Teaching';
+        subject = 'DAPT exam1';
+        reviewerType = 'exam';
+    }
+    else if (whatIsClickToggleQuizExam === 'DevelopmentallyAppropriatePracticesinTeachingQuiz1') {
+        questions = DAPTQuiz1JSON;
+        quizTitle = 'Quiz1 in Developmentally Appropriate Practices in Teaching';
+        subject = 'DAPT quiz1';
+        reviewerType = 'quiz';
+    }
+    //------------------------------------------------------------------
+    else if (whatIsClickToggleQuizExam === 'CurriculumDevelopmentExam1') {
+        questions = CurriculumDevelopmentExam1JSON;
+        quizTitle = 'Exam1 in Curriculum Development';
+        subject = 'CD exam1';
         reviewerType = 'exam';
     }
 
+    else if (whatIsClickToggleQuizExam === 'CurriculumDevelopmentQuiz1') {
+        questions = CurriculumDevelopmentQuiz1JSON;
+        quizTitle = 'Quiz1 in Curriculum Development';
+        subject = 'CD quiz1';
+        reviewerType = 'quiz';
+    }
+      //------------------------------------------------------------------
+    else if (whatIsClickToggleQuizExam === 'FieldStudyandPracticeExam1') {
+        questions = FieldStudyandPracticeExam1JSON;
+        quizTitle = 'Exam1 in Field Study and Practice';
+        subject = 'FSP exam1';
+        reviewerType = 'exam';
+    }
+    else if (whatIsClickToggleQuizExam === 'FieldStudyandPracticeQuiz1') {
+        questions = FieldStudyandPracticeQuiz1JSON;
+        quizTitle = 'Quiz1 in Field Study and Practice';
+        subject = 'FSP quiz1';
+        reviewerType = 'quiz';
+    }
+    
+    
 
     // reset if change tab
     useEffect(() => {
