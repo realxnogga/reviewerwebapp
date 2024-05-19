@@ -38,6 +38,7 @@ export const UserPerformance = () => {
 
     const [dateValue, setDateValue] = useState(dateNow);
     const [typeValue, setTypeValue] = useState('all');
+    const [rangeType, setRangeType] = useState('day'); // New state for range type
     const [filteredQuizData, setFilteredQuizData] = useState([]);
 
     //for exam
@@ -57,6 +58,10 @@ export const UserPerformance = () => {
     const handleSearchUserTakerFunc = (e) => {
         setQuizTakerSearch(e.target.value)
     }
+
+    const handleRangeTypeChangeFunc = (e) => {
+        setRangeType(e.target.value);
+    };
 
     const handleClearSearchUserFunc = () => {
         setFilteredQuizData([]);
@@ -87,13 +92,37 @@ export const UserPerformance = () => {
         setTypeValue(e.target.value);
     };
 
+    //
     useEffect(() => {
-        const filteredData = userPerformanceQuizData.filter(item =>
-            item.quizdatetaken === dateValue && (typeValue === 'all' || item.quiztype === typeValue)
-        );
-        setFilteredQuizData(filteredData);
+        const filterByDateRange = (data, rangeType, dateValue) => {
+            const currentDate = new Date(dateValue);
+            let startDate, endDate;
 
-    }, [dateValue, typeValue, userPerformanceQuizData]);
+            if (rangeType === 'week') {
+                const dayOfWeek = currentDate.getDay();
+                const firstDayOfWeek = new Date(currentDate);
+                firstDayOfWeek.setDate(currentDate.getDate() - (dayOfWeek - 1));
+                startDate = new Date(firstDayOfWeek);
+                endDate = new Date(firstDayOfWeek);
+                endDate.setDate(firstDayOfWeek.getDate() + 6);
+            } else if (rangeType === 'month') {
+                startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+                endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+            } else {
+                startDate = currentDate;
+                endDate = currentDate;
+            }
+
+            return data.filter(item => {
+                const itemDate = new Date(item.quizdatetaken);
+                return itemDate >= startDate && itemDate <= endDate && (typeValue === 'all' || item.quiztype === typeValue);
+            });
+        };
+
+        const filteredData = filterByDateRange(userPerformanceQuizData, rangeType, dateValue);
+        setFilteredQuizData(filteredData);
+    }, [dateValue, typeValue, rangeType, userPerformanceQuizData]);
+
 
     useEffect(() => {
 
@@ -136,7 +165,7 @@ export const UserPerformance = () => {
                             <FaMagnifyingGlass className="text-xl" />
                         </div>
 
-                        <input value={quizTakerSearch}  onChange={handleSearchUserTakerFunc} type="text" name="systemname" id="systemname" placeholder="search users here..." className={`${themeHolder.colorbg2} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none border-l-transparent focus:border-gray-500 focus:border-l-transparent focus:ring-0 p-2 text-gray-300 text-md `} />
+                        <input value={quizTakerSearch} onChange={handleSearchUserTakerFunc} type="text" name="systemname" id="systemname" placeholder="search users here..." className={`${themeHolder.colorbg2} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none border-l-transparent focus:border-gray-500 focus:border-l-transparent focus:ring-0 p-2 text-gray-300 text-md `} />
                     </div>
 
                     <div className="flex items-center gap-x-2">
@@ -151,8 +180,8 @@ export const UserPerformance = () => {
                 </div>
 
 
-                <div className="flex flex-wrap mobile:gap-y-4 mobile:flex-col-reverse items-start justify-between gap-x-5">
-                    <div className="flex items-end gap-x-5 mobile:gap-x-3 ">
+                <div className="flex flex-wrap mobile:gap-y-4 mobile:flex-col-reverse items-start justify-between gap-x-5 mobile:overflow-scroll noScrollbar">
+                    <div className="flex items-end gap-x-5 mobile:gap-x-3">
                         <select
                             value={typeValue}
                             onChange={handleTypeChangeFunc}
@@ -162,7 +191,18 @@ export const UserPerformance = () => {
                             <option value="quiz">Quiz</option>
                         </select>
 
-                        <input className={`${themeHolder.colorbg3} ${themeHolder.colortxt1} ${themeHolder.border} rounded-md outline-none mobile:p-1 mobile:pl-2`} value={dateValue} onChange={handleDateChangeFunc} type="date" />
+                        <select
+                            value={rangeType}
+                            onChange={handleRangeTypeChangeFunc}
+                            className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-400 rounded-md outline-none p-2 text-gray-300 text-md mobile:p-1 mobile:pl-2`}>
+                            <option value="day">This Day</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                        </select>
+
+                        <div>
+                            <input className={`${themeHolder.colorbg3} ${themeHolder.colortxt1} ${themeHolder.border} rounded-md outline-none mobile:p-1 mobile:pl-2`} value={dateValue} onChange={handleDateChangeFunc} type="date" />
+                        </div>
                     </div>
                 </div>
             </section>
