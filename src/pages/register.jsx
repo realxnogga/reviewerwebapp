@@ -10,13 +10,17 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { RegistrationThunk } from '../feature/account/registrationSlice';
 import { isUserAlreadyExistTemp } from '../feature/account/registrationSlice';
 import { clearRegistrationState } from '../feature/account/registrationSlice';
-import { InsertSettingDataThunk } from '../feature/systemsettingSlice';
 import { IoMdArrowDropup } from "react-icons/io";
+import { useridTemp } from '../feature/account/loginSlice';
+import { InsertSystemSettingDataThunk } from '../feature/sytemsettingSlice';
 
 export const Register = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const userid = useSelector(useridTemp);
+    console.log(userid); 
 
     const [registerInput, setRegisterInput] = useState({
         username: '',
@@ -91,19 +95,22 @@ export const Register = () => {
         if (alreadyExist === false) {
             ShowToast('account is created', 'success');
 
-            setRegisterInput({
-                username: '',
-                password: '',
-                email: '',
-            })
+            // setRegisterInput({
+            //     username: '',
+            //     password: '',
+            //     email: '',
+            // })
 
-            dispatch(clearRegistrationState());
-
-            const systemsettingdatatemp = {
+            dispatch(clearRegistrationState());   
+            
+            
+            const systemSettingDataTemp = {
                 username: registerInput.username,
-                userpassword: registerInput.password,
-            }
-            dispatch(InsertSettingDataThunk({ systemsettingdatatemp }));
+                password: registerInput.password,
+            } 
+            dispatch(InsertSystemSettingDataThunk({ systemSettingDataTemp }))
+
+
 
             navigate('/');
         }

@@ -15,26 +15,23 @@ import { themeHolderTemp } from '../feature/themeSlice';
 import { DeleteAllNoteThunk } from '../feature/noteSlice';
 import { CgProfile } from "react-icons/cg";
 import { RiEditBoxLine } from "react-icons/ri";
-import { IoSettingsOutline } from "react-icons/io5";
 import { RxDividerVertical } from "react-icons/rx";
-import { isSystemNameUpdatedTemp } from '../feature/systemsettingSlice';
-import { GetSettingDataThunk } from '../feature/systemsettingSlice';
-import { clearIsSystemNameUpdatedState } from '../feature/systemsettingSlice';
-import { EditSettingDataThunk } from '../feature/systemsettingSlice';
-import { DeleteSettingDataThunk } from '../feature/systemsettingSlice';
-import { systemDataTemp } from '../feature/systemsettingSlice';
 import { DeleteAllFlashCardDataThunk } from '../feature/flashcardSlice';
 import { DeleteAllFlashCardItemThunk } from '../feature/flashcardSlice';
 import { UpdateNoteUserThunk } from '../feature/noteSlice';
 import { UpdateFlashcardUserThunk } from '../feature/flashcardSlice';
 import { UpdateFlashcardItemUserThunk } from '../feature/flashcardSlice';
-import { UpdateSettingUsernameThunk } from '../feature/systemsettingSlice';
 import { LogoutInProfileDropdown } from './logoutbutton';
 import { clearMinimizeSidebarState } from '../feature/opensidebarSlice';
 import { clearToggleThemeState } from '../feature/themeSlice';
 import { clearWhatIsClickToggleQuizExamState } from '../feature/opentogglequizexamSlice';
 import { UpdateQuizUserThunk } from '../feature/quizSlice';
 import { DeleteQuizThunk } from '../feature/quizSlice';
+import { EditSystemNameButton } from './editsystemnamebutton';
+import { DeleteSettingDataThunk } from '../feature/sytemsettingSlice';
+import { UpdateSystemSettingUserThunk } from '../feature/sytemsettingSlice';
+import { systemNameTemp } from '../feature/sytemsettingSlice';
+
 
 export const Navbar = () => {
 
@@ -42,6 +39,7 @@ export const Navbar = () => {
     const navigate = useNavigate();
 
     const themeHolder = useSelector(themeHolderTemp);
+    const systemName = useSelector(systemNameTemp);
 
     const userdata = useSelector(userdataTemp);
     if (Object.keys(userdata).length != 0) {
@@ -55,11 +53,8 @@ export const Navbar = () => {
     const [openUserDataModal, setOpenUserDataModal] = useState(false);
     const [openDeleteUserModal, setOpenDeleteUserModal] = useState(false);
     const [openEditUserModal, setOpenEditUserModal] = useState(false);
-    const [openEditSystemSettingModal, setOpenEditSystemSettingModal] = useState(false);
 
-    const ShowProfileDropdownFunc = () => setShowUserProfileDropdown(!showUserProfileDropdown);
-    const ShowProfileDropdownMouseLeaveFunc = () => setShowUserProfileDropdown(!showUserProfileDropdown);
-    const [showUserProfileDropdown, setShowUserProfileDropdown] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
 
     const handleDeleteAccount = () => {
         dispatch(DeleteAccountThunk({
@@ -84,11 +79,12 @@ export const Navbar = () => {
             dispatch(clearToggleThemeState());
             dispatch(clearWhatIsClickedState());
             dispatch(DeleteAllNoteThunk(name));
-            dispatch(DeleteSettingDataThunk(name));
             dispatch(DeleteAllFlashCardDataThunk(name));
             dispatch(DeleteAllFlashCardItemThunk(name));
-            dispatch(DeleteQuizThunk(name));     
-            navigate('/');         
+            dispatch(DeleteQuizThunk(name));
+            dispatch(DeleteSettingDataThunk(name));
+ 
+            navigate('/');
 
         }
         if (isAccountDeleted == false) {
@@ -146,7 +142,7 @@ export const Navbar = () => {
         if (isUserEdited === true) {
             ShowToast('updated successfully', 'success')
             setOpenEditUserModal(false);
-            
+
             setEditInput({
                 username: '',
                 password: '',
@@ -176,74 +172,32 @@ export const Navbar = () => {
             userID: userID,
             user: name,
             password: password,
-         }
-         dispatch(UpdateNoteUserThunk({datatobeupdated}));
-         dispatch(UpdateFlashcardUserThunk({datatobeupdated}));
-         dispatch(UpdateFlashcardItemUserThunk({datatobeupdated}));
-         dispatch(UpdateSettingUsernameThunk({datatobeupdated}));
-         dispatch(UpdateQuizUserThunk({datatobeupdated}));
-         
+        }
+        dispatch(UpdateNoteUserThunk({ datatobeupdated }));
+        dispatch(UpdateFlashcardUserThunk({ datatobeupdated }));
+        dispatch(UpdateFlashcardItemUserThunk({ datatobeupdated }));
+        dispatch(UpdateQuizUserThunk({ datatobeupdated }));
+        dispatch(UpdateSystemSettingUserThunk({ datatobeupdated }));
+        
     }, [name])
-         
-    // -----------------------------------------------------
-    const [editSystem, setEditSystem] = useState({
-        systemname: '',
-    })
-
-    const handleEditSystemChange = (e) => {
-        const { name, value } = e.target;
-        setEditSystem({ ...editSystem, [name]: value });
-    };
-
-    const systemSettingTemp = {
-        systemsettinguser: name,
-        systemname: editSystem.systemname,
-    }
-
-    const handleChangeSystemSetting = () => {
-        dispatch(EditSettingDataThunk({ systemSettingTemp }));
-    }
-
-    const isSystemNameUpdated = useSelector(isSystemNameUpdatedTemp);
-
-    useEffect(() => {
-        if (isSystemNameUpdated === true) {
-            setOpenEditSystemSettingModal(false);
-            dispatch(GetSettingDataThunk(name));
-            dispatch(clearIsSystemNameUpdatedState());
-        }
-        if (isSystemNameUpdated === false) {
-            dispatch(clearIsSystemNameUpdatedState());
-        }
-    }, [isSystemNameUpdated]);
-
-    console.log(isSystemNameUpdated)
-
-
-
-    //------------------------------------------------
-    const systemData = useSelector(systemDataTemp);
-    if (Object.keys(systemData).length != 0) {
-        var systemName = systemData.systemsettingname;
-    }
 
     return (
         <>
             <nav className={`${themeHolder.colorbg1} h-[4rem] px-12 mobile:px-4 w-screen backdrop-blur absolute top-0  z-10 backdrop-brightness-75 flex items-center justify-between  `}>
 
-                {/* <img className="animate-spin spin h-[2rem] w-[2rem]" src="../../asset/icon/logo192.png" alt="" /> */}
                 <div className={`text-gray-300 text-xl flex items-center gap-x-1 mobile:text-sm`}>
 
-                     <p>{systemName}</p>
-                    <RxDividerVertical className='text-[2rem] text-yellow-500' />
+                    {/* <img className="animate-spin spin h-[2rem] w-[2rem]" src="../../asset/icon/logo192.png" alt="" /> */}
+                    <p>{ systemName }</p>
+                    <RxDividerVertical className='text-[2rem] text-yellow-500' />     
                     <p>Welcome, <span>{name}</span></p>
 
                 </div>
-
+                {/* http://reviewerapplication.infinityfreeapp.com/ */}
                 <div className={`relative`}>
-                    <img onMouseOver={ShowProfileDropdownFunc} className="h-[2.5rem] w-[2.5rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />
+                    <img onClick={() => { setShowDropdown(!showDropdown) }} className="h-[2.5rem] w-[2.5rem] mobile:h-[1.9rem] mobile:w-[1.9rem] rounded-[50%]" src={`../../asset/userprofile/${userImgUrl}`} alt="" />
 
-                    <div onMouseLeave={ShowProfileDropdownMouseLeaveFunc} className={`${showUserProfileDropdown ? 'h-[16rem] p-3' : ''} ${themeHolder.colorbg2} ${themeHolder.colortxt1} h-0 w-fit text-nowrap absolute right-0 mt-3 flex flex-col items-start gap-y-1 overflow-hidden`}>
+                    <div className={`${showDropdown ? '' : 'hidden'} ${themeHolder.colorbg2} ${themeHolder.colortxt1} h-fit p-3 w-fit text-nowrap absolute right-0 mt-3 flex flex-col items-start gap-y-1 `}>
                         <strong>{name}</strong>
                         <strong>{email}</strong>
                         <hr className='w-full my-2' />
@@ -256,35 +210,13 @@ export const Navbar = () => {
                             Edit Profile
                         </p>
                         <hr className='w-full my-2' />
-                        <p className='hover:text-yellow-500 cursor-pointer flex items-center gap-x-2' onClick={() => { setOpenEditSystemSettingModal(true); }}>
-                            <IoSettingsOutline className='text-xl' />
-                            System Setting
-                        </p>
+                        <EditSystemNameButton />
                         <hr className='w-full my-2' />
-                       <LogoutInProfileDropdown />
+                        <LogoutInProfileDropdown />
                     </div>
                 </div>
 
             </nav>
-
-            {/* edit system setting */}
-            <Modal size="md" dismissible show={openEditSystemSettingModal} onClose={() => setOpenEditSystemSettingModal(false)}>
-                <div className={`${themeHolder.colorbg3} space-y-8 bg-gray-700 rounded-lg p-5 `}>
-                    <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Edit System Setting</h3>
-
-                    <div className="flex flex-col items-start gap-y-8">
-                        <div>
-                            <label htmlFor="systemname" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>enter a new system name:</label>
-                            <input type="text" name="systemname" id="systemname" onChange={handleEditSystemChange} value={editSystem.systemname} className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md `} />
-                        </div>
-                    </div>
-                    <div className='flex flex-row gap-x-3'>
-                        <Button onClick={handleChangeSystemSetting} className='w-fit rounded-md' gradientMonochrome="cyan">submit</Button>
-
-                        <Button className='w-fit rounded-md' onClick={() => setOpenEditSystemSettingModal(false)} gradientMonochrome="success">close</Button>
-                    </div>
-                </div>
-            </Modal>
 
             {/* view profile modal */}
 
@@ -353,7 +285,9 @@ export const Navbar = () => {
                             </div>
 
                             <div>
-                                <FileInput className='text-gray-300' onChange={handleEditImageUploadChange} id="large-file-upload" sizing="lg" />
+                                {/* <FileInput className='text-gray-300' onChange={handleEditImageUploadChange} id="large-file-upload" sizing="lg" required/> */}
+                                <label className={`${themeHolder.colortxt1} text-lg text-gray-300`}>upload profile picture: <span className='text-red-500'>*</span></label>
+                                <input onChange={handleEditImageUploadChange} className='bg-white border border-gray-300 w-full rounded-lg' type="file" required/>
                             </div>
 
                             <div className='flex flex-row gap-x-3'>

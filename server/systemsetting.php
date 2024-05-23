@@ -1,5 +1,4 @@
 
-
 <?php
 header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Access-Control-Allow-Headers: Content-Type");
@@ -21,103 +20,87 @@ if (isset($_GET['action'])) {
     $action = $_GET['action'];
 
     switch ($action) {
-        case 'insertSystemSetting':
-            $data = json_decode($_POST['systemsettingdatatemp'], true);
+        case 'putSystemSettingData':
+
+            $data = json_decode($_POST['systemSettingDataTemp'], true);
 
             $username = $data['username'];
-            $userpassword = $data['userpassword'];
+            $password = $data['password'];
 
-            $sql = "insert into systemsetting (systemsettinguser, systemsettinguserpassword) VALUES ('$username', '$userpassword')";
+            $sql = "SELECT ID FROM user WHERE username = '$username' AND password = '$password'";
+            $result = $conn->query($sql);
 
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $userid = $row['ID'];
+
+                $sql = "insert into systemsetting (systemsettinguserID, systemsettinguser) VALUES ('$userid','$username')";
+                $conn->query($sql);
+            }
+            $conn->close();
+            break;
+
+        case 'editSystemSettingName':
+
+            $data = json_decode($_POST['systemSettingDataTemp'], true);
+            $systemsettinguser = $data['systemsettinguser'];
+            $systemsettingname = $data['systemsettingname'];
+
+            $sql = "UPDATE `systemsetting` SET `systemsettingname` = '$systemsettingname' WHERE `systemsettinguser` = '$systemsettinguser'";
+            $result = $conn->query($sql);
+
+            if ($conn->affected_rows > 0) {
+                echo json_encode(['success' => true, 'message' => 'system name updated successfully']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'system name failed to update']);
+            }
+
+            $conn->close();
+            break;
+
+        case 'deleteSystemSetting':
+
+            $systemsettinguser = json_decode(file_get_contents("php://input"), true);
+ 
+            $sql = "delete from systemsetting where systemsettinguser = '$systemsettinguser'";
             $conn->query($sql);
 
             $conn->close();
             break;
+        
+            case 'updateSystemSettingUser':   
+                $data = json_decode($_POST['datatobeupdated'], true);
 
-        case 'getSystemSetting':
-            $systemsettinguser = json_decode(file_get_contents("php://input"), true);
-
-            $sql = "select*from systemsetting where systemsettinguser = '$systemsettinguser'";
-            $result = $conn->query($sql);
-
-            $data = [];
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
-            }
-            header('Content-Type: application/json');
-            echo json_encode($data);
-
-            $conn->close();
+                $systemsettinguserID = $data['userID'];
+                $systemsettinguser = $data['user'];
+     
+                $sql = "UPDATE `systemsetting` SET `systemsettinguser` = '$systemsettinguser' WHERE `systemsettinguserID` = '$systemsettinguserID'";
+                $conn->query($sql);
+    
+                $conn->close();
             break;
 
-            
-            case 'editSystemSettingUsername':
-                $data = json_decode(file_get_contents("php://input"), true);
+            case 'getSystemSettingName':   
 
-                $user = $data['user'];
-                $password = $data['password'];
+                $systemsettinguser = json_decode(file_get_contents("php://input"), true);
+     
+                $sql = "SELECT systemsettingname FROM systemsetting WHERE systemsettinguser = '$systemsettinguser'";
+                $result = $conn->query($sql);
 
-            
-                // $sql = "update `systemsetting` SET `systemsettingname` = '$systemname'  where systemsettinguser = '$systemsettinguser'";
+                    if ($result->num_rows > 0) {
+                        $row = $result->fetch_assoc();
+                        $systemsettingname = $row['systemsettingname'];
 
-                $sql = "UPDATE `systemsetting` SET `systemsettinguser` = '$user' WHERE `systemsettinguserpassword` = '$password'";
-
-                 $conn->query($sql);
-    
-                if ($conn->affected_rows > 0) {
-                    echo json_encode(['success' => true, 'message' => 'system name updated successfully']);
-                }
-                else{
-                    echo json_encode(['success' => false, 'message' => 'system name failed to update']);
-                }
-                $conn->close();
-                break;
-            
-
-
-        case 'editSystemSetting':
-                $data = json_decode(file_get_contents("php://input"), true);
-
-                $systemsettinguser = $data['systemsettinguser'];
-                $systemname = $data['systemname'];
-
-            
-                // $sql = "update `systemsetting` SET `systemsettingname` = '$systemname'  where systemsettinguser = '$systemsettinguser'";
-
-                $sql = "UPDATE `systemsetting` SET `systemsettingname` = '$systemname' WHERE `systemsettinguser` = '$systemsettinguser'";
-
-                 $conn->query($sql);
-    
-                if ($conn->affected_rows > 0) {
-                    echo json_encode(['success' => true, 'message' => 'system name updated successfully']);
-                }
-                else{
-                    echo json_encode(['success' => false, 'message' => 'system name failed to update']);
-                }
-                $conn->close();
-                break;
-            
-            case 'deleteSystemSetting':
-                    $systemsettinguser = json_decode(file_get_contents("php://input"), true);
-    
-                    $sql = "delete from systemsetting where systemsettinguser = '$systemsettinguser'";
-                    $conn->query($sql);
-        
-                    if ($conn->affected_rows > 0) {
-                        echo json_encode(['success' => true, 'message' => 'system name updated successfully']);
+                        echo json_encode($systemsettingname);
                     }
-                    else{
-                        echo json_encode(['success' => false, 'message' => 'system name failed to update']);
-                    }
-                    $conn->close();
-                    break;
+                $conn->close();
+            break;
 
+
+            
+         
     }
 }
-
-
-
-
 
 
 ?>

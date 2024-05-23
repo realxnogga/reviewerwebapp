@@ -123,13 +123,7 @@ if (isset($_GET['action'])) {
     
                 $conn->close();
                 break;
-          
-
-
-
-
-
-
+        
 
         default:
 

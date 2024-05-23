@@ -363,7 +363,7 @@ export const Note = () => {
                         <div className="flex flex-col items-start gap-y-2">
 
                             <div className="w-full">
-                                <label htmlFor="subject" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Choose a subject:</label>
+                                <label htmlFor="subject" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Choose a subject: <span className='text-red-500'>*</span></label>
                                 <select
                                     onChange={handleNoteDataChangeFunc}
                                     value={noteData.noteSubject}
@@ -381,7 +381,7 @@ export const Note = () => {
                             </div>
 
                             <div className="w-full">
-                                <label htmlFor="title" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Enter note title:</label>
+                                <label htmlFor="title" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Enter note title: <span className='text-red-500'>*</span></label>
                                 <input onChange={handleNoteDataChangeFunc} value={noteData.noteTitle} type="text" name="noteTitle" id="noteTitle" className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md`} placeholder="Note Title:" />
                             </div>
 

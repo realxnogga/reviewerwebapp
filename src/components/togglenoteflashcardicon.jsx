@@ -1,7 +1,6 @@
 
 import { themeHolderTemp } from "../feature/themeSlice";
 import { useSelector, useDispatch } from 'react-redux';
-import { RxSwitch } from "react-icons/rx";
 import { IoMdSwitch } from "react-icons/io";
 import { isToggleNoteFlashCardOpenState } from "../feature/opentogglenoteflashcardSlice";
 

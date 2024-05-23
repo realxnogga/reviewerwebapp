@@ -618,7 +618,7 @@ export const FlashCard = () => {
                         <div className="flex flex-col items-start gap-y-2">
 
                             <div className="w-full">
-                                <label htmlFor="flashcardItemFront" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Question:</label>
+                                <label htmlFor="flashcardItemFront" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Question: <span className='text-red-500'>*</span></label>
 
                                 <textarea
                                     onChange={handleFlashcardItemChangeFunc}
@@ -627,7 +627,7 @@ export const FlashCard = () => {
                             </div>
 
                             <div className="w-full">
-                                <label htmlFor="flashcardItemBack" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Answer:</label>
+                                <label htmlFor="flashcardItemBack" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Answer: <span className='text-red-500'>*</span></label>
 
                                 <textarea
                                     onChange={handleFlashcardItemChangeFunc}
@@ -657,7 +657,7 @@ export const FlashCard = () => {
                         <div className="flex flex-col items-start gap-y-2">
 
                             <div className="w-full">
-                                <label htmlFor="flashcardSubject" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Choose a subject:</label>
+                                <label htmlFor="flashcardSubject" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Choose a subject: <span className='text-red-500'>*</span></label>
                                 <select
                                     onChange={handleFlashcardDataChangeFunc}
                                     value={flashcardData.flashcardSubject}
@@ -675,7 +675,7 @@ export const FlashCard = () => {
                             </div>
 
                             <div className="w-full">
-                                <label htmlFor="flashcardTitle" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Enter flashcard title:</label>
+                                <label htmlFor="flashcardTitle" className={`${themeHolder.colortxt1} text-lg text-gray-300`}>Enter flashcard title: <span className='text-red-500'>*</span></label>
                                 <input onChange={handleFlashcardDataChangeFunc} value={flashcardData.flashcardTitle} type="text" name="flashcardTitle" id="flashcardTitle" className={`${themeHolder.colorbg3} ${themeHolder.border} ${themeHolder.colortxt1} bg-gray-600 rounded-sm w-full outline-none p-2 text-gray-300 text-md`} placeholder="flashcard Title:" />
                             </div>
 

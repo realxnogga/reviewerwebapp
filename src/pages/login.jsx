@@ -11,10 +11,11 @@ import { useridTemp } from '../feature/account/loginSlice';
 import { changeThemeState } from '../feature/themeSlice';
 import { GetResourceDataThunk } from '../feature/insertresourcedataSlice';
 import { GetNoteThunk } from '../feature/noteSlice';
-import { GetSettingDataThunk } from '../feature/systemsettingSlice';
 import { GetFlashcardThunk } from '../feature/flashcardSlice';
 import { GetQuizThunk } from '../feature/quizSlice';
 import { GetResourceCountThunk } from '../feature/insertresourcedataSlice';
+import { GetSystemSettingNameThunk } from '../feature/sytemsettingSlice';
+
 
 export const Login = () => {
 
@@ -78,22 +79,20 @@ export const Login = () => {
             dispatch(GetResourceDataThunk()) // if login is successfull, resourcedata will dispatch
             dispatch(GetNoteThunk(inputValue.username)) // if login is successfull, note will dispatch
             dispatch(GetFlashcardThunk(inputValue.username));  
-            dispatch(GetSettingDataThunk(inputValue.username));
             dispatch(GetQuizThunk(inputValue.username));
             dispatch(GetResourceCountThunk());
+            dispatch(GetSystemSettingNameThunk(inputValue.username));      
     
+
         }
 
         if (loginCookie === false) {
             ShowToast('login failed', 'error');
-
             setInputValue({
                 username: '',
                 password: '',
             })
-
-            dispatch(clearLoginState());
-
+           
         }
     }, [loginCookie]);
 

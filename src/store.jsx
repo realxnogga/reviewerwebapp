@@ -12,10 +12,11 @@ import { insertResourceDataSliceReducer } from './feature/insertresourcedataSlic
 import { themeSliceReducer } from './feature/themeSlice';
 import { OpenToggleNoteFlashcardReducer } from './feature/opentogglenoteflashcardSlice';
 import { noteSliceReducer } from './feature/noteSlice';
-import { systemSettingSliceReducer } from './feature/systemsettingSlice';
 import { flashcardSliceReducer } from './feature/flashcardSlice';
 import { OpenToggleQuizExamReducer } from './feature/opentogglequizexamSlice';
 import { QuizSliceReducer } from './feature/quizSlice';
+import { insertSystemSettingDataSliceReducer } from './feature/sytemsettingSlice';
+import { systemSettingSliceReducer } from './feature/sytemsettingSlice';
 
 const persistConfig = {
   key: 'root',
@@ -33,10 +34,10 @@ const rootReducer = combineReducers({
   ThemeSliceName: themeSliceReducer,
   OpenToggleNoteFlashcardSliceName: OpenToggleNoteFlashcardReducer,
   NoteSliceName: noteSliceReducer,
-  SystemSettingSliceName: systemSettingSliceReducer,
   FlashcardSliceName: flashcardSliceReducer,
   OpenToggleQuizExamSliceName: OpenToggleQuizExamReducer,
   QuizSliceName: QuizSliceReducer,
+  SystemSettingSliceName: systemSettingSliceReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

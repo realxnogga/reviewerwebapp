@@ -28,7 +28,6 @@ if (isset($_GET['action'])) {
             $email = $registerData['email'];
             $file = $_FILES['file'];
 
-
             $sql = "select*from user where username = '$username' and email = '$email'";
             $result = $conn->query($sql);
 
