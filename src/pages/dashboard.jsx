@@ -146,17 +146,17 @@ export const DashBoard = () => {
                 <section className="w-full flex flex-wrap gap-y-5 mobile:justify-center justify-between">
                     <div className="border-2 border-green-600 h-[14rem] w-[22rem] rounded-2xl p-4">
                         <p className={`${themeHolder.colortxt1} text-[3rem] font-semibold text-green-800`}>Over</p>
-                        <span className="text-[5rem] font-extrabold text-yellow-500 leading-10">{resourceCount - 1}+</span>
+                        <span className="text-[5rem] font-extrabold text-yellow-500 leading-10">{resourceCount}+</span>
                         <p className={`${themeHolder.colortxt1} text-[2rem] `}>Learning resources</p>
                     </div>
                     <div className="border-2 border-red-600 h-[14rem] w-[22rem] rounded-2xl p-4">
                         <p className={`${themeHolder.colortxt1} text-[3rem] font-semibold `}>Over</p>
-                        <span className="text-[5rem] font-extrabold text-yellow-500 leading-10">7+</span>
+                        <span className="text-[5rem] font-extrabold text-yellow-500 leading-10">8+</span>
                         <p className={`${themeHolder.colortxt1} text-[2rem] `}>Free Quiz Reviewer</p>
                     </div>
                     <div className="border-2 border-blue-600 h-[14rem] w-[22rem] rounded-2xl p-4">
                         <p className={`${themeHolder.colortxt1} text-[3rem] font-semibold `}>Over</p>
-                        <span className="text-[5rem] font-extrabold text-yellow-500 leading-10">7+</span>
+                        <span className="text-[5rem] font-extrabold text-yellow-500 leading-10">8+</span>
                         <p className={`${themeHolder.colortxt1} text-[2rem] `}>Free Exam Reviewer</p>
                     </div>
                 </section>
