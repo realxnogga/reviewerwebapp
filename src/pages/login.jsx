@@ -82,8 +82,6 @@ export const Login = () => {
             dispatch(GetQuizThunk(inputValue.username));
             dispatch(GetResourceCountThunk());
             dispatch(GetSystemSettingNameThunk(inputValue.username));      
-    
-
         }
 
         if (loginCookie === false) {
@@ -92,6 +90,8 @@ export const Login = () => {
                 username: '',
                 password: '',
             })
+
+            dispatch(clearLoginState());
            
         }
     }, [loginCookie]);
