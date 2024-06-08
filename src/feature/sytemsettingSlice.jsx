@@ -101,7 +101,7 @@ export const EditSystemSettingNameThunk = createAsyncThunk(
             const formData = new FormData();
             formData.append('systemSettingDataTemp', JSON.stringify(systemSettingDataTemp));
 
-            const res = await fetch("http://localhost/simple_web_in_react/server/systemsetting.php?action=editSystemSettingName", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/systemsetting.php?action=editSystemSettingName", {
                 method: 'POST',
                 body: formData,
             });
