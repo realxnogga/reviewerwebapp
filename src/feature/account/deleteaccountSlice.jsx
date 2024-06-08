@@ -29,7 +29,7 @@ export const DeleteAccountThunk = createAsyncThunk(
     'DeleteAccountSliceName/DeleteAccountThunk',
     async (dataTobedeleted) => {
         try {
-            const res = await fetch('http://localhost/simple_web_in_react/server/register.php?action=deleteAccout', {
+            const res = await fetch('http://localhost/reviewerwebapp/server/register.php?action=deleteAccout', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(dataTobedeleted),

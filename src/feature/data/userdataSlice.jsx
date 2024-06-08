@@ -27,7 +27,7 @@ export const getUserDataThunk = createAsyncThunk(
     'GetUserDataSliceName/getUserDataThunk',
     async (userid) => {
       try {
-        const res = await fetch("http://localhost/simple_web_in_react/server/register.php?action=getData", {
+        const res = await fetch("http://localhost/reviewerwebapp/server/register.php?action=getData", {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(userid),

@@ -38,7 +38,7 @@ export const GetSystemSettingNameThunk = createAsyncThunk(
     async (systemsettinguser) => {
         try {
         
-        const res = await fetch("http://localhost/simple_web_in_react/server/systemsetting.php?action=getSystemSettingName", {
+        const res = await fetch("http://localhost/reviewerwebapp/server/systemsetting.php?action=getSystemSettingName", {
             method: 'POST',
             header: {'Content-Type' : 'application/json'},
             body: JSON.stringify(systemsettinguser)

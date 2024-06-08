@@ -68,7 +68,7 @@ export const UpdateFlashcardItemUserThunk = createAsyncThunk(
             const formData = new FormData();
             formData.append('datatobeupdated', JSON.stringify(datatobeupdated));
 
-            const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=updateFlashcardItemUser", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=updateFlashcardItemUser", {
                 method: 'POST',
                 body: formData,
             })
@@ -90,7 +90,7 @@ export const UpdateFlashcardUserThunk = createAsyncThunk(
             const formData = new FormData();
             formData.append('datatobeupdated', JSON.stringify(datatobeupdated));
 
-            const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=updateFlashcardUser", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=updateFlashcardUser", {
                 method: 'POST',
                 body: formData,
             })
@@ -110,7 +110,7 @@ export const DeleteAllFlashCardDataThunk = createAsyncThunk(
     async (flashcarduser) => {
         try {
 
-        const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=deleteAllFlashcardData", {
+        const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=deleteAllFlashcardData", {
             method: 'POST',  
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify(flashcarduser),
@@ -129,7 +129,7 @@ export const DeleteAllFlashCardItemThunk = createAsyncThunk(
     async (flashcarduser) => {
         try {
 
-        const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=deleteAllFlashcardItem", {
+        const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=deleteAllFlashcardItem", {
             method: 'POST',  
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify(flashcarduser),
@@ -149,7 +149,7 @@ export const DeleteFlashCardDataThunk = createAsyncThunk(
     async (flashcardID) => {
         try {
 
-        const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=deleteFlashcardItemData", {
+        const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=deleteFlashcardItemData", {
             method: 'POST',  
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify(flashcardID),
@@ -168,7 +168,7 @@ export const DeleteFlashCardItemByIDThunk = createAsyncThunk(
     async (flashcarditemID) => {
         try {
 
-        const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=deleteFlashcardItemById", {
+        const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=deleteFlashcardItemById", {
             method: 'POST',  
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify(flashcarditemID),
@@ -185,7 +185,7 @@ export const GetFlashcardItemThunk = createAsyncThunk(
     "FlashcardSliceName/GetFlashcardItemThunk",
     async (flashcardID) => {
         try {
-            const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=getFlashcardItemData", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=getFlashcardItemData", {
              method: 'POST',
              headers: {'Content-Type' : 'application/json'},
              body: JSON.stringify(flashcardID)
@@ -207,7 +207,7 @@ export const InsertFlashCardItemThunk = createAsyncThunk(
 
         const formData = new FormData();
         formData.append('flashcardItemTemp', JSON.stringify(flashcardItemTemp))
-        const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=insertFlashcardItemData", {
+        const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=insertFlashcardItemData", {
             method: 'POST',  
             body: formData,
         })
@@ -224,7 +224,7 @@ export const GetFlashcardThunk = createAsyncThunk(
     async (flashcarduser) => {
         try {
 
-        const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=getFlashcardData", {
+        const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=getFlashcardData", {
             method: 'POST',
             headers: {'Content-Type' : 'application'},
             body: JSON.stringify(flashcarduser)
@@ -247,7 +247,7 @@ export const InsertFlashcardThunk = createAsyncThunk(
             const formData = new FormData();
             formData.append('flashcardDataTemp', JSON.stringify(flashcardDataTemp));
 
-        const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=insertFlashcardData", {
+        const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=insertFlashcardData", {
             method: 'POST',
             body: formData
         })

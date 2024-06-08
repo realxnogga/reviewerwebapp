@@ -41,7 +41,7 @@ export const GetResourceCountThunk = createAsyncThunk(
     "InsertResourceDataSliceName/GetResourceCountThunk",
     async () => {
         try {
-            const res = await fetch("http://localhost/simple_web_in_react/server/learningresource.php?action=getLearningResourceCount", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/learningresource.php?action=getLearningResourceCount", {
                 method: 'GET',
             });
             const data = await res.json();
@@ -56,7 +56,7 @@ export const GetResourceDataThunk = createAsyncThunk(
     "InsertResourceDataSliceName/GetResourceDataThunk",
     async () => {
         try {
-            const res = await fetch("http://localhost/simple_web_in_react/server/learningresource.php?action=getLearningResourceData", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/learningresource.php?action=getLearningResourceData", {
                 method: 'GET',
             });
             const data = await res.json();
@@ -77,7 +77,7 @@ export const InsertResourceDataThunk = createAsyncThunk(
             formData.append('resourceDataTemp', JSON.stringify(resourceDataTemp));
             formData.append('resourceDataActualFile', resourceDataActualFile);
 
-            const res = await fetch("http://localhost/simple_web_in_react/server/learningresource.php?action=putLearningResourceData", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/learningresource.php?action=putLearningResourceData", {
                 method: 'POST',
                 body: formData,
             });

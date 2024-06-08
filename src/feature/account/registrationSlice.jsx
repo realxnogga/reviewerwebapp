@@ -33,7 +33,7 @@ export const RegistrationThunk = createAsyncThunk(
         formData.append('registerData', JSON.stringify(userdata));
         formData.append('file', file);
   
-        const res = await fetch("http://localhost/simple_web_in_react/server/register.php?action=putData", {
+        const res = await fetch("http://localhost/reviewerwebapp/server/register.php?action=putData", {
           method: 'POST',
           body: formData,
         });

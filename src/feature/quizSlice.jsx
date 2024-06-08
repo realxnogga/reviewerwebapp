@@ -56,7 +56,7 @@ export const GetUserPerformanceThunk = createAsyncThunk(
             const formData = new FormData();
             formData.append('quiztaker', JSON.stringify(quiztaker));
 
-            const res = await fetch("http://localhost/simple_web_in_react/server/quizexam.php?action=getUserPerformance", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/quizexam.php?action=getUserPerformance", {
                 method: 'POST',
                 body: formData,
             })
@@ -75,7 +75,7 @@ export const CheckUserPerformanceExistThunk = createAsyncThunk(
     "QuizSliceName/CheckUserPerformanceExistThunk",
     async (quiztaker) => {
         try {
-            const res = await fetch("http://localhost/simple_web_in_react/server/quizexam.php?action=checkUserPerformanceExist", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/quizexam.php?action=checkUserPerformanceExist", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(quiztaker)
@@ -93,7 +93,7 @@ export const DeleteQuizThunk = createAsyncThunk(
     "QuizSliceName/DeleteQuizThunk",
     async (user) => {
         try {
-            const res = await fetch("http://localhost/simple_web_in_react/server/quizexam.php?action=deleteQuizData", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/quizexam.php?action=deleteQuizData", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user)
@@ -112,7 +112,7 @@ export const UpdateQuizUserThunk = createAsyncThunk(
             const formData = new FormData();
             formData.append('datatobeupdated', JSON.stringify(datatobeupdated));
 
-            await fetch("http://localhost/simple_web_in_react/server/quizexam.php?action=updateQuizUser", {
+            await fetch("http://localhost/reviewerwebapp/server/quizexam.php?action=updateQuizUser", {
                 method: 'POST',
                 body: formData,
             })
@@ -130,7 +130,7 @@ export const InsertQuizThunk = createAsyncThunk(
             const formData = new FormData();
             formData.append('quizdatatemp', JSON.stringify(quizdatatemp));
 
-            const res = await fetch("http://localhost/simple_web_in_react/server/quizexam.php?action=putquizdata", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/quizexam.php?action=putquizdata", {
                 method: 'POST',
                 body: formData,
             })
@@ -150,7 +150,7 @@ export const GetQuizThunk = createAsyncThunk(
             const formData = new FormData();
             formData.append('quiztaker', JSON.stringify(quiztaker));
 
-            const res = await fetch("http://localhost/simple_web_in_react/server/quizexam.php?action=getquizdata", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/quizexam.php?action=getquizdata", {
                 method: 'POST',
                 body: formData,
             })

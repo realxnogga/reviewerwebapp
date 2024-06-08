@@ -44,7 +44,7 @@ export const GetNoteThunk = createAsyncThunk(
     "NoteSliceName/GetNoteThunk",
     async (username) => {
         try {
-            const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=getNoteData", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=getNoteData", {
                method: 'POST',
                headers: {'Content-Type' : 'application/json'},
                body: JSON.stringify(username),           
@@ -65,7 +65,7 @@ export const UpdateNoteUserThunk = createAsyncThunk(
             const formData = new FormData();
             formData.append('datatobeupdated', JSON.stringify(datatobeupdated));
 
-            await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=updateNoteUser", {
+            await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=updateNoteUser", {
                 method: 'POST',
                 body: formData,
             })   
@@ -83,7 +83,7 @@ export const InsertNoteThunk = createAsyncThunk(
             const formData = new FormData();
             formData.append('noteDataTemp', JSON.stringify(noteDataTemp));
 
-            const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=putNoteData", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=putNoteData", {
                 method: 'POST',
                 body: formData,
             })
@@ -101,7 +101,7 @@ export const DeleteNoteThunk = createAsyncThunk(
      async (noteID) => {
         try {
             
-            const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=deleteNoteData", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=deleteNoteData", {
               method: 'POST',
               headers: {'Content-Type' : 'application/json'},
               body: JSON.stringify(noteID),
@@ -119,7 +119,7 @@ export const DeleteAllNoteThunk = createAsyncThunk(
     "NoteSliceName/DeleteAllNoteThunk",
     async (noteUser) => {
         try {
-            const res = await fetch("http://localhost/simple_web_in_react/server/learningmaterial.php?action=deleteAllNoteData", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=deleteAllNoteData", {
             method: 'POST',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify(noteUser)
