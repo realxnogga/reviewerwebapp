@@ -122,7 +122,7 @@ export const InsertSystemSettingDataThunk = createAsyncThunk(
             const formData = new FormData();
             formData.append('systemSettingDataTemp', JSON.stringify(systemSettingDataTemp));
 
-            const res = await fetch("http://localhost/simple_web_in_react/server/systemsetting.php?action=putSystemSettingData", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/systemsetting.php?action=putSystemSettingData", {
                 method: 'POST',
                 body: formData,
             });

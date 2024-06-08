@@ -118,7 +118,7 @@ export const Login = () => {
                             <p className='text-[.8rem] text-gray-400'>show password</p>
                         </div>
                     </div>
-
+               
                     <Button onClick={handleLoginSubmit} gradientDuoTone="purpleToBlue" className='rounded-[50px]'>Login</Button>
                     <p className='text-white'>Don't have an account yet? <span className='underline hover:text-blue-600'><NavLink to={'/register'}>Register</NavLink></span></p>
                
