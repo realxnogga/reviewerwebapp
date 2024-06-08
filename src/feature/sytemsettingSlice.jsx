@@ -61,7 +61,7 @@ export const UpdateSystemSettingUserThunk = createAsyncThunk(
             const formData = new FormData();
             formData.append('datatobeupdated', JSON.stringify(datatobeupdated));
 
-            const res = await fetch("http://localhost/simple_web_in_react/server/systemsetting.php?action=updateSystemSettingUser", {
+            const res = await fetch("http://localhost/reviewerwebapp/server/systemsetting.php?action=updateSystemSettingUser", {
                 method: 'POST',
                 body: formData,
             });
@@ -81,7 +81,7 @@ export const DeleteSettingDataThunk = createAsyncThunk(
     "SystemSettingSliceName/DeleteSettingDataThunk",
     async (systemsettinguser) => {
         try {
-        const res = await fetch("http://localhost/simple_web_in_react/server/systemsetting.php?action=deleteSystemSetting", {
+        const res = await fetch("http://localhost/reviewerwebapp/server/systemsetting.php?action=deleteSystemSetting", {
             method: 'POST',
             header: {'Content-Type' : 'application/json'},
             body: JSON.stringify(systemsettinguser)
