@@ -1,7 +1,8 @@
 
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
+import { HelperFormDataFunction } from "../utils/helperformdatafunction";
+import { HelperThunkFunction } from "../utils/helperthunkfunction";
 
 export const SystemSettingSlice = createSlice({
     name: 'SystemSettingSliceName',
@@ -36,19 +37,9 @@ export const systemSettingSliceReducer = SystemSettingSlice.reducer;
 export const GetSystemSettingNameThunk = createAsyncThunk(
     "SystemSettingSliceName/GetSystemSettingNameThunk",
     async (systemsettinguser) => {
-        try {
-        
-        const res = await fetch("http://localhost/reviewerwebapp/server/systemsetting.php?action=getSystemSettingName", {
-            method: 'POST',
-            header: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(systemsettinguser)
-        })
-        const data = await res.json();
-        return data;
-            
-        } catch (error) {
-          console.log('Error', error);  
-        }
+
+        return HelperThunkFunction('systemsetting.php?action=getSystemSettingName', 'POST', systemsettinguser, false);
+
     }
 )
 
@@ -57,21 +48,10 @@ export const GetSystemSettingNameThunk = createAsyncThunk(
 export const UpdateSystemSettingUserThunk = createAsyncThunk(
     "SystemSettingSliceName/UpdateSystemSettingUserThunk",
     async ({ datatobeupdated }) => {
-        try {
-            const formData = new FormData();
-            formData.append('datatobeupdated', JSON.stringify(datatobeupdated));
 
-            const res = await fetch("http://localhost/reviewerwebapp/server/systemsetting.php?action=updateSystemSettingUser", {
-                method: 'POST',
-                body: formData,
-            });
+        const formData = HelperFormDataFunction(datatobeupdated);
+        return HelperThunkFunction('systemsetting.php?action=updateSystemSettingUser', 'POST', formData, true);
 
-            const data = await res.json();
-            return data.success;
-
-        } catch (error) {
-            console.log('Error:', error);
-        }
     }
 )
 
@@ -80,16 +60,9 @@ export const UpdateSystemSettingUserThunk = createAsyncThunk(
 export const DeleteSettingDataThunk = createAsyncThunk(
     "SystemSettingSliceName/DeleteSettingDataThunk",
     async (systemsettinguser) => {
-        try {
-        const res = await fetch("http://localhost/reviewerwebapp/server/systemsetting.php?action=deleteSystemSetting", {
-            method: 'POST',
-            header: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(systemsettinguser)
-        })
-            
-        } catch (error) {
-          console.log('Error:', error);
-        }
+
+        return HelperThunkFunction('systemsetting.php?action=deleteSystemSetting', 'POST', systemsettinguser, false);
+
     }
 )
 
@@ -97,41 +70,19 @@ export const DeleteSettingDataThunk = createAsyncThunk(
 export const EditSystemSettingNameThunk = createAsyncThunk(
     "SystemSettingSliceName/EditSystemSettingNameThunk",
     async ({ systemSettingDataTemp }) => {
-        try {
-            const formData = new FormData();
-            formData.append('systemSettingDataTemp', JSON.stringify(systemSettingDataTemp));
 
-            const res = await fetch("http://localhost/reviewerwebapp/server/systemsetting.php?action=editSystemSettingName", {
-                method: 'POST',
-                body: formData,
-            });
+        const formData = HelperFormDataFunction(systemSettingDataTemp);
+        return HelperThunkFunction('systemsetting.php?action=editSystemSettingName', 'POST', formData, true);
 
-            const data = await res.json();
-            return data.success;
-
-        } catch (error) {
-            console.log('Error:', error);
-        }
     }
 )
 
 export const InsertSystemSettingDataThunk = createAsyncThunk(
     "SystemSettingSliceName/InsertSystemSettingDataThunk",
     async ({ systemSettingDataTemp }) => {
-        try {
-            const formData = new FormData();
-            formData.append('systemSettingDataTemp', JSON.stringify(systemSettingDataTemp));
 
-            const res = await fetch("http://localhost/reviewerwebapp/server/systemsetting.php?action=putSystemSettingData", {
-                method: 'POST',
-                body: formData,
-            });
+        const formData = HelperFormDataFunction(systemSettingDataTemp);
+        return HelperThunkFunction('systemsetting.php?action=putSystemSettingData', 'POST', formData, true);
 
-            const data = await res.json();
-            return data;
-
-        } catch (error) {
-            console.log('Error:', error);
-        }
     }
 )

@@ -1,5 +1,7 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { HelperThunkFunction } from "../utils/helperthunkfunction";
+import { HelperFormDataFunction } from "../utils/helperformdatafunction";
 
 export const FlashcardSlice = createSlice({
     name: "FlashcardSliceName",
@@ -59,67 +61,33 @@ export const isGetFlashcardItemPendingTemp = state => state.FlashcardSliceName.i
 export const flashcardSliceReducer = FlashcardSlice.reducer;
 
 
-
-
 export const UpdateFlashcardItemUserThunk = createAsyncThunk(
     "NoteSliceName/UpdateFlashcardItemUserThunk",
     async ({ datatobeupdated }) => {
-        try {
-            const formData = new FormData();
-            formData.append('datatobeupdated', JSON.stringify(datatobeupdated));
 
-            const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=updateFlashcardItemUser", {
-                method: 'POST',
-                body: formData,
-            })
-            const data = await res.json();
-            return data.success;
+        const formData = HelperFormDataFunction(datatobeupdated);
+        return HelperThunkFunction('learningmaterial.php?action=updateFlashcardItemUser', 'POST', formData, true);
 
-        } catch (error) {
-            console.log('Error:', error);
-        }
     }
 )
-
-
 
 export const UpdateFlashcardUserThunk = createAsyncThunk(
     "NoteSliceName/UpdateFlashcardUserThunk",
     async ({ datatobeupdated }) => {
-        try {
-            const formData = new FormData();
-            formData.append('datatobeupdated', JSON.stringify(datatobeupdated));
 
-            const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=updateFlashcardUser", {
-                method: 'POST',
-                body: formData,
-            })
-            const data = await res.json();
-            return data.success;
+        const formData = HelperFormDataFunction(datatobeupdated);
+        return HelperThunkFunction('learningmaterial.php?action=updateFlashcardUser', 'POST', formData, true);
 
-        } catch (error) {
-            console.log('Error:', error);
-        }
     }
 )
-
 
 // to delete all flashcard item  based on username
 export const DeleteAllFlashCardDataThunk = createAsyncThunk(
     "FlashcardSliceName/DeleteAllFlashCardDataThunk",
-    async (flashcarduser) => {
-        try {
+    async (flashcarduser) => { 
+        
+        return HelperThunkFunction('learningmaterial.php?action=deleteAllFlashcardData', 'POST', flashcarduser, false);
 
-        const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=deleteAllFlashcardData", {
-            method: 'POST',  
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(flashcarduser),
-        })
-         const data = await res.json();
-         return data.success;
-        } catch (error) {
-        console.log('Error:', error);
-        }
     }
 )
 
@@ -127,38 +95,19 @@ export const DeleteAllFlashCardDataThunk = createAsyncThunk(
 export const DeleteAllFlashCardItemThunk = createAsyncThunk(
     "FlashcardSliceName/DeleteAllFlashCardItemThunk",
     async (flashcarduser) => {
-        try {
 
-        const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=deleteAllFlashcardItem", {
-            method: 'POST',  
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(flashcarduser),
-        })
-         const data = await res.json();
-         return data.success;
-        } catch (error) {
-        console.log('Error:', error);
-        }
+        return HelperThunkFunction('learningmaterial.php?action=deleteAllFlashcardItem', 'POST', flashcarduser, false);
+
     }
 )
-
 
 // to delete flashcard based on ID
 export const DeleteFlashCardDataThunk = createAsyncThunk(
     "FlashcardSliceName/DeleteFlashCardItemThunk",
     async (flashcardID) => {
-        try {
 
-        const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=deleteFlashcardItemData", {
-            method: 'POST',  
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(flashcardID),
-        })
-         const data = await res.json();
-         return data.success;
-        } catch (error) {
-        console.log('Error:', error);
-        }
+        return HelperThunkFunction('learningmaterial.php?action=deleteFlashcardItemData', 'POST', flashcardID, false);
+
     }
 )
 
@@ -166,36 +115,18 @@ export const DeleteFlashCardDataThunk = createAsyncThunk(
 export const DeleteFlashCardItemByIDThunk = createAsyncThunk(
     "FlashcardSliceName/DeleteFlashCardItemByIDThunk",
     async (flashcarditemID) => {
-        try {
+       
+        return HelperThunkFunction('learningmaterial.php?action=deleteFlashcardItemById', 'POST', flashcarditemID, false);
 
-        const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=deleteFlashcardItemById", {
-            method: 'POST',  
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(flashcarditemID),
-        })
-         const data = await res.json();
-         return data.success;
-        } catch (error) {
-        console.log('Error:', error);
-        }
     }
 )
 
 export const GetFlashcardItemThunk = createAsyncThunk(
     "FlashcardSliceName/GetFlashcardItemThunk",
     async (flashcardID) => {
-        try {
-            const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=getFlashcardItemData", {
-             method: 'POST',
-             headers: {'Content-Type' : 'application/json'},
-             body: JSON.stringify(flashcardID)
-            })
-            const data = await res.json();
-            return data;
-            
-        } catch (error) {
-        console.log('Error:', error); 
-        }
+
+        return HelperThunkFunction('learningmaterial.php?action=getFlashcardItemData', 'POST', flashcardID, false);
+
     }
 
 )
@@ -203,59 +134,28 @@ export const GetFlashcardItemThunk = createAsyncThunk(
 export const InsertFlashCardItemThunk = createAsyncThunk(
     "FlashcardSliceName/GetFlashCardItemThunk",
     async ({flashcardItemTemp}) => {
-        try {
 
-        const formData = new FormData();
-        formData.append('flashcardItemTemp', JSON.stringify(flashcardItemTemp))
-        const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=insertFlashcardItemData", {
-            method: 'POST',  
-            body: formData,
-        })
-         const data = await res.json();
-         return data.success;
-        } catch (error) {
-        console.log('Error:', error);
-        }
+        const formData = HelperFormDataFunction(flashcardItemTemp);
+        return HelperThunkFunction('learningmaterial.php?action=insertFlashcardItemData', 'POST', formData, true);
+
     }
 )
 
 export const GetFlashcardThunk = createAsyncThunk(
     "FlashcardSliceName/GetFlashcardThunk",
     async (flashcarduser) => {
-        try {
 
-        const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=getFlashcardData", {
-            method: 'POST',
-            headers: {'Content-Type' : 'application'},
-            body: JSON.stringify(flashcarduser)
-        })
-        const data = await res.json();
-        return data;
-            
-        } catch (error) {
-          console.log('Error:', error);  
-        }
+        return HelperThunkFunction('learningmaterial.php?action=getFlashcardData', 'POST', flashcarduser, false);
+
     }
 )
-
 
 export const InsertFlashcardThunk = createAsyncThunk(
     "FlashcardSliceName/InsertFlashcardThunk",
     async ({flashcardDataTemp}) => {
-        try {
 
-            const formData = new FormData();
-            formData.append('flashcardDataTemp', JSON.stringify(flashcardDataTemp));
+        const formData = HelperFormDataFunction(flashcardDataTemp);
+        return HelperThunkFunction('learningmaterial.php?action=insertFlashcardData', 'POST', formData, true);
 
-        const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=insertFlashcardData", {
-            method: 'POST',
-            body: formData
-        })
-        const data = await res.json();
-        return data.success;
-            
-        } catch (error) {
-          console.log('Error:', error);  
-        }
     }
 )

@@ -12,13 +12,17 @@ import { GetNoteThunk } from "../feature/noteSlice";
 import { noteDataTemp } from "../feature/noteSlice";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { DeleteNoteThunk } from "../feature/noteSlice";
-import { RiAddCircleFill } from "react-icons/ri";
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import { NoteNavbarItem } from "./notenavbaritem";
 
 export const Note = () => {
 
     const dispatch = useDispatch();
     const themeHolder = useSelector(themeHolderTemp);
-    const [whatIsClickedInNoteTab, setWhatIsClickedInNoteTab] = useState('all');
+
+    const constraintsRef = useRef(null)
+
     const [openInsertNoteModal, setOpenInsertNoteModal] = useState(false);
 
     const userdata = useSelector(userdataTemp);
@@ -104,8 +108,8 @@ export const Note = () => {
 
     }, [isNoteDataDeleted])
 
-     //---------------------------------------------------------------------------
-    
+    //---------------------------------------------------------------------------
+
 
     const NoteColorFunc = (usernote) => {
         if (usernote === 'english') return 'bg-blue-300';
@@ -117,219 +121,73 @@ export const Note = () => {
         if (usernote === 'ict') return 'bg-red-300';
     }
 
-
+    const [whatIsClickedInNoteTab, setWhatIsClickedInNoteTab] = useState('all');
     const [subjectFilter, setSubjectFilter] = useState('all');
-    const gotNoteData = useSelector(noteDataTemp);
-    
-    const filteredNoteData = gotNoteData.filter(item => {
 
+    const gotNoteData = useSelector(noteDataTemp);
+
+    function GetNoteCount(str) {
+        return str === 'all' ? Object.keys(gotNoteData).length : gotNoteData.filter(item => item.notesubject === str).length;
+    }
+
+    const filteredNoteData = gotNoteData.filter(item => {
         const allSubjectFilter = subjectFilter === 'all' || item.notesubject.toLowerCase() === subjectFilter.toLowerCase();
 
         return allSubjectFilter;
     });
 
-    // get the count of each note base on subject
-    const allSubjectNoteCount = Object.keys(gotNoteData).length;
-    const englishNoteCount = gotNoteData.filter(item => item.notesubject === 'english').length;
-    const filipinoNoteCount = gotNoteData.filter(item => item.notesubject === 'filipino').length;
-    const mathematicsNoteCount = gotNoteData.filter(item => item.notesubject === 'mathematics').length;
-    const scienceNoteCount = gotNoteData.filter(item => item.notesubject === 'science').length;
-    const socialscienceNoteCount = gotNoteData.filter(item => item.notesubject === 'social science').length;
-    const humanitiesNoteCount = gotNoteData.filter(item => item.notesubject === 'humanities').length;
-    const communicationskillsNoteCount = gotNoteData.filter(item => item.notesubject === 'communication skills').length;
-    const ictNoteCount = gotNoteData.filter(item => item.notesubject === 'ict').length;
-
     return (
         <div className="relative h-[90%] w-[69rem] max-w-[95%]">
-            <section className={`${themeHolder.colorbg2} overflow-hidden rounded-md h-[9%] w-full flex items-center justify-between`}>
-                <div className={` h-full w-full overflow-scroll noScrollbar`}>
-                    <ul className={`flex h-full text-sm text-gray-300 text-nowrap`}>
+           
+           <section className={`${themeHolder.colorbg2} overflow-hidden rounded-md h-[9%] w-full flex items-center justify-between`}>
+            <div className={` h-full w-full overflow-scroll noScrollbar`}>
+                <ul className={`flex h-full text-sm text-gray-300 text-nowrap`}>
 
-                        <li onClick={() => { setSubjectFilter('all'); setWhatIsClickedInNoteTab('all') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'all' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>All
-                        
-                            {
-                                allSubjectNoteCount > 0 ?
-                                    (
-                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
-                                            <p className="text-white">{allSubjectNoteCount}</p>
-                                        </div>
-                                    )
-                                    :
-                                    (
-                                        ''
-                                    )
-                            }
+                    <NoteNavbarItem click={() => { setSubjectFilter('all'); setWhatIsClickedInNoteTab('all') }} whatclick={whatIsClickedInNoteTab} subject={'all'} count={GetNoteCount('all')} />
 
-                        </li>
+                    <NoteNavbarItem click={() => { setSubjectFilter('english'); setWhatIsClickedInNoteTab('english') }} whatclick={whatIsClickedInNoteTab} subject={'english'} count={GetNoteCount('english')} />
 
-                        <li onClick={() => { setSubjectFilter('english'); setWhatIsClickedInNoteTab('english') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'english' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>English
+                    <NoteNavbarItem click={() => { setSubjectFilter('filipino'); setWhatIsClickedInNoteTab('filipino') }} whatclick={whatIsClickedInNoteTab} subject={'filipino'} count={GetNoteCount('filipino')} />
 
-                            {
-                                englishNoteCount > 0 ?
-                                    (
-                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
-                                            <p className="text-white">{englishNoteCount}</p>
-                                        </div>
-                                    )
-                                    :
-                                    (
-                                        ''
-                                    )
-                            }
-                        </li>
+                    <NoteNavbarItem click={() => { setSubjectFilter('mathematics'); setWhatIsClickedInNoteTab('mathematics') }} whatclick={whatIsClickedInNoteTab} subject={'mathematics'} count={GetNoteCount('mathematics')} />
 
-                        <li onClick={() => { setSubjectFilter('filipino'); setWhatIsClickedInNoteTab('filipino') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'filipino' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Filipino
+                    <NoteNavbarItem click={() => { setSubjectFilter('science'); setWhatIsClickedInNoteTab('science') }} whatclick={whatIsClickedInNoteTab} subject={'science'} count={GetNoteCount('science')} />
 
-                            {
-                                filipinoNoteCount > 0 ?
-                                    (
-                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
-                                            <p className="text-white">{filipinoNoteCount}</p>
-                                        </div>
-                                    )
-                                    :
-                                    (
-                                        ''
-                                    )
-                            }
-                        </li>
+                    <NoteNavbarItem click={() => { setSubjectFilter('social science'); setWhatIsClickedInNoteTab('social science') }} whatclick={whatIsClickedInNoteTab} subject={'social science'} count={GetNoteCount('social science')} />
 
-                        <li onClick={() => { setSubjectFilter('mathematics'); setWhatIsClickedInNoteTab('mathematics') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'mathematics' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Mathematics
+                    <NoteNavbarItem click={() => { setSubjectFilter('humanities'); setWhatIsClickedInNoteTab('humanities') }} whatclick={whatIsClickedInNoteTab} subject={'humanities'} count={GetNoteCount('humanities')} />
 
-                            {
-                                mathematicsNoteCount > 0 ?
-                                    (
-                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
-                                            <p className="text-white">{mathematicsNoteCount}</p>
-                                        </div>
-                                    )
-                                    :
-                                    (
-                                        ''
-                                    )
-                            }
-                        </li>
+                    <NoteNavbarItem click={() => { setSubjectFilter('communication skills'); setWhatIsClickedInNoteTab('communication skills') }} whatclick={whatIsClickedInNoteTab} subject={'communication skills'} count={GetNoteCount('communication skills')} />
 
-                        <li onClick={() => { setSubjectFilter('science'); setWhatIsClickedInNoteTab('science') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'science' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Science
+                    <NoteNavbarItem click={() => { setSubjectFilter('ict'); setWhatIsClickedInNoteTab('ict') }} whatclick={whatIsClickedInNoteTab} subject={'ict'} count={GetNoteCount('ict')} />
+                </ul>
+            </div>
 
-                            {
-                                scienceNoteCount > 0 ?
-                                    (
-                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
-                                            <p className="text-white">{scienceNoteCount}</p>
-                                        </div>
-                                    )
-                                    :
-                                    (
-                                        ''
-                                    )
-                            }
-                        </li>
-
-                        <li onClick={() => { setSubjectFilter('social science'); setWhatIsClickedInNoteTab('social science') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'social science' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Social Science
-
-                            {
-                                socialscienceNoteCount > 0 ?
-                                    (
-                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
-                                            <p className="text-white">{socialscienceNoteCount}</p>
-                                        </div>
-                                    )
-                                    :
-                                    (
-                                        ''
-                                    )
-                            }
-                        </li>
-
-                        <li onClick={() => { setSubjectFilter('humanities'); setWhatIsClickedInNoteTab('humanities') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'humanities' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Humanities
-
-                            {
-                                humanitiesNoteCount > 0 ?
-                                    (
-                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
-                                            <p className="text-white">{humanitiesNoteCount}</p>
-                                        </div>
-                                    )
-                                    :
-                                    (
-                                        ''
-                                    )
-                            }
-                        </li>
-
-                        <li onClick={() => { setSubjectFilter('communication skills'); setWhatIsClickedInNoteTab('communication skills') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'communication skills' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>Communication Skills
-
-                            {
-                                communicationskillsNoteCount > 0 ?
-                                    (
-                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
-                                            <p className="text-white">{communicationskillsNoteCount}</p>
-                                        </div>
-                                    )
-                                    :
-                                    (
-                                        ''
-                                    )
-                            }
-                        </li>
-
-                        <li onClick={() => { setSubjectFilter('ict'); setWhatIsClickedInNoteTab('ict') }}
-                            className={`${themeHolder.colortxt1} ${whatIsClickedInNoteTab === 'ict' ? 'border-b-4 border-yellow-500' : ''} relative h-full w-fit px-5 hover:border-b-4 border-yellow-500 cursor-pointer flex items-center justify-center`}>ICT
-
-                            {
-                                ictNoteCount > 0 ?
-                                    (
-                                        <div className="absolute bg-gray-500 h-[1.1rem] w-[1.1rem] top-0 right-0 rounded-[50%] flex items-center justify-center ">
-                                            <p className="text-white">{ictNoteCount}</p>
-                                        </div>
-                                    )
-                                    :
-                                    (
-                                        ''
-                                    )
-                            }
-                        </li>
-
-                    </ul>
-                </div>
-
-                <button onClick={() => { setOpenInsertNoteModal(true) }} className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-[85%] w-[5rem] m-1 rounded-md text-white">
-                    add
-                </button>
-                
-            </section>
-
-
+            <button /*onClick={() => { setOpenInsertNoteModal(true) }}*/ className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-[85%] w-[5rem] m-1 rounded-md text-white">
+                add
+            </button>
+        </section>
 
             {
                 filteredNoteData.length === 0 ?
                     (
                         <section className="h-[91%] w-full flex items-center justify-center flex-col gap-y-2.5 text-center">
-                           <img className="h-[17rem] mobile:h-[13rem]" 
-                           src="../../asset/emptyImg/emptyImg.png" alt="" />
-                           <h3 className={`text-gray-400 text-[3rem] font-bold mobile:text-[2rem] `}>
-                            Nothing to show </h3>
+                            <img className="h-[17rem] mobile:h-[13rem]"
+                                src="../../asset/emptyImg/emptyImg.png" alt="" />
+                            <h3 className={`text-gray-400 text-[3rem] font-bold mobile:text-[2rem] `}>
+                                Nothing to show </h3>
                             <span className="text-gray-400">It's empty here, you can create a note by clicking the add button.</span>
                         </section>
                     )
                     :
                     (
-                        <section className="h-[91%] w-full pt-3 overflow-scroll noScrollbar flex flex-wrap content-start gap-4 mobile:justify-center">
+                        <motion.section ref={constraintsRef} className="h-[91%] w-full pt-3 overflow-scroll noScrollbar flex flex-wrap content-start gap-4 mobile:justify-center">
 
                             {
 
                                 filteredNoteData.map((item) => (
 
-                                    <div key={item.noteID} className={`${NoteColorFunc(item.notesubject)} relative h-[13rem] w-[13rem] overflow-scroll noScrollbar  rounded-lg p-2 mobile:h-[20rem] mobile:w-[20rem]`}>
+                                    <motion.div drag dragConstraints={constraintsRef} key={item.noteID} className={`${NoteColorFunc(item.notesubject)} relative h-[13rem] w-[13rem] overflow-scroll noScrollbar  rounded-lg p-2 mobile:h-[20rem] mobile:w-[20rem]`}>
                                         <div >
                                             <p className="text-gray-600 text-sm">{item.notedate}</p>
                                         </div>
@@ -344,13 +202,13 @@ export const Note = () => {
                                             <p className="text-gray-800 text-md">{item.actualnote}</p>
                                         </div>
 
-                                    </div>
+                                    </motion.div>
 
                                 ))
 
 
                             }
-                        </section>
+                        </motion.section>
                     )
             }
 

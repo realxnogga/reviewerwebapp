@@ -1,15 +1,7 @@
 
 <?php
-header("Access-Control-Allow-Origin: http://localhost:3000");
-header("Access-Control-Allow-Headers: Content-Type");
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "reviewerwebapp";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+require_once "connection/connection.php";
 
 // Check connection
 if ($conn->connect_error) {
@@ -22,7 +14,7 @@ if (isset($_GET['action'])) {
     switch ($action) {
         case 'putSystemSettingData':
 
-            $data = json_decode($_POST['systemSettingDataTemp'], true);
+            $data = json_decode($_POST['credential'], true);
 
             $username = $data['username'];
             $password = $data['password'];
@@ -42,7 +34,7 @@ if (isset($_GET['action'])) {
 
         case 'editSystemSettingName':
 
-            $data = json_decode($_POST['systemSettingDataTemp'], true);
+            $data = json_decode($_POST['credential'], true);
             $systemsettinguser = $data['systemsettinguser'];
             $systemsettingname = $data['systemsettingname'];
 
@@ -50,9 +42,9 @@ if (isset($_GET['action'])) {
             $result = $conn->query($sql);
 
             if ($conn->affected_rows > 0) {
-                echo json_encode(['success' => true, 'message' => 'system name updated successfully']);
+                echo json_encode(true);
             } else {
-                echo json_encode(['success' => false, 'message' => 'system name failed to update']);
+                echo json_encode(false);
             }
 
             $conn->close();
@@ -69,7 +61,7 @@ if (isset($_GET['action'])) {
             break;
         
             case 'updateSystemSettingUser':   
-                $data = json_decode($_POST['datatobeupdated'], true);
+                $data = json_decode($_POST['credential'], true);
 
                 $systemsettinguserID = $data['userID'];
                 $systemsettinguser = $data['user'];

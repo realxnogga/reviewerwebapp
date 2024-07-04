@@ -1,7 +1,8 @@
 
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
+import { HelperThunkFunction } from "../utils/helperthunkfunction";
+import { HelperFormDataFunction } from "../utils/helperformdatafunction";
 
 export const NoteSlice = createSlice({
     name: 'NoteSliceName',
@@ -33,7 +34,6 @@ export const NoteSlice = createSlice({
 
 })
 
-
 export const { ClearIsNoteDataInsertedState, ClearIsNoteDataDeletedState } = NoteSlice.actions;
 export const noteDataTemp = state => state.NoteSliceName.noteData;
 export const isNoteDataInsertedTemp = state => state.NoteSliceName.isNoteDataInserted;
@@ -43,91 +43,46 @@ export const noteSliceReducer = NoteSlice.reducer;
 export const GetNoteThunk = createAsyncThunk(
     "NoteSliceName/GetNoteThunk",
     async (username) => {
-        try {
-            const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=getNoteData", {
-               method: 'POST',
-               headers: {'Content-Type' : 'application/json'},
-               body: JSON.stringify(username),           
-            })
-            const data = await res.json();
-            return data;
-            
-        } catch (error) {
-          console.log('Error:', error);  
-        }
+
+        return HelperThunkFunction('learningmaterial.php?action=getNoteData', 'POST', username, false);
+
     }
 )
 
 export const UpdateNoteUserThunk = createAsyncThunk(
     "NoteSliceName/UpdateNoteUserThunk",
     async ({ datatobeupdated }) => {
-        try {
-            const formData = new FormData();
-            formData.append('datatobeupdated', JSON.stringify(datatobeupdated));
 
-            await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=updateNoteUser", {
-                method: 'POST',
-                body: formData,
-            })   
+        const formData = HelperFormDataFunction(datatobeupdated);
+        return HelperThunkFunction('learningmaterial.php?action=updateNoteUser', 'POST', formData, true);
 
-        } catch (error) {
-            console.log('Error:', error);
-        }
     }
 )
 
 export const InsertNoteThunk = createAsyncThunk(
     "NoteSliceName/InsertNoteThunk",
     async ({ noteDataTemp }) => {
-        try {
-            const formData = new FormData();
-            formData.append('noteDataTemp', JSON.stringify(noteDataTemp));
 
-            const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=putNoteData", {
-                method: 'POST',
-                body: formData,
-            })
-            const data = await res.json();
-            return data.success;
+        const formData = HelperFormDataFunction(noteDataTemp);
+        return HelperThunkFunction('learningmaterial.php?action=putNoteData', 'POST', formData, true);
 
-        } catch (error) {
-            console.log('Error:', error);
-        }
     }
 )
 
 export const DeleteNoteThunk = createAsyncThunk(
     "NoteSliceName/DeleteNoteThunk",
      async (noteID) => {
-        try {
-            
-            const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=deleteNoteData", {
-              method: 'POST',
-              headers: {'Content-Type' : 'application/json'},
-              body: JSON.stringify(noteID),
-            })
-            const data = await res.json();
-            return data.success;
-            
-        } catch (error) {
-          console.log('Error:', error);  
-        }
+
+        return HelperThunkFunction('learningmaterial.php?action=deleteNoteData', 'POST', noteID, false);
+
      }
 )
 
 export const DeleteAllNoteThunk = createAsyncThunk(
     "NoteSliceName/DeleteAllNoteThunk",
     async (noteUser) => {
-        try {
-            const res = await fetch("http://localhost/reviewerwebapp/server/learningmaterial.php?action=deleteAllNoteData", {
-            method: 'POST',
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(noteUser)
 
-            })
-            
-        } catch (error) {
-            console.log('Error:', error);
-        }
+        return HelperThunkFunction('learningmaterial.php?action=deleteAllNoteData', 'POST', noteUser, false);
+
     }
 )

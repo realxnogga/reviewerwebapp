@@ -1,16 +1,8 @@
 
 
 <?php
-header("Access-Control-Allow-Origin: http://localhost:3000");
-header("Access-Control-Allow-Headers: Content-Type");
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "reviewerwebapp";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+require_once "connection/connection.php";
 
 // Check connection
 if ($conn->connect_error) {
@@ -21,8 +13,8 @@ if (isset($_GET['action'])) {
     $action = $_GET['action'];
 
     switch ($action) {
-        case 'putquizdata':
-            $data = json_decode($_POST['quizdatatemp'], true);
+        case 'putQuizData':
+            $data = json_decode($_POST['credential'], true);
 
             $quiztaker = $data['quiztaker'];
             $quiztakerid = $data['quiztakerid'];
@@ -38,16 +30,17 @@ if (isset($_GET['action'])) {
             $conn->query($sql);
 
             if ($conn->affected_rows > 0) {
-                echo json_encode(['success' => true, 'message' => 'quiz successfully inserted']);
+                echo json_encode(true);
             } else {
-                echo json_encode(['success' => false, 'message' => 'quiz failed to insert']);
+                echo json_encode(false);
             }
 
             $conn->close();
             break;
 
         case 'getquizdata':
-            $quiztaker = json_decode($_POST['quiztaker'], true);
+           
+            $quiztaker = json_decode(file_get_contents("php://input"), true);
 
             $sql = "select*from quiz where quiztaker = '$quiztaker'";
             $result = $conn->query($sql);
@@ -63,7 +56,8 @@ if (isset($_GET['action'])) {
             break;
 
         case 'updateQuizUser':
-            $data = json_decode($_POST['datatobeupdated'], true);
+            $data = json_decode($_POST['credential'], true);
+
             $userID = $data['userID'];
             $user = $data['user'];
 
@@ -99,7 +93,8 @@ if (isset($_GET['action'])) {
 
             
             case 'getUserPerformance':
-                $quiztaker = json_decode($_POST['quiztaker'], true);
+    
+                $quiztaker = json_decode(file_get_contents("php://input"), true);
 
                 $sql = "select*from quiz where quiztaker = '$quiztaker'";
                 $result = $conn->query($sql);

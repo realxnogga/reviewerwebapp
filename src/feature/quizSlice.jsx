@@ -1,6 +1,7 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
+import { HelperFormDataFunction } from "../utils/helperformdatafunction";
+import { HelperThunkFunction } from "../utils/helperthunkfunction";
 
 export const QuizSlice = createSlice({
     name: 'QuizSliceName',
@@ -52,113 +53,55 @@ export const QuizSliceReducer = QuizSlice.reducer;
 export const GetUserPerformanceThunk = createAsyncThunk(
     "QuizSliceName/GetUserPerformanceThunk",
     async (quiztaker) => {
-        try {
-            const formData = new FormData();
-            formData.append('quiztaker', JSON.stringify(quiztaker));
 
-            const res = await fetch("http://localhost/reviewerwebapp/server/quizexam.php?action=getUserPerformance", {
-                method: 'POST',
-                body: formData,
-            })
-
-            const data = await res.json();
-            return { userPerformance: data.userPerformance, userInfo: data.userInfo };
-
-
-        } catch (error) {
-            console.log('Error:', error);
-        }
+        return HelperThunkFunction('quizexam.php?action=getUserPerformance', 'POST', quiztaker, false);
+        
     }
 )
 
 export const CheckUserPerformanceExistThunk = createAsyncThunk(
     "QuizSliceName/CheckUserPerformanceExistThunk",
     async (quiztaker) => {
-        try {
-            const res = await fetch("http://localhost/reviewerwebapp/server/quizexam.php?action=checkUserPerformanceExist", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(quiztaker)
-            })
-            const data = await res.json();
-            return data;
 
-        } catch (error) {
-            console.log('Error:', error);
-        }
+        return HelperThunkFunction('quizexam.php?action=checkUserPerformanceExist', 'POST', quiztaker, false);
+
     }
 )
 
 export const DeleteQuizThunk = createAsyncThunk(
     "QuizSliceName/DeleteQuizThunk",
     async (user) => {
-        try {
-            const res = await fetch("http://localhost/reviewerwebapp/server/quizexam.php?action=deleteQuizData", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(user)
-            })
 
-        } catch (error) {
-            console.log('Error:', error);
-        }
+        return HelperThunkFunction('quizexam.php?action=deleteQuizData', 'POST', user, false);
+
     }
 )
 
 export const UpdateQuizUserThunk = createAsyncThunk(
     "QuizSliceName/UpdateQuizUserThunk",
     async ({ datatobeupdated }) => {
-        try {
-            const formData = new FormData();
-            formData.append('datatobeupdated', JSON.stringify(datatobeupdated));
+        
+        const formData = HelperFormDataFunction(datatobeupdated);
+        return HelperThunkFunction('quizexam.php?action=updateQuizUser', 'POST', formData, true);
 
-            await fetch("http://localhost/reviewerwebapp/server/quizexam.php?action=updateQuizUser", {
-                method: 'POST',
-                body: formData,
-            })
-
-        } catch (error) {
-            console.log('Error:', error);
-        }
     }
 )
 
 export const InsertQuizThunk = createAsyncThunk(
     "QuizSliceName/InsertQuizThunk",
     async ({ quizdatatemp }) => {
-        try {
-            const formData = new FormData();
-            formData.append('quizdatatemp', JSON.stringify(quizdatatemp));
 
-            const res = await fetch("http://localhost/reviewerwebapp/server/quizexam.php?action=putquizdata", {
-                method: 'POST',
-                body: formData,
-            })
-            const data = await res.json();
-            return data.success;
+        const formData = HelperFormDataFunction(quizdatatemp);
+        return HelperThunkFunction('quizexam.php?action=putQuizData', 'POST', formData, true);
 
-        } catch (error) {
-            console.log('Error:', error);
-        }
     }
 )
 
 export const GetQuizThunk = createAsyncThunk(
     "QuizSliceName/GetQuizThunk",
     async (quiztaker) => {
-        try {
-            const formData = new FormData();
-            formData.append('quiztaker', JSON.stringify(quiztaker));
 
-            const res = await fetch("http://localhost/reviewerwebapp/server/quizexam.php?action=getquizdata", {
-                method: 'POST',
-                body: formData,
-            })
-            const data = await res.json();
-            return data;
+        return HelperThunkFunction('quizexam.php?action=getquizdata', 'POST', quiztaker, false);
 
-        } catch (error) {
-            console.log('Error:', error);
-        }
     }
 )

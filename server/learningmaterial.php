@@ -1,16 +1,8 @@
 
 
 <?php
-header("Access-Control-Allow-Origin: http://localhost:3000");
-header("Access-Control-Allow-Headers: Content-Type");
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "reviewerwebapp";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+require_once "connection/connection.php";
 
 // Check connection
 if ($conn->connect_error) {
@@ -23,7 +15,7 @@ if (isset($_GET['action'])) {
     switch ($action) {
         case 'putNoteData':
 
-            $data = json_decode($_POST['noteDataTemp'], true);
+            $data = json_decode($_POST['credential'], true);
 
             $userID = $data['userID'];
             $noteUser = $data['noteuser'];
@@ -32,17 +24,15 @@ if (isset($_GET['action'])) {
             $actualnote = $data['note'];
             $noteDate = $data['notedate'];
 
-
             $sql = "insert into note (userID, usernote, notesubject, notetitle, actualnote, notedate) VALUES ('$userID','$noteUser', '$noteSubject', '$noteTitle', '$actualnote', '$noteDate')";
 
             $conn->query($sql);
 
             if ($conn->affected_rows > 0) {
-                echo json_encode(['success' => true, 'message' => 'Note successfully inserted']);
+                echo json_encode(true);
             } else {
-                echo json_encode(['success' => false, 'message' => 'Note failed to insert']);
+                echo json_encode(false);
             }
-
 
             $conn->close();
             break;
@@ -68,7 +58,7 @@ if (isset($_GET['action'])) {
 
         case 'updateNoteUser':
 
-            $data = json_decode($_POST['datatobeupdated'], true);
+            $data = json_decode($_POST['credential'], true);
             $userID = $data['userID'];
             $user = $data['user'];
 
@@ -88,9 +78,9 @@ if (isset($_GET['action'])) {
             $conn->query($sql);
 
             if ($conn->affected_rows > 0) {
-                echo json_encode(['success' => true, 'message' => 'Note successfully deleted']);
+                echo json_encode(true);
             } else {
-                echo json_encode(['success' => false, 'message' => 'Note failed to delete']);
+                echo json_encode(false);
             }
 
             $conn->close();
@@ -103,16 +93,16 @@ if (isset($_GET['action'])) {
             $conn->query($sql);
 
             if ($conn->affected_rows > 0) {
-                echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
+                echo json_encode(true);
             } else {
-                echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
+                echo json_encode(false);
             }
 
             $conn->close();
             break;
 
         case 'insertFlashcardData':
-            $data = json_decode($_POST['flashcardDataTemp'], true);
+            $data = json_decode($_POST['credential'], true);
             $userID = $data['userID'];
             $flashcardUser = $data['flashcardUser'];
             $flashcardSubject = $data['flashcardSubject'];
@@ -124,9 +114,9 @@ if (isset($_GET['action'])) {
             $conn->query($sql);
 
             if ($conn->affected_rows > 0) {
-                echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
+                echo json_encode(true);
             } else {
-                echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
+                echo json_encode(false);
             }
 
             $conn->close();
@@ -151,7 +141,7 @@ if (isset($_GET['action'])) {
 
         case 'insertFlashcardItemData':
 
-            $data = json_decode($_POST['flashcardItemTemp'], true);
+            $data = json_decode($_POST['credential'], true);
 
             $userID = $data['userID'];
             $flashcardItemID = $data['flashcardItemID'];
@@ -165,9 +155,9 @@ if (isset($_GET['action'])) {
             $conn->query($sql);
 
             if ($conn->affected_rows > 0) {
-                echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
+                echo json_encode(true);
             } else {
-                echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
+                echo json_encode(false);
             }
 
             $conn->close();
@@ -195,7 +185,7 @@ if (isset($_GET['action'])) {
 
 
         case 'updateFlashcardUser':
-            $data = json_decode($_POST['datatobeupdated'], true);
+            $data = json_decode($_POST['credential'], true);
             $userID = $data['userID'];
             $user = $data['user'];
 
@@ -208,7 +198,7 @@ if (isset($_GET['action'])) {
 
 
         case 'updateFlashcardItemUser':
-            $data = json_decode($_POST['datatobeupdated'], true);
+            $data = json_decode($_POST['credential'], true);
             $userID = $data['userID'];
             $user = $data['user'];
 
@@ -229,9 +219,9 @@ if (isset($_GET['action'])) {
             $conn->query($sql);
 
             if ($conn->affected_rows > 0) {
-                echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
+                echo json_encode(true);
             } else {
-                echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
+                echo json_encode(false);
             }
 
             $conn->close();
@@ -247,9 +237,9 @@ if (isset($_GET['action'])) {
             $conn->query($sql);
 
             if ($conn->affected_rows > 0) {
-                echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
+                echo json_encode(true);
             } else {
-                echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
+                echo json_encode(false);
             }
 
             $conn->close();
@@ -265,9 +255,9 @@ if (isset($_GET['action'])) {
             $conn->query($sql);
 
             if ($conn->affected_rows > 0) {
-                echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
+                echo json_encode(true);
             } else {
-                echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
+                echo json_encode(false);
             }
 
             $conn->close();
@@ -282,9 +272,9 @@ if (isset($_GET['action'])) {
             $conn->query($sql);
 
             if ($conn->affected_rows > 0) {
-                echo json_encode(['success' => true, 'message' => 'All Note successfully deleted']);
+                echo json_encode(true);
             } else {
-                echo json_encode(['success' => false, 'message' => 'All Note failed to delete']);
+                echo json_encode(false);
             }
 
             $conn->close();

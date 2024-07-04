@@ -251,7 +251,7 @@ export const LearningResources = () => {
                 {/* contribution modal */}
                 <Modal size="md" dismissible show={openContributeModal} onClose={() => setOpenContributeModal(false)}>
 
-                    <form onSubmit={handleResourceDataSubmitFunc} action="">
+                   
                         <div className={`${themeHolder.colorbg3} space-y-8 bg-gray-700 rounded-lg p-5`}>
                             <h3 className={`${themeHolder.colortxt1} text-xl font-medium text-gray-300 dark:text-white`}>Make a contribution</h3>
 
@@ -294,12 +294,12 @@ export const LearningResources = () => {
 
                             </div>
                             <div className='flex flex-row gap-x-3'>
-                                <Button className='w-fit rounded-md' type='submit' gradientMonochrome="cyan">submit</Button>
+                                <Button onClick={handleResourceDataSubmitFunc} className='w-fit rounded-md' type='submit' gradientMonochrome="cyan">submit</Button>
 
                                 <Button className='w-fit rounded-md' onClick={() => setOpenContributeModal(false)} gradientMonochrome="success">close</Button>
                             </div>
                         </div>
-                    </form>
+                  
                 </Modal>
             </div>
         </>
